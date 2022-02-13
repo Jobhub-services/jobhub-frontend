@@ -5,4 +5,4 @@ export const dispatchers = {};
 export const actions = {
 	login() {},
 };
-export function* saga() {}
+export function* sagas() {}
