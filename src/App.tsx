@@ -1,12 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {Button} from 'staak-ui'
+import React, { FC } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { AppProps } from '@/models/component/app.interface';
+import AppRoutes from '@/routes/AppRoutes';
 
-function App() {
-  return (
-    <></>
-  );
-}
+const App: FC<AppProps> = ({ basename }) => {
+	return (
+		<BrowserRouter basename={basename}>
+			<AppRoutes />
+		</BrowserRouter>
+	);
+};
+
 
 export default App;
