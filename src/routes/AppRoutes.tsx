@@ -1,11 +1,11 @@
 import { FC } from 'react';
-import { RootState } from '@/config/store/rootReducer';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual } from 'react-redux';
+import { useAppSelector } from '@/utils/appHooks';
 import PublicRoutes from '@/routes/PublicRoutes';
 import PrivateRoutes from '@/routes/PrivateRoutes';
 
 const AppRoutes: FC = () => {
-	const isAuthorized = useSelector<RootState>(({ auth }) => auth.accessToken, shallowEqual);
+	const isAuthorized = useAppSelector(({ auth }) => auth.accessToken, shallowEqual);
 	return isAuthorized ? <PrivateRoutes /> : <PublicRoutes />;
 };
 

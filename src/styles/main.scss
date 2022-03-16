@@ -1,0 +1,48 @@
+@import '@/styles/font.scss';
+
+body{
+    font-family:  $font-family;
+    font-weight: $font-weight;
+    font-size : $font-size;
+    line-height: $line-height;
+    letter-spacing: $letter-spacing;
+    -webkit-user-select: $moz-user-select;
+    -moz-user-select: $moz-user-select;
+    -ms-user-select: $ms-user-select;
+    user-select: $user-select;
+}
+
+.b-radius-5{
+    border-radius: 5px;
+}
+.mr-5{
+    margin-right: 5px;
+}
+.mr-10{
+    margin-right: 10px;
+}
+.mr-15{
+    margin-right: 15px;
+}
+.mr-20{
+    margin-right: 20px;
+}
+.ml-5{
+    margin-left: 5px;
+}
+.ml-10{
+    margin-left: 10px;
+}
+.ml-15{
+    margin-left: 15px;
+}
+.ml-20{
+    margin-left: 20px;
+}
+.m-auto{
+    margin: auto;
+}
+.c-pointer{
+    cursor: pointer;
+    
+}
