@@ -1,5 +1,4 @@
 import LoginView  from '@/views/publics/LoginView';
-import RegisterView from '@/views/publics/RegisterView';
-import HomeView from '@/views/publics/HomeView';
+import RegisterView  from '@/views/publics/RegisterView';
 
-export {LoginView,RegisterView,HomeView}
+export {LoginView,RegisterView}

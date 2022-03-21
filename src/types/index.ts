@@ -1,1 +1,1 @@
-export * from '@/types/shared'
+export * from '@/types/common'

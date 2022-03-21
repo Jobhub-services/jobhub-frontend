@@ -1,4 +1,4 @@
-import { TypeAttributes } from '@/types/publics/common';
+import { TypeAttributes } from '@/types/common';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss'
 
 const CardFontSize:{[key in TypeAttributes.Size]:string} = {
@@ -9,7 +9,7 @@ const CardFontSize:{[key in TypeAttributes.Size]:string} = {
     xlg:'24px'
 }
 const AppColors:{[key in TypeAttributes.Color]:{primary:string,secondry?:string,third?:string}} = {
-    red:{primary:Colors.PURPLE_BASE},
+    red:{primary:Colors.RED_BASE},
     purple: {primary:Colors.PURPLE_BASE,secondry:Colors.PURPLE_2,third:Colors.PURPLE_3}, 
     blue: {primary:Colors.PURPLE_BASE}, 
     black: {primary:'black'}, 

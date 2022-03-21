@@ -8,7 +8,6 @@ import store, { persistor } from '@/config/store/store';
 import App from '@/App';
 
 const { PUBLIC_URL } = process.env;
-
 ReactDOM.render(
 	<React.StrictMode>
 		<StoreProvider store={store}>

@@ -12,3 +12,8 @@ export interface LogoProps extends StandardProps {
 	link?:string,
 	src?:string
 }
+
+export interface ErrorWrapperProps extends StandardProps {
+    error:boolean
+    message:string
+}

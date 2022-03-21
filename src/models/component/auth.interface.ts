@@ -3,11 +3,10 @@ import { StandardProps } from "@/models/component/app.interface"
 export type LoginProps = {};
 export type LoginState = {};
 
-export type RegisterProps = {};
+export interface RegisterProps  {
+    for:'developer' | 'company'
+}
 export type RegisterState = {};
-
-export type HomeProps = {};
-export type HomeState = {};
 
 
 export interface SideBarProps extends StandardProps {
@@ -15,6 +14,12 @@ export interface SideBarProps extends StandardProps {
     icon?:string | React.ReactNode
     src?:string | undefined
     color?: 'first' | 'second'
+}
+
+export interface AuthFooterProps extends StandardProps{
+    title?:string
+    link?:string
+    to:string
 }
 
 

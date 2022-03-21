@@ -1,6 +1,6 @@
 import React from 'react'
 import { Logo } from "@/components/common"
-import { SideBarProps, StandardProps } from "@/models"
+import { SideBarProps, StandardProps } from "@/models/component"
 import { FlexBox, Headline } from "staak-ui"
 import styled from "styled-components"
 import { SideBarColors } from '@/constants';

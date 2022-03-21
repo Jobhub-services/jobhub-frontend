@@ -1,4 +1,4 @@
-import { LogoProps } from "@/models"
+import { LogoProps } from "@/models/component"
 
 const Logo = (props:LogoProps)=>{
     return (
@@ -11,6 +11,6 @@ const Logo = (props:LogoProps)=>{
 }
 Logo.defaultProps = {
     alt:"img",
-    src:'assets/img/logo.JPG'
+    src:'/assets/img/logo.JPG'
 }
 export default Logo
