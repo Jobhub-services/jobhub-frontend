@@ -6,4 +6,7 @@ export declare namespace CompaniesOverview {
     interface SideBarProps extends StandardProps {
         width?:string
     }
+    interface HeaderBarProps extends StandardProps {
+        width?:string
+    }
 }

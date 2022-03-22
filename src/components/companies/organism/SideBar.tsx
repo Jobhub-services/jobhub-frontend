@@ -40,6 +40,9 @@ const SideBar = (props:CompaniesOverview.SideBarProps)=>{
                     <NavItem.Content>Schedule</NavItem.Content>
                 </NavItem>
                 <NavItem icon={<SettingIcon />} width={widthItems}>
+                    <NavItem.Content>Assements</NavItem.Content>
+                </NavItem>
+                <NavItem icon={<SettingIcon />} width={widthItems}>
                     <NavItem.Content>Settings</NavItem.Content>
                 </NavItem>
             </FlexBox>

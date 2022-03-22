@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexBox } from 'staak-ui';
-import { SideBar } from "@/components/companies";
+import { HeaderBar, SideBar } from "@/components/companies";
 
 const StyledPublicView = styled.div`
     position: fixed;
@@ -19,10 +19,10 @@ const StyledFlexBox = styled(FlexBox)`
 const MasterLayout: FC = () => {
 	return (
 		<StyledPublicView>
-			<StyledFlexBox>
+			<StyledFlexBox align='flex-start'>
                 <SideBar />
-                <FlexBox width='87%'>
-
+                <FlexBox width='87%' flexDirection='column' align='flex-start' justify='flex-start'>
+                    <HeaderBar />
                 </FlexBox>
             </StyledFlexBox>
 			<Outlet />
