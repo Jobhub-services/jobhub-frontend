@@ -1,0 +1,39 @@
+// fonts for UI redesign
+@font-face {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 300;
+	src: local('Poppins'), url(./fonts/Poppins-Light.ttf) format('truetype'); // Poppins-Light
+}
+
+@font-face {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Poppins'), url(./fonts/Poppins-Regular.ttf) format('truetype'); // Poppins-Regular
+}
+
+@font-face {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	src: local('Poppins'), url(./fonts/Poppins-SemiBold.ttf) format('truetype'); // Poppins-SemiBold
+}
+
+$font-size: 14px;
+$line-height: 1.5;
+$letter-spacing: 0.02857em;
+$font-family: 'Poppins', sans-serif;
+$font-weight: 400;
+$webkit-user-select: none;
+$moz-user-select: none;
+$ms-user-select: none;
+$user-select: none;
+
+:export{
+    FONT_SIZE:$font-size;
+    FONT_FAMILY:$font-family;
+    LINE_HEIGHT:$line-height;
+    LETTER_SPACING:$letter-spacing;
+    FONT_WEIGHT: $font-weight;
+}

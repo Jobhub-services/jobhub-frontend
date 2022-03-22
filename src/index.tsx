@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
+import reportWebVitals from '@/reportWebVitals';
+import { PersistGate } from 'redux-persist/integration/react';
+import { Provider as StoreProvider } from 'react-redux';
+import store, { persistor } from '@/config/store/store';
+import App from '@/App';
+
+const { PUBLIC_URL } = process.env;
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+	<React.StrictMode>
+		<StoreProvider store={store}>
+			{/* Asynchronously persist redux stores and show `SplashScreen` while it's loading. */}
+			<PersistGate persistor={persistor} loading={<div>Loading...</div>}>
+				<App basename={PUBLIC_URL} />
+			</PersistGate>
+		</StoreProvider>
+	</React.StrictMode>,
+	document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals(console.log);
