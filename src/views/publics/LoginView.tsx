@@ -4,6 +4,9 @@ import {SideBar,AuthFooter, LoginForm, ConnectionOptions} from '@/components';
 import {  Divider, FlexBox,Headline,SimpleLink} from 'staak-ui';
 import styled from 'styled-components';
 
+const MainFlexBox = styled(FlexBox)`
+	padding:0px !important;
+`
 const FlexBoxPadding = styled(FlexBox)`
 	padding: 15px 20px 0px 20px !important;
 `
@@ -21,7 +24,7 @@ class LoginView extends Component<LoginProps, LoginState> {
 	
 	render(): React.ReactNode {
 		return ( 
-			<FlexBox height='100%' justify='flex-start'>
+			<MainFlexBox height='100%' justify='flex-start'>
 				<SideBar width='27%' src='assets/loginimg.PNG'>
 					<SideBar.Title>Discover the world’s top Companies & Developers.</SideBar.Title>
 				</SideBar>
@@ -39,7 +42,7 @@ class LoginView extends Component<LoginProps, LoginState> {
 						<AuthFooter title="Don't have a Staak account?" link='Sign Up Now' to='/register/company' />
 					</FormFlexBox>
 				</FlexBox>
-			</FlexBox>
+			</MainFlexBox>
 		)
 	}
 }

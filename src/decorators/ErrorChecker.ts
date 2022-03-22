@@ -4,4 +4,10 @@ import { IErrorChecker } from "./error.interface";
     error:IErrorChecker
     
     checkErrors: (name: string) => { error: boolean; message: string; };
+
+
 }*/
+
+
+
+

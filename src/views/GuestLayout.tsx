@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
-const StyledHomeView = styled.div`
+const StyledPublicView = styled.div`
     position: fixed;
     top: 0;
     left: 0;
@@ -11,9 +11,9 @@ const StyledHomeView = styled.div`
 `
 const GuestLayout: FC = () => {
 	return (
-		<StyledHomeView>
+		<StyledPublicView>
 			<Outlet />
-		</StyledHomeView>
+		</StyledPublicView>
 	);
 };
 export default GuestLayout;

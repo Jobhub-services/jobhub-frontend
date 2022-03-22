@@ -8,6 +8,7 @@ import { SideBarColors } from '@/constants';
 const StyledContainer = styled(FlexBox)`
     background-color:${(props:SideBarProps)=>SideBarColors[props.color!]};
     height:100%;
+    padding:0px !important;
 `
 const StyledFlexBox = styled(FlexBox)`
     padding: 70px !important;
