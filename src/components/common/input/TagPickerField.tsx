@@ -1,0 +1,25 @@
+import React from "react"
+import { TagPickerProps,TagPickerOptionProps } from "@/models/component"
+import { TagPicker } from "staak-ui"
+import { SLabel,ErrorSpan } from './input.styles'
+
+
+const TagPickerField = (props:TagPickerProps) => {
+    const options = React.Children.map(props.children,(child)=>typeof child!=='string' &&child?.type?.displayName==='Option'?child:null)
+
+    return (
+        <div className={props.className}>
+            <SLabel>{props.title}</SLabel>
+            <TagPicker width={props.width} name={props.name} placeholder={props.placeholder} required={props.required}>
+                {options}
+            </TagPicker>
+            {props.error && <ErrorSpan>{props.message}</ErrorSpan>}
+        </div>
+    )
+}
+
+const Option = (props:TagPickerOptionProps)=><>{props.children}</>
+Option.displayName = 'Option'
+TagPickerField.Option = Option
+
+export default TagPickerField

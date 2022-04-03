@@ -11,21 +11,25 @@ const StyledPublicView = styled.div`
     overflow-y: auto;
     width:100%;
 	height:100%;
+    background:#f5f8fa;
 `
 const StyledFlexBox = styled(FlexBox)`
 	padding: 0px !important;
 	height: 100%;
+    overflow:auto;
 `
 const MasterLayout: FC = () => {
 	return (
 		<StyledPublicView>
 			<StyledFlexBox align='flex-start'>
                 <SideBar />
-                <FlexBox width='87%' flexDirection='column' align='flex-start' justify='flex-start'>
+                <StyledFlexBox width='86%' flexDirection='column' align='flex-start' justify='flex-start'>
                     <HeaderBar />
-                </FlexBox>
+                    <FlexBox width='100%' align='flex-start' justify='flex-start'>
+                        <Outlet />
+                    </FlexBox>
+                </StyledFlexBox>
             </StyledFlexBox>
-			<Outlet />
 		</StyledPublicView>
 	);
 };

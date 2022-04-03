@@ -9,7 +9,7 @@ const CardFontSize:{[key in TypeAttributes.Size]:string} = {
     xlg:'24px'
 }
 const AppColors:{[key in TypeAttributes.Color]:{primary:string,secondry?:string,third?:string}} = {
-    red:{primary:Colors.RED_BASE},
+    red:{primary:Colors.RED_BASE,secondry:Colors.RED_CLEAR_1},
     purple: {primary:Colors.PURPLE_BASE,secondry:Colors.PURPLE_2,third:Colors.PURPLE_3}, 
     blue: {primary:Colors.PURPLE_BASE}, 
     black: {primary:'black'}, 

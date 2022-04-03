@@ -1,5 +1,5 @@
 import React from 'react'
-import InputField from "@/components/common/InputField"
+import InputField from "@/components/common/input/InputField"
 import { InputProps,FormProps, ButtonProps, CheckBoxProps } from "@/models/component"
 import { Button, FlexBox } from 'staak-ui'
 import styled from 'styled-components'

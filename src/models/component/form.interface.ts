@@ -1,15 +1,45 @@
 import { TypeAttributes } from '@/types/common';
 import { StandardProps } from "@/models/component/app.interface"
 
-export interface InputProps extends StandardProps {
+
+interface StandardInputProps extends StandardProps {
     children?: JSX.Element | JSX.Element[] | React.ReactNode
     name: string
-    type?: 'text' | 'email' | 'password'
     width?: string
-    startIcon?: React.ReactNode
     placeholder?: string
     required?:boolean
+}
+export interface InputProps extends StandardInputProps {
+    type?: 'text' | 'email' | 'password'
+    startIcon?: React.ReactNode
     onChange?:(event:React.ChangeEvent<HTMLInputElement>)=>void
+}
+
+export interface InputPickerProps extends StandardInputProps {
+    children?: JSX.Element | JSX.Element[] 
+    title:string
+    message?:string
+    error?:boolean
+    onChange?:(event:React.MouseEvent<HTMLDivElement>, value:string)=>void
+}
+
+export interface TagPickerProps extends StandardInputProps {
+    children?: JSX.Element | JSX.Element[] 
+    title:string
+    message?:string
+    error?:boolean
+}
+
+export interface InputPickerOptionProps extends StandardProps {
+    value:string
+}
+export interface TagPickerOptionProps extends StandardProps {
+    value:string
+}
+
+export interface TextAreaProps extends StandardInputProps {
+    height?: string
+    onChange?:(event:React.ChangeEvent<HTMLTextAreaElement>)=>void
 }
 
 export interface CheckBoxProps extends StandardProps {
