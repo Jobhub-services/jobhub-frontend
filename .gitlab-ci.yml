@@ -1,0 +1,30 @@
+image: node:14.15.4-alpine
+
+stages:
+  - test
+  - build
+  - deploy
+unit_test:
+  stage: test
+  only:
+    - merge_requests
+  script:
+    - npm ci
+build:
+  stage: build
+  only:
+    - merge_requests
+    - dev
+  script:
+    - npm install
+    - npm run build:prod
+deploy:
+  image: ruby:latest
+  stage: deploy
+  only:
+    - dev
+  script:
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=$APP_NAME --api-key=$HEROKU_API_KEY

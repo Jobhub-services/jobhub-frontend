@@ -6,11 +6,12 @@ import rootSaga from '@/config/store/rootSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 const middleware = [sagaMiddleware];
+const { APP_ENV } = STAAK_ENV;
 
 const store = configureStore({
 	reducer: rootReducer,
 	middleware,
-	devTools: process.env.NODE_ENV !== 'production',
+	devTools: APP_ENV !== 'production',
 });
 
 export const persistor = persistStore(store);

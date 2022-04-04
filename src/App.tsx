@@ -1,8 +1,8 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { AppProps } from '@/models/component/app.interface';
 import AppRoutes from '@/routes/AppRoutes';
-import '@/styles/main.scss'
+import '@/assets/scss/main.scss';
 
 const App: FC<AppProps> = ({ basename }) => {
 	return (
@@ -11,6 +11,5 @@ const App: FC<AppProps> = ({ basename }) => {
 		</BrowserRouter>
 	);
 };
-
 
 export default App;

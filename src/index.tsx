@@ -7,13 +7,14 @@ import { Provider as StoreProvider } from 'react-redux';
 import store, { persistor } from '@/config/store/store';
 import App from '@/App';
 
-const { PUBLIC_URL } = process.env;
+const { BASE_URL } = STAAK_ENV;
+
 ReactDOM.render(
 	<React.StrictMode>
 		<StoreProvider store={store}>
 			{/* Asynchronously persist redux stores and show `SplashScreen` while it's loading. */}
 			<PersistGate persistor={persistor} loading={<div>Loading...</div>}>
-				<App basename={PUBLIC_URL} />
+				<App basename={BASE_URL} />
 			</PersistGate>
 		</StoreProvider>
 	</React.StrictMode>,
