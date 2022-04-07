@@ -1,18 +1,18 @@
 import React, { useState } from "react"
-import { TagPickerField,TextAreaField } from "@/components/common"
-import { SIcon,SButton } from "@/components/companies/jobs/newjob/additional/additional.styles"
+import { TextAreaField } from "@/components/common"
+import { SButton,SIcon } from "@/components/companies/jobs/newjob/newjob.styles"
 import { PlusIcon,TrashIcon } from "staak-ui"
 import { TextArea,FlexBox } from "staak-ui"
 
 
-const PreQualification = (props:any)=>{
+const Questions = (props:any)=>{
     const [questions,setQuestions] = useState<{index:number,value:string}[]>([])
     function addQuestion(event:React.SyntheticEvent){
         const tmp = [...questions,{index:questions.length+2,value:''}]
         setQuestions(tmp)
     }
     function removeQuestion(event:React.SyntheticEvent,index:number){
-        setQuestions(questions.filter(elem=>{
+        setQuestions(questions.filter(elem => {
             if(elem.index!==index){
                 elem.index = elem.index-1
                 return elem
@@ -22,15 +22,9 @@ const PreQualification = (props:any)=>{
     return (
         <div>
             <h3>Pre-qualifications</h3>
-            <div style={{marginBottom:'20px'}}>
-                <TagPickerField name='hire_remotly' width="805px" placeholder="Add skills" title="Skills">
-                    <TagPickerField.Option value="full_time">Full-time</TagPickerField.Option>
-                    <TagPickerField.Option value="part_time">Part-time</TagPickerField.Option>
-                </TagPickerField>
-            </div>
             <div>
                 <div>
-                    <TextAreaField className='mt-10 mb-10' placeholder="Requirements" name='job_desc' width="795px" >Question 1</TextAreaField>
+                    <TextAreaField className='mt-10 mb-10' placeholder="Requirements" name='job_desc' width="785px" height='60px' >Question 1</TextAreaField>
                     {questions.map((elem,key)=>{
                         return (
                             <div key={key}>
@@ -40,7 +34,7 @@ const PreQualification = (props:any)=>{
                                         <TrashIcon color='inherit' />
                                     </SIcon>
                                 </FlexBox>
-                                <TextArea className='mt-5 mb-10' placeholder="Requirements" name='job_desc' width="580px" ></TextArea>
+                                <TextArea className='mt-5 mb-10' placeholder="Requirements" name='job_desc' width="785px" height='60px' ></TextArea>
                             </div>
                         )
                     })}
@@ -51,4 +45,4 @@ const PreQualification = (props:any)=>{
     )
 }
 
-export default PreQualification
+export default Questions

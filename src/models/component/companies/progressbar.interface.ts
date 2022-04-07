@@ -7,4 +7,5 @@ export interface StepProgressProps extends StandardProps{
     active?:boolean
     valid?:boolean
     direction?:'horizontal' | 'vertical'
+    onSelectStep?:(event:React.SyntheticEvent,step:number)=> void
 }
