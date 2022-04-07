@@ -1,0 +1,24 @@
+@import './font.scss';
+@import 'staak-ui/lib/esm/styles/colors.module.scss';
+
+button,
+input,
+#root {
+	font-family: $font-family;
+}
+#root {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+* {
+	box-sizing: border-box;
+}

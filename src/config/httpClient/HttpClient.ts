@@ -6,7 +6,7 @@ export class HttpClient {
 
 	constructor() {
 		const config = {
-			baseURL: process.env.REACT_APP_API_BASE_URL,
+			baseURL: STAAK_ENV.API_URL,
 		};
 
 		axios.defaults.withCredentials = true;
@@ -60,7 +60,7 @@ export class HttpClient {
 	 * Injects JWT token from session storage as bearer token in auth header.
 	 */
 	private _initAuthInterceptor() {
-		const authInterceptor = (config:any) => {
+		const authInterceptor = (config: any) => {
 			const {
 				auth: { accessToken },
 			} = store.getState();
@@ -78,7 +78,7 @@ export class HttpClient {
 	 * Returns response duration in duration property of response.
 	 */
 	private _initResponseDurationInterceptor() {
-		const requestStartTimeInterceptor = (config:any) => {
+		const requestStartTimeInterceptor = (config: any) => {
 			config.metadata = {
 				startTime: new Date(),
 			};
@@ -86,7 +86,7 @@ export class HttpClient {
 		};
 		this._client.interceptors.request.use(requestStartTimeInterceptor);
 
-		const responseEndTimeInterceptor = (response:any) => {
+		const responseEndTimeInterceptor = (response: any) => {
 			/** Calculate response time */
 			response.duration = new Date().getTime() - response.config.metadata.startTime.getTime();
 			return response;
@@ -95,7 +95,7 @@ export class HttpClient {
 	}
 
 	private _initCancelTokenErrorInterceptor(): void {
-		const cancelTokenErrorInterceptor = (error:any) => {
+		const cancelTokenErrorInterceptor = (error: any) => {
 			if (axios.isCancel(error)) return undefined;
 			return Promise.reject(error);
 		};
