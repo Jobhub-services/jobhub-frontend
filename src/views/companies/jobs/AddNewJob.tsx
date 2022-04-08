@@ -8,19 +8,23 @@ import AdditionalInfo from '@/components/companies/jobs/newjob/details/DetailedI
 import AddTests from '@/components/companies/jobs/newjob/qualifications/QaulificationsInfo';
 import JobReview from '@/components/companies/jobs/newjob/review/JobReview';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
+import { HEADER_HIEGHT } from '@/constants/app.constants';
 
 /* component style */
 
-const StyledDiv = styled.div`
-	align-self: flex-start;
-	padding: 0px 20px;
+const AddJobContainer = styled.div`
+	position: relative;
+	padding: 5px 50px 5px 0;
+	display: flex;
+`;
+
+const StepContainer = styled.div`
 	position: sticky;
-	top: 77px;
+	height: max-content;
+	padding: 0px 50px;
+	top: calc(${HEADER_HIEGHT}px + 20px);
 `;
-const StyledFlexBox = styled(FlexBox)`
-	padding: 5px 0px !important;
-	height: 100%;
-`;
+
 const StyledHeadline = styled(Headline)`
 	margin-top: 0px;
 `;
@@ -29,6 +33,7 @@ const SContainer = styled.div`
 	background: white;
 	box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
 	border-radius: 8px;
+	width: 100%;
 `;
 /* component class */
 
@@ -82,11 +87,10 @@ class AddNewJob extends Component<any, AddNewJobState> {
 				title = 'Job Review';
 		}
 		return (
-			<StyledFlexBox align="flex-start" height="100%">
-				<StyledDiv>
+			<AddJobContainer>
+				<StepContainer>
 					<StepProgress
 						onSelectStep={this.selectStep}
-						style={{ marginLeft: '40px' }}
 						direction="vertical"
 						items={[
 							{ name: 'Basics', valid: validSteps![0], active: currentStep === 0 },
@@ -95,7 +99,7 @@ class AddNewJob extends Component<any, AddNewJobState> {
 							{ name: 'Review', valid: validSteps![3], active: currentStep === 3 },
 						]}
 					/>
-				</StyledDiv>
+				</StepContainer>
 				<SContainer>
 					<div style={{ borderBottom: `1px solid ${Colors.BLACK_12}`, padding: '0px 20px' }}>
 						<StyledHeadline variant="h2" size="md">
@@ -104,7 +108,7 @@ class AddNewJob extends Component<any, AddNewJobState> {
 					</div>
 					<div style={{ padding: '0px 20px' }}>{step}</div>
 				</SContainer>
-			</StyledFlexBox>
+			</AddJobContainer>
 		);
 	}
 }

@@ -20,5 +20,22 @@ a {
 }
 
 * {
-	box-sizing: border-box;
+	box-sizing: border-box !important;
+}
+
+.staak_scrollbar::-webkit-scrollbar {
+	width: 7px;
+}
+
+/* Handle */
+.staak_scrollbar::-webkit-scrollbar-thumb {
+	transition-duration: 0.5s;
+	cursor: pointer;
+	border-radius: 8px;
+	background-color: $BLACK_11;
+}
+
+/* Handle on hover */
+.staak_scrollbar::-webkit-scrollbar-thumb:hover {
+	background: $BLACK_10;
 }
