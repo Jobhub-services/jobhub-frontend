@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexBox } from 'staak-ui';
 import { HeaderBar, SideBar } from "@/components/companies";
+import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 
 const StyledPublicView = styled.div`
     position: fixed;
@@ -17,6 +18,22 @@ const StyledFlexBox = styled(FlexBox)`
 	padding: 0px !important;
 	height: 100%;
     overflow:auto;
+    &::-webkit-scrollbar {
+        width: 7px;
+    }
+
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        transition-duration: 0.5s;
+        cursor:pointer;
+        border-radius:8px;
+        background-color: ${Colors.BLACK_11};
+    }
+
+    /* Handle on hover */
+    &::-webkit-scrollbar-thumb:hover {
+        background: ${Colors.BLACK_10};
+    }
 `
 const MasterLayout: FC = () => {
 	return (

@@ -1,10 +1,12 @@
 import { StandardProps } from "@/models/component";
+import ShowJobs from "@/components/companies/jobs/showjob/ShowJobs";
 
 
 const JobOverview = (props:StandardProps)=>{
-    console.log('hhhhhhhhhhhhhh')
     return (
-        <></>
+        <>
+            <ShowJobs />
+        </>
     )
 }
 

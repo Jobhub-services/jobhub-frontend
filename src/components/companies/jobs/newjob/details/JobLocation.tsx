@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import { InputPicker,Input,CheckBox,Radio } from "staak-ui"
 import { PlusIcon,TrashIcon } from "staak-ui"
-import { SIcon,SButton,StyledGap } from "@/components/companies/jobs/newjob/additional/additional.styles"
+import { StyledGap,SLabel } from "./detailedInfo.styles"
+import { SButton,SIcon } from "@/components/companies/jobs/newjob/newjob.styles"
 
 
 const JobLocation = (props:any)=>{
@@ -25,7 +26,8 @@ const JobLocation = (props:any)=>{
         <div>
             <h3>Location</h3>
             <div style={{marginBottom:'20px'}}>
-                <label>Job location</label>
+                <SLabel>Job location</SLabel>
+                <CheckBox>Allow Remote Workers</CheckBox>
                 <StyledGap justify='flex-start'>
                     <InputPicker width='240px' name='job_location' placeholder="Country" title="Country">
                         <InputPicker.Option value="full_time">Full-time</InputPicker.Option>
@@ -35,7 +37,6 @@ const JobLocation = (props:any)=>{
                         <InputPicker.Option value="other">Other</InputPicker.Option>
                     </InputPicker>
                     <Input width='240px' name='zip_code' placeholder='Region, City or Zip Code' />
-                    <CheckBox>Remote</CheckBox>
                 </StyledGap>
                 {workLocations.map((elem,key)=>{
                     return (
@@ -57,7 +58,8 @@ const JobLocation = (props:any)=>{
                 <SButton onClick={addWorkLocation} variant='text' startIcon={<PlusIcon />}>Add location</SButton>
             </div>
             <div style={{marginBottom:'20px'}}>
-                <label>Hire Remotly</label>
+                <SLabel>Hire Remotly</SLabel>
+                <CheckBox>Allow Remote Hiring</CheckBox>
                 <StyledGap justify='flex-start'>
                     <InputPicker width='240px' name='hire_remotly' placeholder="Country" title="Hire Remotly">
                         <InputPicker.Option value="full_time">Full-time</InputPicker.Option>
@@ -67,7 +69,6 @@ const JobLocation = (props:any)=>{
                         <InputPicker.Option value="other">Other</InputPicker.Option>
                     </InputPicker>
                     <Input width='240px' name='zip_code' placeholder='Region, City or Zip Code' />
-                    <CheckBox>Remote</CheckBox>
                 </StyledGap>
                 {hireLocations.map((elem,key)=>{
                     return (
@@ -89,7 +90,7 @@ const JobLocation = (props:any)=>{
                 <SButton onClick={addHireLocation} variant='text' startIcon={<PlusIcon />}>Add location</SButton>
             </div>
             <div style={{marginBottom:'20px'}}>
-                <label>Visa sponsorship</label>
+                <SLabel>Visa sponsorship</SLabel>
                 <StyledGap align='flex-start' justify='flex-start'>
                     <Radio>Yes</Radio>
                     <Radio>No</Radio>

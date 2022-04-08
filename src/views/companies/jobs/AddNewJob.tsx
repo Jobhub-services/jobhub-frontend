@@ -3,9 +3,10 @@ import styled from 'styled-components';
 import { FlexBox, Headline } from 'staak-ui';
 import { AddNewJobProps, AddNewJobState } from '@/models/component';
 import { StepProgress } from '@/components/companies/progressBar';
-import BasicDetails from '@/components/companies/jobs/newjob/basics/BasicsDetails';
-import AdditionalInfo from '@/components/companies/jobs/newjob/additional/AdditionalInfo';
-import AddTests from '@/components/companies/jobs/newjob/tests/AddTests';
+import BasicDetails from '@/components/companies/jobs/newjob/basics/BasicInfo';
+import AdditionalInfo from '@/components/companies/jobs/newjob/details/DetailedInfo';
+import AddTests from '@/components/companies/jobs/newjob/qualifications/QaulificationsInfo';
+import JobReview from '@/components/companies/jobs/newjob/review/JobReview';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 
 /* component style */
@@ -36,49 +37,62 @@ class AddNewJob extends Component<any, AddNewJobState> {
 		super(props);
 		this.state = {
 			currentStep: 0,
+			validSteps: [false, false, false, false],
 		};
 		this.handleNext = this.handleNext.bind(this);
 		this.handlePreviouse = this.handlePreviouse.bind(this);
+		this.selectStep = this.selectStep.bind(this);
+	}
+	selectStep(event: React.SyntheticEvent, step: number) {
+		this.setState({ currentStep: step });
 	}
 	handleNext() {
-		const { currentStep } = this.state;
-		this.setState({ currentStep: currentStep! + 1 });
+		const { currentStep, validSteps } = this.state;
+		const tmp = [...validSteps!];
+		tmp[currentStep!] = true;
+		this.setState({
+			currentStep: currentStep! + 1,
+			validSteps: tmp,
+		});
 	}
 	handlePreviouse() {
-		const { currentStep } = this.state;
-		this.setState({ currentStep: currentStep! > 0 ? currentStep! - 1 : 0 });
+		const { currentStep, validSteps } = this.state;
+		const tmp = [...validSteps!];
+		tmp[currentStep! - 1] = false;
+		this.setState({ currentStep: currentStep! > 0 ? currentStep! - 1 : 0, validSteps: tmp });
 	}
 	render() {
-		const { currentStep } = this.state;
+		const { currentStep, validSteps } = this.state;
 		let step, title;
 		switch (currentStep) {
 			case 0:
-				step = <BasicDetails onNext={this.handleNext} onPreviouse={this.handlePreviouse} />;
-				title = 'Basics details';
+				step = <BasicDetails onNext={this.handleNext} />;
+				title = 'Basic Informations';
 				break;
 			case 1:
 				step = <AdditionalInfo onNext={this.handleNext} onPreviouse={this.handlePreviouse} />;
-				title = 'Location & skills';
+				title = 'Detailed Informations';
 				break;
 			case 2:
 				step = <AddTests onNext={this.handleNext} onPreviouse={this.handlePreviouse} />;
-				title = 'Tests';
+				title = 'Qualifications';
 				break;
-			default:
-				step = <BasicDetails onNext={this.handleNext} />;
-				title = 'Basics details';
+			case 3:
+				step = <JobReview onPreviouse={this.handlePreviouse} />;
+				title = 'Job Review';
 		}
 		return (
-			<StyledFlexBox justify="flex-start" align="flex-start" height="100%">
+			<StyledFlexBox align="flex-start" height="100%">
 				<StyledDiv>
 					<StepProgress
+						onSelectStep={this.selectStep}
 						style={{ marginLeft: '40px' }}
 						direction="vertical"
 						items={[
-							{ name: 'Basics', valid: currentStep! - 1 === 0, active: currentStep === 0 },
-							{ name: 'Details', valid: currentStep! - 1 === 1, active: currentStep === 1 },
-							{ name: 'Qualifications', valid: currentStep! - 1 === 2, active: currentStep === 2 },
-							{ name: 'Review', valid: currentStep! - 1 === 3, active: currentStep === 3 },
+							{ name: 'Basics', valid: validSteps![0], active: currentStep === 0 },
+							{ name: 'Details', valid: validSteps![1], active: currentStep === 1 },
+							{ name: 'Qualifications', valid: validSteps![2], active: currentStep === 2 },
+							{ name: 'Review', valid: validSteps![3], active: currentStep === 3 },
 						]}
 					/>
 				</StyledDiv>

@@ -4,6 +4,7 @@ import { CompaniesOverview } from "@/models/component"
 import { SearchInput,FlexBox,Button } from 'staak-ui'
 import { PlusIcon } from 'staak-ui'
 import { IconDropDown,AvatarDropDown } from '@/components/companies/dropdown'
+import {useNavigate} from 'react-router-dom'
 
 const SyledContainer = styled.div<CompaniesOverview.HeaderBarProps>`
     position:sticky;
@@ -21,12 +22,13 @@ const StyledNewJobButton = styled.span`
     margin-right:35px;
 `
 const HeaderBar = (props:CompaniesOverview.HeaderBarProps)=>{
+    const navigate = useNavigate() 
     return(
         <SyledContainer width={props.width}>
             <StyledFlexContainer width='95%' justify='space-between'>
                 <SearchInput placeholder='Search Talents' width='350px' />
                 <FlexBox justify='space-between'>
-                    <StyledNewJobButton><Button startIcon={<PlusIcon />}>Create New Job</Button></StyledNewJobButton>
+                    <StyledNewJobButton><Button startIcon={<PlusIcon />} onClick={(event:React.SyntheticEvent)=>{navigate('jobs/new',{replace:true})}}>Create New Job</Button></StyledNewJobButton>
                     <FlexBox width='160px' justify='space-between'>
                         <IconDropDown />
                         <AvatarDropDown />

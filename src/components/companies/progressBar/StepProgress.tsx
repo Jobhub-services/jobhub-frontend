@@ -38,12 +38,13 @@ const StyledContainer = styled.div`
     position:relative;
 `
 const LineDiv = styled.li<StepProgressProps>`
+    cursor:pointer;
     margin-top: ${props=>props.direction==='vertical'?'150px':'0'};
     margin-left: ${props=>props.direction==='horizontal'?'80px':'0'};
     &:first-child {
         margin-top: 0px;
         margin-left:0px;
-    } 
+    }
     ${props=>props.direction==='vertical'&&css<StepProgressProps>`
         &:after {
             content: '';
@@ -73,10 +74,13 @@ const StyledDiv = styled.div<StepProgressProps>`
     background:${Colors.PURPLE_2};
     border-radius:50%;
     position:relative;
+    transition-duration:.3s;
     ${props=>!props.active&&!props.valid&&css`
         background:${Colors.BLACK_9};
     `}
-
+    ${LineDiv}:hover & {
+        box-shadow:0px 0px 5px 5px ${Colors.PURPLE_3};
+    }
     ${props=>props.direction==='horizontal'&&css<StepProgressProps>`
         &:after {    
             content: '';
@@ -94,12 +98,15 @@ const StyledDiv = styled.div<StepProgressProps>`
     
 `
 const StepProgress = (props:StepProgressProps) => {
+    function selectStep(event:React.SyntheticEvent,step:number){
+        if(props.onSelectStep) props.onSelectStep(event,step)
+    }
     return (
         <StyledContainer style={props.style}>
             <StyledUl direction={props.direction}>
                 {props.items?.map((elem,index)=>{
                     return (
-                        <LineDiv key={index} valid={elem.valid} direction={props.direction}>
+                        <LineDiv key={index} valid={elem.valid} direction={props.direction} onClick={(event)=>selectStep(event,index)}>
                             <FlexBox flexDirection={props.direction==='horizontal'?'column':'row'} justify='flex-start'>
                                 <StyledDiv direction={props.direction} active={elem.active} valid={elem.valid} ><StyledSpan valid={elem.valid} /></StyledDiv>
                                 <StyledContent>{elem.name}</StyledContent>
