@@ -1,14 +1,30 @@
 import React from 'react';
 import { Input } from 'staak-ui';
 import { InputProps } from '@/models/component';
-import { SLabel, ErrorSpan } from './input.styles';
+import styled from 'styled-components';
+import { colors } from '@/assets/theme';
+
+const SLabel = styled.label`
+	display: inline-block;
+	margin: 5px 0px;
+`;
+const ErrorSpan = styled.span`
+	display: inline-block;
+	color: ${colors.RED_BASE};
+	margin-top: 5px;
+	font-size: 13px;
+`;
+
+const InputContainer = styled.div`
+	margin-bottom: 15px;
+`;
 
 const InputField = (props: InputProps) => {
 	let wrapper;
 	if (React.isValidElement(props.children)) wrapper = props.children.props;
 
 	return (
-		<div>
+		<InputContainer>
 			<SLabel>{wrapper ? wrapper.children : props.children}</SLabel>
 			<Input
 				onChange={props.onChange}
@@ -20,7 +36,7 @@ const InputField = (props: InputProps) => {
 				required={props.required}
 			/>
 			{wrapper && wrapper.error && <ErrorSpan>{wrapper.message}</ErrorSpan>}
-		</div>
+		</InputContainer>
 	);
 };
 

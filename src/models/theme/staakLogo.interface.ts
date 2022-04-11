@@ -7,4 +7,5 @@ export enum VariantType {
 export interface IStaakLogo {
 	variant?: VariantType;
 	size?: number;
+	style?: any;
 }

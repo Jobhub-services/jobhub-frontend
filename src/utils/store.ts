@@ -1,6 +1,6 @@
 import store from '@/config/store/store';
 
-const dispatchToStore = (type: any, payload: any) => {
-	store.dispatch({ type, payload });
+const dispatchToStore = (action) => {
+	store.dispatch(action);
 };
 export default dispatchToStore;

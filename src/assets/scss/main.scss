@@ -39,3 +39,12 @@ a {
 .staak_scrollbar::-webkit-scrollbar-thumb:hover {
 	background: $BLACK_10;
 }
+
+@keyframes animateProgressBar {
+	0% {
+		background-position: 100% 0%;
+	}
+	100% {
+		background-position: 0% 0%;
+	}
+}

@@ -1,27 +1,23 @@
-import { FlexBox,SimpleLink } from "staak-ui"
-import styled from "styled-components"
-import { Link } from "react-router-dom"
-import { AuthFooterProps } from "@/models/component"
+import { FlexBox } from 'staak-ui';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { AuthFooterProps } from '@/models/component';
+import { colors } from '@/assets/theme';
 const SignUpFlexBox = styled(FlexBox)`
-	background: #f9f9f9;
-	padding: 10px 0px !important;
-`
-const StyledDiv = styled.div`
-	margin-left:20px;
-	border-bottom-left-radius: 8px;
-	border-bottom-right-radius: 8px;
-`
-const AuthFooter = (props:AuthFooterProps)=>{
-    return (
-        <SignUpFlexBox width='100%' flexDirection='column' align='flex-start' justify='flex-start'>
-            <StyledDiv>
-                <div>{props.title}</div>
-                <Link to={props.to}>
-                    <SimpleLink>{props.link}</SimpleLink>
-                </Link>
-            </StyledDiv>
-        </SignUpFlexBox>
-    )
-}
+	background: ${colors.GRAY_2};
+	padding: 12px 20px !important;
+`;
 
-export default AuthFooter
+const LinkLogin = styled(Link)`
+	color: ${colors.PURPLE_BASE};
+`;
+const AuthFooter = (props: AuthFooterProps) => {
+	return (
+		<SignUpFlexBox width="100%" flexDirection="column" align="flex-start" justify="flex-start">
+			<div>{props.title}</div>
+			<LinkLogin to={props.to}>{props.link}</LinkLogin>
+		</SignUpFlexBox>
+	);
+};
+
+export default AuthFooter;

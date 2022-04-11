@@ -18,7 +18,6 @@ const SyledContainer = styled.div<CompaniesOverview.SideBarProps>`
 const SideBar = (props: CompaniesOverview.SideBarProps) => {
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
-	console.log(pathname);
 	const widthItems = '96%';
 	function changeRoute(event: React.SyntheticEvent, index: string) {
 		navigate(index, { replace: true });
