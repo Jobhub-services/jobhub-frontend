@@ -1,8 +1,8 @@
 import { Component } from 'react';
 import styled from 'styled-components';
-import { FlexBox, Headline } from 'staak-ui';
+import { Headline } from 'staak-ui';
 import { AddNewJobProps, AddNewJobState } from '@/models/component';
-import { StepProgress } from '@/components/companies/progressBar';
+import { StepProgress } from '@/components/companies/wizard';
 import BasicDetails from '@/components/companies/jobs/newjob/basics/BasicInfo';
 import AdditionalInfo from '@/components/companies/jobs/newjob/details/DetailedInfo';
 import AddTests from '@/components/companies/jobs/newjob/qualifications/QaulificationsInfo';

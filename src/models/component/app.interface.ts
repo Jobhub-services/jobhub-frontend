@@ -3,7 +3,8 @@ export type AppProps = {
 };
 
 export interface IconProps {
-	size?: number;
+	width?: string;
+	height?: string;
 	color?: string;
 }
 

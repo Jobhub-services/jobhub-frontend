@@ -8,7 +8,7 @@ const InputField = (props: InputProps) => {
 	if (React.isValidElement(props.children)) wrapper = props.children.props;
 
 	return (
-		<div>
+		<div className={`w-100 ${props.className}`}>
 			<SLabel>{wrapper ? wrapper.children : props.children}</SLabel>
 			<Input
 				onChange={props.onChange}

@@ -1,4 +1,5 @@
-import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
+import { Colors } from 'staak-ui';
+
 interface ColorsType {
 	WHITE: string;
 	PURPLE_BASE: string;
@@ -34,5 +35,49 @@ interface ColorsType {
 	RED_CLEAR_3: string;
 	RED_CLEAR_4: string;
 	RED_CLEAR_5: string;
+
+	GREEN_BASE: string;
+	GREEN_DARK_1: string;
+	GREEN_DARK_2: string;
+	GREEN_DARK_3: string;
+	GREEN_DARK_4: string;
+	GREEN_CLEAR_1: string;
+	GREEN_CLEAR_2: string;
+	GREEN_CLEAR_3: string;
+	GREEN_CLEAR_4: string;
+	GREEN_CLEAR_5: string;
+
+	YELLOW_BASE: string;
+	YELLOW_DARK_1: string;
+	YELLOW_DARK_2: string;
+	YELLOW_DARK_3: string;
+	YELLOW_DARK_4: string;
+	YELLOW_CLEAR_1: string;
+	YELLOW_CLEAR_2: string;
+	YELLOW_CLEAR_3: string;
+	YELLOW_CLEAR_4: string;
+	YELLOW_CLEAR_5: string;
+
+	BLUE_BASE: string;
+	BLUE_DARK_1: string;
+	BLUE_DARK_2: string;
+	BLUE_DARK_3: string;
+	BLUE_DARK_4: string;
+	BLUE_CLEAR_1: string;
+	BLUE_CLEAR_2: string;
+	BLUE_CLEAR_3: string;
+	BLUE_CLEAR_4: string;
+	BLUE_CLEAR_5: string;
+
+	PINK_BASE: string;
+	PINK_DARK_1: string;
+	PINK_DARK_2: string;
+	PINK_DARK_3: string;
+	PINK_DARK_4: string;
+	PINK_CLEAR_1: string;
+	PINK_CLEAR_2: string;
+	PINK_CLEAR_3: string;
+	PINK_CLEAR_4: string;
+	PINK_CLEAR_5: string;
 }
 export const colors: ColorsType = Colors as any as ColorsType;

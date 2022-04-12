@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 import { CompaniesOverview } from '@/models/component';
 import { SearchInput, FlexBox, Button } from 'staak-ui';
-import { PlusIcon } from 'staak-ui';
+import { PlusIcon, Colors } from 'staak-ui';
 import { IconDropDown, AvatarDropDown } from '@/components/companies/dropdown';
 import { useNavigate } from 'react-router-dom';
 import { HEADER_HIEGHT } from '@/constants/app.constants';
