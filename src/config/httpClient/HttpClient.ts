@@ -1,6 +1,11 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 import store from '@/config/store/store';
 
+export const API_PATHS = {
+	USERS_SERVICE: `/users`,
+	JOBS_SERVICE: `/jobs`,
+};
+
 export class HttpClient {
 	private _client: AxiosInstance;
 
@@ -9,11 +14,10 @@ export class HttpClient {
 			baseURL: STAAK_ENV.API_URL,
 		};
 
-		axios.defaults.withCredentials = true;
+		//axios.defaults.withCredentials = true;
 		this._client = axios.create(config);
 		this._initAuthInterceptor();
 		this._initResponseDurationInterceptor();
-		this._initCancelTokenErrorInterceptor();
 	}
 
 	get clientInstance() {
@@ -56,6 +60,10 @@ export class HttpClient {
 		return this._client.patch(url, data, config);
 	}
 
+	setAuthToken() {
+		this._initAuthInterceptor();
+	}
+
 	/**
 	 * Injects JWT token from session storage as bearer token in auth header.
 	 */
@@ -92,15 +100,6 @@ export class HttpClient {
 			return response;
 		};
 		this._client.interceptors.response.use(responseEndTimeInterceptor);
-	}
-
-	private _initCancelTokenErrorInterceptor(): void {
-		const cancelTokenErrorInterceptor = (error: any) => {
-			if (axios.isCancel(error)) return undefined;
-			return Promise.reject(error);
-		};
-
-		this._client.interceptors.response.use((res) => res, cancelTokenErrorInterceptor);
 	}
 }
 

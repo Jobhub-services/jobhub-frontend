@@ -1,7 +1,19 @@
 import { InputPickerProps, InputPickerOptionProps } from '@/models/component';
 import React from 'react';
 import { InputPicker } from 'staak-ui';
-import { SLabel, ErrorSpan } from './input.styles';
+import styled from 'styled-components';
+import { colors } from '@/assets/theme';
+
+const SLabel = styled.label`
+	display: inline-block;
+	margin: 5px 0px;
+`;
+const ErrorSpan = styled.span`
+	display: inline-block;
+	color: ${colors.RED_BASE};
+	margin-top: 5px;
+	font-size: 13px;
+`;
 
 const InputPickerField = (props: InputPickerProps) => {
 	const options = React.Children.map(props.children, (child) => (typeof child !== 'string' && child?.type?.displayName === 'Option' ? child : null));

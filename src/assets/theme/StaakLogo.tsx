@@ -16,7 +16,7 @@ const StaakLogo = (props: IStaakLogo) => {
 		}
 	};
 	return (
-		<svg xmlns="http://www.w3.org/2000/svg" fill={getFill()} width={getSize()} viewBox="0 0 3187.5 761.0015918295709">
+		<svg xmlns="http://www.w3.org/2000/svg" style={props.style} fill={getFill()} width={getSize()} viewBox="0 0 3187.5 761.0015918295709">
 			<g transform="scale(9.375) translate(10, 10)">
 				<g transform="matrix(1.3008975982666016,0,0,1.3008975982666016,-15.044883606330401,-33.8679545094762)">
 					<path

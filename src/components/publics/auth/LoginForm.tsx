@@ -1,38 +1,38 @@
-import React, { useState } from 'react'
-import { Form ,ErrorWrapper} from "@/components/common";
-import { FormProps } from "@/models/component";
-import { LockIcon, AtSignIcon } from "staak-ui";
-
+import React, { useState } from 'react';
+import { Form, ErrorWrapper } from '@/components/common';
+import { FormProps } from '@/models/component';
+import { LockIcon, AtSignIcon } from 'staak-ui';
+import { authActions } from '@/modules/actions/auth.actions';
+import { useAppSelector } from '@/utils/appHooks';
 
 const LoginForm = (props: FormProps) => {
-    const [values, setValues] = useState({})
-    function onValueChange(event: React.ChangeEvent<HTMLInputElement>) {
-        const { name, value } = event.target
-        let tmpValues:{[key in string]:string} = {...values}
-        tmpValues[name] = value
-        setValues(tmpValues)
-    }
-    function onSubmitData(event:React.SyntheticEvent){
-        alert("its me")
-        console.log(values)
-    }
-    return (
-        <Form onChange={onValueChange} onSubmit={onSubmitData} >
-            <Form.Input placeholder='email' startIcon={<AtSignIcon />} width="350px" name="email" type="email">
-                <ErrorWrapper error={false} message='Your email is incorrect'>
-                    Email
-                </ErrorWrapper>
-            </Form.Input>
-            <Form.Input placeholder='password' startIcon={<LockIcon />} width="350px" name='password' type="password">
-                <ErrorWrapper error={true} message='Your password is incorrect'>
-                    Password
-                </ErrorWrapper>
-            </Form.Input>
-            <Form.Submit width="100%">
-                Log In
-            </Form.Submit>
-        </Form>
-    )
-}
+	const { authErrors } = useAppSelector((state) => state.auth);
+	const [state, setState] = useState({ username: '', password: '' });
+	function onChange(event: React.ChangeEvent<HTMLInputElement>) {
+		const { name, value } = event.target;
+		setState({
+			...state,
+			[name]: value,
+		});
+	}
+	function onSubmit() {
+		authActions.login(state);
+	}
+	return (
+		<Form onSubmit={onSubmit}>
+			<Form.Input onChange={onChange} placeholder="Email or Username" startIcon={<AtSignIcon />} name="username" type="text">
+				<ErrorWrapper error={authErrors.username} message={authErrors.username}>
+					Email or Username
+				</ErrorWrapper>
+			</Form.Input>
+			<Form.Input onChange={onChange} placeholder="Password" startIcon={<LockIcon />} name="password" type="password">
+				<ErrorWrapper error={authErrors.password} message={authErrors.password}>
+					Password
+				</ErrorWrapper>
+			</Form.Input>
+			<Form.Submit width="100%">Log In</Form.Submit>
+		</Form>
+	);
+};
 
-export default LoginForm
+export default LoginForm;

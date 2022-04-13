@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 import { FlexBox } from 'staak-ui';
 import { HeaderBar, SideBar } from '@/components/companies';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
+import { userActions } from '@/modules/actions/user.actions';
+import { useAppSelector } from '@/utils/appHooks';
 
 const StyledPublicView = styled.div`
 	position: fixed;
@@ -31,6 +33,10 @@ const MainContainer = styled.div`
 	padding: 10px 15px;
 `;
 const MasterLayout: FC = () => {
+	const { userInfoLoaded } = useAppSelector((state) => state.user);
+	useEffect(() => {
+		if (!userInfoLoaded) userActions.getUserInfo();
+	}, []);
 	return (
 		<StyledPublicView>
 			<StyledFlexBox align="flex-start" className="staak_scrollbar">

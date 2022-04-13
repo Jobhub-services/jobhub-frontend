@@ -7,6 +7,7 @@ import { AssesmentsIcon } from 'staak-ui';
 import React, { useState } from 'react';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { ASIDE_WIDTH } from '@/constants/app.constants';
+import StaakLogo from '@/assets/theme/StaakLogo';
 
 const SyledContainer = styled.div<CompaniesOverview.SideBarProps>`
 	border-right: 1px solid ${Colors.BLACK_12};
@@ -18,14 +19,13 @@ const SyledContainer = styled.div<CompaniesOverview.SideBarProps>`
 const SideBar = (props: CompaniesOverview.SideBarProps) => {
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
-	console.log(pathname);
 	const widthItems = '96%';
 	function changeRoute(event: React.SyntheticEvent, index: string) {
 		navigate(index, { replace: true });
 	}
 	return (
 		<SyledContainer width={props.width}>
-			<h1 style={{ color: Colors.PURPLE_BASE, paddingLeft: '15px' }}>{'</> staak'}</h1>
+			<StaakLogo style={{ paddingLeft: '15px', margin: '20px 0 15px 0' }} size={150} />
 			<FlexBox flexDirection="column" align="flex-start">
 				<NavItem
 					icon={<HealthIcon />}

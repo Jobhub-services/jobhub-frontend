@@ -20,6 +20,6 @@ export interface LogoProps extends StandardProps {
 }
 
 export interface ErrorWrapperProps extends StandardProps {
-	error: boolean;
+	error: any;
 	message: string;
 }
