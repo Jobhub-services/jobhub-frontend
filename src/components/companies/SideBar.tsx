@@ -28,6 +28,7 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 			<StaakLogo style={{ paddingLeft: '15px', margin: '20px 0 15px 0' }} size={150} />
 			<FlexBox flexDirection="column" align="flex-start">
 				<NavItem
+					className="mb-10"
 					icon={<HealthIcon />}
 					width={widthItems}
 					active={pathname === '/'}
@@ -36,6 +37,7 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 					<NavItem.Content>Overview</NavItem.Content>
 				</NavItem>
 				<NavItem
+					className="mb-10"
 					icon={<JobIcon />}
 					width={widthItems}
 					active={pathname.startsWith('/jobs')}
@@ -44,6 +46,7 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 					<NavItem.Content>Jobs</NavItem.Content>
 				</NavItem>
 				<NavItem
+					className="mb-10"
 					icon={<TalentIcon />}
 					width={widthItems}
 					active={pathname === '/talents'}
@@ -52,6 +55,7 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 					<NavItem.Content>Talents</NavItem.Content>
 				</NavItem>
 				<NavItem
+					className="mb-10"
 					icon={<ApplicantIcon />}
 					width={widthItems}
 					active={pathname === '/applicants'}
@@ -60,6 +64,7 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 					<NavItem.Content>Applicants</NavItem.Content>
 				</NavItem>
 				<NavItem
+					className="mb-10"
 					icon={<MessageIcon />}
 					width={widthItems}
 					active={pathname === '/messages'}
@@ -68,6 +73,7 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 					<NavItem.Content>Messages</NavItem.Content>
 				</NavItem>
 				<NavItem
+					className="mb-10"
 					icon={<InvitationIcon />}
 					width={widthItems}
 					active={pathname === '/invitation'}
@@ -76,6 +82,7 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 					<NavItem.Content>Invitations</NavItem.Content>
 				</NavItem>
 				<NavItem
+					className="mb-10"
 					icon={<ScheduleIcon />}
 					width={widthItems}
 					active={pathname === '/schedule'}
@@ -84,6 +91,7 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 					<NavItem.Content>Schedule</NavItem.Content>
 				</NavItem>
 				<NavItem
+					className="mb-10"
 					icon={<AssesmentsIcon />}
 					width={widthItems}
 					active={pathname === 'assesments/'}
