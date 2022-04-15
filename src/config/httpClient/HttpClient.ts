@@ -2,11 +2,6 @@ import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 import store from '@/config/store/store';
 import { authDispatchers } from '@/modules/actions/auth.actions';
 
-export const API_PATHS = {
-	USERS_SERVICE: `/users`,
-	JOBS_SERVICE: `/jobs`,
-};
-
 export class HttpClient {
 	private _client: AxiosInstance;
 
