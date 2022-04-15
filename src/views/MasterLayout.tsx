@@ -30,7 +30,8 @@ const MainContent = styled.div`
 
 const MainContainer = styled.div`
 	width: 100%;
-	padding: 10px 15px;
+	height: calc(100% - ${HEADER_HIEGHT}px);
+	/*padding: 10px 15px;*/
 `;
 const MasterLayout: FC = () => {
 	const { userInfoLoaded } = useAppSelector((state) => state.user);

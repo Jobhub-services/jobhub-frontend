@@ -1,8 +1,8 @@
 import { IconProps } from '@/models/component/app.interface';
 
-const GroupPersonsIcon = ({ size }: IconProps) => {
+const GroupPersonsIcon = ({ width, height }: IconProps) => {
 	return (
-		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={size} viewBox="0 0 171 171">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 171 171">
 			<defs>
 				<linearGradient x1="30.666" y1="41.3535" x2="55.518" y2="66.2055" gradientUnits="userSpaceOnUse" id="group-presons-color-1">
 					<stop offset="0" stopColor="#0d61a9"></stop>

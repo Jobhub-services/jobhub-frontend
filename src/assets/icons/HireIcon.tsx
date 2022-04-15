@@ -1,8 +1,8 @@
 import { IconProps } from '@/models/component/app.interface';
 
-const HireIcon = ({ size }: IconProps) => {
+const HireIcon = ({ width, height }: IconProps) => {
 	return (
-		<svg version="1.1" width={size} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171 171">
+		<svg version="1.1" width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171 171">
 			<defs>
 				<radialGradient cx="71.3355" cy="71.592" r="69.83925" gradientUnits="userSpaceOnUse" id="hire-color-1">
 					<stop offset="0.693" stopColor="#006185"></stop>

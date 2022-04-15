@@ -1,8 +1,8 @@
 import { IconProps } from '@/models/component/app.interface';
 
-const SandboxIcon = ({ size }: IconProps) => {
+const SandboxIcon = ({ width, height }: IconProps) => {
 	return (
-		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={size} viewBox="0 0 171 171">
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 171 171">
 			<defs>
 				<linearGradient x1="85.5" y1="110.26294" x2="85.5" y2="127.14919" gradientUnits="userSpaceOnUse" id="sandbox-color-1">
 					<stop offset="0" stopColor="#484b4f"></stop>

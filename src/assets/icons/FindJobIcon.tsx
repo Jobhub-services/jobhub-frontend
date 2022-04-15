@@ -1,8 +1,8 @@
 import { IconProps } from '@/models/component/app.interface';
 
-const FindJobIcon = ({ size }: IconProps) => {
+const FindJobIcon = ({ width, height }: IconProps) => {
 	return (
-		<svg version="1.1" width={size} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171 171">
+		<svg version="1.1" width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171 171">
 			<defs>
 				<linearGradient x1="85.5" y1="31.98769" x2="85.5" y2="22.47225" gradientUnits="userSpaceOnUse" id="find-job-color-1">
 					<stop offset="0" stopColor="#b33f20"></stop>

@@ -1,8 +1,8 @@
 import { IconProps } from '@/models/component/app.interface';
 
-const TestIcon = ({ size }: IconProps) => {
+const TestIcon = ({ width, height }: IconProps) => {
 	return (
-		<svg version="1.1" width={size} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171 171">
+		<svg version="1.1" width={width} height={height} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 171 171">
 			<defs>
 				<linearGradient x1="85.5" y1="21.75263" x2="85.5" y2="149.81738" gradientUnits="userSpaceOnUse" id="tets-color-1">
 					<stop offset="0" stopColor="#33bef0"></stop>

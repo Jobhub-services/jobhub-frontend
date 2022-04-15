@@ -14,7 +14,7 @@ import { HEADER_HIEGHT } from '@/constants/app.constants';
 
 const AddJobContainer = styled.div`
 	position: relative;
-	padding: 5px 50px 5px 0;
+	padding: 15px 60px 15px 10px;
 	display: flex;
 `;
 
