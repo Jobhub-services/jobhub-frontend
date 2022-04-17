@@ -1,36 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { StandardProps } from '@/models/component';
 import ShowJobs from '@/components/companies/jobs/showjob/ShowJobs';
 import styled from 'styled-components';
-import { CloseIcon, FlexBox, Headline, IconButton, InputPicker, Button, CheckBox } from 'staak-ui';
-import { colors } from '@/assets/theme';
+import { FlexBox, Headline, InputPicker, Button, CheckBox } from 'staak-ui';
 import FilterIcon from '@/assets/icons/FilterIcon';
-import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
+import FilterContianer from '@/components/companies/filter/FilterContainer';
+import { useAppSelector } from '@/utils/appHooks';
+import { jobActions } from '@/modules/actions/company/job.actions';
 
 const Container = styled.div`
 	position: relative;
 	height: 100%;
 `;
-const FilterContainer = styled.div<any>`
-	position: fixed;
-	top: ${HEADER_HIEGHT}px;
-	left: ${ASIDE_WIDTH}px;
-	background: white;
-	width: ${(props) => (props.closed ? '0' : '300px')};
-	overflow-x: hidden;
-	height: calc(100% - ${HEADER_HIEGHT}px);
-	box-shadow: 2px -5px 20px -15px ${colors.BLACK_7};
-	transition: width 0.2s, visibility 50ms;
-`;
 
-const SubContainer = styled.div`
-	display: flex;
-	flex-direction: column;
-	width: 300px;
-	height: 100%;
-`;
 const JobOverview = (props: StandardProps) => {
-	const [closed, setClosed] = useState(true);
+	const { filterClosed } = useAppSelector((state) => state.job);
 	return (
 		<Container>
 			<div style={{ padding: '5px 15px' }}>
@@ -41,7 +25,7 @@ const JobOverview = (props: StandardProps) => {
 					<FlexBox style={{ gap: '10px' }}>
 						<Button
 							onClick={(event: React.SyntheticEvent) => {
-								setClosed(!closed);
+								jobActions.setClosedFilter(!filterClosed);
 							}}
 							variant="primary"
 							startIcon={<FilterIcon />}
@@ -56,25 +40,9 @@ const JobOverview = (props: StandardProps) => {
 				</FlexBox>
 				<ShowJobs />
 			</div>
-
-			<FilterContainer closed={closed}>
-				<SubContainer>
-					<FlexBox style={{ borderBottom: `1px solid ${colors.BLACK_12}`, padding: '5px 10px' }} justify="space-between">
-						<Headline variant="h2" size="sm">
-							Job Searcher
-						</Headline>
-						<IconButton
-							onClick={(event: React.SyntheticEvent) => {
-								setClosed(true);
-							}}
-							width="30px"
-							height="30px"
-							circle
-						>
-							<CloseIcon color={colors.BLACK_8} />
-						</IconButton>
-					</FlexBox>
-					<div style={{ padding: '5px 10px', flexGrow: '1' }}>
+			<FilterContianer title="Job Searcher" type="job">
+				<FilterContianer.Body>
+					<div>
 						<h3>Employement Type</h3>
 						<div>
 							<CheckBox className="mb-10">Full-time</CheckBox>
@@ -83,14 +51,8 @@ const JobOverview = (props: StandardProps) => {
 							<CheckBox className="mb-10">Temporary/Sesoneal</CheckBox>
 						</div>
 					</div>
-					<FlexBox style={{ borderTop: `1px solid ${colors.BLACK_12}`, padding: '15px 10px', gap: '10px' }}>
-						<Button variant="outlined" width="100%">
-							Clean
-						</Button>
-						<Button width="100%">Apply</Button>
-					</FlexBox>
-				</SubContainer>
-			</FilterContainer>
+				</FilterContianer.Body>
+			</FilterContianer>
 		</Container>
 	);
 };

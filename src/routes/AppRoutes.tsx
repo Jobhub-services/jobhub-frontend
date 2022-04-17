@@ -6,7 +6,7 @@ import PrivateRoutes from '@/routes/PrivateRoutes';
 
 const AppRoutes: FC = () => {
 	const isAuthorized = useAppSelector(({ auth }) => auth.accessToken, shallowEqual);
-	return isAuthorized || true ? <PrivateRoutes /> : <PublicRoutes />;
+	return isAuthorized ? <PrivateRoutes /> : <PublicRoutes />;
 };
 
 export default AppRoutes;

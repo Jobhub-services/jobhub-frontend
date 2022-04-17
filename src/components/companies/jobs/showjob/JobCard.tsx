@@ -117,7 +117,7 @@ const JobCard = (props: JobCardProps) => {
 							<SSpan>
 								<strong>23</strong> Applicants
 							</SSpan>
-							<SimpleLink size="xs">View details</SimpleLink>
+							<SimpleLink size="xs">View applicants</SimpleLink>
 						</div>
 					</SGap>
 				</SFooter>
