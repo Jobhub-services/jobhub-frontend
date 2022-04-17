@@ -6,9 +6,8 @@ WORKDIR /staak-app
 
 ENV PORT=$port
 RUN npm install
-RUN npm install -g serve
 RUN npm run build:prod
 
 EXPOSE $PORT
 
-CMD serve dist -p $PORT
+CMD export APP_PORT=$PORT && npm run heroku:serve

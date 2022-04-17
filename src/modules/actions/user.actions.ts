@@ -1,7 +1,8 @@
-import { httpClient, API_PATHS } from '@/config/httpClient/HttpClient';
+import { httpClient } from '@/config/httpClient/HttpClient';
 import dispatchToStore from '@/utils/store';
 import { storeActions } from '@/modules/store/user.store';
 import { IUser } from '@/models/store/user.interface';
+import { API_PATHS } from '@/constants/api.constants';
 
 const { USERS_SERVICE } = API_PATHS;
 

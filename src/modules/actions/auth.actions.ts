@@ -1,9 +1,10 @@
-import { httpClient, API_PATHS } from '@/config/httpClient/HttpClient';
+import { httpClient } from '@/config/httpClient/HttpClient';
 import dispatchToStore from '@/utils/store';
 import { storeActions } from '@/modules/store/auth.store';
 import { AxiosResponse } from 'axios';
 import { transformErrors } from '@/utils/validations';
 import { IUser } from '@/models/store/user.interface';
+import { API_PATHS } from '@/constants/api.constants';
 
 const { USERS_SERVICE } = API_PATHS;
 

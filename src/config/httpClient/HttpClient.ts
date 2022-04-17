@@ -1,10 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse, AxiosRequestConfig } from 'axios';
 import store from '@/config/store/store';
-
-export const API_PATHS = {
-	USERS_SERVICE: `/users`,
-	JOBS_SERVICE: `/jobs`,
-};
+import { authDispatchers } from '@/modules/actions/auth.actions';
 
 export class HttpClient {
 	private _client: AxiosInstance;
@@ -17,6 +13,7 @@ export class HttpClient {
 		//axios.defaults.withCredentials = true;
 		this._client = axios.create(config);
 		this._initAuthInterceptor();
+		this._initErrorInterceptor();
 		this._initResponseDurationInterceptor();
 	}
 
@@ -100,6 +97,24 @@ export class HttpClient {
 			return response;
 		};
 		this._client.interceptors.response.use(responseEndTimeInterceptor);
+	}
+
+	private _initErrorInterceptor() {
+		const responseInterceptor = (res: AxiosResponse) => {
+			return res;
+		};
+
+		const errorInterceptor = async (error: any) => {
+			const response = error.response;
+			if (response) {
+				if (response.status === 401) {
+					authDispatchers.setAuthToken(null);
+					window.location.reload();
+				}
+			}
+		};
+
+		this._client.interceptors.response.use(responseInterceptor, errorInterceptor);
 	}
 }
 
