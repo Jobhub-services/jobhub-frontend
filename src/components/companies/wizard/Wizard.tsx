@@ -1,9 +1,9 @@
-import { StepProgressProps } from '@/models/component';
+import { WizardProps } from '@/models/component';
 import { FlexBox } from 'staak-ui';
 import styled, { css } from 'styled-components';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 
-const StyledUl = styled.ul<StepProgressProps>`
+const StyledUl = styled.ul<WizardProps>`
 	${(props) =>
 		props.direction === 'horizontal' &&
 		css`
@@ -13,7 +13,7 @@ const StyledUl = styled.ul<StepProgressProps>`
 	list-style-type: none;
 	padding-inline-start: 0px;
 `;
-const StyledSpan = styled.span<StepProgressProps>`
+const StyledSpan = styled.span<WizardProps>`
 	display: inline-block;
 	width: 15px;
 	height: 15px;
@@ -40,7 +40,7 @@ const StyledSpan = styled.span<StepProgressProps>`
 const StyledContainer = styled.div`
 	position: relative;
 `;
-const LineDiv = styled.li<StepProgressProps>`
+const LineDiv = styled.li<WizardProps>`
 	cursor: pointer;
 	margin-top: ${(props) => (props.direction === 'vertical' ? '150px' : '0')};
 	margin-left: ${(props) => (props.direction === 'horizontal' ? '80px' : '0')};
@@ -50,7 +50,7 @@ const LineDiv = styled.li<StepProgressProps>`
 	}
 	${(props) =>
 		props.direction === 'vertical' &&
-		css<StepProgressProps>`
+		css<WizardProps>`
 			&:after {
 				content: '';
 				position: absolute;
@@ -68,7 +68,7 @@ const LineDiv = styled.li<StepProgressProps>`
 const StyledContent = styled.span`
 	padding-left: 5px;
 `;
-const StyledDiv = styled.div<StepProgressProps>`
+const StyledDiv = styled.div<WizardProps>`
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -90,7 +90,7 @@ const StyledDiv = styled.div<StepProgressProps>`
 	}
 	${(props) =>
 		props.direction === 'horizontal' &&
-		css<StepProgressProps>`
+		css<WizardProps>`
 			&:after {
 				content: '';
 				position: absolute;
@@ -105,7 +105,7 @@ const StyledDiv = styled.div<StepProgressProps>`
 			}
 		`};
 `;
-const StepProgress = (props: StepProgressProps) => {
+const StepProgress = (props: WizardProps) => {
 	function selectStep(event: React.SyntheticEvent, step: number) {
 		if (props.onSelectStep) props.onSelectStep(event, step);
 	}

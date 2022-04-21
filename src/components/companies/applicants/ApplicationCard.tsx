@@ -3,7 +3,9 @@ import { FlexBox, Tag, Button } from 'staak-ui';
 import { LinkedinIcon, GithubIcon } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import CVIcon from '@/assets/icons/CVIcon';
-import Avatar from '@/assets/icons/Avatar.jpg';
+import Jerome from '@/assets/icons/jerome.jpg';
+import { ApplicantCardProps } from '@/models/component/companies/applications/applications.interface';
+import { useNavigate } from 'react-router-dom';
 
 const CustomizedButton = styled(Button)`
 	font-size: 12px !important;
@@ -41,12 +43,17 @@ const SSpan = styled.span`
 	font-weight: 500;
 	color: ${colors.BLACK_7};
 `;
-const ApplicationCard = () => {
+
+const ApplicationCard = ({ applicantId }: ApplicantCardProps) => {
+	const navigate = useNavigate();
+	function viewDetails(id?: number) {
+		navigate(`/applicants/detail/${id}`);
+	}
 	return (
 		<SCard>
 			<FlexBox justify="space-between" style={{ padding: '8px 10px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 				<SGap align="flex-start">
-					<img src={Avatar} alt="avatar" width={50} height={50} style={{ borderRadius: '50%' }} />
+					<img src={Jerome} alt="avatar" width={50} height={50} style={{ borderRadius: '50%' }} />
 					<div>
 						<div>
 							<strong>Jerome Bell</strong>
@@ -54,7 +61,9 @@ const ApplicationCard = () => {
 						<SSpan>Fullstack developer</SSpan>
 					</div>
 				</SGap>
-				<CustomizedButton variant="text">View details</CustomizedButton>
+				<CustomizedButton onClick={() => viewDetails(applicantId)} variant="text">
+					View details
+				</CustomizedButton>
 			</FlexBox>
 			<div style={{ padding: '10px 10px' }}>
 				<p style={{ height: '45px', overflow: 'hidden' }}>
@@ -90,7 +99,7 @@ const ApplicationCard = () => {
 						Accept
 					</CustomizedButton>
 					<CustomizedButton variant="text" color="red">
-						Close
+						Decline
 					</CustomizedButton>
 				</FlexBox>
 				<div style={{ fontSize: '12px' }}> 12 March 2022</div>

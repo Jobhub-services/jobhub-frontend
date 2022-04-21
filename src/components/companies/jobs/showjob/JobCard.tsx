@@ -1,11 +1,9 @@
-import { useState } from 'react';
-import { Button, FlexBox, IconButton, SimpleLink, Tag, DropDown, Radio } from 'staak-ui';
+import { Button, FlexBox, IconButton, SimpleLink, Tag, DropDown } from 'staak-ui';
 import styled from 'styled-components';
 import Clock from '@/__icons__/Clock.svg';
 import Location from '@/__icons__/Location.svg';
 import { colors } from '@/assets/theme';
-import IconUsers from '@/__icons__/IconUsers';
-import IconDot from '@/__icons__/IconDot';
+import { UsersIcon, DotIcon } from '@/assets/icons';
 import Money from '@/__icons__/Money.svg';
 import { StatusColors, StatusValue } from '@/constants/company/job.contants';
 import { JobCardProps } from '@/models/component';
@@ -59,7 +57,7 @@ const JobCard = (props: JobCardProps) => {
 						<DropDown listPosition="left">
 							<DropDown.Title>
 								<IconButton width="40px" height="25px">
-									<IconDot />
+									<DotIcon />
 								</IconButton>
 							</DropDown.Title>
 							<DropDown.Item>Show</DropDown.Item>
@@ -112,7 +110,7 @@ const JobCard = (props: JobCardProps) => {
 						<Button variant="outlined">Details</Button>
 					</div>
 					<SGap gap={10} justify="flex-start">
-						<IconUsers />
+						<UsersIcon />
 						<div>
 							<SSpan>
 								<strong>23</strong> Applicants

@@ -22,7 +22,7 @@ const ApplicantsHeader = () => {
 				<HeaderTab onClick={onChangeTab} title="New Applicants" badge="10" active={status === 'new'} status="new" />
 				<HeaderTab onClick={onChangeTab} title="In Process" badge="5" active={status === 'process'} status="process" />
 				<HeaderTab onClick={onChangeTab} title="Hired" badge="2" active={status === 'hired'} status="hired" />
-				<HeaderTab onClick={onChangeTab} title="Closed" badge="3" active={status === 'closed'} status="closed" />
+				<HeaderTab onClick={onChangeTab} title="Declined" badge="3" active={status === 'declined'} status="declined" />
 			</Sgap>
 			<Sgap gap="10">
 				<Button

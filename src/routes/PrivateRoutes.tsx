@@ -13,7 +13,10 @@ const PrivateRoutes: FC = () => {
 					<Route path="/jobs" element={<Navigate to="" />} />
 				</Route>
 				<Route path="talents" element={<Overview />} />
-				<Route path="applicants/:status" element={<ApplicantsOverview />} />
+				<Route path="applicants">
+					<Route path=":status" element={<ApplicantsOverview />} />
+					<Route path="/applicants/:status" element={<Navigate to="/:status" />} />
+				</Route>
 				<Route path="*" element={<Navigate to="/" />} />
 			</Route>
 			;

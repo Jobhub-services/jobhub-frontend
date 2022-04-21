@@ -2,6 +2,7 @@ import ApplicationContainer from '@/components/companies/applicants/ApplicationC
 import ApplicantsHeader from '@/components/companies/applicants/header/ApplicantsHeader';
 import ApplicationsFilter from '@/components/companies/applicants/ApplicationFilter';
 import styled from 'styled-components';
+import ApplicationDetails from '@/components/companies/applicants/details/ApplicationDetails';
 
 const MainContainer = styled.div`
 	position: relative;
@@ -12,6 +13,7 @@ const SContainer = styled.div`
 	grid-template-columns: repeat(2, 1fr);
 	gap: 10px;
 `;
+
 const ApplicantsOverview = () => {
 	return (
 		<MainContainer>
@@ -24,6 +26,7 @@ const ApplicantsOverview = () => {
 				</SContainer>
 			</div>
 			<ApplicationsFilter />
+			<ApplicationDetails />
 		</MainContainer>
 	);
 };

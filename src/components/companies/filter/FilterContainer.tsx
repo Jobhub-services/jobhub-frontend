@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { colors } from '@/assets/theme';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';

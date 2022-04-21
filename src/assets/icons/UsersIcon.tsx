@@ -1,4 +1,4 @@
-const IconUsers = (props: any) => {
+const UsersIcon = (props: any) => {
 	return (
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={props.width} height={props.height}>
 			<g fill="inherit">
@@ -11,10 +11,10 @@ const IconUsers = (props: any) => {
 	);
 };
 
-IconUsers.defaultProps = {
+UsersIcon.defaultProps = {
 	width: '30px',
 	height: '30px',
 	color: 'black',
 };
 
-export default IconUsers;
+export default UsersIcon;

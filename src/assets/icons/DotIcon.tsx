@@ -1,4 +1,4 @@
-const IconDot = (props: any) => {
+const DotIcon = (props: any) => {
 	return (
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={props.width} height={props.height}>
 			<g fill="inherit">
@@ -11,9 +11,9 @@ const IconDot = (props: any) => {
 	);
 };
 
-IconDot.defaultProps = {
+DotIcon.defaultProps = {
 	width: '20',
 	height: '20',
 	color: 'black',
 };
-export default IconDot;
+export default DotIcon;

@@ -49,7 +49,7 @@ const ApplicationContainer = () => {
 				</FlexBox>
 			</div>
 			<CardContainer>
-				<ApplicationCard />
+				<ApplicationCard applicantId={1} />
 				<ApplicationCard />
 			</CardContainer>
 		</AppContainer>
