@@ -1,7 +1,6 @@
 import { Button, FlexBox, IconButton, SimpleLink, Tag, DropDown } from 'staak-ui';
 import styled from 'styled-components';
-import Clock from '@/__icons__/Clock.svg';
-import Location from '@/__icons__/Location.svg';
+import { LocationIcon, CalendarIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { UsersIcon, DotIcon } from '@/assets/icons';
 import Money from '@/__icons__/Money.svg';
@@ -83,7 +82,7 @@ const JobCard = (props: JobCardProps) => {
 								<SSpan>3500-4500 EUR</SSpan>
 							</SGap>
 							<SGap gap={5} align="flex-start" className="mt-5">
-								<img src={Location} alt="clock" width={18} height={18} />
+								<LocationIcon width="18px" height="18px" />
 								<SGap gap={10} justify="flex-start">
 									<SSpan>Remote</SSpan>
 									<SGap gap={2}>
@@ -100,7 +99,7 @@ const JobCard = (props: JobCardProps) => {
 							</SGap>
 						</div>
 						<SGap gap={5}>
-							<img src={Clock} alt="clock" width={18} height={18} />
+							<CalendarIcon width="18px" height="18px" />
 							<SSpan>7 Juin 2022</SSpan>
 						</SGap>
 					</FlexBox>
