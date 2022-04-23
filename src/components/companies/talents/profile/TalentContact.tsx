@@ -42,7 +42,9 @@ const TalentContact = () => {
 				<LinkedInSolidIcon width="20px" height="20px" color={colors.BLACK_7} />
 				<div>
 					<SSpan>LinkedIn</SSpan>
-					<div style={{ color: `${colors.PURPLE_BASE}` }}>https://www.linkedin.com/in/</div>
+					<SLink target="_blank" href="https://www.linkedin.com/in/">
+						https://www.linkedin.com/in/
+					</SLink>
 				</div>
 			</FlexBox>
 			<HrDivider top={10} side={20} />
