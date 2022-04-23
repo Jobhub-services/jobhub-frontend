@@ -79,7 +79,7 @@ const ApplicationCard = ({ applicantId }: ApplicantCardProps) => {
 					</FlexBox>
 				</FlexBox>
 				<FlexBox justify="flex-start" className="mt-10" style={{ gap: '10px' }}>
-					<SButton background={colors.BLUE_CLEAR_4} color={colors.BLUE_BASE}>
+					<SButton background={colors.BLUE_CLEAR_5} color={colors.BLUE_BASE}>
 						<LinkedinIcon width="20px" height="20px" color={colors.BLUE_BASE} />
 						<span>LinkedIn</span>
 					</SButton>
@@ -96,7 +96,7 @@ const ApplicationCard = ({ applicantId }: ApplicantCardProps) => {
 			<FlexBox justify="space-between" style={{ borderTop: `1px solid ${colors.BLACK_12}`, padding: '10px 10px' }}>
 				<FlexBox style={{ gap: '10px' }}>
 					<CustomizedButton pColor={colors.PURPLE_1} color="green">
-						Accept
+						Approve
 					</CustomizedButton>
 					<CustomizedButton variant="text" color="red">
 						Decline

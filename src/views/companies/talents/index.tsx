@@ -1,3 +1,3 @@
-import TalentsView from './TalentsOverivew';
+import TalentsView from './TalentsView';
 
 export { TalentsView };

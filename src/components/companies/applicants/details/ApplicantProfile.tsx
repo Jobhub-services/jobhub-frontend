@@ -1,4 +1,4 @@
-import WorkExperience from './WorkExperience';
+import WorkExperience from '../../_common/WorkExperience';
 import { FlexBox, Button, Tag, HrDivider } from 'staak-ui';
 import { CVIcon } from '@/assets/icons';
 import styled from 'styled-components';
@@ -49,7 +49,7 @@ const ApplicantProfile = () => {
 					location="Los Angeles"
 					dateRange="April 17.2019 - July 18.2020"
 				/>
-				<HrDivider top={10} side={0} />
+				<HrDivider top={15} side={0} />
 				<WorkExperience
 					title="Junior frontend developer"
 					jobType="Full-time"
@@ -57,7 +57,7 @@ const ApplicantProfile = () => {
 					location="San Fransisco"
 					dateRange="Fev 25.2020 - Jan 25.2022"
 				/>
-				<HrDivider top={10} side={0} />
+				<HrDivider top={15} side={0} />
 				<WorkExperience
 					title="Junior frontend developer"
 					jobType="Full-time"

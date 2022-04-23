@@ -7,7 +7,7 @@ const SBadge = styled.span<any>`
 	display: inline-block;
 	padding: 3px 7px;
 	color: ${(props) => props.active && 'white'};
-	background-color: ${(props) => (props.active ? colors.PURPLE_BASE : colors.BLUE_CLEAR_5)};
+	background-color: ${(props) => (props.active ? colors.PURPLE_BASE : '#d8e4f5')};
 	border-radius: 8px;
 	transition-duration: 0.2s;
 	font-size: 10px;

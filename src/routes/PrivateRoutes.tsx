@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import MasterLayout from '@/views/MasterLayout';
-import { Overview, JobOverview, AddNewJob, ApplicantsOverview } from '@/views/companies';
+import { Overview, JobOverview, AddNewJob, ApplicantsOverview, TalentsView } from '@/views/companies';
 const PrivateRoutes: FC = () => {
 	return (
 		<Routes>
@@ -12,7 +12,7 @@ const PrivateRoutes: FC = () => {
 					<Route path="new" element={<AddNewJob />} />
 					<Route path="/jobs" element={<Navigate to="" />} />
 				</Route>
-				<Route path="talents" element={<Overview />} />
+				<Route path="talents" element={<TalentsView />} />
 				<Route path="applicants">
 					<Route path=":status" element={<ApplicantsOverview />} />
 					<Route path="/applicants/:status" element={<Navigate to="/:status" />} />

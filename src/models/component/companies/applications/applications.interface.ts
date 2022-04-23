@@ -26,6 +26,8 @@ export interface WorkExperienceProps extends StandardProps {
 	dateRange?: string;
 	jobType?: string;
 	location?: string;
+	description?: string;
+	link?: string;
 }
 
 export interface InterviewInfoProps extends StandardProps {

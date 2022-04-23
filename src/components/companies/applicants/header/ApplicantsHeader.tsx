@@ -1,4 +1,4 @@
-import FilterIcon from '@/assets/icons/FilterIcon';
+import { FilterIcon } from '@/assets/icons';
 import { Button, FlexBox, InputPicker } from 'staak-ui';
 import styled from 'styled-components';
 import HeaderTab from './HeaderTab';

@@ -8,5 +8,28 @@ import EmailIcon from './EmailIcon';
 import PhoneIcon from './PhoneIcon';
 import LinkedInSolidIcon from './LinkedInSolidIcon';
 import WorldIcon from './WorldIcon';
+import ProfileIcon from './ProfileIcon';
+import FilterIcon from './FilterIcon';
+import GraduationCapIcon from './GraduationCapIcon';
+import CertificateIcon from './CertificateIcon';
+import HomeIcon from './HomeIcon';
+import TwitterIcon from './TwitterIcon';
 
-export { CVIcon, CompanyIcon, LocationIcon, DotIcon, UsersIcon, CalendarIcon, EmailIcon, PhoneIcon, LinkedInSolidIcon, WorldIcon };
+export {
+	TwitterIcon,
+	HomeIcon,
+	CertificateIcon,
+	GraduationCapIcon,
+	CVIcon,
+	CompanyIcon,
+	LocationIcon,
+	DotIcon,
+	UsersIcon,
+	CalendarIcon,
+	EmailIcon,
+	PhoneIcon,
+	LinkedInSolidIcon,
+	WorldIcon,
+	ProfileIcon,
+	FilterIcon,
+};

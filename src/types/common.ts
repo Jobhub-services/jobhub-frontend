@@ -9,6 +9,6 @@ export declare namespace TypeAttributes {
 	type Direction = 'column' | 'column-reverse' | 'row' | 'row-reverse';
 }
 
-export type FilterType = 'applications' | 'job';
+export type FilterType = 'applications' | 'job' | 'talent';
 export type StoreState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

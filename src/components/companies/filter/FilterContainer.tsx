@@ -7,9 +7,10 @@ import { CloseIcon } from 'staak-ui';
 import { FilterContianerProps, StandardProps } from '@/models/component';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { jobActions } from '@/modules/actions/company/job.actions';
+import { talentsActions } from '@/modules/actions/company/talents.actions';
 import { useAppSelector } from '@/utils/appHooks';
 
-const actionsMap = { job: jobActions, applications: applicationsActions };
+const actionsMap = { job: jobActions, applications: applicationsActions, talent: talentsActions };
 
 const FContainer = styled.div<any>`
 	position: fixed;
