@@ -13,7 +13,7 @@ const SWrapper = styled(FlexBox)`
 `;
 const SContainer = styled.div`
 	background: white;
-	box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
+	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
 	border-radius: 8px;
 	border: 1px solid ${colors.BLACK_12};
 `;
@@ -56,7 +56,7 @@ const JobCard = (props: JobCardProps) => {
 						<DropDown listPosition="left">
 							<DropDown.Title>
 								<IconButton width="40px" height="25px">
-									<DotIcon />
+									<DotIcon color={colors.BLACK_4} />
 								</IconButton>
 							</DropDown.Title>
 							<DropDown.Item>Show</DropDown.Item>
@@ -106,7 +106,7 @@ const JobCard = (props: JobCardProps) => {
 				</SBody>
 				<SFooter justify="space-between">
 					<div>
-						<Button variant="outlined">Details</Button>
+						<Button variant="light">Details</Button>
 					</div>
 					<SGap gap={10} justify="flex-start">
 						<UsersIcon />

@@ -14,9 +14,7 @@ import { useState } from 'react';
 import ApplicationStatus from './ApplicationStatus';
 
 const ScrollContainer = styled.div`
-	height: 700px;
 	padding: 0 10px;
-	overflow: auto;
 `;
 const DetailContainer = styled.div<any>`
 	position: absolute;
@@ -81,7 +79,7 @@ const ApplicationDetails = () => {
 			<DetailContainer close={close}>
 				<SubContainer>
 					<SHeader>
-						<FlexBox width="14%" justify="space-between">
+						<FlexBox justify="start" gap={10}>
 							<IconButton
 								width="30px"
 								height="30px"

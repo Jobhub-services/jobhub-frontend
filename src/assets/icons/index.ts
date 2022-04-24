@@ -14,8 +14,22 @@ import GraduationCapIcon from './GraduationCapIcon';
 import CertificateIcon from './CertificateIcon';
 import HomeIcon from './HomeIcon';
 import TwitterIcon from './TwitterIcon';
+import DescriptionIcon from './DescriptionIcon';
+import BenefitIcon from './BenefitIcon';
+import QuestionIcon from './QuestionIcon';
+import SkillsIcon from './SkillsIcon';
+import ResponsibleIcon from './ResponsibleIcon';
+import RequirementIcon from './RequirementIcon';
+import MoneyIcon from './MoneyIcon';
 
 export {
+	MoneyIcon,
+	RequirementIcon,
+	ResponsibleIcon,
+	SkillsIcon,
+	QuestionIcon,
+	BenefitIcon,
+	DescriptionIcon,
 	TwitterIcon,
 	HomeIcon,
 	CertificateIcon,

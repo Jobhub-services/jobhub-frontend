@@ -7,6 +7,7 @@ import FilterIcon from '@/assets/icons/FilterIcon';
 import FilterContianer from '@/components/companies/filter/FilterContainer';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions } from '@/modules/actions/company/job.actions';
+import JobDetails from '@/components/companies/jobs/showjob/details/JobDetails';
 
 const Container = styled.div`
 	position: relative;
@@ -53,6 +54,7 @@ const JobOverview = (props: StandardProps) => {
 					</div>
 				</FilterContianer.Body>
 			</FilterContianer>
+			<JobDetails />
 		</Container>
 	);
 };

@@ -17,7 +17,7 @@ const STitle = styled.h2`
 `;
 const Preferences = () => {
 	return (
-		<div className="staak_scrollbar" style={{ padding: '0 15px', overflow: 'auto', height: '740px' }}>
+		<div className="staak_scrollbar" style={{ padding: '0 15px' }}>
 			<div>
 				<STitle>Languages</STitle>
 				<FlexBox justify="start" gap={10}>

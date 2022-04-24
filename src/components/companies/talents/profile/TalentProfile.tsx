@@ -38,14 +38,20 @@ const SubContainer = styled.div`
 	height: 100%;
 	overflow: hidden;
 `;
-
+const SButton = styled(Button)`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 20px;
+	width: 100%;
+`;
 const TalentProfile = () => {
 	const { showDetails } = useAppSelector((state) => state.talent);
 	return (
 		<MainContainer close={!showDetails}>
 			<DetailContainer>
 				<SubContainer>
-					<FlexBox width="13%" justify="space-between" style={{ padding: '5px 10px' }}>
+					<FlexBox justify="start" gap={10} height="62px" style={{ padding: '5px 10px' }}>
 						<IconButton
 							width="30px"
 							height="30px"
@@ -61,18 +67,17 @@ const TalentProfile = () => {
 						</Headline>
 					</FlexBox>
 					<HrDivider color={colors.BLACK_12} top={0} side={0} />
-					<FlexBox justify="start" align="start">
-						<FlexBox flexDirection="column" align="start" style={{ width: '25%', padding: '15px 20px' }}>
+					<FlexBox justify="start" align="start" style={{ height: 'calc(100% - 62px)' }}>
+						<div style={{ width: '25%', padding: '15px 20px', overflow: 'auto', height: '100%' }}>
 							<ProfileAvatar img={Women} role="Frontend developer" name="Merguerita Burns" />
 							<TalentStatus title="Ready To Interview" status="ready" />
-							{/*<ApplicationContact /><SSpan>Work Onsite or Remotly</SSpan>*/}
 							<HrDivider top={20} side={20} />
 							<TalentContact />
-							<Button size="md" width="100%" startIcon={<CVIcon />} style={{ marginTop: '20px' }}>
+							<SButton size="md" startIcon={<CVIcon />}>
 								Download Resume
-							</Button>
-						</FlexBox>
-						<div className="staak_scrollbar" style={{ width: '75%', borderLeft: `1px solid ${colors.BLACK_12}` }}>
+							</SButton>
+						</div>
+						<div style={{ width: '75%', borderLeft: `1px solid ${colors.BLACK_12}`, height: '100%' }}>
 							<TabPane activeItem="genrale" paneWidth="20%">
 								<TabPane.Pane name="genrale" title="General">
 									<GeneralInfo />

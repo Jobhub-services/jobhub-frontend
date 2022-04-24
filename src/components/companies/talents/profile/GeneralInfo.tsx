@@ -13,7 +13,7 @@ const STitle = styled.h2`
 
 const GeneralInfo = () => {
 	return (
-		<div className="staak_scrollbar" style={{ padding: '0 15px', overflow: 'auto', height: '750px' }}>
+		<div className="staak_scrollbar" style={{ padding: '0 15px', overflow: 'auto' }}>
 			<div>
 				<STitle>Professional Summary</STitle>
 				<p>

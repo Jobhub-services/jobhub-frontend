@@ -15,7 +15,7 @@ const GraduationCapIcon = ({ width, height, color }: IconProps) => {
 
 GraduationCapIcon.defaultProps = {
 	color: 'black',
-	widht: '20px',
+	width: '20px',
 	height: '20px',
 };
 export default GraduationCapIcon;
