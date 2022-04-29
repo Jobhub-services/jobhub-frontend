@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import styled from 'styled-components';
 import { Headline } from 'staak-ui';
-import { AddNewJobProps, AddNewJobState } from '@/models/component';
-import { StepProgress } from '@/components/companies/wizard';
+import { AddNewJobProps, IAddNewJobState } from '@/models/component';
+import { StepProgress } from '@/components/companies/_common/wizard';
 import BasicDetails from '@/components/companies/jobs/newjob/basics/BasicInfo';
 import AdditionalInfo from '@/components/companies/jobs/newjob/details/DetailedInfo';
-import AddTests from '@/components/companies/jobs/newjob/qualifications/QaulificationsInfo';
+import AddTests from '@/components/companies/jobs/newjob/qualifications/QualificationsInfo';
 import JobReview from '@/components/companies/jobs/newjob/review/JobReview';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 import { HEADER_HIEGHT } from '@/constants/app.constants';
@@ -33,11 +33,11 @@ const SContainer = styled.div`
 	background: white;
 	box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
 	border-radius: 8px;
-	width: 100%;
+	width: calc(100% - 230px);
 `;
 /* component class */
 
-class AddNewJob extends Component<any, AddNewJobState> {
+class AddNewJob extends Component<any, IAddNewJobState> {
 	constructor(props: AddNewJobProps) {
 		super(props);
 		this.state = {
@@ -49,7 +49,10 @@ class AddNewJob extends Component<any, AddNewJobState> {
 		this.selectStep = this.selectStep.bind(this);
 	}
 	selectStep(event: React.SyntheticEvent, step: number) {
-		this.setState({ currentStep: step });
+		let udpate = true;
+		const { validSteps } = this.state;
+		for (var i = 0; i < step; i++) udpate = udpate && validSteps![i];
+		if (udpate) this.setState({ currentStep: step });
 	}
 	handleNext() {
 		const { currentStep, validSteps } = this.state;
@@ -61,10 +64,8 @@ class AddNewJob extends Component<any, AddNewJobState> {
 		});
 	}
 	handlePreviouse() {
-		const { currentStep, validSteps } = this.state;
-		const tmp = [...validSteps!];
-		tmp[currentStep! - 1] = false;
-		this.setState({ currentStep: currentStep! > 0 ? currentStep! - 1 : 0, validSteps: tmp });
+		const { currentStep } = this.state;
+		this.setState({ currentStep: currentStep! > 0 ? currentStep! - 1 : 0 });
 	}
 	render() {
 		const { currentStep, validSteps } = this.state;

@@ -1,12 +1,16 @@
 import { StandardProps } from '@/models/component/app.interface';
-import { StatusType } from '@/types/jobs';
+import { ShowJobInfo } from '@/types/jobs';
 
-export interface JobCardProps extends StandardProps {
-	status?: StatusType;
-}
+export interface JobCardProps extends StandardProps, ShowJobInfo {}
 
 export interface TextAvatarProps extends StandardProps {
 	title?: string;
 	subtitle?: string;
 	bColor?: number;
+}
+
+export interface ILocationElem {
+	country?: string;
+	city?: string;
+	size?: number;
 }

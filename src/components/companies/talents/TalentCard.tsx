@@ -5,7 +5,7 @@ import { talentsActions } from '@/modules/actions/company/talents.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import styled from 'styled-components';
 import TalentAvatar from './TalentAvatar';
-import TalentStatus from './profile/TalentStatus';
+import StatusElem from '@/components/companies/_common/StatusElem';
 import { TitleStatus } from '@/constants/company/talent.contants';
 import { CardProps } from '@/models/component/companies/talents/talents.interface';
 
@@ -43,7 +43,7 @@ const TalentCard = (props: CardProps) => {
 					<LocationIcon width="18px" height="18px" color={colors.BLACK_8} />
 					<SubTitle>{props.location}</SubTitle>
 				</FlexBox>
-				<TalentStatus title={TitleStatus[props.status!]} status={props.status} />
+				<StatusElem title={TitleStatus[props.status!]} status={props.status} />
 			</FlexBox>
 			<div>
 				<div className="mt-10">

@@ -1,107 +1,163 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { InputPicker, Input, CheckBox, Radio } from 'staak-ui';
 import { PlusIcon, TrashIcon } from 'staak-ui';
 import { StyledGap } from '../newjob.styles';
 import { SButton, SIcon } from '@/components/companies/jobs/newjob/newjob.styles';
+import { JobArrayIndex, JobBooleanIndex } from '@/types/jobs';
+import { useAppSelector } from '@/utils/appHooks';
+import { jobActions } from '@/modules/actions/company/job.actions';
+import { metadataActions } from '@/modules/actions/metadata.actions';
 
 const JobLocation = (props: any) => {
-	const [workLocations, setWorkLocations] = useState<{ index: number; value: string }[]>([]);
-	const [hireLocations, setHireLocations] = useState<{ index: number; value: string }[]>([]);
+	const { createJob } = useAppSelector((state) => state.job);
+	const { countries } = useAppSelector((state) => state.metadata);
+	const data = createJob;
+	useEffect(() => {
+		metadataActions.getCountries();
+	}, []);
 	function addWorkLocation(event: React.SyntheticEvent) {
-		const tmp = [...workLocations, { index: workLocations.length + 2, value: '' }];
-		setWorkLocations(tmp);
+		const tmp = { ...data };
+		tmp.work_location = [...data.work_location!, { country: '', city: '' }];
+		jobActions.saveJobData(tmp);
 	}
 	function addHireLocation(event: React.SyntheticEvent) {
-		const tmp = [...hireLocations, { index: hireLocations.length + 2, value: '' }];
-		setHireLocations(tmp);
+		const tmp = { ...data };
+		tmp.hire_location = [...data.hire_location!, { country: '', city: '' }];
+		jobActions.saveJobData(tmp);
 	}
 	function removeWorkLocation(event: React.SyntheticEvent, index: number) {
-		setWorkLocations(workLocations.filter((elem) => elem.index !== index));
+		const tmp = { ...data };
+		tmp.work_location = tmp.work_location?.filter((elem, idx) => idx !== index);
+		jobActions.saveJobData(tmp);
 	}
 	function removeHireLocation(event: React.SyntheticEvent, index: number) {
-		setHireLocations(hireLocations.filter((elem) => elem.index !== index));
+		const tmp = { ...data };
+		tmp.hire_location = tmp.hire_location?.filter((elem, idx) => idx !== index);
+		jobActions.saveJobData(tmp);
 	}
+	function handleInput(event: React.ChangeEvent<HTMLInputElement>, index: number) {
+		const value = event.target.value;
+		const name: JobArrayIndex.location = event.target.name as JobArrayIndex.location;
+		let tmp = { ...data };
+		let tmpArray = [...tmp[name]!];
+		tmpArray[index] = { country: tmpArray[index]!.country, city: value };
+		tmp[name] = tmpArray;
+		jobActions.saveJobData(tmp);
+	}
+	function handleCheckBox(event: React.ChangeEvent<HTMLInputElement>) {
+		const value = event.target.value;
+		const name: JobBooleanIndex = event.target.name as JobBooleanIndex;
+		let tmp = { ...data };
+		tmp[name] = value === 'false';
+		jobActions.saveJobData(tmp);
+	}
+	function handleInputPicker(event: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string, index: number) {
+		const idx = name as JobArrayIndex.location;
+		let tmp = { ...data };
+		let tmpArray = [...tmp[idx]!];
+		tmpArray[index] = { country: label, city: tmpArray[index].city };
+		tmp[idx] = tmpArray;
+		jobActions.saveJobData(tmp);
+	}
+
 	return (
 		<div>
-			<h3>Location</h3>
+			<h3>Job Location</h3>
 			<div>
-				<div>Job location</div>
+				<div>Work location</div>
 				<div style={{ marginTop: '12px' }}>
-					<CheckBox>Allow Remote Workers</CheckBox>
-					<StyledGap justify="flex-start">
-						<InputPicker width="45%" name="job_location" placeholder="Country" title="Country">
-							<InputPicker.Option value="full_time">Full-time</InputPicker.Option>
-							<InputPicker.Option value="part_time">Part-time</InputPicker.Option>
-							<InputPicker.Option value="contract">Contract</InputPicker.Option>
-							<InputPicker.Option value="temporary">Temporary</InputPicker.Option>
-							<InputPicker.Option value="other">Other</InputPicker.Option>
-						</InputPicker>
-						<Input width="45%" name="zip_code" placeholder="Region, City or Zip Code" />
-					</StyledGap>
+					<CheckBox name="work_remotly" value={data.work_remotly} checked={data.work_remotly} onChange={handleCheckBox}>
+						Allow Remote Workers
+					</CheckBox>
+					{data.work_location?.map((elem, idx) => {
+						return (
+							<StyledGap key={idx} justify="flex-start">
+								<InputPicker
+									type="text"
+									width="45%"
+									name="work_location"
+									placeholder="Country"
+									title="Country"
+									value={elem.country}
+									onChange={(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) =>
+										handleInputPicker(evet, value, label, name, idx)
+									}
+								>
+									{countries?.map((elem, idx) => {
+										return (
+											<InputPicker.Option key={idx} value={elem.code!}>
+												{elem.label}
+											</InputPicker.Option>
+										);
+									})}
+								</InputPicker>
+								<Input
+									width="45%"
+									name="work_location"
+									placeholder="Region, City or Zip Code"
+									value={elem.city}
+									onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleInput(event, idx)}
+								/>
+								<SIcon onClick={(event: React.SyntheticEvent) => removeWorkLocation(event, idx)} width="25px" height="25px">
+									<TrashIcon color="inherit" />
+								</SIcon>
+							</StyledGap>
+						);
+					})}
 				</div>
-				{workLocations.map((elem, key) => {
-					return (
-						<StyledGap key={key} justify="flex-start">
-							<InputPicker width="45%" name="job_location" placeholder="Country" title="Country">
-								<InputPicker.Option value="full_time">Full-time</InputPicker.Option>
-								<InputPicker.Option value="part_time">Part-time</InputPicker.Option>
-								<InputPicker.Option value="contract">Contract</InputPicker.Option>
-								<InputPicker.Option value="temporary">Temporary</InputPicker.Option>
-								<InputPicker.Option value="other">Other</InputPicker.Option>
-							</InputPicker>
-							<Input width="45%" name="zip_code" placeholder="Region, City or Zip Code" />
-							<SIcon onClick={(event: React.SyntheticEvent) => removeWorkLocation(event, elem.index)} width="25px" height="25px">
-								<TrashIcon color="inherit" />
-							</SIcon>
-						</StyledGap>
-					);
-				})}
 				<SButton onClick={addWorkLocation} variant="text" startIcon={<PlusIcon />}>
 					Add location
 				</SButton>
 			</div>
 			<div className="mt-15">
-				<div>Hire Remotly</div>
+				<div>Candidate Location</div>
 				<div style={{ marginTop: '12px' }}>
-					<CheckBox>Allow Remote Hiring</CheckBox>
-					<StyledGap justify="flex-start">
-						<InputPicker width="45%" name="hire_remotly" placeholder="Country" title="Hire Remotly">
-							<InputPicker.Option value="full_time">Full-time</InputPicker.Option>
-							<InputPicker.Option value="part_time">Part-time</InputPicker.Option>
-							<InputPicker.Option value="contract">Contract</InputPicker.Option>
-							<InputPicker.Option value="temporary">Temporary</InputPicker.Option>
-							<InputPicker.Option value="other">Other</InputPicker.Option>
-						</InputPicker>
-						<Input width="45%" name="zip_code" placeholder="Region, City or Zip Code" />
-					</StyledGap>
+					<CheckBox name="hire_remotly" value={data.hire_remotly} checked={data.hire_remotly} onChange={handleCheckBox}>
+						Allow Remote Hiring
+					</CheckBox>
+					{data.hire_location?.map((elem, idx) => {
+						return (
+							<StyledGap key={idx} justify="flex-start">
+								<InputPicker
+									width="45%"
+									name="hire_location"
+									placeholder="Country"
+									title="Country"
+									value={elem.country}
+									onChange={(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) =>
+										handleInputPicker(evet, value, label, name, idx)
+									}
+								>
+									{countries?.map((elem, idx) => {
+										return (
+											<InputPicker.Option key={idx} value={elem.code!}>
+												{elem.label}
+											</InputPicker.Option>
+										);
+									})}
+								</InputPicker>
+								<Input
+									width="45%"
+									name="hire_location"
+									placeholder="Region, City or Zip Code"
+									value={elem.city}
+									onChange={(event: React.ChangeEvent<HTMLInputElement>) => handleInput(event, idx)}
+								/>
+								<SIcon onClick={(event: React.SyntheticEvent) => removeHireLocation(event, idx)} width="25px" height="25px">
+									<TrashIcon color="inherit" />
+								</SIcon>
+							</StyledGap>
+						);
+					})}
 				</div>
-				{hireLocations.map((elem, key) => {
-					return (
-						<StyledGap key={key} justify="flex-start">
-							<InputPicker width="45%" name="job_location" placeholder="Country" title="Country">
-								<InputPicker.Option value="full_time">Full-time</InputPicker.Option>
-								<InputPicker.Option value="part_time">Part-time</InputPicker.Option>
-								<InputPicker.Option value="contract">Contract</InputPicker.Option>
-								<InputPicker.Option value="temporary">Temporary</InputPicker.Option>
-								<InputPicker.Option value="other">Other</InputPicker.Option>
-							</InputPicker>
-							<Input width="45%" name="zip_code" placeholder="Region, City or Zip Code" />
-							<SIcon onClick={(event: React.SyntheticEvent) => removeHireLocation(event, elem.index)} width="25px" height="25px">
-								<TrashIcon color="inherit" />
-							</SIcon>
-						</StyledGap>
-					);
-				})}
 				<SButton onClick={addHireLocation} variant="text" startIcon={<PlusIcon />}>
 					Add location
 				</SButton>
 			</div>
 			<div className="mt-15">
-				<div>Visa sponsorship</div>
-				<StyledGap align="flex-start" justify="flex-start">
-					<Radio>Yes</Radio>
-					<Radio>No</Radio>
-				</StyledGap>
+				<CheckBox name="visa_sponsorship" value={data.visa_sponsorship} checked={data.visa_sponsorship} onChange={handleCheckBox}>
+					Visa sponsorship
+				</CheckBox>
 			</div>
 		</div>
 	);

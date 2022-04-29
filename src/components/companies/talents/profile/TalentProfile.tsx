@@ -8,7 +8,7 @@ import { talentsActions } from '@/modules/actions/company/talents.actions';
 import ProfileAvatar from './ProfileAvatar';
 import Women from '@/assets/icons/women.jpg';
 import { CVIcon } from '@/assets/icons';
-import TalentStatus from './TalentStatus';
+import StatusElem from '@/components/companies/_common/StatusElem';
 import Preferences from './Preferences';
 import TalentContact from './TalentContact';
 import GeneralInfo from './GeneralInfo';
@@ -70,7 +70,7 @@ const TalentProfile = () => {
 					<FlexBox justify="start" align="start" style={{ height: 'calc(100% - 62px)' }}>
 						<div style={{ width: '25%', padding: '15px 20px', overflow: 'auto', height: '100%' }}>
 							<ProfileAvatar img={Women} role="Frontend developer" name="Merguerita Burns" />
-							<TalentStatus title="Ready To Interview" status="ready" />
+							<StatusElem title="Ready To Interview" status="ready" />
 							<HrDivider top={20} side={20} />
 							<TalentContact />
 							<SButton size="md" startIcon={<CVIcon />}>

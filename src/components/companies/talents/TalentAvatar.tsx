@@ -1,7 +1,7 @@
 import { FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 import { colors } from '@/assets/theme';
-import { StatusColors } from '@/constants/company/talent.contants';
+import { StatusColors } from '@/constants/company/common.constants';
 import { AvatarProps } from '@/models/component/companies/talents/talents.interface';
 
 const SAvatar = styled.div<AvatarProps>`

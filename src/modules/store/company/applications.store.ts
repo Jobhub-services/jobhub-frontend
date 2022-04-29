@@ -3,6 +3,7 @@ import { IApplicationsState } from '@/models/store/company/applications.interfac
 
 const initialState: IApplicationsState = {
 	filterClosed: true,
+	showDetails: false,
 };
 
 const reducerSlices = createSlice({

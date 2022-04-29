@@ -4,6 +4,7 @@ import { reducer as userReducer } from '@/modules/store/user.store';
 import { reducer as applicationsReducer } from '@/modules/store/company/applications.store';
 import { reducer as jobReducer } from '@/modules/store/company/job.store';
 import { reducer as talentReducer } from '@/modules/store/company/talents.store';
+import { reducer as metadataReducer } from '@/modules/store/metadata.store';
 
 const rootReducer = combineReducers({
 	auth: authReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
 	applications: applicationsReducer,
 	job: jobReducer,
 	talent: talentReducer,
+	metadata: metadataReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

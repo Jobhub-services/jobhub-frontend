@@ -1,5 +1,5 @@
 import { FlexBox, Button, TextArea } from 'staak-ui';
-import { StageBar } from '@/components/companies/progressBar';
+import { StageBar } from '@/components/companies/_common/progressBar';
 import { colors } from '@/assets/theme';
 import { useState } from 'react';
 import styled from 'styled-components';

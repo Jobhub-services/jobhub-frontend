@@ -1,30 +1,33 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { IconButton, Headline, HrDivider, Button } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import { FlexBox } from 'staak-ui';
-import { STitle, SP, SSpan } from './shared.styles';
+import { STitle, SP, SSpan } from './utils/shared.styles';
 import { DescriptionIcon, ResponsibleIcon } from '@/assets/icons';
 import styled from 'styled-components';
-import TalentStatus from '@/components/companies/talents/profile/TalentStatus';
-import TitleIcon from './TitleIcon';
-import Compensation from './Compensation';
-import Qualifications from './Qualifcations';
+import StatusElem from '@/components/companies/_common/StatusElem';
+import TitleIcon from '../../_common/TitleIcon';
+import Compensation from './utils/Compensation';
+import Qualifications from './utils/Qualifcations';
 import { IconProps } from '@/models/component';
-import Location from './Location';
-import Role from './Role';
-import Avatar from './Avatar';
+import Location from './utils/Location';
+import Role from './utils/Role';
+import { useAppSelector } from '@/utils/appHooks';
+import Avatar from './AvatarList';
 import Women from '@/assets/icons/women.jpg';
 import Man from '@/assets/icons/man.jpg';
 import Jerome from '@/assets/icons/jerome.jpg';
+import { jobActions } from '@/modules/actions/company/job.actions';
+import { useNavigate } from 'react-router-dom';
 
 const MainContainer = styled.div<any>`
 	position: fixed;
 	right: 0;
 	top: ${HEADER_HIEGHT}px;
-	width: calc(${(props) => (props.close ? '0' : `100% - ${ASIDE_WIDTH}px`)});
-	height: calc(${(props) => (props.close ? '0' : `100% - ${HEADER_HIEGHT}px`)});
+	width: calc(${(props) => (props.showed ? `100% - ${ASIDE_WIDTH}px` : '0')});
+	height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
 const DetailContainer = styled.div<any>`
@@ -32,10 +35,10 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: ${(props) => (props.close ? '0' : '1400px')};
+	width: ${(props) => (props.showed ? '1400px' : '0')};
 	background: white;
 	box-shadow: 2px -5px 20px -15px ${colors.BLACK_7};
-	transition: width 0.3s;
+	transition: width 0.2s;
 `;
 const SubContainer = styled.div`
 	display: flex;
@@ -55,7 +58,7 @@ const LeftContainer = styled(SScroll)`
 `;
 const RightContainer = styled(SScroll)`
 	width: 80%;
-	border-left: 1px solid ${colors.BLACK_9};
+	border-left: 1px solid ${colors.BLACK_12};
 `;
 const SubTitle = styled.span`
 	font-size: 13px;
@@ -63,21 +66,22 @@ const SubTitle = styled.span`
 	color: ${colors.BLACK_5};
 `;
 const JobDetails = () => {
-	const [close, setClose] = useState(false);
+	const navigate = useNavigate();
+	const { showDetails } = useAppSelector((state) => state.job);
+	useEffect(() => {
+		jobActions.setShowJobDetails(true);
+	}, []);
+	function onClose() {
+		jobActions.setShowJobDetails(false);
+		navigate('/jobs', { replace: true });
+	}
 	return (
-		<MainContainer close={close}>
-			<DetailContainer close={close}>
+		<MainContainer showed={showDetails}>
+			<DetailContainer showed={showDetails}>
 				<SubContainer>
 					<FlexBox justify="space-between" height="62px" style={{ padding: '5px 10px' }}>
 						<FlexBox gap={10}>
-							<IconButton
-								width="30px"
-								height="30px"
-								circle
-								onClick={() => {
-									setClose(true);
-								}}
-							>
+							<IconButton width="30px" height="30px" circle onClick={() => onClose()}>
 								<CloseIcon color={colors.BLACK_8} />
 							</IconButton>
 							<Headline variant="h2" size="sm">
@@ -108,7 +112,7 @@ const JobDetails = () => {
 							<div>
 								<STitle style={{ marginBottom: '5px' }}>Senior Frontend developer</STitle>
 								<FlexBox justify="start" gap={50}>
-									<TalentStatus style={{ marginTop: '0' }} title="Active" status="ready" />
+									<StatusElem style={{ marginTop: '0' }} title="Active" status="ready" />
 									<FlexBox gap={5}>
 										<SubTitle>Posted</SubTitle>
 										<SSpan>April 17. 2022</SSpan>

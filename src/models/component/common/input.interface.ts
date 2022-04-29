@@ -1,4 +1,4 @@
-import { TypeAttributes } from '@/types/common';
+import { TypeAttributes } from '@/types/common.type';
 import { StandardProps } from '@/models/component/app.interface';
 
 interface StandardInputProps extends StandardProps {
@@ -7,6 +7,7 @@ interface StandardInputProps extends StandardProps {
 	width?: string;
 	placeholder?: string;
 	required?: boolean;
+	value?: string;
 }
 export interface InputProps extends StandardInputProps {
 	type?: 'text' | 'email' | 'password';
@@ -19,7 +20,7 @@ export interface InputPickerProps extends StandardInputProps {
 	title: string;
 	message?: string;
 	error?: boolean;
-	onChange?: (event: React.MouseEvent<HTMLDivElement>, value: string) => void;
+	onChange?: (event: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) => void;
 }
 export interface InputDateProps extends StandardInputProps {
 	timeIntervals?: number;
@@ -34,6 +35,15 @@ export interface TagPickerProps extends StandardInputProps {
 	title: string;
 	message?: string;
 	error?: boolean;
+	values?: { value: string; label: string }[];
+	onChange?: (event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent, value: { value: string; label: string }[], name?: string) => void;
+}
+export interface TagInputProps extends StandardInputProps {
+	title: string;
+	message?: string;
+	error?: boolean;
+	values?: string[];
+	onChange?: (event: any, value: string[], name?: string) => void;
 }
 
 export interface InputPickerOptionProps extends StandardProps {

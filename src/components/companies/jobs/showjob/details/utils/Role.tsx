@@ -18,8 +18,8 @@ const Role = () => {
 				<div className="mt-20">
 					<SSubTitle>Job Type & Duration</SSubTitle>
 					<FlexBox className="mt-10" justify="start" gap={10}>
-						<Tag color={colors.PURPLE_3}>Full-time</Tag>
-						<Tag color={colors.PURPLE_3}>Parmanent</Tag>
+						<Tag color={colors.BLUE_CLEAR_5}>Full-time</Tag>
+						<Tag color={colors.GREEN_CLEAR_5}>Parmanent</Tag>
 					</FlexBox>
 				</div>
 			</div>

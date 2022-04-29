@@ -1,6 +1,6 @@
 import { InputPickerProps, InputPickerOptionProps } from '@/models/component';
 import React from 'react';
-import { InputPicker } from 'staak-ui';
+import { InputPicker, FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 import { colors } from '@/assets/theme';
 
@@ -14,14 +14,28 @@ const ErrorSpan = styled.span`
 	margin-top: 5px;
 	font-size: 13px;
 `;
-
+const SRequired = styled.span`
+	display: inline-block;
+	color: ${colors.RED_BASE};
+	font-size: 16px;
+`;
 const InputPickerField = (props: InputPickerProps) => {
 	const options = React.Children.map(props.children, (child) => (typeof child !== 'string' && child?.type?.displayName === 'Option' ? child : null));
 
 	return (
 		<div className={`w-100 ${props.className}`}>
-			<SLabel>{props.title}</SLabel>
-			<InputPicker onChange={props.onChange} width={props.width} name={props.name} placeholder={props.placeholder} required={props.required}>
+			<FlexBox justify="start" gap={5}>
+				<SLabel>{props.title}</SLabel>
+				{props.required && <SRequired>*</SRequired>}
+			</FlexBox>
+			<InputPicker
+				onChange={props.onChange}
+				width={props.width}
+				name={props.name}
+				value={props.value}
+				placeholder={props.placeholder}
+				required={props.required}
+			>
 				{options}
 			</InputPicker>
 			{props.error && <ErrorSpan>{props.message}</ErrorSpan>}

@@ -21,6 +21,7 @@ const StyledSpan = styled.span<WizardProps>`
 	background-color: white;
 	${(props) =>
 		props.valid &&
+		!props.active &&
 		css`
 			display: inline-block;
 			position: absolute;
@@ -117,7 +118,7 @@ const StepProgress = (props: WizardProps) => {
 						<LineDiv key={index} valid={elem.valid} direction={props.direction} onClick={(event) => selectStep(event, index)}>
 							<FlexBox flexDirection={props.direction === 'horizontal' ? 'column' : 'row'} justify="flex-start">
 								<StyledDiv direction={props.direction} active={elem.active} valid={elem.valid}>
-									<StyledSpan valid={elem.valid} />
+									<StyledSpan valid={elem.valid} active={elem.active} />
 								</StyledDiv>
 								<StyledContent>{elem.name}</StyledContent>
 							</FlexBox>

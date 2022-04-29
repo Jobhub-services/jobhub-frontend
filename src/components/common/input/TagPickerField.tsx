@@ -21,7 +21,14 @@ const TagPickerField = (props: TagPickerProps) => {
 	return (
 		<div className={`w-100 ${props.className}`}>
 			<SLabel>{props.title}</SLabel>
-			<TagPicker width={props.width} name={props.name} placeholder={props.placeholder} required={props.required}>
+			<TagPicker
+				width={props.width}
+				name={props.name}
+				placeholder={props.placeholder}
+				required={props.required}
+				values={props.values}
+				onChange={props.onChange}
+			>
 				{options}
 			</TagPicker>
 			{props.error && <ErrorSpan>{props.message}</ErrorSpan>}

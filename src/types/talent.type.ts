@@ -1,1 +1,2 @@
-export type StatusType = 'ready' | 'open' | 'closed';
+//export type StatusType = 'ready' | 'open' | 'closed';
+export {};

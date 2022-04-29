@@ -2,7 +2,7 @@ import { colors } from '@/assets/theme';
 import { MoneyIcon, BenefitIcon } from '@/assets/icons';
 import { IconProps } from '@/models/component';
 import { STitle, SP } from './shared.styles';
-import TitleIcon from './TitleIcon';
+import TitleIcon from '@/components/companies/jobs/_common/TitleIcon';
 
 const Compensation = () => {
 	return (

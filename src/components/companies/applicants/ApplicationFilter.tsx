@@ -1,4 +1,4 @@
-import FilterContianer from '@/components/companies/filter/FilterContainer';
+import FilterContianer from '@/components/companies/_common/filter/FilterContainer';
 import { CheckBox, DateRangePicker, FlexBox, Input, InputPicker } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import styled from 'styled-components';

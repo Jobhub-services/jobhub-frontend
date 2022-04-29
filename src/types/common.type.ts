@@ -12,3 +12,4 @@ export declare namespace TypeAttributes {
 export type FilterType = 'applications' | 'job' | 'talent';
 export type StoreState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export type StatusType = 'ready' | 'open' | 'closed';

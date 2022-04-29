@@ -1,5 +1,5 @@
 import { StandardProps } from '@/models/component/app.interface';
-import { StatusType } from '@/types/talent.type';
+import { StatusType } from '@/types/common.type';
 
 export interface AvatarProps extends StandardProps {
 	name?: string;
@@ -26,8 +26,4 @@ export interface CardProps extends StandardProps, AvatarProps {
 	location?: string;
 	skills?: string[];
 	description?: string;
-}
-export interface TalentStatusProps extends StandardProps {
-	title?: string;
-	status?: StatusType;
 }

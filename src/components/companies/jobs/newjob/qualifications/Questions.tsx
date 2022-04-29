@@ -1,43 +1,55 @@
 import React, { useState } from 'react';
 import { TextAreaField } from '@/components/common';
 import { SButton, SIcon } from '@/components/companies/jobs/newjob/newjob.styles';
+import { useAppSelector } from '@/utils/appHooks';
 import { PlusIcon, TrashIcon } from 'staak-ui';
 import { TextArea, FlexBox } from 'staak-ui';
+import { jobActions } from '@/modules/actions/company/job.actions';
 
 const Questions = (props: any) => {
-	const [questions, setQuestions] = useState<{ index: number; value: string }[]>([]);
+	const { createJob } = useAppSelector((state) => state.job);
+	const data = createJob;
+
 	function addQuestion(event: React.SyntheticEvent) {
-		const tmp = [...questions, { index: questions.length + 2, value: '' }];
-		setQuestions(tmp);
+		const tmp = { ...data };
+		tmp.questions = [...tmp.questions!, ''];
+		jobActions.saveJobData(tmp);
 	}
 	function removeQuestion(event: React.SyntheticEvent, index: number) {
-		setQuestions(
-			questions.filter((elem) => {
-				if (elem.index !== index) {
-					elem.index = elem.index - 1;
-					return elem;
-				}
-			})
-		);
+		const tmp = { ...data };
+		tmp.questions = tmp.questions?.filter((elem, idx) => idx !== index);
+		jobActions.saveJobData(tmp);
+	}
+	function handleTxt(event: React.ChangeEvent<HTMLTextAreaElement>, index: number) {
+		const value = event.target.value;
+		const tmp = { ...data };
+		let arrayTmp = [...tmp.questions!];
+		arrayTmp![index] = value;
+		tmp.questions = arrayTmp;
+		jobActions.saveJobData(tmp);
 	}
 	return (
 		<div style={{ width: '95%' }}>
 			<h3>Pre-qualifications</h3>
 			<div>
 				<div>
-					<TextAreaField placeholder="Requirements" name="job_desc" height="60px">
-						Question 1
-					</TextAreaField>
-					{questions.map((elem, key) => {
+					{data.questions?.map((elem, key) => {
 						return (
 							<div key={key} className="mt-10">
 								<FlexBox justify="space-between">
-									<label>Question {elem.index}</label>
-									<SIcon onClick={(event: React.SyntheticEvent) => removeQuestion(event, elem.index)} width="25px" height="25px">
+									<label>Question</label>
+									<SIcon onClick={(event: React.SyntheticEvent) => removeQuestion(event, key)} width="25px" height="25px">
 										<TrashIcon color="inherit" />
 									</SIcon>
 								</FlexBox>
-								<TextArea className="mt-5 mb-10" placeholder="Requirements" name="job_desc" height="60px"></TextArea>
+								<TextArea
+									className="mt-5 mb-10"
+									placeholder="Question"
+									name="questions"
+									height="60px"
+									value={elem}
+									onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => handleTxt(event, key)}
+								/>
 							</div>
 						);
 					})}
