@@ -1,22 +1,25 @@
 import styled, { css } from 'styled-components';
 import { FlexBox, Tag, Button } from 'staak-ui';
 import { LinkedinIcon, GithubIcon } from 'staak-ui';
+import { CalendarIcon, CVIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
-import CVIcon from '@/assets/icons/CVIcon';
-import Jerome from '@/assets/icons/jerome.jpg';
 import { ApplicantCardProps } from '@/models/component/companies/applications/applications.interface';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useSearchParams, createSearchParams, useParams } from 'react-router-dom';
+import { useAppSelector } from '@/utils/appHooks';
+import { applicationsActions } from '@/modules/actions/company/applications.actions';
+import { Avatar } from '@/components/companies/_common';
+import { ApplicationStatus } from '@/types/applications.type';
+
+const Status: { [key in ApplicationStatus]?: ApplicationStatus } = { new: 'process', process: 'interview', interview: 'hired' };
 
 const CustomizedButton = styled(Button)`
 	font-size: 12px !important;
 	font-weight: 500 !important;
-	${(props) =>
-		props.pColor &&
-		css`
-			background-color: ${props.pColor} !important;
-			border: none !important;
-			color: ${props.textColor ? props.textColor : colors.PURPLE_BASE} !important;
-		`}
+`;
+const SSpan = styled.span`
+	font-size: 12px;
+	font-weight: 500;
+	color: ${colors.BLACK_9};
 `;
 const SCard = styled.div`
 	background: white;
@@ -35,75 +38,86 @@ const SButton = styled.div<any>`
 	font-size: 12px;
 	cursor: pointer;
 `;
-const SGap = styled(FlexBox)`
-	gap: 10px;
-`;
-const SSpan = styled.span`
-	font-size: 13px;
-	font-weight: 500;
-	color: ${colors.BLACK_7};
-`;
 
-const ApplicationCard = ({ applicantId }: ApplicantCardProps) => {
-	const navigate = useNavigate();
-	function viewDetails(id?: number) {
-		navigate(`/applicants/detail/${id}`);
+const ApplicationCard = (props: ApplicantCardProps) => {
+	const { status } = useParams();
+	const [searchParams, setSearchParams] = useSearchParams({});
+	function viewDetails(id: string) {
+		applicationsActions.getApplicantDetails(status as ApplicationStatus, id);
+		searchParams.set('detail', id);
+		setSearchParams(searchParams);
+	}
+	function onStatusChange(event: any, status: ApplicationStatus) {
+		console.log('status of the candidat ', status, props.applicantId);
+		applicationsActions.setApplicationStatus(status, props.applicantId);
 	}
 	return (
 		<SCard>
 			<FlexBox justify="space-between" style={{ padding: '8px 10px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
-				<SGap align="flex-start">
-					<img src={Jerome} alt="avatar" width={50} height={50} style={{ borderRadius: '50%' }} />
-					<div>
-						<div>
-							<strong>Jerome Bell</strong>
-						</div>
-						<SSpan>Fullstack developer</SSpan>
-					</div>
-				</SGap>
-				<CustomizedButton onClick={() => viewDetails(applicantId)} variant="text">
+				<FlexBox align="flex-start">
+					<Avatar size={50} img={props.img} name={props.name} role={props.role} status="ready" />
+				</FlexBox>
+				<CustomizedButton onClick={() => viewDetails(props.applicantId)} variant="text">
 					View details
 				</CustomizedButton>
 			</FlexBox>
-			<div style={{ padding: '10px 10px' }}>
-				<p style={{ height: '45px', overflow: 'hidden' }}>
-					I am Jerome Bell, a software enginner. I am working as a frontend, backend, and full-stack developer since 2018. I have created a lot of web
-					applications for many France companies.
-				</p>
-				<FlexBox justify="flex-start">
-					<span style={{ color: `${colors.BLACK_4}` }}>Skills</span>
-					<FlexBox style={{ gap: '10px', marginLeft: '10px' }}>
-						<Tag>Laravel</Tag>
-						<Tag>PHP</Tag>
-						<Tag>Django</Tag>
+			<div style={{ padding: '10px 10px 0 10px' }}>
+				<div>
+					<p style={{ height: '45px', overflow: 'hidden', margin: '10px 0' }}>{props.cover_letter}</p>
+				</div>
+				<FlexBox justify="flex-start" className="mt-10">
+					<span style={{ color: `${colors.BLACK_9}`, fontWeight: '500' }}>Skills</span>
+					<FlexBox gap={10} className="ml-10">
+						{props.skils?.map((elem, idx) => {
+							return <Tag key={idx}>{elem.label}</Tag>;
+						})}
 					</FlexBox>
 				</FlexBox>
-				<FlexBox justify="flex-start" className="mt-10" style={{ gap: '10px' }}>
+				<FlexBox justify="flex-start" className="mt-15" gap={10}>
 					<SButton background={colors.BLUE_CLEAR_5} color={colors.BLUE_BASE}>
 						<LinkedinIcon width="20px" height="20px" color={colors.BLUE_BASE} />
-						<span>LinkedIn</span>
+						<a href={props.linkedIn} target="_blank">
+							LinkedIn
+						</a>
 					</SButton>
 					<SButton background={colors.PURPLE_1} color={colors.PURPLE_BASE}>
 						<CVIcon width="20px" height="20px" color={colors.PURPLE_BASE} />
-						<span>CV (.pdf)</span>
+						<a href={props.cv} target="_blank">
+							CV (.pdf)
+						</a>
 					</SButton>
 					<SButton background={colors.BLACK_13}>
 						<GithubIcon />
-						<span>Git</span>
+						<a href={props.github} target="_blank">
+							Git
+						</a>
 					</SButton>
 				</FlexBox>
 			</div>
-			<FlexBox justify="space-between" style={{ borderTop: `1px solid ${colors.BLACK_12}`, padding: '10px 10px' }}>
-				<FlexBox style={{ gap: '10px' }}>
-					<CustomizedButton pColor={colors.PURPLE_1} color="green">
-						Approve
-					</CustomizedButton>
-					<CustomizedButton variant="text" color="red">
-						Decline
-					</CustomizedButton>
+			<div className="mt-10" style={{ borderTop: `1px solid ${colors.BLACK_12}`, padding: '10px 10px' }}>
+				{props.job && (
+					<FlexBox justify="space-between">
+						<FlexBox justify="start" gap={10}>
+							<span style={{ color: `${colors.BLACK_9}`, fontWeight: '500' }}>Applied to</span>
+							<span style={{}}>Senior frontend developer</span>
+						</FlexBox>
+					</FlexBox>
+				)}
+				<FlexBox justify="space-between" className="mt-5">
+					<FlexBox gap={10}>
+						<CustomizedButton size="md" variant="light" onClick={(event: any) => onStatusChange(event, Status[props.applicationStatus!]!)}>
+							Approve
+						</CustomizedButton>
+						<CustomizedButton size="md" color="red" variant="text" onClick={(event: any) => onStatusChange(event, 'declined')}>
+							Decline
+						</CustomizedButton>
+					</FlexBox>
+					<FlexBox gap={5}>
+						<CalendarIcon width="18px" height="18px" color={colors.BLACK_9} />
+						<SSpan>{props.applied}</SSpan>
+					</FlexBox>
 				</FlexBox>
-				<div style={{ fontSize: '12px' }}> 12 March 2022</div>
-			</FlexBox>
+			</div>
 		</SCard>
 	);
 };

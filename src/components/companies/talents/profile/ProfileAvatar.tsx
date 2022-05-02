@@ -1,5 +1,5 @@
 import { colors } from '@/assets/theme';
-import { AvatarProps } from '@/models/component/companies/talents/talents.interface';
+import { AvatarProps } from '@/models/component/companies/common.interface';
 import { FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 

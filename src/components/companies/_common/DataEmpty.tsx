@@ -9,12 +9,12 @@ const Sp = styled.p`
 	font-size: 16px;
 	margin: 10px 0;
 `;
-const DataEmpty = ({ description, title }: any) => {
+const DataEmpty = ({ description, title, top, className, style }: any) => {
 	return (
-		<FlexBox height="calc(100% - 55px)">
+		<FlexBox className={className} style={{ ...style }} height={`calc(100% - ${top}px)`}>
 			<FlexBox flexDirection="column">
 				<SImg src={NoData} alt="NoData" />
-				<Headline variant="h2" className="mt-20">
+				<Headline variant="h2" size="sm" className="mt-20">
 					{title}
 				</Headline>
 				<Sp>{description}</Sp>
@@ -22,5 +22,7 @@ const DataEmpty = ({ description, title }: any) => {
 		</FlexBox>
 	);
 };
-
+DataEmpty.defaultProps = {
+	top: 55,
+};
 export default DataEmpty;

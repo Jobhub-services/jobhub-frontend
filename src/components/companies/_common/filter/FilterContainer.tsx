@@ -17,7 +17,7 @@ const FContainer = styled.div<any>`
 	top: ${HEADER_HIEGHT}px;
 	left: ${ASIDE_WIDTH}px;
 	background: white;
-	width: ${(props) => (props.closed ? '0' : '300px')};
+	width: ${(props) => (props.closed ? '0' : '350px')};
 	overflow-x: hidden;
 	height: calc(100% - ${HEADER_HIEGHT}px);
 	box-shadow: 2px -5px 20px -15px ${colors.BLACK_7};
@@ -27,20 +27,21 @@ const FContainer = styled.div<any>`
 const SubContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 300px;
+	width: 350px;
 	height: 100%;
 `;
 const SHeader = styled(FlexBox)`
 	border-bottom: 1px solid ${colors.BLACK_12};
-	padding: 5px 10px !important;
+	padding: 5px 15px !important;
 `;
 const SFooter = styled(FlexBox)`
 	border-top: 1px solid ${colors.BLACK_12};
-	padding: 15px 10px !important;
-	gap: 10px;
+	padding: 15px 15px !important;
+	gap: 10px !important;
 `;
 const SBody = styled.div`
-	padding: 5px 10px;
+	padding: 5px 15px;
+	overflow-y: auto;
 	flex-grow: 1;
 `;
 const FilterContianer = (props: FilterContianerProps) => {
@@ -64,12 +65,14 @@ const FilterContianer = (props: FilterContianerProps) => {
 						<CloseIcon color={colors.BLACK_8} />
 					</IconButton>
 				</SHeader>
-				<SBody>{body}</SBody>
+				<SBody className="staak_scrollbar">{body}</SBody>
 				<SFooter>
-					<Button variant="outlined" width="100%">
+					<Button variant="outlined" width="100%" onClick={props.onClear}>
 						Clean All
 					</Button>
-					<Button width="100%">Apply</Button>
+					<Button width="100%" onClick={props.onApply}>
+						Apply
+					</Button>
 				</SFooter>
 			</SubContainer>
 		</FContainer>

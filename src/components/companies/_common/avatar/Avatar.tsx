@@ -1,17 +1,17 @@
 import { FlexBox } from 'staak-ui';
 import styled from 'styled-components';
-import { colors } from '@/assets/theme';
 import { StatusColors } from '@/constants/company/common.constants';
 import { AvatarProps } from '@/models/component/companies/common.interface';
+import { colors } from '@/assets/theme';
 
 const SAvatar = styled.div<AvatarProps>`
-	border: 2px solid ${(props) => StatusColors[props.status!]};
+	border: 2px solid ${(props) => (props.color ? props.color : StatusColors[props.status!])};
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 40%;
-	width: 70px;
-	height: 70px;
+	width: ${(props) => props.size}px;
+	height: ${(props) => props.size}px;
 `;
 const SubTitle = styled.span`
 	display: block;
@@ -31,21 +31,21 @@ const SSpan = styled.span`
 	margin-top: 2px;
 	font-size: 13px;
 `;
-const TalentAvatar = ({ img, name, role, status }: AvatarProps) => {
+const Avatar = ({ img, name, role, status, experience, size, color }: AvatarProps) => {
 	return (
 		<FlexBox justify="start" gap={10}>
-			<SAvatar status={status}>
-				<SImg src={img} alt="women" width={60} height={60} />
+			<SAvatar size={size! + 10} status={status} color={color}>
+				<SImg src={img} alt="women" width={size} height={size} />
 			</SAvatar>
 			<div>
 				<SH3>{name}</SH3>
 				<SubTitle>{role}</SubTitle>
-				<SSpan>4 Years of experience</SSpan>
+				<SSpan>{experience}</SSpan>
 			</div>
 		</FlexBox>
 	);
 };
-TalentAvatar.defaultProps = {
-	status: 'ready',
+Avatar.defaultProps = {
+	size: 60,
 };
-export default TalentAvatar;
+export default Avatar;

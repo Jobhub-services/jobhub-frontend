@@ -4,10 +4,9 @@ import { FlexBox, Button, Radio, DateRangePicker } from 'staak-ui';
 import { InputField, InputPickerField, TextAreaField } from '@/components/common';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { metadataActions } from '@/modules/actions/metadata.actions';
-import { StyledGap } from '../newjob.styles';
 import React from 'react';
 import { useAppSelector } from '@/utils/appHooks';
-import { JobStringIndex } from '@/types/jobs';
+import { JobStringIndex } from '@/types/jobs.type';
 
 const BasicDetails = (props: JobReviewProps) => {
 	const { createJob } = useAppSelector((state) => state.job);
@@ -104,25 +103,25 @@ const BasicDetails = (props: JobReviewProps) => {
 						<h3>Employment type & Duration</h3>
 						<div>
 							<label>Type</label>
-							<StyledGap justify="flex-start">
+							<FlexBox className="mt-10" gap={15} justify="flex-start">
 								<Radio name="job_type" value="full_time" checked={data.job_type === 'full_time'} onChange={handleInput}>
 									Full-Time
 								</Radio>
 								<Radio name="job_type" value="part_time" checked={data.job_type === 'part_time'} onChange={handleInput}>
 									Part-Time
 								</Radio>
-							</StyledGap>
+							</FlexBox>
 						</div>
 						<div className="mt-15">
 							<label>Duration</label>
-							<StyledGap justify="flex-start">
+							<FlexBox className="mt-10" gap={15} justify="flex-start">
 								<Radio name="duration" value="permanent" checked={data.duration === 'permanent'} onChange={handleInput}>
 									Permanent
 								</Radio>
 								<Radio name="duration" value="temporary" checked={data.duration === 'temporary'} onChange={handleInput}>
 									Temporary/Seasonal
 								</Radio>
-							</StyledGap>
+							</FlexBox>
 						</div>
 						{data.duration === 'temporary' && (
 							<div className="mt-15">
@@ -137,12 +136,12 @@ const BasicDetails = (props: JobReviewProps) => {
 					</div>
 				</div>
 			</FlexBox>
-			<StyledGap align="flex-start" justify="flex-start">
+			<FlexBox className="mt-10" gap={15} align="flex-start" justify="flex-start">
 				<Button variant="outlined" onClick={handlePrevious}>
 					Back
 				</Button>
 				<Button onClick={handleNext}>Save & Continue</Button>
-			</StyledGap>
+			</FlexBox>
 		</>
 	);
 };

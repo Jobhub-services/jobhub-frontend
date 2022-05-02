@@ -1,30 +1,32 @@
 import { FilterIcon } from '@/assets/icons';
 import { Button, FlexBox, InputPicker } from 'staak-ui';
-import styled from 'styled-components';
 import HeaderTab from './HeaderTab';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { ApplicationStatus } from '@/types/applications.type';
 
-const Sgap = styled(FlexBox)`
-	gap: ${(props) => props.gap}px;
-`;
 const ApplicantsHeader = () => {
 	const navigate = useNavigate();
 	const { status } = useParams();
-	const { filterClosed } = useAppSelector((state) => state.applications);
+	const { pathname, search } = useLocation();
+	const { filterClosed, applicantsByJobs } = useAppSelector((state) => state.applications);
+	const { total } = applicantsByJobs;
+
 	function onChangeTab(status: string) {
-		navigate(`/applicants/${status}`, { replace: true });
+		let path = pathname.split('/');
+		path[2] = status;
+		navigate(`${path.join('/')}${search}`);
 	}
 	return (
 		<FlexBox justify="space-between">
-			<Sgap gap="20">
-				<HeaderTab onClick={onChangeTab} title="New Applicants" badge="10" active={status === 'new'} status="new" />
-				<HeaderTab onClick={onChangeTab} title="In Process" badge="5" active={status === 'process'} status="process" />
-				<HeaderTab onClick={onChangeTab} title="Hired" badge="2" active={status === 'hired'} status="hired" />
-				<HeaderTab onClick={onChangeTab} title="Declined" badge="3" active={status === 'declined'} status="declined" />
-			</Sgap>
-			<Sgap gap="10">
+			<FlexBox gap={20}>
+				<HeaderTab onClick={onChangeTab} title="New Applicants" badge={`${total}`} active={status === 'new'} status="new" />
+				<HeaderTab onClick={onChangeTab} title="In Process" badge={`${total}`} active={status === 'process'} status="process" />
+				<HeaderTab onClick={onChangeTab} title="Hired" badge={`${total}`} active={status === 'hired'} status="hired" />
+				<HeaderTab onClick={onChangeTab} title="Declined" badge={`${total}`} active={status === 'declined'} status="declined" />
+			</FlexBox>
+			<FlexBox gap={10}>
 				<Button
 					startIcon={<FilterIcon />}
 					onClick={() => {
@@ -37,7 +39,7 @@ const ApplicantsHeader = () => {
 					<InputPicker.Option>Newest</InputPicker.Option>
 					<InputPicker.Option>Oldest</InputPicker.Option>
 				</InputPicker>
-			</Sgap>
+			</FlexBox>
 		</FlexBox>
 	);
 };

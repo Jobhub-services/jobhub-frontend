@@ -1,12 +1,5 @@
 import { StandardProps } from '@/models/component/app.interface';
-import { StatusType } from '@/types/common.type';
-
-export interface AvatarProps extends StandardProps {
-	name?: string;
-	role?: string;
-	img?: string;
-	status?: StatusType;
-}
+import { AvatarProps } from '../common.interface';
 
 export interface EducationProps extends StandardProps {
 	title: string;

@@ -1,17 +1,20 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { FlexBox, IconButton, Headline, Button, TabPane } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import Jerome from '@/assets/icons/jerome.jpg';
-import Avatar from '../Avatar';
 import InterviewForm from './interview/InterviewForm';
 import ApplicationStage from './ApplicationStage';
 import InterviewsList from './interview/InterviewsList';
 import ApplicationContact from './ApplicationContact';
 import ApplicantProfile from './ApplicantProfile';
-import { useState } from 'react';
 import ApplicationStatus from './ApplicationStatus';
+import { useAppSelector } from '@/utils/appHooks';
+import { applicationsActions } from '@/modules/actions/company/applications.actions';
+import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { Avatar } from '@/components/companies/_common';
 
 const ScrollContainer = styled.div`
 	padding: 0 10px;
@@ -41,7 +44,7 @@ const SBody = styled(FlexBox)`
 	padding: 10px 20px !important;
 	align-items: flex-start !important;
 	justify-content: flex-start !important;
-	gap: 20px;
+	gap: 20px !important;
 `;
 const AppContact = styled.div`
 	padding: 10px 15px;
@@ -66,28 +69,26 @@ const MainContainer = styled.div<any>`
 	position: fixed;
 	right: 0;
 	top: ${HEADER_HIEGHT}px;
-	width: calc(${(props) => (props.close ? '0' : `100% - ${ASIDE_WIDTH}px`)});
-	height: calc(${(props) => (props.close ? '0' : `100% - ${HEADER_HIEGHT}px`)});
+	width: calc(${(props) => (props.showed ? `100% - ${ASIDE_WIDTH}px` : '0')});
+	height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
 
 const ApplicationDetails = () => {
-	const [accepted, setAccepted] = useState('onprogress');
-	const [close, setClose] = useState(false);
+	const { applicantDetails } = useAppSelector((state) => state.applications);
+	const [searchParams, setSearchParams] = useSearchParams();
+	function onClose() {
+		searchParams.delete('detail');
+		setSearchParams(searchParams);
+	}
+	console.log('detail value', searchParams.get('detail'));
 	return (
-		<MainContainer close={close}>
-			<DetailContainer close={close}>
+		<MainContainer showed={searchParams.get('detail')}>
+			<DetailContainer showed={searchParams.get('detail')}>
 				<SubContainer>
 					<SHeader>
 						<FlexBox justify="start" gap={10}>
-							<IconButton
-								width="30px"
-								height="30px"
-								circle
-								onClick={() => {
-									setClose(true);
-								}}
-							>
+							<IconButton width="30px" height="30px" circle onClick={() => onClose()}>
 								<CloseIcon color={colors.BLACK_8} />
 							</IconButton>
 							<Headline variant="h2" size="sm">
@@ -97,7 +98,17 @@ const ApplicationDetails = () => {
 					</SHeader>
 					<SBody>
 						<AppContact>
-							<Avatar img={Jerome} width={80} height={80} title="Jerome Bell" subTitle="Fullstack developer" />
+							<FlexBox justify="space-between">
+								<Avatar
+									img={Jerome}
+									size={70}
+									name="Jerome Bell"
+									role="Fullstack developer"
+									color={colors.PURPLE_BASE}
+									experience="4 Years of experience"
+								/>
+								<span style={{ display: 'block', fontSize: '13px', color: `${colors.PURPLE_BASE}`, cursor: 'pointer' }}>View Profile</span>
+							</FlexBox>
 							<div style={{ background: `${colors.PURPLE_1}`, padding: '5px 10px', borderRadius: '5px', marginTop: '15px' }}>
 								<FlexBox justify="space-between" style={{ fontSize: '12px', padding: '5px 0', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 									<span>Applied jobs</span>
@@ -110,14 +121,10 @@ const ApplicationDetails = () => {
 									</div>
 								</div>
 							</div>
-							{accepted === 'onprogress' ? (
-								<ApplicationStage
-									onConfirm={(val: string) => {
-										setAccepted(val);
-									}}
-								/>
+							{applicantDetails.applicationStatus !== 'hired' && applicantDetails.applicationStatus !== 'declined' ? (
+								<ApplicationStage />
 							) : (
-								<ApplicationStatus accepted={accepted === 'accepted'} />
+								<ApplicationStatus accepted={applicantDetails.applicationStatus === 'hired'} />
 							)}
 							<hr style={{ borderTop: `1px solid ${colors.BLACK_13}` }} />
 

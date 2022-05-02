@@ -2,55 +2,88 @@ import styled, { css } from 'styled-components';
 import { colors } from '@/assets/theme';
 import { FlexBox, Button } from 'staak-ui';
 import ApplicationCard from './ApplicationCard';
+import { ApplicationContainerProps } from '@/models/component/companies/applications/applications.interface';
+import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
 
+const SHeader = styled(FlexBox)`
+	justify-content: space-between !important;
+	border-bottom: 1px solid ${colors.BLACK_12};
+	padding: 7px 15px !important;
+`;
+const SButton = styled(Button)`
+	font-size: 12px !important;
+	font-weight: 500 !important;
+`;
+const STitle = styled.div`
+	font-size: 18px;
+	font-weight: 600;
+`;
 const SSpan = styled.span<any>`
 	font-size: 13px;
 	font-weight: 500;
 	color: ${colors.BLACK_7};
 	opacity: ${(props) => props.opacity};
 `;
-const CustomizedButton = styled(Button)`
-	font-size: 12px !important;
-	font-weight: 500 !important;
-	${(props) =>
-		props.pColor &&
-		css`
-			background-color: ${props.pColor} !important;
-			border: none !important;
-			color: ${props.textColor ? props.textColor : colors.PURPLE_BASE} !important;
-		`}
-`;
 const AppContainer = styled.div`
 	background-color: white;
 	border-radius: 8px;
-	border: 1px solid ${colors.BLACK_12};
+	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
 `;
-const CardContainer = styled.div`
+const CardContainer = styled.div<any>`
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 10px;
-	padding: 10px 10px;
+	padding: 10px 15px;
 `;
-const ApplicationContainer = () => {
+const ApplicationContainer = (props: ApplicationContainerProps) => {
+	const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
+	function handleClick() {
+		navigate(`/jobs/details/${props.jobId}`);
+	}
+	function allApplicants() {
+		searchParams.set('jobId', props.jobId);
+		const params = createSearchParams(searchParams);
+		navigate(`search?${params}`);
+	}
 	return (
 		<AppContainer>
 			<div>
-				<FlexBox style={{ borderBottom: `1px solid ${colors.BLACK_12}`, padding: '7px 10px' }} justify="space-between">
-					<FlexBox justify="flex-start" align="flex-start">
-						<div style={{ marginLeft: '5px' }}>
-							<div style={{ fontWeight: '600', fontSize: '18px' }}>Senior frontend developer</div>
-							<SSpan opacity={0.6}>Humain resource administration </SSpan>
-						</div>
+				<SHeader>
+					<div>
+						<STitle>{props.title}</STitle>
+						<SSpan opacity={0.6}>{props.category}</SSpan>
+					</div>
+					<FlexBox gap={10}>
+						<SButton size="md" variant="text" onClick={handleClick}>
+							View Job
+						</SButton>
+						<SButton size="md" variant="light" onClick={allApplicants}>
+							All Applicants
+						</SButton>
 					</FlexBox>
-					<FlexBox style={{ gap: '10px' }}>
-						<CustomizedButton variant="text">View Job</CustomizedButton>
-						<CustomizedButton pColor={colors.PURPLE_1}>All Applicants</CustomizedButton>
-					</FlexBox>
-				</FlexBox>
+				</SHeader>
 			</div>
 			<CardContainer>
-				<ApplicationCard applicantId={1} />
-				<ApplicationCard />
+				{props.applicants?.map((elem, idx) => {
+					return (
+						<ApplicationCard
+							key={idx}
+							applicantId={elem.applicantId}
+							img={elem.img}
+							name={elem.name}
+							role={elem.role}
+							experience_duration={elem.experience_duration}
+							cover_letter={elem.cover_letter}
+							skils={elem.skils}
+							applied={elem.applied}
+							linkedIn={elem.linkedIn}
+							github={elem.github}
+							cv={elem.cv}
+							applicationStatus={elem.applicationStatus}
+						/>
+					);
+				})}
 			</CardContainer>
 		</AppContainer>
 	);

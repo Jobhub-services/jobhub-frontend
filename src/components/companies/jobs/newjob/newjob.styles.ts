@@ -19,8 +19,3 @@ export const SIcon = styled(IconButton)`
 		background-color: ${Colors.RED_CLEAR_5} !important;
 	}
 `;
-
-export const StyledGap = styled(FlexBox)`
-	margin-top: 10px;
-	gap: 15px;
-`;

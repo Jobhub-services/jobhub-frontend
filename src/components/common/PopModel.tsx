@@ -38,16 +38,16 @@ const PopModel = (props: PopModelProps) => {
 	return (
 		<Container closed={closed}>
 			<SPopUp>
-				<FlexBox justify="space-between" style={{ padding: '5px 10px' }}>
+				<FlexBox justify="space-between" style={{ padding: '10px 15px' }}>
 					{header}
 					<IconButton width="30px" height="30px" circle onClick={onClose}>
 						<CloseIcon color={colors.BLACK_8} />
 					</IconButton>
 				</FlexBox>
 				<HrDivider />
-				<div style={{ padding: '5px 10px' }}>{body}</div>
+				<div style={{ padding: '15px 15px' }}>{body}</div>
 				<HrDivider />
-				<FlexBox style={{ padding: '10px 10px' }}>{footer}</FlexBox>
+				<FlexBox style={{ padding: '10px 15px' }}>{footer}</FlexBox>
 			</SPopUp>
 		</Container>
 	);

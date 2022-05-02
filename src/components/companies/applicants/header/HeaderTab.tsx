@@ -1,13 +1,13 @@
-import styled from 'styled-components';
 import { colors } from '@/assets/theme';
 import { HeaderTabProps } from '@/models/component/companies/applications/applications.interface';
 import React from 'react';
+import styled, { css } from 'styled-components';
 
 const SBadge = styled.span<any>`
 	display: inline-block;
 	padding: 3px 7px;
-	color: ${(props) => props.active && 'white'};
-	background-color: ${(props) => (props.active ? colors.PURPLE_BASE : '#d8e4f5')};
+	color: white;
+	background-color: ${colors.PURPLE_BASE};
 	border-radius: 8px;
 	transition-duration: 0.2s;
 	font-size: 10px;
@@ -39,7 +39,7 @@ const HeaderTab = ({ title, badge, active = false, onClick, status }: HeaderTabP
 	return (
 		<SHeaderTab active={active} onClick={(event: React.SyntheticEvent) => onClick(status!, event)}>
 			<span>{title}</span>
-			<SBadge active={active}>{badge}</SBadge>
+			{active && <SBadge>{badge}</SBadge>}
 		</SHeaderTab>
 	);
 };

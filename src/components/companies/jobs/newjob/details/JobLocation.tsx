@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { InputPicker, Input, CheckBox, Radio } from 'staak-ui';
+import { InputPicker, Input, CheckBox, Radio, FlexBox } from 'staak-ui';
 import { PlusIcon, TrashIcon } from 'staak-ui';
-import { StyledGap } from '../newjob.styles';
 import { SButton, SIcon } from '@/components/companies/jobs/newjob/newjob.styles';
-import { JobArrayIndex, JobBooleanIndex } from '@/types/jobs';
+import { JobArrayIndex, JobBooleanIndex } from '@/types/jobs.type';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { metadataActions } from '@/modules/actions/metadata.actions';
@@ -71,7 +70,7 @@ const JobLocation = (props: any) => {
 					</CheckBox>
 					{data.work_location?.map((elem, idx) => {
 						return (
-							<StyledGap key={idx} justify="flex-start">
+							<FlexBox className="mt-10" gap={15} key={idx} justify="flex-start">
 								<InputPicker
 									type="text"
 									width="45%"
@@ -101,7 +100,7 @@ const JobLocation = (props: any) => {
 								<SIcon onClick={(event: React.SyntheticEvent) => removeWorkLocation(event, idx)} width="25px" height="25px">
 									<TrashIcon color="inherit" />
 								</SIcon>
-							</StyledGap>
+							</FlexBox>
 						);
 					})}
 				</div>
@@ -117,7 +116,7 @@ const JobLocation = (props: any) => {
 					</CheckBox>
 					{data.hire_location?.map((elem, idx) => {
 						return (
-							<StyledGap key={idx} justify="flex-start">
+							<FlexBox className="mt-10" gap={15} key={idx} justify="flex-start">
 								<InputPicker
 									width="45%"
 									name="hire_location"
@@ -146,7 +145,7 @@ const JobLocation = (props: any) => {
 								<SIcon onClick={(event: React.SyntheticEvent) => removeHireLocation(event, idx)} width="25px" height="25px">
 									<TrashIcon color="inherit" />
 								</SIcon>
-							</StyledGap>
+							</FlexBox>
 						);
 					})}
 				</div>

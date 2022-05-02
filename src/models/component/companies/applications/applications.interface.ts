@@ -1,4 +1,4 @@
-import { ApplicationStatus, InterviewStatus } from '@/types/applications.type';
+import { ApplicantsByJob, ApplicantsShortInfo, ApplicationStatus, InterviewStatus } from '@/types/applications.type';
 import { StandardProps } from '@/models/component';
 
 export interface HeaderTabProps extends StandardProps {
@@ -9,9 +9,10 @@ export interface HeaderTabProps extends StandardProps {
 	status?: ApplicationStatus;
 }
 
-export interface ApplicantCardProps extends StandardProps {
-	applicantId?: number;
-}
+export interface ApplicantCardProps extends StandardProps, ApplicantsShortInfo {}
+
+export interface ApplicationContainerProps extends StandardProps, ApplicantsByJob {}
+
 export interface AvatarProps extends StandardProps {
 	width?: number;
 	height?: number;

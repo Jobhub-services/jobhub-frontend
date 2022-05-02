@@ -1,9 +1,8 @@
 import { FlexBox, Button } from 'staak-ui';
 import { TextAreaField, TagPickerField, TagInputField } from '@/components/common';
 import { useAppSelector } from '@/utils/appHooks';
-import { StyledGap } from '../newjob.styles';
 import Questions from './Questions';
-import { JobArrayIndex, JobArrayStringIndex, JobStringIndex } from '@/types/jobs';
+import { JobArrayIndex, JobArrayStringIndex, JobStringIndex } from '@/types/jobs.type';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { useEffect } from 'react';
 import { metadataActions } from '@/modules/actions/metadata.actions';
@@ -45,11 +44,11 @@ const QualificationsInfo = (props: any) => {
 			<FlexBox flexDirection="column" align="flex-start">
 				<div style={{ width: '95%' }}>
 					<h3>Experience details</h3>
-					<StyledGap justify="flex-start" align="flex-start">
+					<FlexBox gap={15} className="mt-10" justify="flex-start" align="flex-start">
 						<TagInputField name="education" title="Education" values={data.education} onChange={handleInputTag} />
 						<TagInputField name="certification" title="Certification" values={data.certification} onChange={handleInputTag} />
-					</StyledGap>
-					<StyledGap align="flex-start" justify="flex-start">
+					</FlexBox>
+					<FlexBox gap={15} className="mt-10" align="flex-start" justify="flex-start">
 						<TagPickerField name="skills" title="Skills" values={data.skills} onChange={handleTagPicker}>
 							{skills_list?.map((elem, idx) => {
 								return (
@@ -59,7 +58,7 @@ const QualificationsInfo = (props: any) => {
 								);
 							})}
 						</TagPickerField>
-					</StyledGap>
+					</FlexBox>
 					<TextAreaField
 						className="mt-10"
 						placeholder="Requirements"
@@ -73,12 +72,12 @@ const QualificationsInfo = (props: any) => {
 				</div>
 				<Questions />
 			</FlexBox>
-			<StyledGap align="flex-start" justify="flex-start">
+			<FlexBox gap={15} className="mt-10" align="flex-start" justify="flex-start">
 				<Button variant="outlined" onClick={handlePrevious}>
 					Back
 				</Button>
 				<Button onClick={handleNext}>Save & Continue</Button>
-			</StyledGap>
+			</FlexBox>
 		</>
 	);
 };
