@@ -1,6 +1,6 @@
 import dispatchToStore from '@/utils/store';
 import { storeActions } from '@/modules/store/company/applications.store';
-import { ApplicantsByJob, ApplicantsShortInfo, ApplicationStatus, FilterType, ApplicantAllInfo } from '@/types/applications.type';
+import { ApplicationStatus, FilterType, ApplicantAllInfo } from '@/types/applications.type';
 import { httpClient } from '@/config/httpClient/HttpClient';
 import { API_PATHS } from '@/constants/api.constants';
 import { AppByJobs, AppData } from '@/models/store/company/applications.interface';

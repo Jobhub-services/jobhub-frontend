@@ -1,5 +1,5 @@
 import { StandardProps } from '@/models/component/app.interface';
-import { AvatarProps } from '../common.interface';
+import { TalentContact, TalentShortInfo } from '@/types/talent.type';
 
 export interface EducationProps extends StandardProps {
 	title: string;
@@ -15,8 +15,11 @@ export interface CertificationProps extends StandardProps {
 	link?: string;
 }
 
-export interface CardProps extends StandardProps, AvatarProps {
-	location?: string;
-	skills?: string[];
-	description?: string;
+export interface ContactProps extends StandardProps, TalentContact {
+	address?: {
+		country: string;
+		city: string;
+	};
 }
+
+export interface CardProps extends StandardProps, TalentShortInfo {}

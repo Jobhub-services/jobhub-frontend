@@ -14,13 +14,11 @@ import Qualifications from './utils/Qualifcations';
 import { IconProps } from '@/models/component';
 import Location from './utils/Location';
 import Role from './utils/Role';
-import { useAppSelector } from '@/utils/appHooks';
 import Avatar from './AvatarList';
 import Women from '@/assets/icons/women.jpg';
 import Man from '@/assets/icons/man.jpg';
 import Jerome from '@/assets/icons/jerome.jpg';
-import { jobActions } from '@/modules/actions/company/job.actions';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const MainContainer = styled.div<any>`
 	position: fixed;
@@ -67,17 +65,14 @@ const SubTitle = styled.span`
 `;
 const JobDetails = () => {
 	const navigate = useNavigate();
-	const { showDetails } = useAppSelector((state) => state.job);
-	useEffect(() => {
-		jobActions.setShowJobDetails(true);
-	}, []);
+	const { pathname } = useLocation();
 	function onClose() {
-		jobActions.setShowJobDetails(false);
 		navigate('/jobs', { replace: true });
 	}
+
 	return (
-		<MainContainer showed={showDetails}>
-			<DetailContainer showed={showDetails}>
+		<MainContainer showed={pathname.includes('/jobs/details/')}>
+			<DetailContainer showed={pathname.includes('/jobs/details/')}>
 				<SubContainer>
 					<FlexBox justify="space-between" height="62px" style={{ padding: '5px 10px' }}>
 						<FlexBox gap={10}>

@@ -90,23 +90,25 @@ const ShowJobs = (props: any) => {
 				posted={new Date(2022, 3, 20)}
 			/>
 			{jobs.map((elem, idx) => {
-				<JobCard
-					key={idx}
-					jobId={elem.jobId}
-					status={elem.status}
-					title={elem.title}
-					category={elem.category}
-					description={elem.description}
-					job_type={elem.job_type}
-					duration={elem.duration}
-					posted={elem.posted}
-					start_salary={elem.start_salary}
-					end_salary={elem.end_salary}
-					currency={elem.currency}
-					work_location={elem.work_location}
-					work_remotly={elem.work_remotly}
-					applicants={elem.applicants}
-				/>;
+				return (
+					<JobCard
+						key={idx}
+						jobId={elem.jobId}
+						status={elem.status}
+						title={elem.title}
+						category={elem.category}
+						description={elem.description}
+						job_type={elem.job_type}
+						duration={elem.duration}
+						posted={elem.posted}
+						start_salary={elem.start_salary}
+						end_salary={elem.end_salary}
+						currency={elem.currency}
+						work_location={elem.work_location}
+						work_remotly={elem.work_remotly}
+						applicants={elem.applicants}
+					/>
+				);
 			})}
 		</SWrapper>
 	);

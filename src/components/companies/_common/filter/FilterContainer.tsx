@@ -40,7 +40,7 @@ const SFooter = styled(FlexBox)`
 	gap: 10px !important;
 `;
 const SBody = styled.div`
-	padding: 5px 15px;
+	padding: 5px 15px 15px 15px;
 	overflow-y: auto;
 	flex-grow: 1;
 `;

@@ -30,10 +30,3 @@ export interface WorkExperienceProps extends StandardProps {
 	description?: string;
 	link?: string;
 }
-
-export interface InterviewInfoProps extends StandardProps {
-	title?: string;
-	date?: string;
-	location?: string;
-	status?: InterviewStatus;
-}

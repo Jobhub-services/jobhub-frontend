@@ -31,7 +31,6 @@ export type JobInfo = {
 
 export interface IJobState {
 	filterClosed?: boolean;
-	showDetails?: boolean;
 	isLoading?: boolean;
 	createJob: JobInfo;
 	showJob: {

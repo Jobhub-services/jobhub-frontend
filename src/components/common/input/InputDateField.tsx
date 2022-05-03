@@ -18,6 +18,7 @@ const InputDateField = (props: InputDateProps) => {
 				timeFormat={props.timeFormat}
 				placeholder={props.placeholder}
 				showTime={props.showTime}
+				date={props.date}
 			/>
 		</div>
 	);

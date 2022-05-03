@@ -28,6 +28,7 @@ export interface InputDateProps extends StandardInputProps {
 	timeFormat?: string;
 	title: string;
 	showTime?: boolean;
+	date?: Date | null;
 	onChange?: (date: Date | null | [Date | null, Date | null]) => void;
 }
 export interface TagPickerProps extends StandardInputProps {

@@ -16,7 +16,6 @@ import { IJobState } from '@/models/store/company/job.interface';
 } */
 const initialState: IJobState = {
 	filterClosed: true,
-	showDetails: false,
 	isLoading: false,
 	createJob: {
 		title: '',
@@ -96,10 +95,6 @@ const reducerSlices = createSlice({
 		setIsLoading: (state, action) => {
 			const { isLoading } = action.payload;
 			state.isLoading = isLoading;
-		},
-		setShowJobDetails: (state, action) => {
-			const { showDetails } = action.payload;
-			state.showDetails = showDetails;
 		},
 		setShowJobs: (state, action) => {
 			state.showJob = action.payload;

@@ -49,9 +49,8 @@ const RedSpan = styled.span`
 `;
 const JobCard = (props: JobCardProps) => {
 	const navigate = useNavigate();
-	const { showDetails, jobDetails } = useAppSelector((state) => state.job);
+	const { jobDetails } = useAppSelector((state) => state.job);
 	function handleClick(event: any, jobId: number, value?: string) {
-		jobActions.setShowJobDetails(!showDetails);
 		if (jobDetails.jobId !== props.jobId) jobActions.getJobDetails(props.jobId);
 		navigate(`details/${jobId}`, { replace: true });
 	}

@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { FlexBox, IconButton, Headline, Button, TabPane } from 'staak-ui';
@@ -12,9 +11,9 @@ import ApplicationContact from './ApplicationContact';
 import ApplicantProfile from './ApplicantProfile';
 import ApplicationStatus from './ApplicationStatus';
 import { useAppSelector } from '@/utils/appHooks';
-import { applicationsActions } from '@/modules/actions/company/applications.actions';
-import { Outlet, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Avatar } from '@/components/companies/_common';
+import InterviewSchedule from '@/components/companies/applicants/details/interview/InterviewSchedule';
 
 const ScrollContainer = styled.div`
 	padding: 0 10px;
@@ -24,7 +23,7 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: ${(props) => (props.close ? '0' : '1400px')};
+	width: ${(props) => (props.showed ? '1400px' : '0')};
 	background: white;
 	box-shadow: 2px -5px 20px -15px ${colors.BLACK_7};
 	transition: width 0.3s;
@@ -100,24 +99,24 @@ const ApplicationDetails = () => {
 						<AppContact>
 							<FlexBox justify="space-between">
 								<Avatar
-									img={Jerome}
+									img={applicantDetails.img}
 									size={70}
-									name="Jerome Bell"
-									role="Fullstack developer"
+									name={applicantDetails.name}
+									role={applicantDetails.role}
 									color={colors.PURPLE_BASE}
-									experience="4 Years of experience"
+									experience={applicantDetails.experience_duration}
 								/>
 								<span style={{ display: 'block', fontSize: '13px', color: `${colors.PURPLE_BASE}`, cursor: 'pointer' }}>View Profile</span>
 							</FlexBox>
 							<div style={{ background: `${colors.PURPLE_1}`, padding: '5px 10px', borderRadius: '5px', marginTop: '15px' }}>
 								<FlexBox justify="space-between" style={{ fontSize: '12px', padding: '5px 0', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 									<span>Applied jobs</span>
-									<span style={{ color: `${colors.BLACK_4}` }}>22 March 2022</span>
+									<span style={{ color: `${colors.BLACK_4}` }}>{applicantDetails.job?.applied?.toLocaleString()}</span>
 								</FlexBox>
 								<div style={{ padding: '10px 0' }}>
 									<div>
-										<h3 style={{ fontSize: '13px', margin: '0' }}>Product Manager</h3>
-										<SSpan>Humain resource administration </SSpan>
+										<h3 style={{ fontSize: '13px', margin: '0' }}>{applicantDetails.job?.title}</h3>
+										<SSpan>{applicantDetails.job?.category}</SSpan>
 									</div>
 								</div>
 							</div>
@@ -143,10 +142,7 @@ const ApplicationDetails = () => {
 									</ScrollContainer>
 								</TabPane.Pane>
 								<TabPane.Pane name="interviewSchedule" title="Interview Schedule">
-									<div style={{ padding: '0 5px' }}>
-										<InterviewForm />
-										<Button className="mt-15">Save</Button>
-									</div>
+									<InterviewSchedule />
 								</TabPane.Pane>
 							</TabPane>
 						</AppDetails>

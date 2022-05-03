@@ -1,3 +1,5 @@
+import { InterviewInfo } from '@/types/interview.type';
+
 export type ApplicationStatus = 'declined' | 'hired' | 'process' | 'new' | 'interview';
 export type InterviewStatus = 'On Progress' | 'Finished' | 'Pending';
 
@@ -5,14 +7,7 @@ export type QuestionType = {
 	question?: string;
 	answer?: string;
 };
-export type InterviewType = {
-	title?: string;
-	period?: Date;
-	location?: string;
-	status?: InterviewStatus;
-	link?: string;
-	note?: string;
-};
+
 export type WorkExperienceType = {
 	title?: string;
 	job_type?: 'part_time' | 'full_time';
@@ -48,7 +43,7 @@ export type ApplicantAllInfo = ApplicantsShortInfo & {
 	notice_period?: string;
 	questions?: QuestionType[];
 	work_experience?: WorkExperienceType[];
-	interviews?: InterviewType[];
+	interviews?: InterviewInfo[];
 	job?: {
 		title?: string;
 		category?: string;

@@ -1,11 +1,10 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { FlexBox, Tag, Button } from 'staak-ui';
 import { LinkedinIcon, GithubIcon } from 'staak-ui';
 import { CalendarIcon, CVIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { ApplicantCardProps } from '@/models/component/companies/applications/applications.interface';
-import { useLocation, useNavigate, useSearchParams, createSearchParams, useParams } from 'react-router-dom';
-import { useAppSelector } from '@/utils/appHooks';
+import { useSearchParams, useParams } from 'react-router-dom';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { Avatar } from '@/components/companies/_common';
 import { ApplicationStatus } from '@/types/applications.type';
@@ -76,19 +75,19 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 				<FlexBox justify="flex-start" className="mt-15" gap={10}>
 					<SButton background={colors.BLUE_CLEAR_5} color={colors.BLUE_BASE}>
 						<LinkedinIcon width="20px" height="20px" color={colors.BLUE_BASE} />
-						<a href={props.linkedIn} target="_blank">
+						<a href={props.linkedIn} target="_blank" rel="noreferrer">
 							LinkedIn
 						</a>
 					</SButton>
 					<SButton background={colors.PURPLE_1} color={colors.PURPLE_BASE}>
 						<CVIcon width="20px" height="20px" color={colors.PURPLE_BASE} />
-						<a href={props.cv} target="_blank">
+						<a href={props.cv} target="_blank" rel="noreferrer">
 							CV (.pdf)
 						</a>
 					</SButton>
 					<SButton background={colors.BLACK_13}>
 						<GithubIcon />
-						<a href={props.github} target="_blank">
+						<a href={props.github} target="_blank" rel="noreferrer">
 							Git
 						</a>
 					</SButton>

@@ -4,4 +4,5 @@ export const API_PATHS = {
 	APPLICANTS_SERVICE: `/applicants`,
 	METADATA_SERVICE: `/common`,
 	INTERVIEW_SERVICE: `/interview`,
+	TALENT_SERVICE: '/talent',
 };

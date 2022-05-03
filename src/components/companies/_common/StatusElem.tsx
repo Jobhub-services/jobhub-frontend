@@ -14,9 +14,9 @@ const Status = styled.span<StatusElemProps>`
 	font-weight: 500;
 	margin-left: 10px;
 `;
-const StatusElem = ({ title, status, style }: StatusElemProps) => {
+const StatusElem = ({ title, status, style, className }: StatusElemProps) => {
 	return (
-		<div style={{ ...style }} className="mt-10">
+		<div style={{ ...style }} className={` ${className}`}>
 			<Circle status={status} />
 			<Status status={status}>{title}</Status>
 		</div>

@@ -7,6 +7,7 @@ import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { userActions } from '@/modules/actions/user.actions';
 import { useAppSelector } from '@/utils/appHooks';
+import PrivateRoutes from '@/routes/PrivateRoutes';
 
 const StyledPublicView = styled.div`
 	position: fixed;
@@ -45,7 +46,7 @@ const MasterLayout: FC = () => {
 				<MainContent className="staak_scrollbar">
 					<HeaderBar />
 					<MainContainer>
-						<Outlet />
+						<PrivateRoutes />
 					</MainContainer>
 				</MainContent>
 			</StyledFlexBox>

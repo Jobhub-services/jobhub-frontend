@@ -57,7 +57,7 @@ const DetailedInfo = (props: any) => {
 						<InputField name="end_salary" placeholder="High end" value={data.end_salary} onChange={handleInput}>
 							To
 						</InputField>
-						<InputPickerField name="currency" title="Currency" onChange={handleInputPicker} value={data.currency}>
+						<InputPickerField placeholder="Currency" name="currency" title="Currency" onChange={handleInputPicker} value={data.currency}>
 							{currencies?.map((elem, idx) => {
 								return (
 									<InputPickerField.Option key={idx} value={elem.value!}>

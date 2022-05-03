@@ -16,9 +16,6 @@ const jobDispatcher = {
 	setClosedFilter(closed: boolean) {
 		dispatchToStore(storeActions.closeFilter({ closed }));
 	},
-	setShowJobDetails(showDetails: boolean) {
-		dispatchToStore(storeActions.setShowJobDetails({ showDetails }));
-	},
 	setOrderBy(order: JobOrderType) {
 		dispatchToStore(storeActions.setOrderBy({ order }));
 	},
@@ -41,9 +38,6 @@ const jobDispatcher = {
 export const jobActions = {
 	async setClosedFilter(closed: boolean) {
 		jobDispatcher.setClosedFilter(closed);
-	},
-	async setShowJobDetails(showDetails: boolean) {
-		jobDispatcher.setShowJobDetails(showDetails);
 	},
 	async setJobOrder(order: JobOrderType) {
 		jobDispatcher.setOrderBy(order);

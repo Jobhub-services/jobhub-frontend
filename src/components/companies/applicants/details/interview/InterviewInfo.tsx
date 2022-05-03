@@ -4,7 +4,7 @@ import { Button, FlexBox, Tag } from 'staak-ui';
 import { ArrowDownIcon } from 'staak-ui';
 import InterviewForm from './InterviewForm';
 import { useState } from 'react';
-import { InterviewInfoProps } from '@/models/component/companies/applications/applications.interface';
+import { InterviewFormProps } from '@/models/component/companies/interview/interview.interface';
 import { InterviewStatus } from '@/types/applications.type';
 
 const StatusColor: { [key in InterviewStatus]: string } = {
@@ -16,8 +16,18 @@ const STd = styled.td`
 	border-bottom: 1px solid ${colors.BLACK_13};
 	padding: 10px 10px;
 `;
+const SA = styled.a`
+	color: ${colors.PURPLE_BASE};
+	font-size: 13px;
+	white-space: break-spaces;
+	word-break: break-all;
+	display: inline-block;
+	overflow: hidden;
+	height: 40px;
+`;
 const Container = styled.div<any>`
-	height: ${(props) => (props.expand ? '515px' : '0')};
+	padding: 5px 20px;
+	height: ${(props) => (props.expand ? '550px' : '0')};
 	transition-duration: 0.3s;
 	overflow: hidden;
 `;
@@ -30,14 +40,19 @@ const Arrow = styled.span<any>`
 	transition-duration: 0.3s;
 	transform: rotate(${(props) => (props.expand ? '180deg' : '0deg')});
 `;
-const InterviewInfo = (props: InterviewInfoProps) => {
+const InterviewInfo = (props: InterviewFormProps) => {
 	const [expand, setExpand] = useState(false);
 	return (
 		<>
 			<tr>
 				<STd>{props.title}</STd>
-				<STd>{props.date}</STd>
+				<STd>{`${props.startDate?.toString().split('GMT')[0]} -\n\r ${props.endDate?.toString().split('GMT')[0]}`}</STd>
 				<STd>{props.location}</STd>
+				<STd style={{ width: '30%' }}>
+					<SA href={props.link} target="_blank" rel="noreferrer">
+						{props.link}
+					</SA>
+				</STd>
 				<STd>
 					<FlexBox width="125px" gap={10} justify="space-between">
 						<Tag color={StatusColor[props.status!]}>{props.status}</Tag>
@@ -55,7 +70,7 @@ const InterviewInfo = (props: InterviewInfoProps) => {
 			<tr>
 				<td colSpan={4}>
 					<Container expand={expand}>
-						<InterviewForm />
+						<InterviewForm {...props} />
 						<FlexBox justify="start" gap={10} className="mt-15">
 							<Button>Save</Button>
 							<Button color="red">Remove</Button>

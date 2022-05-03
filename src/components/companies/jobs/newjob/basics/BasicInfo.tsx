@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { JobReviewProps } from '@/models/component';
 import { FlexBox, Button, Radio, DateRangePicker } from 'staak-ui';
 import { InputField, InputPickerField, TextAreaField } from '@/components/common';
