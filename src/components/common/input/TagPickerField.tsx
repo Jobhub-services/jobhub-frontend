@@ -28,6 +28,7 @@ const TagPickerField = (props: TagPickerProps) => {
 				required={props.required}
 				values={props.values}
 				onChange={props.onChange}
+				onDataChange={props.onDataChange}
 			>
 				{options}
 			</TagPicker>

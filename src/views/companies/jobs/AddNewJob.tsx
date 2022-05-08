@@ -22,7 +22,8 @@ const StepContainer = styled.div`
 	position: sticky;
 	height: max-content;
 	padding: 0px 50px;
-	top: calc(${HEADER_HIEGHT}px + 20px);
+	top: 20px;
+	//top: calc(${HEADER_HIEGHT}px + 20px);
 `;
 
 const StyledHeadline = styled(Headline)`

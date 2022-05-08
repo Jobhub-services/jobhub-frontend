@@ -29,8 +29,13 @@ const DetailedInfo = (props: any) => {
 	}
 	function handleInputPicker(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) {
 		let tmp = { ...data };
-		const idx = name as JobStringIndex;
-		tmp[idx] = label;
+		if (name === 'currency') {
+			const obj = { id: value, name: label };
+			tmp.currency = obj;
+		} else {
+			const idx = name as JobStringIndex;
+			tmp[idx] = label;
+		}
 		jobActions.saveJobData(tmp);
 	}
 	return (
@@ -57,11 +62,12 @@ const DetailedInfo = (props: any) => {
 						<InputField name="end_salary" placeholder="High end" value={data.end_salary} onChange={handleInput}>
 							To
 						</InputField>
-						<InputPickerField placeholder="Currency" name="currency" title="Currency" onChange={handleInputPicker} value={data.currency}>
-							{currencies?.map((elem, idx) => {
+						<InputPickerField placeholder="Currency" name="currency" title="Currency" onChange={handleInputPicker} value={data.currency?.name}>
+							{currencies?.content?.map((elem, idx) => {
+								const str = elem.name + ' (' + elem.code?.toUpperCase() + ')';
 								return (
-									<InputPickerField.Option key={idx} value={elem.value!}>
-										{elem.label} ({elem.value?.toUpperCase()})
+									<InputPickerField.Option key={idx} value={elem._id!}>
+										{str}
 									</InputPickerField.Option>
 								);
 							})}

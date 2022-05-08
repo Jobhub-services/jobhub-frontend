@@ -1,4 +1,4 @@
-import { InputDateProps } from '@/models/component';
+import { RangeDateProps } from '@/models/component';
 import styled from 'styled-components';
 import { DateRangePicker } from 'staak-ui';
 
@@ -7,7 +7,7 @@ const SLabel = styled.label`
 	margin: 5px 0px;
 `;
 
-const InputDateRangeField = (props: InputDateProps) => {
+const InputDateRangeField = (props: RangeDateProps) => {
 	return (
 		<div className={`w-100 ${props.className}`}>
 			<SLabel>{props.title}</SLabel>
@@ -18,6 +18,8 @@ const InputDateRangeField = (props: InputDateProps) => {
 				timeFormat={props.timeFormat}
 				placeholder={props.placeholder}
 				showTime={props.showTime}
+				endDate={props.endDate}
+				startDate={props.startDate}
 			/>
 		</div>
 	);

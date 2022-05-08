@@ -1,9 +1,7 @@
-import React, { FC, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { FlexBox } from 'staak-ui';
-import { HeaderBar, SideBar } from '@/components/companies';
-import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
+import { HeaderBar, SideBar } from '@/components/common';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { userActions } from '@/modules/actions/user.actions';
 import { useAppSelector } from '@/utils/appHooks';
@@ -19,7 +17,7 @@ const StyledPublicView = styled.div`
 `;
 const StyledFlexBox = styled(FlexBox)`
 	padding: 0px !important;
-	height: 100%;
+	height: calc(100% - ${HEADER_HIEGHT}px);
 	width: 100%;
 `;
 
@@ -31,7 +29,8 @@ const MainContent = styled.div`
 
 const MainContainer = styled.div`
 	width: 100%;
-	height: calc(100% - ${HEADER_HIEGHT}px);
+	/*height: calc(100% - ${HEADER_HIEGHT}px);*/
+	height: 100%;
 	/*padding: 10px 15px;*/
 `;
 const MasterLayout: FC = () => {
@@ -41,10 +40,10 @@ const MasterLayout: FC = () => {
 	}, []);
 	return (
 		<StyledPublicView>
+			<HeaderBar />
 			<StyledFlexBox align="flex-start" className="staak_scrollbar">
 				<SideBar />
 				<MainContent className="staak_scrollbar">
-					<HeaderBar />
 					<MainContainer>
 						<PrivateRoutes />
 					</MainContainer>

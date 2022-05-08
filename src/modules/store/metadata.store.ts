@@ -2,12 +2,28 @@ import { IAppState } from '@/models/store/metadata.interface';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IAppState = {
-	countries: [],
+	countries: {
+		count: 0,
+		size: 0,
+		content: [],
+	},
 	isLoading: false,
-	job_categories: [],
+	job_categories: {
+		count: 0,
+		size: 0,
+		content: [],
+	},
 	comapny_division: [],
-	currencies: [],
-	skills_list: [],
+	currencies: {
+		count: 0,
+		size: 0,
+		content: [],
+	},
+	skills_list: {
+		count: 0,
+		size: 0,
+		content: [],
+	},
 };
 
 const reducerSlice = createSlice({

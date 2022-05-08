@@ -18,7 +18,7 @@ const Compensation = (props: JobReviewProps) => {
 					<div style={{ marginLeft: '20px' }}>
 						<span style={{ color: `${colors.BLACK_2}` }}>{data.start_salary}</span>-
 						<span style={{ color: `${colors.BLACK_2}` }}>{data.end_salary}</span>
-						<span style={{ marginLeft: '10px', color: `${colors.BLACK_2}` }}>{data.currency}</span>
+						<span style={{ marginLeft: '10px', color: `${colors.BLACK_2}` }}>{data.currency?.name}</span>
 					</div>
 				</div>
 			)}

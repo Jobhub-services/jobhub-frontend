@@ -21,8 +21,25 @@ import SkillsIcon from './SkillsIcon';
 import ResponsibleIcon from './ResponsibleIcon';
 import RequirementIcon from './RequirementIcon';
 import MoneyIcon from './MoneyIcon';
+import NewCompanyIcon from './NewCompanyIcon';
+import CameraIcon from './CameraIcon';
+import LogOutIcon from './LogOutIcon';
+import EditIcon from './EditIcon';
+import TrashIcon from './TrashIcon';
+import LocationSolidIcon from './LocationSolidIcon';
+import PlusIcon from './PlusIcon';
+import TwitterLogo from './TwitterLogo';
+import WebsiteLogo from './WebsiteLogo';
 
 export {
+	WebsiteLogo,
+	TwitterLogo,
+	PlusIcon,
+	LocationSolidIcon,
+	TrashIcon,
+	EditIcon,
+	LogOutIcon,
+	CameraIcon,
 	MoneyIcon,
 	RequirementIcon,
 	ResponsibleIcon,
@@ -46,4 +63,5 @@ export {
 	WorldIcon,
 	ProfileIcon,
 	FilterIcon,
+	NewCompanyIcon,
 };

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { InputPicker, Input, CheckBox, Radio, FlexBox } from 'staak-ui';
+import React, { useEffect } from 'react';
+import { InputPicker, Input, CheckBox, FlexBox } from 'staak-ui';
 import { PlusIcon, TrashIcon } from 'staak-ui';
 import { SButton, SIcon } from '@/components/companies/jobs/newjob/newjob.styles';
 import { JobArrayIndex, JobBooleanIndex } from '@/types/jobs.type';
@@ -16,12 +16,12 @@ const JobLocation = (props: any) => {
 	}, []);
 	function addWorkLocation(event: React.SyntheticEvent) {
 		const tmp = { ...data };
-		tmp.work_location = [...data.work_location!, { country: '', city: '' }];
+		tmp.work_location = [...data.work_location!, { country: { id: '', name: '' }, city: '' }];
 		jobActions.saveJobData(tmp);
 	}
 	function addHireLocation(event: React.SyntheticEvent) {
 		const tmp = { ...data };
-		tmp.hire_location = [...data.hire_location!, { country: '', city: '' }];
+		tmp.hire_location = [...data.hire_location!, { country: { id: '', name: '' }, city: '' }];
 		jobActions.saveJobData(tmp);
 	}
 	function removeWorkLocation(event: React.SyntheticEvent, index: number) {
@@ -54,7 +54,7 @@ const JobLocation = (props: any) => {
 		const idx = name as JobArrayIndex.location;
 		let tmp = { ...data };
 		let tmpArray = [...tmp[idx]!];
-		tmpArray[index] = { country: label, city: tmpArray[index].city };
+		tmpArray[index] = { country: { id: value, name: label }, city: tmpArray[index].city };
 		tmp[idx] = tmpArray;
 		jobActions.saveJobData(tmp);
 	}
@@ -77,15 +77,16 @@ const JobLocation = (props: any) => {
 									name="work_location"
 									placeholder="Country"
 									title="Country"
-									value={elem.country}
+									value={elem.country?.name}
 									onChange={(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) =>
 										handleInputPicker(evet, value, label, name, idx)
 									}
 								>
-									{countries?.map((elem, idx) => {
+									{countries?.content?.map((elem, idx) => {
+										const str = elem.name + ' (' + elem.code?.toUpperCase() + ')';
 										return (
-											<InputPicker.Option key={idx} value={elem.code!}>
-												{elem.label}
+											<InputPicker.Option key={idx} value={elem._id!}>
+												{str}
 											</InputPicker.Option>
 										);
 									})}
@@ -122,15 +123,16 @@ const JobLocation = (props: any) => {
 									name="hire_location"
 									placeholder="Country"
 									title="Country"
-									value={elem.country}
+									value={elem.country?.name}
 									onChange={(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) =>
 										handleInputPicker(evet, value, label, name, idx)
 									}
 								>
-									{countries?.map((elem, idx) => {
+									{countries?.content?.map((elem, idx) => {
+										const str = elem.name + ' (' + elem.code?.toUpperCase() + ')';
 										return (
-											<InputPicker.Option key={idx} value={elem.code!}>
-												{elem.label}
+											<InputPicker.Option key={idx} value={elem._id!}>
+												{str}
 											</InputPicker.Option>
 										);
 									})}

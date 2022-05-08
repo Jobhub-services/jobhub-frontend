@@ -45,20 +45,27 @@ export const jobActions = {
 	async create(payload: JobInfo) {
 		jobDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.post(`${JOBS_SERVICE}/create`, payload);
+			let tmp: any = { ...payload };
+			tmp.category = payload.category?.id;
+			tmp.currency = payload.currency?.id;
+			tmp.work_location = payload.work_location?.map((elem) => {
+				return { country: elem.country?.id, city: elem.city };
+			});
+			tmp.hire_location = payload.hire_location?.map((elem) => {
+				return { country: elem.country?.id, city: elem.city };
+			});
+			tmp.skills = payload.skills?.map((elem) => elem.value);
+
+			const response = await httpClient.post(`${JOBS_SERVICE}/company`, tmp);
+			console.log('response is ', response);
 			const responseData = response.data;
 			if (responseData) {
-				jobDispatcher.createJob(responseData.data);
+				console.log('job created ', responseData);
+				jobDispatcher.createJob(responseData);
 			}
 		} catch (e: any) {
 			const response: AxiosResponse = e?.response;
-			if (response) {
-				const data = response.data;
-				let errors = {};
-				if (data.message) errors = { password: data.message };
-				else errors = transformErrors(data);
-				jobDispatcher.setJobErrors(errors);
-			}
+			console.log('failed ', e);
 		} finally {
 			jobDispatcher.setIsLoading(false);
 		}

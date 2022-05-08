@@ -28,7 +28,7 @@ const Location = (props: JobReviewProps) => {
 					<SWrapper>
 						{data.work_remotly && <SSpan>Remote</SSpan>}
 						{data.work_location?.map((elem, idx) => {
-							return <LocationElem country={elem.country} city={elem.city} key={idx} />;
+							return <LocationElem country={elem.country?.name} city={elem.city} key={idx} />;
 						})}
 					</SWrapper>
 				</div>
@@ -39,7 +39,7 @@ const Location = (props: JobReviewProps) => {
 					<SWrapper>
 						{data.hire_remotly && <SSpan>Remote</SSpan>}
 						{data.hire_location?.map((elem, idx) => {
-							return <LocationElem country={elem.country} city={elem.city} key={idx} />;
+							return <LocationElem country={elem.country?.name} city={elem.city} key={idx} />;
 						})}
 					</SWrapper>
 				</div>

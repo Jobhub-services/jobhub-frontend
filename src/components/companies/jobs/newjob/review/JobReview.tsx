@@ -39,7 +39,6 @@ const JobReview = (props: JobReviewProps) => {
 	function handlePrevious(event: React.SyntheticEvent) {
 		if (props.onPreviouse) props.onPreviouse(event);
 	}
-	console.log(data);
 	return (
 		<>
 			<FlexBox justify="flex-start" align="flex-start">

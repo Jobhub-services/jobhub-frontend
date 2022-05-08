@@ -1,8 +1,24 @@
 export interface IAppState {
 	isLoading?: boolean;
-	countries?: { id?: string; code?: string; label?: string }[];
-	job_categories?: { id?: string; value?: string; label?: string }[];
+	countries?: {
+		count?: number;
+		size?: number;
+		content?: { _id?: string; code?: string; name?: string }[];
+	};
+	job_categories?: {
+		content: { _id?: string; name?: string }[];
+		count?: number;
+		size?: number;
+	};
 	comapny_division?: { id?: string; value?: string; label?: string }[];
-	currencies?: { id?: string; value?: string; label?: string }[];
-	skills_list?: { id?: string; value?: string; label?: string }[];
+	currencies?: {
+		count?: number;
+		size?: number;
+		content?: { _id?: string; code?: string; name?: string }[];
+	};
+	skills_list?: {
+		count?: number;
+		size?: number;
+		content?: { _id?: string; name?: string }[];
+	};
 }

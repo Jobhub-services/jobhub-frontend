@@ -2,19 +2,28 @@ import { FlexBox, Button } from 'staak-ui';
 import { TextAreaField, TagPickerField, TagInputField } from '@/components/common';
 import { useAppSelector } from '@/utils/appHooks';
 import Questions from './Questions';
-import { JobArrayIndex, JobArrayStringIndex, JobStringIndex } from '@/types/jobs.type';
+import { JobArrayStringIndex, JobStringIndex } from '@/types/jobs.type';
 import { jobActions } from '@/modules/actions/company/job.actions';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 
 const QualificationsInfo = (props: any) => {
 	const { createJob } = useAppSelector((state) => state.job);
 	const { skills_list } = useAppSelector((state) => state.metadata);
+	const [localSkills, setLocalSkills] = useState<{ _id?: string | undefined; name?: string | undefined }[]>([]);
 	const data = createJob;
 
 	useEffect(() => {
 		metadataActions.getSkills();
 	}, []);
+	function handleChangeData(event: React.ChangeEvent<HTMLInputElement>) {
+		const { value } = event.target;
+		if (value === '') setLocalSkills([]);
+		else {
+			const tmp = skills_list?.content?.filter((elem) => elem.name?.toLocaleLowerCase().startsWith(value.toLocaleLowerCase()));
+			setLocalSkills(tmp!);
+		}
+	}
 	function handleNext(event: React.SyntheticEvent) {
 		if (props.onNext) props.onNext(event);
 	}
@@ -49,11 +58,11 @@ const QualificationsInfo = (props: any) => {
 						<TagInputField name="certification" title="Certification" values={data.certification} onChange={handleInputTag} />
 					</FlexBox>
 					<FlexBox gap={15} className="mt-10" align="flex-start" justify="flex-start">
-						<TagPickerField name="skills" title="Skills" values={data.skills} onChange={handleTagPicker}>
-							{skills_list?.map((elem, idx) => {
+						<TagPickerField name="skills" title="Skills" values={data.skills} onChange={handleTagPicker} onDataChange={handleChangeData}>
+							{localSkills?.map((elem, idx) => {
 								return (
-									<TagPickerField.Option key={idx} value={elem.value!}>
-										{elem.label}
+									<TagPickerField.Option key={idx} value={elem._id!}>
+										{elem.name}
 									</TagPickerField.Option>
 								);
 							})}

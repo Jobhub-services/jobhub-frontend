@@ -9,6 +9,8 @@ import TagInputField from '@/components/common/input/TagInputField';
 import InputDateField from '@/components/common/input/InputDateField';
 import InputDateRangeField from '@/components/common/input/InputDateRangeFiled';
 import PopModel from '@/components/common/PopModel';
+import SideBar from '@/components/common/sidebar/SideBar';
+import HeaderBar from '@/components/common/headerbar/HeaderBar';
 
 export {
 	Logo,
@@ -22,4 +24,6 @@ export {
 	InputDateRangeField,
 	PopModel,
 	TagInputField,
+	SideBar,
+	HeaderBar,
 };

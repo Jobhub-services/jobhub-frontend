@@ -38,6 +38,7 @@ const SPar = styled.p`
 	font-size: 13px;
 	height: 60px;
 	overflow: hidden;
+	color: ${colors.BLACK_8};
 `;
 const SGap = styled(FlexBox)`
 	gap: ${(props) => props.gap}px;

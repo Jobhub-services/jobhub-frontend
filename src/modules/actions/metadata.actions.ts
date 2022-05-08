@@ -32,7 +32,7 @@ export const metadataActions = {
 			metadataDispatcher.setIsLoading(true);
 			const response = await httpClient.get(`${METADATA_SERVICE}/countries`);
 			const responseData = response.data;
-			if (responseData.data) metadataDispatcher.getCountries(responseData.data);
+			if (responseData) metadataDispatcher.getCountries(responseData);
 		} catch {
 		} finally {
 			metadataDispatcher.setIsLoading(false);
@@ -41,9 +41,9 @@ export const metadataActions = {
 	async getJobCategories() {
 		metadataDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.get(`${METADATA_SERVICE}/categories`);
+			const response = await httpClient.get(`${METADATA_SERVICE}/job-categories`);
 			const responseData = response.data;
-			if (responseData.data) metadataDispatcher.getJobCategories(responseData.data);
+			if (responseData) metadataDispatcher.getJobCategories(responseData);
 		} catch (e: any) {
 		} finally {
 			metadataDispatcher.setIsLoading(false);
@@ -67,19 +67,22 @@ export const metadataActions = {
 		try {
 			const response = await httpClient.get(`${METADATA_SERVICE}/currencies`);
 			const responseData = response.data;
-			if (responseData.data) metadataDispatcher.getCurrency(responseData.data);
+			if (responseData) metadataDispatcher.getCurrency(responseData);
 		} catch (e: any) {
 		} finally {
 			metadataDispatcher.setIsLoading(false);
 		}
 	},
 
-	async getSkills() {
+	async getSkills(params?: { name: string }) {
 		metadataDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.get(`${METADATA_SERVICE}/skills`);
+			const param = {
+				params: params,
+			};
+			const response = await httpClient.get(`${METADATA_SERVICE}/skills`, param);
 			const responseData = response.data;
-			if (responseData.data) metadataDispatcher.getSkills(responseData.data);
+			if (responseData) metadataDispatcher.getSkills(responseData);
 		} catch (e: any) {
 		} finally {
 			metadataDispatcher.setIsLoading(false);

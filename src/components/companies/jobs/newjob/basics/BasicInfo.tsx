@@ -38,8 +38,13 @@ const BasicDetails = (props: JobReviewProps) => {
 	}
 	function handleInputPicker(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) {
 		let tmp = { ...data };
-		const idx = name as JobStringIndex;
-		tmp[idx] = label;
+		if (name === 'category') {
+			const obj = { id: value, name: label };
+			tmp.category = obj;
+		} else {
+			const idx = name as JobStringIndex;
+			tmp[idx] = label;
+		}
 		jobActions.saveJobData(tmp);
 	}
 	return (
@@ -89,11 +94,18 @@ const BasicDetails = (props: JobReviewProps) => {
 								);
 							})}
 						</InputPickerField>
-						<InputPickerField name="category" placeholder="Category" title="Category" value={data.category} onChange={handleInputPicker}>
-							{job_categories?.map((elem, idx) => {
+						<InputPickerField
+							className="mt-10"
+							name="category"
+							placeholder="Category"
+							title="Category"
+							value={data.category?.name}
+							onChange={handleInputPicker}
+						>
+							{job_categories?.content?.map((elem, idx) => {
 								return (
-									<InputPickerField.Option key={idx} value={elem.value!}>
-										{elem.label}
+									<InputPickerField.Option key={idx} value={elem._id!}>
+										{elem.name}
 									</InputPickerField.Option>
 								);
 							})}

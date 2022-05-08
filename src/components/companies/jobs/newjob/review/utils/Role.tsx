@@ -19,7 +19,7 @@ const Role = () => {
 			{data.category !== '' && (
 				<div className="mt-20">
 					<SSubTitle>Job category</SSubTitle>
-					<SSpan>{data.category}</SSpan>
+					<SSpan>{data.category?.name}</SSpan>
 				</div>
 			)}
 			{(data.job_type !== '' || data.duration !== '') && (

@@ -6,7 +6,7 @@ export type JobInfo = {
 	description?: string;
 	responsabilities?: string;
 	company_division?: string;
-	category?: string;
+	category?: { id?: string; name?: string };
 	job_type?: string;
 	duration?: string;
 	duration_range?: [Date | null, Date | null];
@@ -14,13 +14,13 @@ export type JobInfo = {
 	salary_type?: string;
 	start_salary?: string;
 	end_salary?: string;
-	currency?: string;
+	currency?: { id?: string; name?: string };
 	benefits?: string;
 	work_remotly?: boolean;
 	hire_remotly?: boolean;
 	visa_sponsorship?: boolean;
-	work_location?: { country?: string; city?: string }[];
-	hire_location?: { country?: string; city?: string }[];
+	work_location?: { country?: { id?: string; name?: string }; city?: string }[];
+	hire_location?: { country?: { id?: string; name?: string }; city?: string }[];
 
 	education?: string[];
 	certification?: string[];

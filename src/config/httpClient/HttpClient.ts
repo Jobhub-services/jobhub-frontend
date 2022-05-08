@@ -14,7 +14,7 @@ export class HttpClient {
 		this._client = axios.create(config);
 		this._initAuthInterceptor();
 		this._initErrorInterceptor();
-		this._initResponseDurationInterceptor();
+		//this._initResponseDurationInterceptor();
 	}
 
 	get clientInstance() {

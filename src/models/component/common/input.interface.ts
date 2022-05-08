@@ -22,22 +22,30 @@ export interface InputPickerProps extends StandardInputProps {
 	error?: boolean;
 	onChange?: (event: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) => void;
 }
-export interface InputDateProps extends StandardInputProps {
+export interface DateProps extends StandardInputProps {
 	timeIntervals?: number;
 	dateFormat?: string;
 	timeFormat?: string;
 	title: string;
 	showTime?: boolean;
+}
+export interface InputDateProps extends DateProps {
 	date?: Date | null;
-	onChange?: (date: Date | null | [Date | null, Date | null]) => void;
+	onChange?: (date: Date | null) => void;
+}
+export interface RangeDateProps extends DateProps {
+	startDate?: Date | null;
+	endDate?: Date | null;
+	onChange?: (date: [Date | null, Date | null]) => void;
 }
 export interface TagPickerProps extends StandardInputProps {
 	children?: JSX.Element | JSX.Element[];
 	title: string;
 	message?: string;
 	error?: boolean;
-	values?: { value: string; label: string }[];
+	values?: { value?: string; label?: string }[];
 	onChange?: (event: React.ChangeEvent<HTMLInputElement> | React.MouseEvent, value: { value: string; label: string }[], name?: string) => void;
+	onDataChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 export interface TagInputProps extends StandardInputProps {
 	title: string;

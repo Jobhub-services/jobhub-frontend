@@ -1,0 +1,39 @@
+import { IconDropDown, AvatarDropDown } from '@/components/common/dropdown';
+import { FlexBox, Button, PlusIcon, SearchInput } from 'staak-ui';
+import { useNavigate } from 'react-router-dom';
+import StaakLogo from '@/assets/theme/StaakLogo';
+
+const CompanyHeader = () => {
+	const navigate = useNavigate();
+	return (
+		<>
+			<FlexBox justify="start" gap={50}>
+				<StaakLogo
+					style={
+						{
+							/*paddingLeft: '15px' ,margin: '20px 0 15px 0' */
+						}
+					}
+					size={150}
+				/>
+				<SearchInput placeholder="Search Talents" width="350px" />
+			</FlexBox>
+			<FlexBox justify="space-between" gap={35}>
+				<Button
+					startIcon={<PlusIcon />}
+					onClick={(event: React.SyntheticEvent) => {
+						navigate('jobs/new', { replace: true });
+					}}
+				>
+					Create New Job
+				</Button>
+				<FlexBox justify="space-between" gap={20}>
+					<IconDropDown />
+					<AvatarDropDown />
+				</FlexBox>
+			</FlexBox>
+		</>
+	);
+};
+
+export default CompanyHeader;
