@@ -1,3 +1,4 @@
+import { transformErrorsToArray } from './../../../utils/validations';
 import dispatchToStore from '@/utils/store';
 import { AxiosResponse } from 'axios';
 import { storeActions } from '@/modules/store/company/job.store';
@@ -31,7 +32,7 @@ const jobDispatcher = {
 	getJobDetails(data: JobDetails) {
 		dispatchToStore(storeActions.setJobDetails(data));
 	},
-	setJobErrors(errors: { [key: string]: string }) {
+	setJobErrors(errors: any) {
 		dispatchToStore(storeActions.setJobErrors(errors));
 	},
 };
@@ -55,9 +56,8 @@ export const jobActions = {
 				return { country: elem.country?.id, city: elem.city };
 			});
 			tmp.skills = payload.skills?.map((elem) => elem.value);
-
+			tmp.duration_range = [payload.duration_range![0]?.toString(), payload.duration_range![1]?.toString()];
 			const response = await httpClient.post(`${JOBS_SERVICE}/company`, tmp);
-			console.log('response is ', response);
 			const responseData = response.data;
 			if (responseData) {
 				console.log('job created ', responseData);
@@ -65,7 +65,10 @@ export const jobActions = {
 			}
 		} catch (e: any) {
 			const response: AxiosResponse = e?.response;
-			console.log('failed ', e);
+			const data = response.data;
+			const errors = transformErrorsToArray(data);
+			console.log(data, errors);
+			jobDispatcher.setJobErrors(errors);
 		} finally {
 			jobDispatcher.setIsLoading(false);
 		}

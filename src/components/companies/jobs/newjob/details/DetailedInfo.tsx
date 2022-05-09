@@ -45,13 +45,13 @@ const DetailedInfo = (props: any) => {
 					<h3>Compensation</h3>
 					<div>Salary Type</div>
 					<FlexBox gap={15} className="mt-10" justify="flex-start">
-						<Radio name="salary_type" value="hourly" checked={data.salary_type === 'hourly'} onChange={handleInput}>
+						<Radio name="salary_type" value="Hourly" checked={data.salary_type === 'Hourly'} onChange={handleInput}>
 							Hourly
 						</Radio>
-						<Radio name="salary_type" value="monthly" checked={data.salary_type === 'monthly'} onChange={handleInput}>
+						<Radio name="salary_type" value="Monthly" checked={data.salary_type === 'Monthly'} onChange={handleInput}>
 							Monthly
 						</Radio>
-						<Radio name="salary_type" value="annually" checked={data.salary_type === 'annually'} onChange={handleInput}>
+						<Radio name="salary_type" value="Annually" checked={data.salary_type === 'Annually'} onChange={handleInput}>
 							Annually
 						</Radio>
 					</FlexBox>

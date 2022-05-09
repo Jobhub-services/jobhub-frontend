@@ -77,7 +77,7 @@ const initialState: IJobState = {
 	filters: {},
 	jobsOrderedBy: 'newest',
 	errors: {
-		job: {},
+		job: [],
 		currencies: {},
 		categories: {},
 		division: {},
@@ -115,7 +115,7 @@ const reducerSlices = createSlice({
 			state.jobsOrderedBy = order;
 		},
 		setJobErrors: (state, action) => {
-			state.errors = action.payload;
+			state.errors.job = action.payload;
 		},
 	},
 });

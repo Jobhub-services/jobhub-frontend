@@ -10,7 +10,7 @@ import { IconProps } from '@/models/component';
 const TagWrapper = styled(FlexBox)`
 	justify-content: flex-start !important;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 10px !important;
 	margin-left: 20px;
 `;
 const Qualifications = (props: JobReviewProps) => {

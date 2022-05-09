@@ -5,3 +5,12 @@ export const transformErrors = (errors: any) => {
 	}
 	return transformedErrors;
 };
+
+export const transformErrorsToArray = (errors: any) => {
+	const transformedErrors: { key: string; value: string }[] = [];
+	for (const error in errors) {
+		const tmp = { key: error, value: errors[error].join('<br/>') };
+		transformedErrors.push(tmp);
+	}
+	return transformedErrors;
+};

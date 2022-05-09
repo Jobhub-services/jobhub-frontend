@@ -46,8 +46,8 @@ export interface IJobState {
 		};
 	};
 	jobsOrderedBy?: JobOrderType;
-	errors?: {
-		job?: { [key: string]: string };
+	errors: {
+		job?: { key: string; value: string }[];
 		categories?: { [key: string]: string };
 		currencies?: { [key: string]: string };
 		division?: { [key: string]: string };

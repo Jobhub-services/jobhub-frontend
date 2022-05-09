@@ -14,7 +14,7 @@ export class HttpClient {
 		this._client = axios.create(config);
 		this._initAuthInterceptor();
 		this._initErrorInterceptor();
-		//this._initResponseDurationInterceptor();
+		this._initResponseDurationInterceptor();
 	}
 
 	get clientInstance() {
@@ -112,6 +112,7 @@ export class HttpClient {
 					window.location.reload();
 				}
 			}
+			return Promise.reject(error);
 		};
 
 		this._client.interceptors.response.use(responseInterceptor, errorInterceptor);
