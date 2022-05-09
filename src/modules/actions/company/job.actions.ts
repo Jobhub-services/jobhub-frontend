@@ -57,15 +57,14 @@ export const jobActions = {
 			tmp.skills = payload.skills?.map((elem) => elem.value);
 
 			const response = await httpClient.post(`${JOBS_SERVICE}/company`, tmp);
-			console.log('response is ', response);
 			const responseData = response.data;
 			if (responseData) {
 				console.log('job created ', responseData);
 				jobDispatcher.createJob(responseData);
 			}
 		} catch (e: any) {
-			const response: AxiosResponse = e?.response;
-			console.log('failed ', e);
+			const data = e?.data;
+			console.log('failed ', data);
 		} finally {
 			jobDispatcher.setIsLoading(false);
 		}
