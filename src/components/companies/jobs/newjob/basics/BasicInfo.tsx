@@ -116,26 +116,26 @@ const BasicDetails = (props: JobReviewProps) => {
 						<div>
 							<label>Type</label>
 							<FlexBox className="mt-10" gap={15} justify="flex-start">
-								<Radio name="job_type" value="full_time" checked={data.job_type === 'full_time'} onChange={handleInput}>
-									Full-Time
+								<Radio name="job_type" value="Full time" checked={data.job_type === 'Full time'} onChange={handleInput}>
+									Full time
 								</Radio>
-								<Radio name="job_type" value="part_time" checked={data.job_type === 'part_time'} onChange={handleInput}>
-									Part-Time
+								<Radio name="job_type" value="Part time" checked={data.job_type === 'Part time'} onChange={handleInput}>
+									Part-time
 								</Radio>
 							</FlexBox>
 						</div>
 						<div className="mt-15">
 							<label>Duration</label>
 							<FlexBox className="mt-10" gap={15} justify="flex-start">
-								<Radio name="duration" value="permanent" checked={data.duration === 'permanent'} onChange={handleInput}>
+								<Radio name="duration" value="Permanent" checked={data.duration === 'Permanent'} onChange={handleInput}>
 									Permanent
 								</Radio>
-								<Radio name="duration" value="temporary" checked={data.duration === 'temporary'} onChange={handleInput}>
+								<Radio name="duration" value="Temporary" checked={data.duration === 'Temporary'} onChange={handleInput}>
 									Temporary/Seasonal
 								</Radio>
 							</FlexBox>
 						</div>
-						{data.duration === 'temporary' && (
+						{data.duration === 'Temporary' && (
 							<div className="mt-15">
 								<DateRangePicker
 									placeholder="Start date - End Date"

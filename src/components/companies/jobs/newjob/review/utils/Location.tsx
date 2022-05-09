@@ -9,7 +9,7 @@ import { colors } from '@/assets/theme';
 const SWrapper = styled(FlexBox)`
 	justify-content: flex-start !important;
 	flex-wrap: wrap;
-	gap: 10px;
+	gap: 10px !important;
 `;
 const Location = (props: JobReviewProps) => {
 	const { createJob } = useAppSelector((state) => state.job);

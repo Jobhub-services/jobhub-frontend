@@ -112,7 +112,7 @@ export class HttpClient {
 					window.location.reload();
 				}
 			}
-			return Promise.reject(response);
+			return Promise.reject(error);
 		};
 
 		this._client.interceptors.response.use(responseInterceptor, errorInterceptor);

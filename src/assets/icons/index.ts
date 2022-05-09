@@ -30,8 +30,10 @@ import LocationSolidIcon from './LocationSolidIcon';
 import PlusIcon from './PlusIcon';
 import TwitterLogo from './TwitterLogo';
 import WebsiteLogo from './WebsiteLogo';
+import ErrorIcon from './ErrorIcon';
 
 export {
+	ErrorIcon,
 	WebsiteLogo,
 	TwitterLogo,
 	PlusIcon,
