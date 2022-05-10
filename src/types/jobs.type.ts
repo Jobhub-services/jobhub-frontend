@@ -28,17 +28,20 @@ export type JobDateIndex = 'duration_range';
 export type JobOrderType = 'newest' | 'oldest' | 'relevant';
 
 export type ShowJobInfo = {
-	jobId: number;
+	_id: string;
 	title?: string;
 	category?: string;
 	description?: string;
 	status?: StatusType;
-	job_type?: 'Full-time' | 'Part-time';
+	job_type?: 'Full time' | 'Part time';
 	duration?: 'Permanent' | 'Temporary';
 	start_salary?: string;
 	end_salary?: string;
-	currency?: string;
-	posted?: Date | null;
+	currency?: {
+		code: string;
+		name: string;
+	};
+	createdAt?: Date | null;
 	work_location?: { country: string; city: string };
 	work_remotly?: boolean;
 	applicants?: string[]; // list of image ulr path
@@ -55,5 +58,6 @@ export type JobDetails = ShowJobInfo & {
 	certification?: string[];
 	skills?: { value: string; label: string }[];
 	requirements?: string;
+	benefits?: string;
 	questions?: string[];
 };

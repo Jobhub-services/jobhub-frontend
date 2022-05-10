@@ -1,22 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IJobState } from '@/models/store/company/job.interface';
-/*{
-	jobId: 0,
-	title: '',
-	category: '',
-	description: '',
-	status: 'ready',
-	job_type: 'Full-time',
-	duration: 'Permanent',
-	start_salary: '',
-	end_salary: '',
-	posted: null,
-	hire_location: [],
-	applicants: [],
-} */
-const initialState: IJobState = {
+
+export const initialState: IJobState = {
 	filterClosed: true,
 	isLoading: false,
+	jobCreated: false,
 	createJob: {
 		title: '',
 		description: '',
@@ -43,22 +31,22 @@ const initialState: IJobState = {
 		questions: [''],
 	},
 	showJob: {
-		jobs: [],
-		total: 0,
+		content: [],
+		count: 0,
 		pages: 0,
-		currentPage: 0,
+		size: 0,
 	},
 	jobDetails: {
-		jobId: 0,
+		_id: '',
 		title: '',
 		category: '',
 		description: '',
 		status: 'ready',
-		job_type: 'Full-time',
+		job_type: 'Full time',
 		duration: 'Permanent',
 		start_salary: '',
 		end_salary: '',
-		posted: null,
+		createdAt: null,
 		hire_location: [],
 		applicants: [],
 		responsabilities: '',
@@ -72,6 +60,7 @@ const initialState: IJobState = {
 		certification: [],
 		skills: [],
 		requirements: '',
+		benefits: '',
 		questions: [],
 	},
 	filters: {},
@@ -96,11 +85,15 @@ const reducerSlices = createSlice({
 			const { isLoading } = action.payload;
 			state.isLoading = isLoading;
 		},
+		setJobCreated: (state, action) => {
+			const { created } = action.payload;
+			state.jobCreated = created;
+		},
 		setShowJobs: (state, action) => {
 			state.showJob = action.payload;
 		},
 		setJobDetails: (state, action) => {
-			state.showJob = action.payload;
+			state.jobDetails = action.payload;
 		},
 		saveJobData: (state, action) => {
 			state.createJob = action.payload;

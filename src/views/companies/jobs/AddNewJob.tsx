@@ -1,7 +1,6 @@
-import { Component, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Headline } from 'staak-ui';
-import { AddNewJobProps, IAddNewJobState } from '@/models/component';
 import { StepProgress } from '@/components/companies/_common/wizard';
 import BasicDetails from '@/components/companies/jobs/newjob/basics/BasicInfo';
 import AdditionalInfo from '@/components/companies/jobs/newjob/details/DetailedInfo';
@@ -10,9 +9,9 @@ import JobReview from '@/components/companies/jobs/newjob/review/JobReview';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 import { HEADER_HIEGHT } from '@/constants/app.constants';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
-import { getState } from '@/utils/store';
 import { useAppSelector } from '@/utils/appHooks';
 import Alert from './Alert';
+import { jobDispatcher } from '@/modules/actions/company/job.actions';
 
 /* component style */
 const ErrorContainer = styled.div`
@@ -50,10 +49,23 @@ const SContainer = styled.div`
 /* component class */
 //IAddNewJobState
 const AddNewJob = () => {
-	const { isLoading, errors } = useAppSelector((state) => state.job);
+	const { isLoading, errors, jobCreated } = useAppSelector((state) => state.job);
 	const [currentStep, setCurrentStep] = useState(0);
 	const [validSteps, setvalidSteps] = useState([false, false, false, false]);
-
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState<any>([]);
+	useEffect(() => {
+		setLoading(isLoading!);
+	}, [isLoading]);
+	useEffect(() => {
+		if (jobCreated) {
+			setCurrentStep(0);
+			setvalidSteps([false, false, false, false]);
+		}
+	}, [jobCreated]);
+	useEffect(() => {
+		setError(errors!);
+	}, [errors]);
 	function selectStep(event: React.SyntheticEvent, step: number) {
 		let udpate = true;
 		for (var i = 0; i < step; i++) udpate = udpate && validSteps![i];
@@ -108,16 +120,27 @@ const AddNewJob = () => {
 				</div>
 				<div style={{ padding: '0px 20px' }}>{step}</div>
 			</SContainer>
-			{isLoading && <LoadingScreen />}
+			{loading && <LoadingScreen />}
 			<ErrorContainer>
-				{errors.job!.length > 0 &&
-					errors.job?.map((elem, idx) => {
+				{error.job?.length > 0 &&
+					error.job?.map((elem: any, idx: number) => {
 						return (
-							<Alert displayErrors={isLoading} className="mt-15" key={idx}>
+							<Alert className="mt-15" key={idx}>
 								{elem.key} : {elem.value}
 							</Alert>
 						);
 					})}
+				{jobCreated && (
+					<Alert
+						className="mt-15"
+						color="green"
+						onCloseCallback={() => {
+							jobDispatcher.setJobCreated(false);
+						}}
+					>
+						Job created succefully
+					</Alert>
+				)}
 			</ErrorContainer>
 		</AddJobContainer>
 	);

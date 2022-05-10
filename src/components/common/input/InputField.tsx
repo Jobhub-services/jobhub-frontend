@@ -38,6 +38,7 @@ const InputField = (props: InputProps) => {
 				placeholder={props.placeholder}
 				required={props.required}
 				value={props.value}
+				onDataChange={props.onDataChange}
 			/>
 			{wrapper && wrapper.error && <ErrorSpan>{wrapper.message}</ErrorSpan>}
 		</div>

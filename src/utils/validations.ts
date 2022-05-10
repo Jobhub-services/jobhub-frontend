@@ -9,7 +9,9 @@ export const transformErrors = (errors: any) => {
 export const transformErrorsToArray = (errors: any) => {
 	const transformedErrors: { key: string; value: string }[] = [];
 	for (const error in errors) {
-		const tmp = { key: error, value: errors[error].join('<br/>') };
+		let tmp;
+		if (Array.isArray(errors[error])) tmp = { key: error, value: errors[error].join('<br/>') };
+		else tmp = { key: 'Unknown', value: errors[error] };
 		transformedErrors.push(tmp);
 	}
 	return transformedErrors;

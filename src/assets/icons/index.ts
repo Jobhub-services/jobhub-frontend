@@ -31,8 +31,10 @@ import PlusIcon from './PlusIcon';
 import TwitterLogo from './TwitterLogo';
 import WebsiteLogo from './WebsiteLogo';
 import ErrorIcon from './ErrorIcon';
+import SuccessIcon from './SuccessIcon';
 
 export {
+	SuccessIcon,
 	ErrorIcon,
 	WebsiteLogo,
 	TwitterLogo,

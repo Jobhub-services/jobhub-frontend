@@ -8,7 +8,7 @@ const DeveloperHeader = () => {
 	const { username } = useAppSelector(({ user }) => user.userInfo);
 	const navigate = useNavigate();
 	function handleItem(event?: React.SyntheticEvent, value?: string) {
-		if (value === 'profile') navigate(`${username}`);
+		if (value === 'profile') navigate(`profile/${username}`);
 	}
 	return (
 		<>

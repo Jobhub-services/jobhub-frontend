@@ -13,6 +13,7 @@ export interface InputProps extends StandardInputProps {
 	type?: 'text' | 'email' | 'password';
 	startIcon?: React.ReactNode;
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	onDataChange?: (event: React.FocusEvent<HTMLTextAreaElement>, value?: string, name?: string) => void;
 }
 
 export interface InputPickerProps extends StandardInputProps {
@@ -65,6 +66,7 @@ export interface TagPickerOptionProps extends StandardProps {
 export interface TextAreaProps extends StandardInputProps {
 	height?: string;
 	onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+	onDataChange?: (event: React.FocusEvent<HTMLTextAreaElement>, value?: string, name?: string) => void;
 }
 
 export interface CheckBoxProps extends StandardProps {

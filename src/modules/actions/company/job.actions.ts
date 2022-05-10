@@ -7,10 +7,11 @@ import { httpClient } from '@/config/httpClient/HttpClient';
 import { API_PATHS } from '@/constants/api.constants';
 import { transformErrors } from '@/utils/validations';
 import { JobDetails, JobOrderType, ShowJobInfo } from '@/types/jobs.type';
+import { initialState } from '@/modules/store/company/job.store';
 
 const { JOBS_SERVICE } = API_PATHS;
 
-const jobDispatcher = {
+export const jobDispatcher = {
 	setIsLoading(isLoading: boolean) {
 		dispatchToStore(storeActions.setIsLoading({ isLoading }));
 	},
@@ -25,6 +26,9 @@ const jobDispatcher = {
 	},
 	createJob(data: JobInfo) {
 		dispatchToStore(storeActions.createJob(data));
+	},
+	setJobCreated(created: boolean) {
+		dispatchToStore(storeActions.setJobCreated({ created }));
 	},
 	getJobs(data: ShowJobInfo) {
 		dispatchToStore(storeActions.setShowJobs(data));
@@ -45,6 +49,8 @@ export const jobActions = {
 	},
 	async create(payload: JobInfo) {
 		jobDispatcher.setIsLoading(true);
+		jobDispatcher.setJobErrors([]);
+		jobDispatcher.setJobCreated(false);
 		try {
 			let tmp: any = { ...payload };
 			tmp.category = payload.category?.id;
@@ -60,15 +66,16 @@ export const jobActions = {
 			const response = await httpClient.post(`${JOBS_SERVICE}/company`, tmp);
 			const responseData = response.data;
 			if (responseData) {
-				console.log('job created ', responseData);
-				jobDispatcher.createJob(responseData);
+				jobDispatcher.setJobCreated(true);
+				//jobDispatcher.createJob(initialState.createJob);
 			}
 		} catch (e: any) {
 			const response: AxiosResponse = e?.response;
-			const data = response.data;
-			const errors = transformErrorsToArray(data);
-			console.log(data, errors);
-			jobDispatcher.setJobErrors(errors);
+			if (response) {
+				const data = response.data;
+				const errors = transformErrorsToArray(data);
+				jobDispatcher.setJobErrors(errors);
+			}
 		} finally {
 			jobDispatcher.setIsLoading(false);
 		}
@@ -76,7 +83,7 @@ export const jobActions = {
 	async getJobs() {
 		jobDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.get(`${JOBS_SERVICE}/show`);
+			const response = await httpClient.get(`${JOBS_SERVICE}/company`);
 			const responseData = response.data;
 			if (responseData) {
 				jobDispatcher.getJobs(responseData);
@@ -94,13 +101,13 @@ export const jobActions = {
 			jobDispatcher.setIsLoading(false);
 		}
 	},
-	async getJobDetails(id: number) {
+	async getJobDetails(id: string) {
 		jobDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.get(`${JOBS_SERVICE}/show/details/${id}`);
+			const response = await httpClient.get(`${JOBS_SERVICE}/company/${id}`);
 			const responseData = response.data;
 			if (responseData) {
-				jobDispatcher.getJobDetails(responseData);
+				jobDispatcher.getJobDetails(responseData.content);
 			}
 		} catch (e: any) {
 			const response: AxiosResponse = e?.response;

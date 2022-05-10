@@ -37,6 +37,7 @@ const TextAreaField = (props: TextAreaProps) => {
 				placeholder={props.placeholder}
 				required={props.required}
 				value={props.value}
+				onDataChange={props.onDataChange}
 			/>
 			{wrapper && wrapper.error && <StyledSpan>{wrapper.message}</StyledSpan>}
 		</div>

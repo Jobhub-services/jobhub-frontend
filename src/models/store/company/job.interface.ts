@@ -33,11 +33,12 @@ export interface IJobState {
 	filterClosed?: boolean;
 	isLoading?: boolean;
 	createJob: JobInfo;
+	jobCreated: boolean;
 	showJob: {
-		jobs: ShowJobInfo[];
-		total?: number;
+		content: ShowJobInfo[];
+		count?: number;
 		pages?: number;
-		currentPage?: number;
+		size?: number;
 	};
 	jobDetails: JobDetails;
 	filters: {

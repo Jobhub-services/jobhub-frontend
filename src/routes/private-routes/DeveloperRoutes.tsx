@@ -7,7 +7,7 @@ const DeveloperRoutes: FC = () => {
 	return (
 		<Routes>
 			<Route path="/" element={<Overview />} />
-			<Route path=":username" element={<DeveloperProfile />} />
+			<Route path="profile/:username" element={<DeveloperProfile />} />
 			<Route path="*" element={<Navigate to="/" />} />
 		</Routes>
 	);

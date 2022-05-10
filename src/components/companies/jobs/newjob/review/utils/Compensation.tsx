@@ -5,29 +5,31 @@ import { SPre, STitle } from '../jobReview.styles';
 import { BenefitIcon, MoneyIcon } from '@/assets/icons';
 import TitleIcon from '@/components/companies/jobs/_common/TitleIcon';
 import { colors } from '@/assets/theme';
+import styled from 'styled-components';
 
+const SSpan = styled.span`
+	color: ${colors.BLACK_2};
+`;
 const Compensation = (props: JobReviewProps) => {
 	const { createJob } = useAppSelector((state) => state.job);
 	const data = createJob;
 	return (
 		<div>
 			<STitle>Compensation</STitle>
-			{data.end_salary !== '' && data.start_salary !== '' && (
-				<div>
-					<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
-					<div style={{ marginLeft: '20px' }}>
-						<span style={{ color: `${colors.BLACK_2}` }}>{data.start_salary}</span>-
-						<span style={{ color: `${colors.BLACK_2}` }}>{data.end_salary}</span>
-						<span style={{ marginLeft: '10px', color: `${colors.BLACK_2}` }}>{data.currency?.name}</span>
-					</div>
+			<div>
+				<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
+				<div style={{ marginLeft: '20px' }}>
+					<SSpan>{data.start_salary !== '' ? data.start_salary : 'N/A'}</SSpan>-
+					<SSpan>
+						{data.end_salary !== '' ? data.end_salary : 'N/A'} / {data.salary_type}
+					</SSpan>
+					<SSpan style={{ marginLeft: '10px' }}>{data.currency?.name}</SSpan>
 				</div>
-			)}
-			{data.benefits !== '' && (
-				<div className="mt-10">
-					<TitleIcon title="Benefits" icon={(props: IconProps) => <BenefitIcon {...props} />} />
-					<SPre>{data.benefits}</SPre>
-				</div>
-			)}
+			</div>
+			<div className="mt-10">
+				<TitleIcon title="Benefits" icon={(props: IconProps) => <BenefitIcon {...props} />} />
+				<SPre>{data.benefits !== '' ? data.benefits : 'N/A'}</SPre>
+			</div>
 		</div>
 	);
 };

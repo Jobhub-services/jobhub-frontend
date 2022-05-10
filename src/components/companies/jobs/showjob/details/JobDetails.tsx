@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { IconButton, Headline, HrDivider, Button } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
@@ -18,7 +17,12 @@ import Avatar from './AvatarList';
 import Women from '@/assets/icons/women.jpg';
 import Man from '@/assets/icons/man.jpg';
 import Jerome from '@/assets/icons/jerome.jpg';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useAppSelector } from '@/utils/appHooks';
+import { dateWithMonthName } from '@/utils/helpers';
+import { StatusTitle } from '@/constants/company/job.contants';
+import { useEffect } from 'react';
+import { jobActions } from '@/modules/actions/company/job.actions';
 
 const MainContainer = styled.div<any>`
 	position: fixed;
@@ -27,6 +31,14 @@ const MainContainer = styled.div<any>`
 	width: calc(${(props) => (props.showed ? `100% - ${ASIDE_WIDTH}px` : '0')});
 	height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
+`;
+const RedSpan = styled.span`
+	font-weight: 500;
+	color: ${colors.RED_CLEAR_1};
+`;
+const SMButton = styled.span`
+	color: ${colors.PURPLE_BASE};
+	cursor: pointer;
 `;
 const DetailContainer = styled.div<any>`
 	position: absolute;
@@ -64,12 +76,16 @@ const SubTitle = styled.span`
 	color: ${colors.BLACK_5};
 `;
 const JobDetails = () => {
+	const { id } = useParams();
+	const { jobDetails } = useAppSelector((state) => state.job);
 	const navigate = useNavigate();
 	const { pathname } = useLocation();
+	useEffect(() => {
+		if (jobDetails._id !== id) jobActions.getJobDetails(id!);
+	}, []);
 	function onClose() {
 		navigate('/jobs', { replace: true });
 	}
-
 	return (
 		<MainContainer showed={pathname.includes('/jobs/details/')}>
 			<DetailContainer showed={pathname.includes('/jobs/details/')}>
@@ -94,55 +110,69 @@ const JobDetails = () => {
 							<div>
 								<FlexBox justify="space-between">
 									<STitle>Applicants</STitle>
-									<span style={{ color: `${colors.PURPLE_BASE}`, cursor: 'pointer' }}>See All</span>
+									{jobDetails.applicants && jobDetails.applicants!.length > 0 && <SMButton>See All</SMButton>}
 								</FlexBox>
-								<Avatar totalAvatar={50} img={[`${Women}`, `${Man}`, `${Jerome}`, `${Women}`]} />
+								{jobDetails.applicants && jobDetails.applicants!.length > 0 ? (
+									<Avatar totalAvatar={50} img={[`${Women}`, `${Man}`, `${Jerome}`, `${Women}`]} />
+								) : (
+									<RedSpan>No Applicants Yet</RedSpan>
+								)}
 							</div>
 							<HrDivider color={colors.BLACK_12} top={15} />
-							<Role />
+							<Role
+								company_division={jobDetails.company_division}
+								_id={jobDetails._id}
+								category={jobDetails.category}
+								job_type={jobDetails.job_type}
+								duration={jobDetails.duration}
+								duration_range={jobDetails.duration_range}
+							/>
 							<HrDivider color={colors.BLACK_12} top={20} />
-							<Location />
+							<Location
+								_id={jobDetails._id}
+								work_location={jobDetails.work_location}
+								hire_location={jobDetails.hire_location}
+								visa_sponsorship={jobDetails.visa_sponsorship}
+							/>
 						</LeftContainer>
 						<RightContainer className="staak_scrollbar">
 							<div>
-								<STitle style={{ marginBottom: '5px' }}>Senior Frontend developer</STitle>
+								<STitle style={{ marginBottom: '5px' }}>{jobDetails.title}</STitle>
 								<FlexBox justify="start" gap={50}>
-									<StatusElem style={{ marginTop: '0' }} title="Active" status="ready" />
+									<StatusElem style={{ marginTop: '0' }} title={StatusTitle[jobDetails.status!]} status={jobDetails.status} />
 									<FlexBox gap={5}>
 										<SubTitle>Posted</SubTitle>
-										<SSpan>April 17. 2022</SSpan>
+										<SSpan>{dateWithMonthName(jobDetails.createdAt!)}</SSpan>
 									</FlexBox>
 								</FlexBox>
 							</div>
 							<div className="mt-10">
 								<div>
 									<TitleIcon title="Description" icon={(props: IconProps) => <DescriptionIcon {...props} />} />
-									<SP>
-										Our Experience team is looking for a passionate Frontend Engineer to join us in creating amazing experiences for our users. Our
-										team is one of the fastest growing within AgencyAnalytics! We work fast and iteratively to ensure our products are modern, easy to
-										use and ultimately make our users happy. More importantly, we're looking for people to build a team of collaborative, supportive
-										and high-skilled engineers that take our products to the next level
-									</SP>
+									<SP>{jobDetails.description}</SP>
 								</div>
 								<div>
 									<TitleIcon title="Responsabilities" icon={(props: IconProps) => <ResponsibleIcon {...props} />} />
-									<SP>
-										1- Develop and iterate on new features to deliver amazing experiences <br />
-										2- Continuously review, improve and adjust all aspects of the user experience
-										<br />
-										3- Promote a culture of collaboration, care and high quality
-										<br />
-										4- Regularly conduct peer reviews, code audits and promote good practices
-										<br />
-										5- Work with other teams to build a technical ecosystem that enables high velocity, low-waste development
-										<br />
-									</SP>
+									<SP>{jobDetails.responsabilities}</SP>
 								</div>
 							</div>
 							<HrDivider color={colors.BLACK_12} top={20} />
-							<Compensation />
+							<Compensation
+								_id={jobDetails._id}
+								end_salary={jobDetails.end_salary}
+								start_salary={jobDetails.start_salary}
+								currency={jobDetails.currency}
+								benefits={jobDetails.benefits}
+							/>
 							<HrDivider color={colors.BLACK_12} top={20} />
-							<Qualifications />
+							<Qualifications
+								_id={jobDetails._id}
+								education={jobDetails.education}
+								certification={jobDetails.certification}
+								skills={jobDetails.skills}
+								requirements={jobDetails.requirements}
+								questions={jobDetails.questions}
+							/>
 						</RightContainer>
 					</FlexBox>
 				</SubContainer>

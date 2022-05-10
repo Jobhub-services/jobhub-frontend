@@ -1,5 +1,5 @@
 import { JobReviewProps } from '@/models/component';
-import { FlexBox, Headline } from 'staak-ui';
+import { FlexBox } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
 import styled from 'styled-components';
 import { STitle, SSubTitle, SSpan } from '../jobReview.styles';
@@ -22,31 +22,35 @@ const Location = (props: JobReviewProps) => {
 	return (
 		<div>
 			<STitle>Location</STitle>
-			{isWorkLocation && (
-				<div className="mt-20">
-					<SSubTitle>Work location</SSubTitle>
+			<div className="mt-15">
+				<SSubTitle>Work location</SSubTitle>
+				{isWorkLocation ? (
 					<SWrapper>
 						{data.work_remotly && <SSpan>Remote</SSpan>}
 						{data.work_location?.map((elem, idx) => {
 							return <LocationElem country={elem.country?.name} city={elem.city} key={idx} />;
 						})}
 					</SWrapper>
-				</div>
-			)}
-			{isHireLocation && (
-				<div className="mt-20">
-					<SSubTitle>Hiring Location</SSubTitle>
+				) : (
+					'N/A'
+				)}
+			</div>
+			<div className="mt-15">
+				<SSubTitle>Hiring Location</SSubTitle>
+				{isHireLocation ? (
 					<SWrapper>
 						{data.hire_remotly && <SSpan>Remote</SSpan>}
 						{data.hire_location?.map((elem, idx) => {
 							return <LocationElem country={elem.country?.name} city={elem.city} key={idx} />;
 						})}
 					</SWrapper>
-				</div>
-			)}
+				) : (
+					'N/A'
+				)}
+			</div>
 			<div className="mt-20">
 				<SSubTitle>Visa sponsorship</SSubTitle>
-				<SSpan style={{ color: `${colors.GREEN_BASE}` }}>{data.visa_sponsorship ? 'Avavailable' : 'Unavavailable'}</SSpan>
+				<SSpan style={{ color: `${colors.GREEN_BASE}` }}>{data.visa_sponsorship ? 'Available' : 'Unavailable'}</SSpan>
 			</div>
 		</div>
 	);

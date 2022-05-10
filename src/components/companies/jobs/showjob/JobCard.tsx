@@ -1,8 +1,8 @@
-import { Button, FlexBox, IconButton, SimpleLink, Tag, DropDown } from 'staak-ui';
+import { Button, FlexBox, IconButton, Tag, DropDown } from 'staak-ui';
 import styled from 'styled-components';
 import { LocationIcon, CalendarIcon, MoneyIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
-import { UsersIcon, DotIcon } from '@/assets/icons';
+import { DotIcon } from '@/assets/icons';
 import { JobCardProps } from '@/models/component';
 import TextAvatar from './TextAvatar';
 import StatusElem from '@/components/companies/_common/StatusElem';
@@ -12,7 +12,6 @@ import AvatarList from './details/AvatarList';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
 
 const SContainer = styled.div`
 	background: white;
@@ -34,11 +33,17 @@ const SSpan = styled.span`
 	font-weight: 500;
 	color: ${colors.BLACK_9};
 `;
-const SPar = styled.p`
+const SPar = styled.pre`
+	display: -webkit-box;
+	margin: 5px 0;
+	font-family: inherit;
 	font-size: 13px;
-	height: 60px;
+	-webkit-line-clamp: 3;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
 	overflow: hidden;
 	color: ${colors.BLACK_8};
+	white-space: pre-line;
 `;
 const SGap = styled(FlexBox)`
 	gap: ${(props) => props.gap}px;
@@ -51,9 +56,9 @@ const RedSpan = styled.span`
 const JobCard = (props: JobCardProps) => {
 	const navigate = useNavigate();
 	const { jobDetails } = useAppSelector((state) => state.job);
-	function handleClick(event: any, jobId: number, value?: string) {
-		if (jobDetails.jobId !== props.jobId) jobActions.getJobDetails(props.jobId);
-		navigate(`details/${jobId}`, { replace: true });
+	function handleClick(event: any, value?: string) {
+		if (jobDetails._id !== props._id) jobActions.getJobDetails(props._id);
+		navigate(`details/${props._id}`, { replace: true });
 	}
 	function onClick() {}
 	return (
@@ -61,13 +66,13 @@ const JobCard = (props: JobCardProps) => {
 			<SBody>
 				<FlexBox justify="space-between" align="flex-start">
 					<TextAvatar title={props.title} subtitle={props.category} />
-					<DropDown listPosition="left">
+					<DropDown listPosition="left" onSelect={handleClick}>
 						<DropDown.Title>
 							<IconButton width="35px" height="20px">
 								<DotIcon color={colors.BLACK_4} />
 							</IconButton>
 						</DropDown.Title>
-						<DropDown.Item onSelect={(event: any, value: string) => handleClick(null, props.jobId, value)}>Show</DropDown.Item>
+						<DropDown.Item>Show</DropDown.Item>
 						<DropDown.Item>Edit</DropDown.Item>
 						<DropDown.Item>Delete</DropDown.Item>
 					</DropDown>
@@ -89,10 +94,10 @@ const JobCard = (props: JobCardProps) => {
 						<SGap gap={5} justify="flex-start">
 							<MoneyIcon width="18px" height="18px" color={colors.BLACK_9} />
 							<SSpan>
-								{props.start_salary ?? 'N/A'}-{props.end_salary ?? 'N/A'} {props.currency}
+								{props.start_salary ?? 'N/A'}-{props.end_salary ?? 'N/A'} {props.currency?.code}
 							</SSpan>
 						</SGap>
-						<SGap gap={5} align="flex-start" className="mt-5">
+						<SGap gap={5} justify="start" align="flex-start" className="mt-5">
 							<LocationIcon width="18px" height="18px" color={colors.BLACK_9} />
 							<SGap gap={10} justify="start">
 								{props.work_remotly && <LocationElem size={12} country={'Remote'} />}
@@ -102,13 +107,13 @@ const JobCard = (props: JobCardProps) => {
 					</div>
 					<SGap gap={5}>
 						<CalendarIcon width="18px" height="18px" color={colors.BLACK_9} />
-						<SSpan>{props.posted?.toDateString()}</SSpan>
+						<SSpan>{props.createdAt?.toDateString()}</SSpan>
 					</SGap>
 				</FlexBox>
 			</SBody>
 			<SFooter justify="space-between">
 				<div>
-					<Button variant="light" size="md" onClick={(event: any) => handleClick(event, props.jobId)}>
+					<Button variant="light" size="md" onClick={handleClick}>
 						Details
 					</Button>
 				</div>
