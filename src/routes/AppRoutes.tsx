@@ -6,7 +6,6 @@ import MasterLayout from '@/views/MasterLayout';
 
 const AppRoutes: FC = () => {
 	const isAuthorized = useAppSelector(({ auth }) => auth.accessToken, shallowEqual);
-	console.log(isAuthorized);
 	return isAuthorized ? <MasterLayout /> : <PublicRoutes />;
 };
 
