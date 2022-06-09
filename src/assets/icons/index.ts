@@ -32,8 +32,24 @@ import TwitterLogo from './TwitterLogo';
 import WebsiteLogo from './WebsiteLogo';
 import ErrorIcon from './ErrorIcon';
 import SuccessIcon from './SuccessIcon';
+import CertificationColorIcon from './CertificationColorIcon';
+import GraduationBigCapIcon from './GraduationBigCapIcon';
+import UnavailableIcon from './UnavailableIcon';
+import OpenToOffers from './OpenToOffers';
+import ClosedToOffers from './ClosedToOffers';
+import ReadyToOffers from './ReadyToOffers';
+import PdfIcon from './PdfIcon';
+import CompanyBuildingColorIcon from './CompanyBuildingColorIcon';
 
 export {
+	CompanyBuildingColorIcon,
+	PdfIcon,
+	ReadyToOffers,
+	OpenToOffers,
+	ClosedToOffers,
+	UnavailableIcon,
+	GraduationBigCapIcon,
+	CertificationColorIcon,
 	SuccessIcon,
 	ErrorIcon,
 	WebsiteLogo,

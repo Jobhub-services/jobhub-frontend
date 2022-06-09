@@ -24,6 +24,11 @@ const initialState: IAppState = {
 		size: 0,
 		content: [],
 	},
+	langs: {
+		count: 0,
+		size: 0,
+		content: [],
+	},
 };
 
 const reducerSlice = createSlice({
@@ -48,6 +53,9 @@ const reducerSlice = createSlice({
 		},
 		setCurrency: (state, action) => {
 			state.currencies = action.payload;
+		},
+		setLanguages: (state, action) => {
+			state.langs = action.payload;
 		},
 	},
 });

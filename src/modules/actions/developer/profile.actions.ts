@@ -1,6 +1,6 @@
 import { httpClient } from '@/config/httpClient/HttpClient';
 import { storeActions } from '@/modules/store/developer/profile.store';
-import { Languages, ProfileInfo } from '@/types/developer/profile.type';
+import { LanguagesType, ProfileInfo } from '@/types/developer/profile.type';
 import dispatchToStore from '@/utils/store';
 import { API_PATHS } from '@/constants/api.constants';
 
@@ -15,7 +15,7 @@ export const profileDispatcher = {
 	setAttribute(data: any, attr: string) {
 		dispatchToStore(storeActions.setAttribute({ data, attr }));
 	},
-	setLanguages(data: Languages[]) {
+	setLanguages(data: LanguagesType[]) {
 		dispatchToStore(storeActions.setLanguages(data));
 	},
 };
@@ -24,8 +24,12 @@ export const profileAction = {
 	async getProfile() {
 		profileDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.get(`${USERS_SERVICE}/profile/developer`);
-			if (response.data) profileDispatcher.setProfile(response.data);
+			const response = await httpClient.get(`${USERS_SERVICE}/developer/profile`);
+			if (response.data) {
+				const content = response.data.content;
+				console.log(content);
+				profileDispatcher.setProfile(content);
+			}
 		} catch (e: any) {
 		} finally {
 			profileDispatcher.setIsLoading(false);
@@ -34,20 +38,25 @@ export const profileAction = {
 	async setAttribute(data: any, attr: string) {
 		profileDispatcher.setIsLoading(true);
 		try {
-			//const response = await httpClient.put(`${USERS_SERVICE}/profile/developer`, data);
-			//if (response.data)
-			profileDispatcher.setAttribute(data, attr);
-		} catch (e: any) {
-		} finally {
-			profileDispatcher.setIsLoading(false);
-		}
-	},
-	async setLanguage(langs: Languages[], data: { idLanguage: string; idLevel: string }) {
-		profileDispatcher.setIsLoading(true);
-		try {
-			//const response = await httpClient.put(`${USERS_SERVICE}/profile/developer`, data);
-			//if (response.data)
-			profileDispatcher.setLanguages(langs);
+			if (attr === 'work_experience') {
+				data = data.map((elem: any) => {
+					const t = { ...elem };
+					if (elem.location && elem.location._id) t.location = elem.location._id;
+					return t;
+				});
+			}
+			let dataToSend = data;
+			if (attr !== 'resume')
+				dataToSend = {
+					[attr]: data,
+				};
+			const response = await httpClient.put(`${USERS_SERVICE}/developer/profile`, dataToSend);
+
+			if (response.data) {
+				const content = response.data?.content![attr];
+				console.log(response.data, content, dataToSend);
+				profileDispatcher.setAttribute(content, attr);
+			}
 		} catch (e: any) {
 		} finally {
 			profileDispatcher.setIsLoading(false);

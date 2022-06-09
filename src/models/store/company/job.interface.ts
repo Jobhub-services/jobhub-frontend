@@ -5,7 +5,7 @@ export type JobInfo = {
 	title?: string;
 	description?: string;
 	responsabilities?: string;
-	company_division?: string;
+	company_division?: string | null;
 	category?: { id?: string; name?: string };
 	job_type?: string;
 	duration?: string;

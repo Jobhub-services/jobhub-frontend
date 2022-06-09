@@ -2,6 +2,7 @@ import { httpClient } from '@/config/httpClient/HttpClient';
 import { storeActions } from '@/modules/store/metadata.store';
 import { API_PATHS } from '@/constants/api.constants';
 import dispatchToStore from '@/utils/store';
+import { TLanguages } from '@/types/metadata.type';
 
 const { METADATA_SERVICE } = API_PATHS;
 
@@ -23,6 +24,9 @@ const metadataDispatcher = {
 	},
 	getSkills(data: { value: string; label: string }[]) {
 		dispatchToStore(storeActions.setSkills(data));
+	},
+	setLanguages(data: { count: number; size: number; content: TLanguages[] }) {
+		dispatchToStore(storeActions.setLanguages(data));
 	},
 };
 
@@ -84,6 +88,17 @@ export const metadataActions = {
 			const responseData = response.data;
 			if (responseData) metadataDispatcher.getSkills(responseData);
 		} catch (e: any) {
+		} finally {
+			metadataDispatcher.setIsLoading(false);
+		}
+	},
+	async getLanguages() {
+		metadataDispatcher.setIsLoading(true);
+		try {
+			const response = await httpClient.get(`${METADATA_SERVICE}/languages`);
+			const responseData = response.data;
+			if (responseData) metadataDispatcher.setLanguages(responseData);
+		} catch {
 		} finally {
 			metadataDispatcher.setIsLoading(false);
 		}

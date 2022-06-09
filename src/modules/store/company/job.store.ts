@@ -9,7 +9,7 @@ export const initialState: IJobState = {
 		title: '',
 		description: '',
 		responsabilities: '',
-		company_division: '',
+		company_division: null,
 		category: { id: '', name: '' },
 		job_type: '',
 		duration: '',

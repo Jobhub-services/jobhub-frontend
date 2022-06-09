@@ -1,3 +1,5 @@
+import { TLanguages } from '@/types/metadata.type';
+
 export interface IAppState {
 	isLoading?: boolean;
 	countries?: {
@@ -20,5 +22,10 @@ export interface IAppState {
 		count?: number;
 		size?: number;
 		content?: { _id?: string; name?: string }[];
+	};
+	langs?: {
+		size?: number;
+		count?: number;
+		content?: TLanguages[];
 	};
 }

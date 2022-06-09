@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Overview } from '@/views/companies';
-import { DeveloperProfile } from '@/components/developers';
+import { DeveloperProfile } from '@/views/developers';
 
 const DeveloperRoutes: FC = () => {
 	return (

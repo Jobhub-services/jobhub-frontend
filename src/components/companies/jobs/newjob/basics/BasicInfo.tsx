@@ -83,7 +83,7 @@ const BasicDetails = (props: JobReviewProps) => {
 							name="company_division"
 							placeholder="Division"
 							title="Company division"
-							value={data.company_division}
+							value={data.company_division!}
 							onChange={handleInputPicker}
 						>
 							{comapny_division?.map((elem, idx) => {

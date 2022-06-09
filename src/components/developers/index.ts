@@ -1,3 +1,5 @@
-import DeveloperProfile from '@/components/developers/profile/DeveloperProfile';
+import ProfileOverview from '@/components/developers/profile/overview/ProfileOverview';
+import ProfileDetails from '@/components/developers/profile/details/ProfileDetails';
+import ProfilePreferences from '@/components/developers/profile/preferences/ProfilePreferences';
 
-export { DeveloperProfile };
+export { ProfileDetails, ProfileOverview, ProfilePreferences };

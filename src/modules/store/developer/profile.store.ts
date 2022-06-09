@@ -8,13 +8,10 @@ const initialState: IProfileState = {
 		languages: [],
 		skills: [],
 		role: {
-			experience: {
-				id: '',
-				label: '',
-			},
+			experience: '',
 			primary_role: {
-				id: '',
-				label: '',
+				_id: '',
+				name: '',
 			},
 			other_roles: [],
 		},
@@ -28,6 +25,24 @@ const initialState: IProfileState = {
 			twitter: '',
 		},
 		resume: 'https://www.google.com/map',
+		address: {
+			country: {
+				_id: null,
+				name: '',
+			},
+			city: '',
+		},
+		status: 'ready',
+		desired_location: [],
+		salary: '',
+		currency: {
+			_id: '',
+			code: '',
+			name: '',
+		},
+		wants: '',
+		job_type: '',
+		other_job_type: [],
 	},
 };
 

@@ -1,30 +1,34 @@
-export type Languages = {
-	idLanguage?: string;
-	language?: string;
+import { StatusType } from '@/types/common.type';
+import { TCurrency, TLanguages } from '@/types/metadata.type';
+
+export type LanguagesType = {
+	language?: TLanguages;
 	level?: string;
 };
 export type SkillType = {
-	id: string;
-	label: string;
+	_id: string;
+	name: string;
 };
 export type Role = {
-	id: string;
-	label: string;
+	_id: string;
+	name: string;
 };
 export type WorkExperienceType = {
+	_id?: string;
 	title?: string;
 	company_name?: string;
 	startDate?: Date | null;
 	endDate?: Date | null;
 	description?: string;
-	job_type?: 'Part-time' | 'Full-time';
+	job_type?: 'Part time' | 'Full time';
 	location?: {
-		id?: string;
-		label?: string;
+		_id?: string;
+		name?: string;
 	};
 };
 
 export type EducationType = {
+	_id?: string;
 	title?: string;
 	school?: string;
 	startDate?: Date | null;
@@ -32,6 +36,7 @@ export type EducationType = {
 };
 
 export type CertificationType = {
+	_id?: string;
 	certificationId?: string;
 	title?: string;
 	provider?: string;
@@ -40,7 +45,14 @@ export type CertificationType = {
 	expirationDate?: Date | null;
 	link?: string;
 };
-
+export type KeyValType = {
+	_id: string | null;
+	name: string;
+};
+export type AddressType = {
+	country?: KeyValType;
+	city?: string | null;
+};
 export type SocialProfileType = {
 	linkedin?: string;
 	git?: string;
@@ -49,16 +61,27 @@ export type SocialProfileType = {
 };
 export type ProfileInfo = {
 	summary?: string;
-	languages?: Languages[];
+	languages?: LanguagesType[];
 	skills?: SkillType[];
 	role?: {
 		primary_role?: Role;
-		experience?: Role;
+		experience?: string;
 		other_roles?: Role[];
 	};
 	work_experience?: WorkExperienceType[];
 	educations?: EducationType[];
 	certifications?: CertificationType[];
 	social_profile?: SocialProfileType;
-	resume?: string;
+	address?: AddressType;
+	status?: StatusType;
+	resume?: string | Blob;
+	desired_location?: {
+		_id?: string;
+		name?: string;
+	}[];
+	salary?: string;
+	currency?: TCurrency;
+	wants?: string;
+	job_type?: string;
+	other_job_type?: string[];
 };

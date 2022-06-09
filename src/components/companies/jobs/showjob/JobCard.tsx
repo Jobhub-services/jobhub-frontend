@@ -107,7 +107,7 @@ const JobCard = (props: JobCardProps) => {
 					</div>
 					<SGap gap={5}>
 						<CalendarIcon width="18px" height="18px" color={colors.BLACK_9} />
-						<SSpan>{props.createdAt?.toDateString()}</SSpan>
+						<SSpan>{new Date(props.createdAt!).toDateString()}</SSpan>
 					</SGap>
 				</FlexBox>
 			</SBody>

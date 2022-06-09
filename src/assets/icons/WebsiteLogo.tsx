@@ -5,12 +5,12 @@ const WebsiteLogo = ({ width, height, color }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<radialGradient cx="37.023" cy="32.89858" r="143.48025" gradientUnits="userSpaceOnUse" id="color-1">
-					<stop offset="0" stop-color="#6fcefc"></stop>
-					<stop offset="1" stop-color="#167cf7"></stop>
+					<stop offset="0" stopColor="#6fcefc"></stop>
+					<stop offset="1" stopColor="#167cf7"></stop>
 				</radialGradient>
 				<radialGradient cx="40.36625" cy="30.38667" r="143.88875" gradientUnits="userSpaceOnUse" id="color-2">
-					<stop offset="0.001" stop-color="#54c0f5"></stop>
-					<stop offset="0.998" stop-color="#0b69db"></stop>
+					<stop offset="0.001" stopColor="#54c0f5"></stop>
+					<stop offset="0.998" stopColor="#0b69db"></stop>
 				</radialGradient>
 			</defs>
 			<g fill="none">

@@ -26,6 +26,7 @@ export interface ErrorWrapperProps extends StandardProps {
 
 export interface PopModelProps extends StandardProps {
 	children?: JSX.Element | JSX.Element[];
+	width?: string;
 	closed?: boolean;
 	onClose?: (close: boolean) => void;
 }

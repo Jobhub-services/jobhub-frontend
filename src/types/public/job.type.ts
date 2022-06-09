@@ -1,1 +1,1 @@
-export type JobTypes = 'Full-time' | 'Part-time';
+export type JobTypes = 'Full time' | 'Part time';
