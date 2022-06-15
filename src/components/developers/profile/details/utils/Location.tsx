@@ -19,7 +19,8 @@ const Location = () => {
 	const [show, setShow] = useState(false);
 	const onSave = () => {
 		if (tmpAddr?.country?._id !== '') {
-			profileAction.setAttribute(tmpAddr, 'address');
+			const data = { city: tmpAddr.city, country: tmpAddr.country?._id };
+			profileAction.setAttribute(data, 'address');
 			setShow(false);
 		}
 	};

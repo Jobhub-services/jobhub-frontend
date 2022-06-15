@@ -28,4 +28,9 @@ export interface IAppState {
 		count?: number;
 		content?: TLanguages[];
 	};
+	roles?: {
+		size?: number;
+		count?: number;
+		content?: { _id?: string; name?: string }[];
+	};
 }

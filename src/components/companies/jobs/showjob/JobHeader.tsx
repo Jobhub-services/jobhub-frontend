@@ -2,7 +2,7 @@ import { FlexBox, Headline, Button, InputPicker } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { FilterIcon } from '@/assets/icons';
-import { JobOrderType } from '@/types/jobs.type';
+import { JobOrderType } from '@/types/company/jobs.type';
 const JobHeader = () => {
 	const { filterClosed, showJob } = useAppSelector((state) => state.job);
 	function handlePicker(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) {

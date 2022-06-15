@@ -38,7 +38,7 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: ${(props) => (props.showed ? '1400px' : '0')};
+	width: ${(props) => (props.showed ? '83%' : '0')};
 	background: white;
 	box-shadow: -5px 0px 20px -15px ${colors.BLACK_7};
 	transition: width 0.2s;
@@ -46,7 +46,7 @@ const DetailContainer = styled.div<any>`
 const SubContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 1400px;
+	width: 100%;
 	height: 100%;
 	overflow: hidden;
 `;

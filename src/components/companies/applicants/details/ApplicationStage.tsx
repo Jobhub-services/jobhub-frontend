@@ -4,7 +4,7 @@ import { colors } from '@/assets/theme';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { PopModel } from '@/components/common';
-import { ApplicationStatus } from '@/types/applications.type';
+import { ApplicationStatus } from '@/types/company/applications.type';
 import { useAppSelector } from '@/utils/appHooks';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 

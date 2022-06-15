@@ -5,7 +5,7 @@ import DataEmpty from '@/components/companies/_common/DataEmpty';
 import { useAppSelector } from '@/utils/appHooks';
 import Jerome from '@/assets/icons/jerome.jpg';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
-import { ApplicationStatus } from '@/types/applications.type';
+import { ApplicationStatus } from '@/types/company/applications.type';
 import styled from 'styled-components';
 
 const SContainer = styled.div`

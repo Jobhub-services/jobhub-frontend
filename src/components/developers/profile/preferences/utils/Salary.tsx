@@ -15,6 +15,8 @@ const Salary = () => {
 		}
 	}, []);
 	const onSave = () => {
+		profileAction.setAttribute(currency?._id, 'currency');
+		profileAction.setAttribute(salary, 'salary');
 		setShow(false);
 	};
 	const handlePicker = (event: any, value: string, label: string, name: string) => {

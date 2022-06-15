@@ -2,8 +2,8 @@ import { colors } from '@/assets/theme';
 import { MoneyIcon, BenefitIcon } from '@/assets/icons';
 import { IconProps } from '@/models/component';
 import { STitle, SP } from './shared.styles';
-import TitleIcon from '@/components/companies/jobs/_common/TitleIcon';
-import { JobDetails } from '@/types/jobs.type';
+import TitleIcon from '@/components/common/jobs/TitleIcon';
+import { JobDetails } from '@/types/company/jobs.type';
 
 const Compensation = (props: JobDetails) => {
 	return (
@@ -12,7 +12,7 @@ const Compensation = (props: JobDetails) => {
 			<div>
 				<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
 				<span style={{ marginLeft: '20px', color: `${colors.BLACK_2}` }}>
-					{props.start_salary} - {props.end_salary} {props.currency?.code.toUpperCase()}
+					{props.start_salary} - {props.end_salary} {props.currency?.code.toUpperCase()} / {props.salary_type}
 				</span>
 			</div>
 			<div className="mt-10">

@@ -1,7 +1,7 @@
 import { FlexBox } from 'staak-ui';
 import { SSpan, STitle, SSubTitle } from './shared.styles';
 import { colors } from '@/assets/theme';
-import { JobDetails } from '@/types/jobs.type';
+import { JobDetails } from '@/types/company/jobs.type';
 import styled from 'styled-components';
 
 const Wrapper = styled(FlexBox)`

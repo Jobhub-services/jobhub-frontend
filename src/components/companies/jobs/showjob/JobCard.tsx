@@ -7,7 +7,7 @@ import { JobCardProps } from '@/models/component';
 import TextAvatar from './TextAvatar';
 import StatusElem from '@/components/companies/_common/StatusElem';
 import { StatusTitle } from '@/constants/company/job.contants';
-import LocationElem from '../_common/LocationElem';
+import LocationElem from '@/components/companies/jobs/_common/LocationElem';
 import AvatarList from './details/AvatarList';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions } from '@/modules/actions/company/job.actions';
@@ -45,9 +45,6 @@ const SPar = styled.pre`
 	color: ${colors.BLACK_8};
 	white-space: pre-line;
 `;
-const SGap = styled(FlexBox)`
-	gap: ${(props) => props.gap}px;
-`;
 
 const RedSpan = styled.span`
 	font-weight: 500;
@@ -79,36 +76,36 @@ const JobCard = (props: JobCardProps) => {
 				</FlexBox>
 				<SPar>{props.description}</SPar>
 				<FlexBox justify="space-between">
-					<SGap gap={10} justify="flex-start">
+					<FlexBox gap={10} justify="flex-start">
 						<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.BLUE_CLEAR_5} size="12px">
 							{props.job_type}
 						</Tag>
 						<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.GREEN_CLEAR_5} size="12px">
 							{props.duration}
 						</Tag>
-					</SGap>
+					</FlexBox>
 					<StatusElem title={StatusTitle[props.status!]} status={props.status} />
 				</FlexBox>
 				<FlexBox justify="space-between" className="mt-10">
 					<div>
-						<SGap gap={5} justify="flex-start">
+						<FlexBox gap={5} justify="flex-start">
 							<MoneyIcon width="18px" height="18px" color={colors.BLACK_9} />
 							<SSpan>
 								{props.start_salary ?? 'N/A'}-{props.end_salary ?? 'N/A'} {props.currency?.code}
 							</SSpan>
-						</SGap>
-						<SGap gap={5} justify="start" align="flex-start" className="mt-5">
+						</FlexBox>
+						<FlexBox gap={5} justify="start" align="flex-start" className="mt-5">
 							<LocationIcon width="18px" height="18px" color={colors.BLACK_9} />
-							<SGap gap={10} justify="start">
+							<FlexBox gap={10} justify="start">
 								{props.work_remotly && <LocationElem size={12} country={'Remote'} />}
 								<LocationElem size={12} country={props.work_location?.country ?? 'N/A'} city={props.work_location?.city ?? 'N/A'} />
-							</SGap>
-						</SGap>
+							</FlexBox>
+						</FlexBox>
 					</div>
-					<SGap gap={5}>
+					<FlexBox gap={5}>
 						<CalendarIcon width="18px" height="18px" color={colors.BLACK_9} />
 						<SSpan>{new Date(props.createdAt!).toDateString()}</SSpan>
-					</SGap>
+					</FlexBox>
 				</FlexBox>
 			</SBody>
 			<SFooter justify="space-between">

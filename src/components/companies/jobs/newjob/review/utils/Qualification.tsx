@@ -3,7 +3,7 @@ import { SUl, SPre, STitle } from '../jobReview.styles';
 import styled from 'styled-components';
 import { JobReviewProps } from '@/models/component';
 import { useAppSelector } from '@/utils/appHooks';
-import TitleIcon from '@/components/companies/jobs/_common/TitleIcon';
+import TitleIcon from '@/components/common/jobs/TitleIcon';
 import { GraduationCapIcon, CertificateIcon, SkillsIcon, RequirementIcon, QuestionIcon } from '@/assets/icons';
 import { IconProps } from '@/models/component';
 

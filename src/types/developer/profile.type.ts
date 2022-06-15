@@ -61,6 +61,7 @@ export type SocialProfileType = {
 };
 export type ProfileInfo = {
 	summary?: string;
+	avatar?: string;
 	languages?: LanguagesType[];
 	skills?: SkillType[];
 	role?: {

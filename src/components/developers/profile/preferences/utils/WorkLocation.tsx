@@ -4,7 +4,7 @@ import { SSpan, SpanTitle } from '@/components/developers/profile/common';
 import { FlexBox, Button, Tag } from 'staak-ui';
 import { useEffect, useState } from 'react';
 import { metadataActions } from '@/modules/actions/metadata.actions';
-import { profileDispatcher } from '@/modules/actions/developer/profile.actions';
+import { profileAction, profileDispatcher } from '@/modules/actions/developer/profile.actions';
 import styled from 'styled-components';
 
 const TagWrapper = styled(FlexBox)`
@@ -32,6 +32,8 @@ const WorkLocation = () => {
 		profileDispatcher.setAttribute(tmp, 'desired_location');
 	};
 	const onSave = () => {
+		const tmp = desired_location?.map((elem) => elem._id);
+		profileAction.setAttribute(tmp, 'desired_location');
 		setShow(false);
 	};
 	return (

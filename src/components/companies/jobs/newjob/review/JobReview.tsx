@@ -1,6 +1,6 @@
 import { FlexBox, Button, HrDivider } from 'staak-ui';
 import { DescriptionIcon, ResponsibleIcon } from '@/assets/icons';
-import TitleIcon from '@/components/companies/jobs/_common/TitleIcon';
+import TitleIcon from '@/components/common/jobs/TitleIcon';
 import { IconProps } from '@/models/component';
 import { JobReviewProps } from '@/models/component';
 import { SPre, STitle } from './jobReview.styles';

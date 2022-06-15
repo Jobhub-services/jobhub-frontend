@@ -45,6 +45,7 @@ export type ShowJobInfo = {
 	work_location?: { country: string; city: string };
 	work_remotly?: boolean;
 	applicants?: string[]; // list of image ulr path
+	salary_type?: string;
 };
 
 export type JobDetails = ShowJobInfo & {

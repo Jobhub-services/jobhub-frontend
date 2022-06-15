@@ -25,6 +25,9 @@ const metadataDispatcher = {
 	getSkills(data: { value: string; label: string }[]) {
 		dispatchToStore(storeActions.setSkills(data));
 	},
+	setRoles(data: { _id: string; name: string }) {
+		dispatchToStore(storeActions.setRoles(data));
+	},
 	setLanguages(data: { count: number; size: number; content: TLanguages[] }) {
 		dispatchToStore(storeActions.setLanguages(data));
 	},
@@ -87,6 +90,17 @@ export const metadataActions = {
 			const response = await httpClient.get(`${METADATA_SERVICE}/skills`, param);
 			const responseData = response.data;
 			if (responseData) metadataDispatcher.getSkills(responseData);
+		} catch (e: any) {
+		} finally {
+			metadataDispatcher.setIsLoading(false);
+		}
+	},
+	async getRoles() {
+		metadataDispatcher.setIsLoading(true);
+		try {
+			const response = await httpClient.get(`${METADATA_SERVICE}/job-roles`);
+			const responseData = response.data;
+			if (responseData) metadataDispatcher.setRoles(responseData);
 		} catch (e: any) {
 		} finally {
 			metadataDispatcher.setIsLoading(false);

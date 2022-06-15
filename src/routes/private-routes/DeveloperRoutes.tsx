@@ -1,13 +1,14 @@
 import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Overview } from '@/views/companies';
-import { DeveloperProfile } from '@/views/developers';
+import { DeveloperProfile, ViewJobs } from '@/views/developers';
 
 const DeveloperRoutes: FC = () => {
 	return (
 		<Routes>
 			<Route path="/" element={<Overview />} />
 			<Route path="profile/:username" element={<DeveloperProfile />} />
+			<Route path="jobs" element={<ViewJobs />} />
 			<Route path="*" element={<Navigate to="/" />} />
 		</Routes>
 	);

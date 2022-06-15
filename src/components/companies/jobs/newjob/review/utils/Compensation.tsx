@@ -3,7 +3,7 @@ import { JobReviewProps } from '@/models/component';
 import { useAppSelector } from '@/utils/appHooks';
 import { SPre, STitle } from '../jobReview.styles';
 import { BenefitIcon, MoneyIcon } from '@/assets/icons';
-import TitleIcon from '@/components/companies/jobs/_common/TitleIcon';
+import TitleIcon from '@/components/common/jobs/TitleIcon';
 import { colors } from '@/assets/theme';
 import styled from 'styled-components';
 

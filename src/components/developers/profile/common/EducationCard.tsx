@@ -6,6 +6,7 @@ import { colors } from '@/assets/theme';
 import { SIcon } from '@/components/developers/profile/common';
 
 const dateOptions: any = { month: 'short', year: 'numeric' };
+
 const SSpan = styled.span`
 	font-weight: 500;
 	color: ${colors.BLACK_9};

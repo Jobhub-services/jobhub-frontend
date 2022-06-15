@@ -26,7 +26,6 @@ const Resume = () => {
 		if (!show) setShow(true);
 		const { files } = event.target;
 		profileDispatcher.setAttribute(files![0], 'resume');
-		console.log(files![0]);
 	};
 	const onSave = () => {
 		let data = new FormData();

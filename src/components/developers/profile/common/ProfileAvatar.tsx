@@ -2,8 +2,10 @@ import { CameraIcon } from '@/assets/icons';
 import Jerome from '@/assets/icons/jerome.jpg';
 import { colors } from '@/assets/theme';
 import { ProfileAvatarProps } from '@/models/component/developer';
+import { profileAction } from '@/modules/actions/developer/profile.actions';
+import { useAppSelector } from '@/utils/appHooks';
 import { getGMTOffset } from '@/utils/helpers';
-import { FlexBox } from 'staak-ui';
+import { FlexBox, UserIcon } from 'staak-ui';
 import styled from 'styled-components';
 const SImg = styled.img`
 	border-radius: 50%;
@@ -24,10 +26,10 @@ const SContainer = styled.div`
 	position: relative;
 	width: fit-content;
 `;
-const ImgSpan = styled.span`
+const ImgSpan = styled.label`
 	position: absolute;
-	top: 65%;
-	left: 75%;
+	top: 55%;
+	left: 65%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -41,6 +43,10 @@ const ImgSpan = styled.span`
 		background-color: ${colors.BLACK_12};
 	}
 `;
+const FInput = styled.input`
+	width: 0;
+	height: 0;
+`;
 const SSapn = styled.span`
 	color: ${colors.BLACK_8};
 `;
@@ -50,15 +56,27 @@ const SH2 = styled.h2`
 	color: ${colors.BLACK_3};
 `;
 const ProfileAvatar = ({ firstname, lastname, location, size, role, experience }: ProfileAvatarProps) => {
+	const { avatar } = useAppSelector((state) => state.developerProfile.profile);
+	const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { files } = event.target;
+		let data = new FormData();
+		data.append('avatar', files![0]!);
+		profileAction.setAttribute(data, 'avatar');
+	};
 	return (
 		<FlexBox gap={20} justify="start">
 			<SContainer>
 				<AvatarContainer size={size! + 10}>
-					<SImg src={Jerome} width={size} height={size} />
+					{avatar && avatar !== '' ? (
+						<SImg src={avatar} width={size} height={size} />
+					) : (
+						<UserIcon width="60px" height="60px" color={colors.BLACK_10} />
+					)}
 				</AvatarContainer>
-				<ImgSpan>
+				<ImgSpan htmlFor="avatar">
 					<CameraIcon width="20px" height="20px" />
 				</ImgSpan>
+				<FInput onChange={handleAvatar} type={'file'} name="resume" id="avatar" />
 			</SContainer>
 			<div>
 				<SH2>

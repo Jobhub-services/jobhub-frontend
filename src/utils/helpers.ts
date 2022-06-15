@@ -1,4 +1,4 @@
-const dateOptions: any = { month: 'short', year: 'numeric' };
+const dateOptions: any = { day: 'numeric', month: 'short', year: 'numeric' };
 export function toString(value: any): string {
 	if (typeof value === 'object') {
 		return value.join(',');

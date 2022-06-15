@@ -1,5 +1,5 @@
-import { ShowJobInfo, JobDetails } from '@/types/jobs.type';
-import { JobOrderType } from '@/types/jobs.type';
+import { ShowJobInfo, JobDetails } from '@/types/company/jobs.type';
+import { JobOrderType } from '@/types/company/jobs.type';
 
 export type JobInfo = {
 	title?: string;

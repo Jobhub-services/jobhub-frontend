@@ -1,11 +1,8 @@
-import { ApplicantsByJob, ApplicantsShortInfo, ApplicationStatus, InterviewStatus } from '@/types/applications.type';
+import { PNav } from '@/models/component/common/common.interface';
+import { ApplicantsByJob, ApplicantsShortInfo, ApplicationStatus } from '@/types/company/applications.type';
 import { StandardProps } from '@/models/component';
 
-export interface HeaderTabProps extends StandardProps {
-	title?: string;
-	badge?: string;
-	active?: boolean;
-	onClick: (status: string, event?: React.SyntheticEvent) => void;
+export interface HeaderTabProps extends PNav {
 	status?: ApplicationStatus;
 }
 

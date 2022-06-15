@@ -2,9 +2,9 @@ import { Tag, FlexBox } from 'staak-ui';
 import { CertificateIcon, GraduationCapIcon, QuestionIcon, RequirementIcon, SkillsIcon } from '@/assets/icons';
 import { IconProps } from '@/models/component';
 import { STitle, SP } from './shared.styles';
-import TitleIcon from '../../../_common/TitleIcon';
+import TitleIcon from '@/components/common/jobs/TitleIcon';
 import styled from 'styled-components';
-import { JobDetails } from '@/types/jobs.type';
+import { JobDetails } from '@/types/company/jobs.type';
 
 const SUl = styled.ul`
 	margin-top: 0;

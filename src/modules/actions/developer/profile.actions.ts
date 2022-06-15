@@ -46,10 +46,11 @@ export const profileAction = {
 				});
 			}
 			let dataToSend = data;
-			if (attr !== 'resume')
+			if (attr !== 'resume' && attr !== 'avatar')
 				dataToSend = {
 					[attr]: data,
 				};
+			console.log(dataToSend);
 			const response = await httpClient.put(`${USERS_SERVICE}/developer/profile`, dataToSend);
 
 			if (response.data) {

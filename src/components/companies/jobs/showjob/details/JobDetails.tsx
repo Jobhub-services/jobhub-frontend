@@ -7,7 +7,7 @@ import { STitle, SP, SSpan } from './utils/shared.styles';
 import { DescriptionIcon, ResponsibleIcon } from '@/assets/icons';
 import styled from 'styled-components';
 import StatusElem from '@/components/companies/_common/StatusElem';
-import TitleIcon from '../../_common/TitleIcon';
+import TitleIcon from '../../../../common/jobs/TitleIcon';
 import Compensation from './utils/Compensation';
 import Qualifications from './utils/Qualifcations';
 import { IconProps } from '@/models/component';

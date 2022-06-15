@@ -40,8 +40,18 @@ import ClosedToOffers from './ClosedToOffers';
 import ReadyToOffers from './ReadyToOffers';
 import PdfIcon from './PdfIcon';
 import CompanyBuildingColorIcon from './CompanyBuildingColorIcon';
+import ClockIcon from './ClockIcon';
+import StarIcon from './StarIcon';
+import HeartIcon from './HeartIcon';
+import HeartFilledIcon from './HeartFilledIcon';
+import EmpolyeesIcon from './EmployeesIcon';
 
 export {
+	EmpolyeesIcon,
+	HeartIcon,
+	HeartFilledIcon,
+	StarIcon,
+	ClockIcon,
 	CompanyBuildingColorIcon,
 	PdfIcon,
 	ReadyToOffers,

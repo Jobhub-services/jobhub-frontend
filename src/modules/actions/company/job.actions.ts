@@ -6,8 +6,7 @@ import { JobInfo } from '@/models/store/company/job.interface';
 import { httpClient } from '@/config/httpClient/HttpClient';
 import { API_PATHS } from '@/constants/api.constants';
 import { transformErrors } from '@/utils/validations';
-import { JobDetails, JobOrderType, ShowJobInfo } from '@/types/jobs.type';
-import { initialState } from '@/modules/store/company/job.store';
+import { JobDetails, JobOrderType, ShowJobInfo } from '@/types/company/jobs.type';
 
 const { JOBS_SERVICE } = API_PATHS;
 

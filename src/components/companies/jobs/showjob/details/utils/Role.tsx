@@ -1,7 +1,7 @@
 import { SSpan, STitle, SSubTitle } from './shared.styles';
 import { FlexBox, Tag } from 'staak-ui';
 import { colors } from '@/assets/theme';
-import { JobDetails } from '@/types/jobs.type';
+import { JobDetails } from '@/types/company/jobs.type';
 import { dateWithMonthName } from '@/utils/helpers';
 const Role = (props: JobDetails) => {
 	return (

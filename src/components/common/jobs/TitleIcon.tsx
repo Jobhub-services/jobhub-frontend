@@ -1,7 +1,7 @@
 import { FlexBox } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import styled from 'styled-components';
-import { ITitleIcon } from '@/models/component';
+import { ITitleIcon } from '@/models/component/common/common.interface';
 
 const SubTitle = styled.h2`
 	margin: 5px 0;

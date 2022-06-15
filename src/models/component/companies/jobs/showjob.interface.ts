@@ -1,5 +1,5 @@
 import { StandardProps } from '@/models/component/app.interface';
-import { ShowJobInfo } from '@/types/jobs.type';
+import { ShowJobInfo } from '@/types/company/jobs.type';
 
 export interface JobCardProps extends StandardProps, ShowJobInfo {}
 

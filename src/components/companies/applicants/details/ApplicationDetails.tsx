@@ -23,7 +23,7 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: ${(props) => (props.showed ? '1400px' : '0')};
+	width: ${(props) => (props.showed ? '83%' : '0')};
 	background: white;
 	box-shadow: 2px -5px 20px -15px ${colors.BLACK_7};
 	transition: width 0.3s;
@@ -31,31 +31,34 @@ const DetailContainer = styled.div<any>`
 const SubContainer = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 1400px;
+	width: 100%;
 	height: 100%;
 	overflow: hidden;
 `;
 const SHeader = styled.div`
 	border-bottom: 1px solid ${colors.BLACK_12};
 	padding: 5px 10px !important;
+	height: 62px;
 `;
 const SBody = styled(FlexBox)`
 	padding: 10px 20px !important;
 	align-items: flex-start !important;
 	justify-content: flex-start !important;
 	gap: 20px !important;
+	height: calc(100% - 62px);
 `;
 const AppContact = styled.div`
 	padding: 10px 15px;
 	border: 1px solid ${colors.BLACK_12};
 	border-radius: 8px;
 	width: 30%;
-	height: 770px;
+	height: 100%;
+	overflow: auto;
 `;
 const AppDetails = styled.div`
 	border: 1px solid ${colors.BLACK_12};
 	border-radius: 8px;
-	height: 770px;
+	height: 100%;
 	width: 70%;
 `;
 const SSpan = styled.span<any>`

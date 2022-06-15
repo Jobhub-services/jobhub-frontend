@@ -1,0 +1,40 @@
+export type JobInfoData = {
+	id: string;
+	title?: string;
+	work_location?: { country?: string; city?: string };
+	work_remotly?: boolean;
+	hire_remotly?: boolean;
+	hire_location?: { country?: string; city?: string }[];
+	category?: string;
+	job_type?: 'Full time' | 'Part time';
+	duration?: 'Permanent' | 'Temporary';
+	createdAt?: string;
+	avatar?: string;
+	company_name?: string;
+	salary_type?: string;
+	start_salary?: string;
+	end_salary?: string;
+	currency?: { id?: string; name?: string; code?: string };
+	featured?: boolean;
+	applied?: boolean;
+	saved?: boolean;
+};
+export type JobInfoDetails = JobInfoData & {
+	duration_range?: [string | null, string | null];
+	description?: string;
+	responsabilities?: string;
+	requirements?: string;
+	benefits?: string;
+	visa_sponsorship?: boolean;
+	education?: string[];
+	certification?: string[];
+	skills?: string[];
+	company_division?: string;
+	questions?: { _id?: string; name?: string }[];
+};
+export type TJobApplication = {
+	resume?: string;
+	start_date?: string;
+	notice_period?: string;
+	questions?: { _id?: string; response?: string }[];
+};

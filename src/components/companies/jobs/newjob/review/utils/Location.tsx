@@ -3,7 +3,7 @@ import { FlexBox } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
 import styled from 'styled-components';
 import { STitle, SSubTitle, SSpan } from '../jobReview.styles';
-import LocationElem from '../../../_common/LocationElem';
+import LocationElem from '@/components/companies/jobs/_common/LocationElem';
 import { colors } from '@/assets/theme';
 
 const SWrapper = styled(FlexBox)`

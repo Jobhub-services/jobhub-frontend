@@ -9,7 +9,7 @@ const SH3 = styled.h3`
 const SSpan = styled.span`
 	font-size: 13px;
 	color: ${colors.BLACK_7};
-	margin-top: 2px;
+	margin-top: 5px;
 `;
 const SGap = styled(FlexBox)`
 	gap: ${(props) => props.gap}px;

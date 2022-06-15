@@ -1,7 +1,7 @@
 import { InputPickerField } from '@/components/common';
 import { SSpan, SpanTitle } from '@/components/developers/profile/common';
 import { JobTypeBColor } from '@/constants/public/job.constants';
-import { profileDispatcher } from '@/modules/actions/developer/profile.actions';
+import { profileAction, profileDispatcher } from '@/modules/actions/developer/profile.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { useState } from 'react';
 import { CheckBox, FlexBox, Button, Tag } from 'staak-ui';
@@ -15,6 +15,8 @@ const DesiredJob = () => {
 	const { job_type, other_job_type } = useAppSelector((state) => state.developerProfile.profile);
 	const [show, setShow] = useState(false);
 	const onSave = () => {
+		profileAction.setAttribute(job_type, 'job_type');
+		profileAction.setAttribute(other_job_type, 'other_job_type');
 		setShow(false);
 	};
 	const valExists = (val: string) => {
@@ -67,16 +69,16 @@ const DesiredJob = () => {
 				</InputPickerField>
 				<div className="mt-15">
 					<div className="mb-10">Also open to the following job types</div>
-					<CheckBox active={valExists('Full time')} value="Full time" className="mb-10" onChange={handleCheck}>
+					<CheckBox checked={valExists('Full time')} value="Full time" className="mb-10" onChange={handleCheck}>
 						Full time
 					</CheckBox>
-					<CheckBox active={valExists('Part time')} value="Part time" className="mb-10" onChange={handleCheck}>
+					<CheckBox checked={valExists('Part time')} value="Part time" className="mb-10" onChange={handleCheck}>
 						Part time
 					</CheckBox>
-					<CheckBox active={valExists('Permanent')} value="Permanent" className="mb-10" onChange={handleCheck}>
+					<CheckBox checked={valExists('Permanent')} value="Permanent" className="mb-10" onChange={handleCheck}>
 						Permanent
 					</CheckBox>
-					<CheckBox active={valExists('Temporary')} value="Temporary" onChange={handleCheck}>
+					<CheckBox checked={valExists('Temporary')} value="Temporary" onChange={handleCheck}>
 						Temporary
 					</CheckBox>
 				</div>

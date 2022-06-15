@@ -18,7 +18,7 @@ const ProfileStatus = () => {
 		}
 	};
 	const onSave = () => {
-		profileDispatcher.setAttribute(status, 'status');
+		profileAction.setAttribute(status, 'status');
 		setShow(false);
 	};
 	return (
