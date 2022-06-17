@@ -22,7 +22,6 @@ const SFooter = styled(FlexBox)`
 	height: 56px;
 `;
 const SSpan = styled.span`
-	font-size: 14px;
 	font-weight: 500;
 	color: ${colors.BLACK_9};
 `;
