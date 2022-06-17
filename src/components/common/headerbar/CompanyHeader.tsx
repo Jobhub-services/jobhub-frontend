@@ -2,9 +2,14 @@ import { IconDropDown, AvatarDropDown } from '@/components/common/dropdown';
 import { FlexBox, Button, PlusIcon, SearchInput } from 'staak-ui';
 import { useNavigate } from 'react-router-dom';
 import StaakLogo from '@/assets/theme/StaakLogo';
+import { useAppSelector } from '@/utils/appHooks';
 
 const CompanyHeader = () => {
+	const { username } = useAppSelector(({ user }) => user.userInfo);
 	const navigate = useNavigate();
+	const handleItem = (event?: React.SyntheticEvent, value?: string) => {
+		if (value === 'profile') navigate(`company/profile/${username}`);
+	};
 	return (
 		<>
 			<FlexBox justify="start" gap={50}>
@@ -29,7 +34,7 @@ const CompanyHeader = () => {
 				</Button>
 				<FlexBox justify="space-between" gap={20}>
 					<IconDropDown />
-					<AvatarDropDown />
+					<AvatarDropDown onClick={handleItem} />
 				</FlexBox>
 			</FlexBox>
 		</>

@@ -85,8 +85,8 @@ const JobCard = (props: PJobCard) => {
 							<SSpan>{props.category}</SSpan>
 						</FlexBox>
 						<FlexBox gap={5} align="start" justify="start" className="mt-15">
-							<div style={{ width: '19%' }}>Hires in :</div>
-							<SLoc style={{ width: '81%' }}>
+							<div style={{ width: '20%' }}>Hires in :</div>
+							<SLoc style={{ width: '80%' }}>
 								{props.hire_remotly
 									? 'Everywhere'
 									: props.hire_location?.length! > 0

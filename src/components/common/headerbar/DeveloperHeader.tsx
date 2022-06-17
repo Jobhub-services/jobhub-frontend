@@ -7,9 +7,9 @@ import StaakLogo from '@/assets/theme/StaakLogo';
 const DeveloperHeader = () => {
 	const { username } = useAppSelector(({ user }) => user.userInfo);
 	const navigate = useNavigate();
-	function handleItem(event?: React.SyntheticEvent, value?: string) {
+	const handleItem = (event?: React.SyntheticEvent, value?: string) => {
 		if (value === 'profile') navigate(`profile/${username}`);
-	}
+	};
 	return (
 		<>
 			<FlexBox justify="start" gap={50}>

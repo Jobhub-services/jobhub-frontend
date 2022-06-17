@@ -28,8 +28,8 @@ const SContainer = styled.div`
 `;
 const ImgSpan = styled.label`
 	position: absolute;
-	top: 55%;
-	left: 65%;
+	top: 65%;
+	left: 75%;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -44,6 +44,7 @@ const ImgSpan = styled.label`
 	}
 `;
 const FInput = styled.input`
+	position: absolute;
 	width: 0;
 	height: 0;
 `;

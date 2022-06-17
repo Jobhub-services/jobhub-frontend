@@ -45,8 +45,10 @@ import StarIcon from './StarIcon';
 import HeartIcon from './HeartIcon';
 import HeartFilledIcon from './HeartFilledIcon';
 import EmpolyeesIcon from './EmployeesIcon';
+import FacebookIcon from './FacebookIcon';
 
 export {
+	FacebookIcon,
 	EmpolyeesIcon,
 	HeartIcon,
 	HeartFilledIcon,

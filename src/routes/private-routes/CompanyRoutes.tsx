@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Overview, JobOverview, AddNewJob, ApplicantsOverview, TalentsView } from '@/views/companies';
+import { Overview, JobOverview, AddNewJob, ApplicantsOverview, TalentsView, CompanyProfile } from '@/views/companies';
 import JobDetails from '@/components/companies/jobs/showjob/details/JobDetails';
 import ApplicationDetails from '@/components/companies/applicants/details/ApplicationDetails';
 import ApplicantsByJob from '@/components/companies/applicants/ApplicantsByJob';
@@ -27,6 +27,7 @@ const CompanyRoutes: FC = () => {
 				<Route path="detail/:id" element={<ApplicationDetails />} />
 				<Route path="/applicants/:status" element={<Navigate to="/:status" />} />
 			</Route>
+			<Route path="company/profile/:username" element={<CompanyProfile />} />
 			<Route path="*" element={<Navigate to="/" />} />
 		</Routes>
 	);

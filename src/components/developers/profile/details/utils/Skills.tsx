@@ -13,7 +13,7 @@ const SSpan = styled.span`
 	color: ${colors.BLACK_9};
 `;
 const TagWrapper = styled(FlexBox)`
-	gap: 10px !important;
+	gap: 15px !important;
 	flex-wrap: wrap;
 	justify-content: flex-start !important;
 `;
@@ -81,7 +81,7 @@ const Skills = () => {
 				) : (
 					skills?.map((elem, idx) => {
 						return (
-							<Tag key={idx} closable value={elem._id}>
+							<Tag key={idx} value={elem._id}>
 								{elem.name}
 							</Tag>
 						);
