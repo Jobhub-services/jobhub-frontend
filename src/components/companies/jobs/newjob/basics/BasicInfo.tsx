@@ -6,7 +6,7 @@ import { jobActions } from '@/modules/actions/company/job.actions';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import React from 'react';
 import { useAppSelector } from '@/utils/appHooks';
-import { JobStringIndex } from '@/types/jobs.type';
+import { JobStringIndex } from '@/types/company/jobs.type';
 
 const BasicDetails = (props: JobReviewProps) => {
 	const { createJob } = useAppSelector((state) => state.job);

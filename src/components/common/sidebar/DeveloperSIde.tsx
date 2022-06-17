@@ -42,8 +42,8 @@ const DeveloperSide = () => {
 				className="mb-5"
 				icon={<ApplicantIcon />}
 				width={widthItems}
-				active={pathname.startsWith('/applicants')}
-				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'Applications/new')}
+				active={pathname.startsWith('/applications')}
+				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'applications')}
 			>
 				<NavItem.Content>Applications</NavItem.Content>
 			</NavItem>

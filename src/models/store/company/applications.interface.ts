@@ -1,4 +1,4 @@
-import { ApplicantsByJob, ApplicantsShortInfo, FilterType, ApplicantAllInfo } from '@/types/applications.type';
+import { ApplicantsByJob, ApplicantsShortInfo, FilterType, ApplicantAllInfo } from '@/types/company/applications.type';
 
 type PaginationType = {
 	total?: number;

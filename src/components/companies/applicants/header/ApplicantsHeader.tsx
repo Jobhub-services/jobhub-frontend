@@ -4,7 +4,6 @@ import HeaderTab from './HeaderTab';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ApplicationStatus } from '@/types/applications.type';
 
 const ApplicantsHeader = () => {
 	const navigate = useNavigate();

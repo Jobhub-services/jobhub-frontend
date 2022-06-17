@@ -7,7 +7,7 @@ import { ApplicantCardProps } from '@/models/component/companies/applications/ap
 import { useSearchParams, useParams } from 'react-router-dom';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { Avatar } from '@/components/companies/_common';
-import { ApplicationStatus } from '@/types/applications.type';
+import { ApplicationStatus } from '@/types/company/applications.type';
 
 const Status: { [key in ApplicationStatus]?: ApplicationStatus } = { new: 'process', process: 'interview', interview: 'hired' };
 

@@ -5,7 +5,7 @@ import { ArrowDownIcon } from 'staak-ui';
 import InterviewForm from './InterviewForm';
 import { useState } from 'react';
 import { InterviewFormProps } from '@/models/component/companies/interview/interview.interface';
-import { InterviewStatus } from '@/types/applications.type';
+import { InterviewStatus } from '@/types/company/applications.type';
 
 const StatusColor: { [key in InterviewStatus]: string } = {
 	'On Progress': colors.YELLOW_CLEAR_4,

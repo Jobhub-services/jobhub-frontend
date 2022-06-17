@@ -2,7 +2,7 @@ import { FlexBox, Button } from 'staak-ui';
 import { TextAreaField, TagPickerField, TagInputField } from '@/components/common';
 import { useAppSelector } from '@/utils/appHooks';
 import Questions from './Questions';
-import { JobArrayStringIndex, JobStringIndex } from '@/types/jobs.type';
+import { JobArrayStringIndex, JobStringIndex } from '@/types/company/jobs.type';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { useEffect, useState } from 'react';
 import { metadataActions } from '@/modules/actions/metadata.actions';

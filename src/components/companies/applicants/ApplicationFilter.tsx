@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { useParams, useSearchParams } from 'react-router-dom';
-import { ApplicationStatus, FilterType } from '@/types/applications.type';
+import { ApplicationStatus, FilterType } from '@/types/company/applications.type';
 import { toString } from '@/utils/helpers';
 
 const SH3 = styled.h3`

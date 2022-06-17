@@ -1,7 +1,7 @@
 import { InputField, InputPickerField, TextAreaField } from '@/components/common';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { metadataActions } from '@/modules/actions/metadata.actions';
-import { JobStringIndex } from '@/types/jobs.type';
+import { JobStringIndex } from '@/types/company/jobs.type';
 import { useAppSelector } from '@/utils/appHooks';
 import React, { useEffect } from 'react';
 import { FlexBox, Radio } from 'staak-ui';

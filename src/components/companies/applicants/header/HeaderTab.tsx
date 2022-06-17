@@ -1,7 +1,7 @@
 import { colors } from '@/assets/theme';
 import { HeaderTabProps } from '@/models/component/companies/applications/applications.interface';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const SBadge = styled.span<any>`
 	display: inline-block;
