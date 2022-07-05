@@ -2,7 +2,7 @@ import { EditIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { InputField, InputPickerField } from '@/components/common';
 import { SpanTitle, SButton, SSpan, SData } from '@/components/companies/profile/common/common.style';
-import { profileDispatcher } from '@/modules/actions/company/profile.actions';
+import { profileDispatcher, profileAction } from '@/modules/actions/company/profile.actions';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useState } from 'react';
@@ -24,6 +24,7 @@ const Headquarters = () => {
 	const handleInput = (event: any, value?: string, name?: string) => {
 		let tmp = { ...headquarter };
 		tmp[name as 'street' | 'city'] = value;
+		console.log(tmp);
 		profileDispatcher.setAttribute(tmp, 'headquarter');
 	};
 	const handlePicker = (event: any, value: string, label: string, name: string) => {
@@ -35,7 +36,9 @@ const Headquarters = () => {
 		setShow(true);
 	};
 	const onSave = () => {
+		let tmp = { country: headquarter?.country._id, city: headquarter?.city, street: headquarter?.street };
 		setShow(false);
+		profileAction.setAttribute(tmp, 'headquarter');
 	};
 	return (
 		<div>
@@ -55,7 +58,7 @@ const Headquarters = () => {
 						<>
 							{headquarter?.street !== '' && <SData>{headquarter?.street}</SData>}
 							<SData>
-								{headquarter?.city ? `${headquarter?.city},` : ''} {headquarter?.country ? `${headquarter?.country.name}.` : ''}
+								{headquarter?.city ? `${headquarter?.city},` : ''} {headquarter?.country ? `${headquarter?.country?.name}.` : ''}
 							</SData>
 						</>
 					) : (
@@ -66,7 +69,7 @@ const Headquarters = () => {
 			{show && (
 				<div className="mt-15">
 					<FlexBox justify="start" gap={10}>
-						<InputPickerField name="country" title="Country" value={headquarter?.country.name} onChange={handlePicker}>
+						<InputPickerField name="country" title="Country" value={headquarter?.country?.name} onChange={handlePicker}>
 							{countries?.content?.map((elem, idx) => {
 								const str = elem.name + '(' + elem.code + ')';
 								return (

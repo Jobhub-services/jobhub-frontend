@@ -39,7 +39,7 @@ const DesiredJob = () => {
 				<div>
 					{job_type && job_type !== '' && (
 						<FlexBox className="mt-15" gap={20} justify="start">
-							<span>Primary job types</span>
+							<span>Primary job type</span>
 							<Tag color={JobTypeBColor[job_type!]}>{job_type}</Tag>
 						</FlexBox>
 					)}

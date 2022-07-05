@@ -33,8 +33,8 @@ const DeveloperSide = () => {
 				className="mb-5"
 				icon={<NewCompanyIcon />}
 				width={widthItems}
-				active={pathname === '/talents'}
-				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'talents')}
+				active={pathname.startsWith('/companies')}
+				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'companies')}
 			>
 				<NavItem.Content>Companies</NavItem.Content>
 			</NavItem>

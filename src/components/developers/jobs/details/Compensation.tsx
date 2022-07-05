@@ -13,7 +13,9 @@ const Compensation = () => {
 			<div>
 				<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
 				<span style={{ marginLeft: '20px', color: `${colors.BLACK_2}` }}>
-					{jobDetails?.start_salary} - {jobDetails?.end_salary} {jobDetails?.currency?.code?.toUpperCase()} / {jobDetails?.salary_type}
+					{jobDetails?.start_salary}
+					{jobDetails?.end_salary ? ` - ${jobDetails?.end_salary}` : ''} {jobDetails?.currency?.code?.toUpperCase()}{' '}
+					{jobDetails?.salary_type ? `/ ${jobDetails?.salary_type}` : ''}
 				</span>
 			</div>
 			{jobDetails?.benefits && jobDetails?.benefits !== '' && (

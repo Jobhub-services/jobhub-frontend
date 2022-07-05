@@ -2,7 +2,7 @@ import { EditIcon } from '@/assets/icons';
 import DivisionElem from '@/components/companies/profile/common/DivisionElem';
 import { colors } from '@/assets/theme';
 import { SpanTitle, SButton } from '@/components/companies/profile/common/common.style';
-import { profileDispatcher } from '@/modules/actions/company/profile.actions';
+import { profileDispatcher, profileAction } from '@/modules/actions/company/profile.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { useState } from 'react';
 import { Button, FlexBox, PlusIcon, TagInput } from 'staak-ui';
@@ -15,6 +15,7 @@ const CompanyDivision = () => {
 	};
 	const onSave = () => {
 		setShow(false);
+		profileAction.setAttribute(company_division, 'company_division');
 	};
 	const handleInputTag = (event: any, value: string[], name?: string) => {
 		profileDispatcher.setAttribute(value, 'company_division');

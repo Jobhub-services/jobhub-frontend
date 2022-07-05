@@ -57,10 +57,10 @@ const SH2 = styled.h2`
 	color: ${colors.BLACK_3};
 `;
 const ProfileAvatar = ({ overview }: PProfileAvatar) => {
-	const { headquarter, generalinfo } = useAppSelector((state) => state.companyProfile.profile);
-	const { email } = useAppSelector((state) => state.user.userInfo);
-	const cmp_name = email?.split('@')[1].split('.')[0];
-
+	const { headquarter } = useAppSelector((state) => state.companyProfile.profile);
+	const { userInfo } = useAppSelector((state) => state.user);
+	const { companyInfo } = userInfo;
+	console.log(userInfo);
 	const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {};
 	return (
 		<FlexBox gap={20} justify="start">
@@ -78,7 +78,7 @@ const ProfileAvatar = ({ overview }: PProfileAvatar) => {
 				)}
 			</SContainer>
 			<div>
-				<SH2>{generalinfo?.company_name ? generalinfo?.company_name : cmp_name?.toUpperCase()}</SH2>
+				<SH2>{companyInfo?.companyName?.toUpperCase()}</SH2>
 				{overview ? (
 					<FlexBox flexDirection="column" gap={5} align="start">
 						{headquarter?.street !== '' && <SData>{headquarter?.street}</SData>}

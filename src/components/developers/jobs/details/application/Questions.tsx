@@ -3,24 +3,33 @@ import { STitle } from '@/components/developers/jobs/details/common.style';
 import { PQuestion } from '@/models/component/developer/jobs.interface';
 import { jobDispatcher } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
+import { useEffect } from 'react';
 
 const Questions = ({ questions }: PQuestion) => {
 	const { jobApplication } = useAppSelector((state) => state.developerJobs);
+	useEffect(() => {
+		let tmp = { ...jobApplication };
+		const data = questions?.map((elem) => {
+			return { question: elem._id, response: '' };
+		});
+		tmp.responses = data;
+		jobDispatcher.setJobApplication(tmp);
+	}, []);
 	const handleInput = (event: any, value?: string, name?: string) => {
 		let tmp = { ...jobApplication };
-		let arrTmp = tmp.questions?.filter((elem) => elem._id !== name);
-		arrTmp?.push({ _id: name, response: value });
-		tmp.questions = arrTmp;
+		let arrTmp = tmp.responses?.filter((elem) => elem.question !== name);
+		arrTmp?.push({ question: name, response: value });
+		tmp.responses = arrTmp;
 		jobDispatcher.setJobApplication(tmp);
 	};
 	return (
-		<div>
+		<div className="mt-10">
 			<STitle>Questions</STitle>
 			<div>
 				{questions?.map((elem, idx) => {
 					return (
 						<InputField className="mt-10" name={elem._id!} key={idx} onDataChange={handleInput}>
-							{elem.name}
+							{elem.question}
 						</InputField>
 					);
 				})}

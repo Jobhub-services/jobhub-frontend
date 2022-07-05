@@ -1,5 +1,5 @@
 export type JobInfoData = {
-	id: string;
+	_id: string;
 	title?: string;
 	work_location?: { country?: string; city?: string };
 	work_remotly?: boolean;
@@ -8,9 +8,11 @@ export type JobInfoData = {
 	category?: string;
 	job_type?: 'Full time' | 'Part time';
 	duration?: 'Permanent' | 'Temporary';
-	createdAt?: string;
+	createdAt?: string | null;
 	avatar?: string;
-	company_name?: string;
+	createdBy?: {
+		companyName?: string;
+	};
 	salary_type?: string;
 	start_salary?: string;
 	end_salary?: string;
@@ -19,7 +21,7 @@ export type JobInfoData = {
 	applied?: boolean;
 	saved?: boolean;
 };
-export type JobInfoDetails = JobInfoData & {
+export type TJobDetails = JobInfoData & {
 	duration_range?: [string | null, string | null];
 	description?: string;
 	responsabilities?: string;
@@ -30,11 +32,12 @@ export type JobInfoDetails = JobInfoData & {
 	certification?: string[];
 	skills?: string[];
 	company_division?: string;
-	questions?: { _id?: string; name?: string }[];
+	questions?: { _id?: string; question?: string }[];
 };
 export type TJobApplication = {
-	resume?: string;
+	jobId?: string;
+	motivation?: string;
 	start_date?: string;
 	notice_period?: string;
-	questions?: { _id?: string; response?: string }[];
+	responses?: { question?: string; response?: string }[];
 };

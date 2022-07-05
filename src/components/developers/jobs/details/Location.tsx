@@ -20,7 +20,8 @@ const Location = () => {
 						<SSubTitle>Work Location</SSubTitle>
 						<FlexBox justify="start" gap={2}>
 							<SSpan>
-								{jobDetails?.work_location?.city}, {jobDetails?.work_location?.country}.
+								{jobDetails.work_remotly ? 'Remote. ' : ''} {jobDetails?.work_location?.city ? `${jobDetails?.work_location?.city},` : ''}{' '}
+								{jobDetails?.work_location?.country}
 							</SSpan>
 						</FlexBox>
 					</div>
@@ -34,7 +35,7 @@ const Location = () => {
 							<Wrapper>
 								{jobDetails?.hire_location?.map((elem, idx) => {
 									return (
-										<SSpan>
+										<SSpan key={idx}>
 											{elem.city}, {elem.country}.
 										</SSpan>
 									);

@@ -9,6 +9,8 @@ import { reducer as interviewReducer } from '@/modules/store/company/interview.s
 import { reducer as reducerDeveloperProfile } from '@/modules/store/developer/profile.store';
 import { reducer as reducerCompanyProfile } from '@/modules/store/company/profile.store';
 import { reducer as reducerDeveloperJobs } from '@/modules/store/developer/job.store';
+import { reducer as reducerDeveloperApplications } from '@/modules/store/developer/application.store';
+import { reducer as reducerCompanies } from '@/modules/store/developer/company.store';
 const rootReducer = combineReducers({
 	auth: authReducer,
 	user: userReducer,
@@ -20,6 +22,8 @@ const rootReducer = combineReducers({
 	developerProfile: reducerDeveloperProfile,
 	developerJobs: reducerDeveloperJobs,
 	companyProfile: reducerCompanyProfile,
+	talentApplications: reducerDeveloperApplications,
+	companies: reducerCompanies,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

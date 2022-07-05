@@ -1,5 +1,6 @@
 import { StandardProps } from '@/models/component/app.interface';
 import { CertificationType, EducationType, KeyValType, WorkExperienceType } from '@/types/developer/profile.type';
+import { StatusType } from '@/types/common.type';
 
 export interface WorkExperienceProps extends StandardProps, WorkExperienceType {
 	width?: string;
@@ -19,4 +20,6 @@ export interface ProfileAvatarProps extends StandardProps {
 		city?: string | null;
 	};
 	size?: number;
+	status?: StatusType;
+	overview?: boolean;
 }

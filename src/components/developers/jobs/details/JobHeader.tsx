@@ -11,8 +11,8 @@ const Container = styled(FlexBox)`
 	width: 100%;
 `;
 const SImg = styled.img`
-	width: 35px;
-	height: 35px;
+	width: 40px;
+	height: 40px;
 	border-radius: 7px;
 `;
 const Span = styled.span<any>`
@@ -29,7 +29,7 @@ const JobHeader = () => {
 				<STitle>{jobDetails?.title}</STitle>
 				<FlexBox justify="space-between" gap={20}>
 					<FlexBox justify="start" gap={20}>
-						<SSpan>{jobDetails?.company_name}</SSpan>
+						<SSpan>{jobDetails?.createdBy?.companyName}</SSpan>
 						<FlexBox gap={5}>
 							<EmpolyeesIcon width="18px" height="18px" color={colors.BLACK_9} />
 							<Span>1-10 Employees</Span>
@@ -38,10 +38,12 @@ const JobHeader = () => {
 							View company details
 						</Button>
 					</FlexBox>
-					<FlexBox justify="start" gap={5}>
-						<ClockIcon color={colors.BLACK_9} />
-						<SSpan>Posted {posted_at}</SSpan>
-					</FlexBox>
+					{jobDetails?.createdAt && (
+						<FlexBox justify="start" gap={5}>
+							<ClockIcon color={colors.BLACK_9} />
+							<SSpan>Posted {posted_at}</SSpan>
+						</FlexBox>
+					)}
 				</FlexBox>
 			</div>
 		</Container>

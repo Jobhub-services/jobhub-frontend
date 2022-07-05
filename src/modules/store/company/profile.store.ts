@@ -21,6 +21,9 @@ const reducerSlices = createSlice({
 			const { loading } = action.payload;
 			state.isLoading = loading;
 		},
+		setProfile: (state, action) => {
+			state.profile = action.payload;
+		},
 		setAttribute: (state, action) => {
 			const { attr, data } = action.payload;
 			state.profile[attr as 'description'] = data;

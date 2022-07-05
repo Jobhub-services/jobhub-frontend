@@ -5,6 +5,7 @@ import { JobInfoData } from '@/types/developer/job.type';
 export interface PJobCard extends StandardProps, JobInfoData {}
 
 export interface PJobAvatar extends StandardProps {
+	_id: string;
 	title?: string;
 	subtitle?: string;
 	bColor?: number;
@@ -12,12 +13,11 @@ export interface PJobAvatar extends StandardProps {
 	img?: string;
 	featured?: boolean;
 	new?: boolean;
-	jobId: string;
 }
 
 export interface PHeaderNav extends PNav {
 	status?: 'Browse all' | 'Saved';
 }
 export interface PQuestion extends StandardProps {
-	questions?: { _id?: string; name?: string }[];
+	questions?: { _id?: string; question?: string }[];
 }

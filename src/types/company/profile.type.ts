@@ -13,7 +13,6 @@ export type TProfileInfo = {
 	headquarter?: { country: { _id?: string; name?: string }; city?: string; street?: string };
 	generalinfo?: {
 		founded?: string;
-		company_name?: string;
 		industry?: string;
 		company_size?: string;
 	};

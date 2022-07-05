@@ -29,7 +29,7 @@ const Role = () => {
 							{jobDetails?.job_type && <Tag color={colors.BLUE_CLEAR_5}>{jobDetails.job_type}</Tag>}
 							{jobDetails?.duration && <Tag color={colors.GREEN_CLEAR_5}>{jobDetails.duration}</Tag>}
 						</FlexBox>
-						{jobDetails?.duration_range && (
+						{jobDetails?.duration_range && jobDetails?.duration_range?.length! > 1 && jobDetails?.duration_range[0] && jobDetails?.duration_range[1] && (
 							<FlexBox gap={5} justify="flex-start" className="mt-15">
 								<SSpan>{dateWithMonthName(jobDetails.duration_range[0]!)}-</SSpan>
 								<SSpan>{dateWithMonthName(jobDetails.duration_range[1]!)}</SSpan>

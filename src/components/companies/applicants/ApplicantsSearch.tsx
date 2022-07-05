@@ -4,7 +4,7 @@ import ApplicationCard from './ApplicationCard';
 import styled from 'styled-components';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { ApplicationStatus } from '@/types/company/applications.type';
-import DataEmpty from '@/components/companies/_common/DataEmpty';
+import DataEmpty from '@/components/common/DataEmpty';
 import { useParams, useSearchParams } from 'react-router-dom';
 import Jerome from '@/assets/icons/jerome.jpg';
 

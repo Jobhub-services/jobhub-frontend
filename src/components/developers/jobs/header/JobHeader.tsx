@@ -5,12 +5,12 @@ import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
 
 const JobHeader = () => {
-	const { filterClosed } = useAppSelector((state) => state.developerJobs);
+	const { filterClosed, jobInfo } = useAppSelector((state) => state.developerJobs);
 	const onChangeTab = () => {};
 	return (
 		<FlexBox justify="space-between">
 			<FlexBox gap={20}>
-				<HeaderNav onClick={onChangeTab} status="Browse all" active title="Browse all" badge="20" />
+				<HeaderNav onClick={onChangeTab} status="Browse all" active title="Browse all" badge={jobInfo?.count?.toString()} />
 				<HeaderNav onClick={onChangeTab} status="Saved" title="Saved" badge="30" />
 			</FlexBox>
 			<FlexBox gap={15}>

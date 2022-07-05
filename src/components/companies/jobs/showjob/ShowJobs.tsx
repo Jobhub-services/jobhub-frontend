@@ -1,7 +1,7 @@
 import JobCard from './JobCard';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
-import DataEmpty from '@/components/companies/_common/DataEmpty';
+import DataEmpty from '@/components/common/DataEmpty';
 
 const SWrapper = styled.div`
 	display: grid;

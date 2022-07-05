@@ -12,11 +12,8 @@ const SocialProfile = () => {
 	return (
 		<div>
 			{social_profile?.website !== '' && (
-				<FlexBox gap={15}>
-					<FlexBox gap={5}>
-						<WorldIcon width="25px" height="25px" color={colors.BLACK_7} />
-						<SData>Website</SData>
-					</FlexBox>
+				<FlexBox gap={5}>
+					<WorldIcon width="25px" height="25px" color={colors.BLACK_7} />
 					<SLink href={social_profile?.website}>{social_profile?.website?.split('//')[1]}</SLink>
 				</FlexBox>
 			)}

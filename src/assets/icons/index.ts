@@ -46,8 +46,20 @@ import HeartIcon from './HeartIcon';
 import HeartFilledIcon from './HeartFilledIcon';
 import EmpolyeesIcon from './EmployeesIcon';
 import FacebookIcon from './FacebookIcon';
+import DetailIcon from './DetailIcon';
+import CalendarFillIcon from './CalendarFillIcon';
+import LocationFillIcon from './LocationFillIcon';
+import WorldColorIcon from './WorldColorIcon';
+import JobHiringIcon from './JobHiringIcon';
+import SecurityConfigIcon from './SecurityConfigIcon';
 
 export {
+	SecurityConfigIcon,
+	JobHiringIcon,
+	WorldColorIcon,
+	LocationFillIcon,
+	CalendarFillIcon,
+	DetailIcon,
 	FacebookIcon,
 	EmpolyeesIcon,
 	HeartIcon,

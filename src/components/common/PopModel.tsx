@@ -1,10 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { colors } from '@/assets/theme';
 import { FlexBox, IconButton, HrDivider } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
 import React, { useEffect, useRef, useState } from 'react';
 import { PopModelProps } from '@/models/component';
-
+const opacity = keyframes`
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+`;
 const Container = styled.div<any>`
 	position: fixed;
 	top: 0;
@@ -12,11 +19,10 @@ const Container = styled.div<any>`
 	width: ${(props) => (props.closed ? '0' : '100%')};
 	height: ${(props) => (props.closed ? '0' : '100%')};
 	display: flex;
-	transition: width 0.5s, height 0.5s;
 	justify-content: center;
 	align-items: center;
 	background: #27272736;
-	//transform: scaleY(5) scaleX(2) translate(20%, 20%);
+	animation: ${opacity} 0.15s ease-out;
 	overflow: hidden;
 	z-index: 150;
 `;

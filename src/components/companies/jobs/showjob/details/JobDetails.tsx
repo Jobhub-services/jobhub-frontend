@@ -86,6 +86,7 @@ const JobDetails = () => {
 	function onClose() {
 		navigate('/jobs', { replace: true });
 	}
+	console.log(jobDetails);
 	return (
 		<MainContainer showed={pathname.includes('/jobs/details/')}>
 			<DetailContainer showed={pathname.includes('/jobs/details/')}>

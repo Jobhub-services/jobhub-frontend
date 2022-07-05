@@ -1,19 +1,29 @@
 import { colors } from '@/assets/theme';
+import { SContainer } from '@/components/developers/_common/common.style';
 import { PJobCard } from '@/models/component/developer/jobs.interface';
 import { Button, DropDown, FlexBox, IconButton, Tag } from 'staak-ui';
 import styled from 'styled-components';
 import JobAvatar from '@/components/developers/jobs/JobAvatar';
 import { ClockIcon, DotIcon, HeartFilledIcon, HeartIcon, LocationIcon, MoneyIcon, StarIcon, SuccessIcon } from '@/assets/icons';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
+import { jobActions } from '@/modules/actions/developer/jobs.actions';
 
-const SContainer = styled.div`
-	background: white;
-	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
-	border-radius: 8px;
+const SHeader = styled(FlexBox)`
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	padding: 15px 15px 10px 15px;
+	cursor: pointer;
+	transition: all 0.2s;
+	&:hover {
+		background-color: ${colors.PURPLE_1};
+	}
 `;
 const SBody = styled.div`
-	padding: 15px 15px;
 	height: 195px;
+`;
+const SubBody = styled(FlexBox)`
+	padding: 0 15px 15px 15px;
 `;
 
 const SFooter = styled(FlexBox)`
@@ -58,14 +68,19 @@ const SButton = styled(FlexBox)`
 	color: ${colors.BLACK_4};
 `;
 const JobCard = (props: PJobCard) => {
+	const navigate = useNavigate();
+	const onApply = () => {
+		jobActions.getJob(props._id);
+		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Application' } });
+	};
 	const handleSelect = () => {};
 	const newPost = Math.abs(new Date(props.createdAt!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
 	const posted_at = moment(new Date(props.createdAt!)).fromNow();
 	return (
 		<SContainer>
 			<SBody>
-				<FlexBox justify="start" align="flex-start" gap={10}>
-					<JobAvatar jobId={props.id} new title={props.title} subtitle={props.company_name} img={props.avatar} featured={props.featured} />
+				<SHeader justify="start" align="flex-start" gap={10}>
+					<JobAvatar _id={props._id} new title={props.title} subtitle={props.createdBy?.companyName} img={props.avatar} featured={props.featured} />
 					<DropDown listPosition="left" onSelect={handleSelect}>
 						<DropDown.Title>
 							<IconButton width="35px" height="20px">
@@ -76,8 +91,8 @@ const JobCard = (props: PJobCard) => {
 						<DropDown.Item>Edit</DropDown.Item>
 						<DropDown.Item>Delete</DropDown.Item>
 					</DropDown>
-				</FlexBox>
-				<FlexBox justify="space-between" align="start" gap={10} className="mt-15">
+				</SHeader>
+				<SubBody justify="space-between" align="start" gap={10} className="mt-5">
 					<div style={{ width: '63%' }}>
 						<FlexBox align="start" justify="start" gap={5}>
 							<div>Category :</div>
@@ -107,13 +122,10 @@ const JobCard = (props: PJobCard) => {
 							<SIcon>
 								<LocationIcon width="18px" height="18px" color={colors.BLACK_9} />
 							</SIcon>
-							{props.work_remotly ? (
-								<SLoc>Remote</SLoc>
-							) : (
-								<SLoc>
-									{props.work_location?.city}, {props.work_location?.country}
-								</SLoc>
-							)}
+							<SLoc>
+								{props.work_remotly ? `Remote. ` : ''}
+								{props.work_location?.city ? `${props.work_location?.city},` : ''} {props.work_location?.country}
+							</SLoc>
 						</FlexBox>
 						<FlexBox gap={10} justify="end" className="mt-15">
 							<Tag color={colors.BLUE_CLEAR_5} size="12px">
@@ -135,7 +147,7 @@ const JobCard = (props: PJobCard) => {
 							{newPost < 7 && <SFeat color={colors.YELLOW_BASE}>New</SFeat>}
 						</FlexBox>
 					</div>
-				</FlexBox>
+				</SubBody>
 			</SBody>
 			<SFooter justify="space-between">
 				<FlexBox gap={5}>
@@ -152,7 +164,9 @@ const JobCard = (props: PJobCard) => {
 							Applied
 						</SButton>
 					) : (
-						<Button size="sm">Apply</Button>
+						<Button size="sm" variant="text" onClick={onApply}>
+							Apply
+						</Button>
 					)}
 				</FlexBox>
 			</SFooter>

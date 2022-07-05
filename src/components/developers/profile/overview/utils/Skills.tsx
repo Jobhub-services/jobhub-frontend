@@ -1,12 +1,8 @@
-import { colors } from '@/assets/theme';
 import { useAppSelector } from '@/utils/appHooks';
 import { FlexBox, Tag } from 'staak-ui';
 import styled from 'styled-components';
-import { SpanTitle } from '@/components/developers/profile/common';
-const SSpan = styled.span`
-	display: inline-block;
-	color: ${colors.BLACK_9};
-`;
+import { SpanTitle, SSpan } from '@/components/developers/profile/common';
+
 const TagWrapper = styled(FlexBox)`
 	gap: 15px !important;
 	flex-wrap: wrap;

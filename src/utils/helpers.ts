@@ -12,6 +12,7 @@ export function getGMTOffset(): string {
 	return 'GMT-' + offset;
 }
 
-export function dateWithMonthName(value: string | Date): string {
+export function dateWithMonthName(value: string | Date): string | null {
+	if (!value || value === '') return null;
 	return new Date(value).toLocaleDateString('en-US', dateOptions);
 }

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import ApplicationContainer from '@/components/companies/applicants/ApplicationContainer';
 import { useParams } from 'react-router-dom';
-import DataEmpty from '@/components/companies/_common/DataEmpty';
+import DataEmpty from '@/components/common/DataEmpty';
 import { useAppSelector } from '@/utils/appHooks';
 import Jerome from '@/assets/icons/jerome.jpg';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';

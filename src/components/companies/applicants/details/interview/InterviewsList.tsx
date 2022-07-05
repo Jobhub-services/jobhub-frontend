@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colors } from '@/assets/theme';
 import InterviewInfo from './InterviewInfo';
 import { useAppSelector } from '@/utils/appHooks';
-import DataEmpty from '@/components/companies/_common/DataEmpty';
+import DataEmpty from '@/components/common/DataEmpty';
 import { useEffect } from 'react';
 import { interviewActions } from '@/modules/actions/company/interview.action';
 

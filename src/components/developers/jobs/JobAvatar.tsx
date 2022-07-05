@@ -3,14 +3,15 @@ import { FlexBox } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import { PJobAvatar } from '@/models/component/developer/jobs.interface';
 import { EmpolyeesIcon } from '@/assets/icons';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { jobActions } from '@/modules/actions/developer/jobs.actions';
 
 const SContainer = styled(FlexBox)`
 	cursor: pointer;
 `;
 const SImg = styled.img`
-	width: 35px;
-	height: 35px;
+	width: 40px;
+	height: 40px;
 	border-radius: 7px;
 `;
 
@@ -35,14 +36,13 @@ const Span = styled.span<any>`
 `;
 
 const JobAvatar = (props: PJobAvatar) => {
-	const [searchParams, setSearchParams] = useSearchParams();
-
+	const navigate = useNavigate();
 	const viewDetail = () => {
-		searchParams.set('detail', props.jobId);
-		setSearchParams(searchParams);
+		jobActions.getJob(props._id);
+		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Overview' } });
 	};
 	return (
-		<SContainer gap={10} justify="start" align="flex-start" width="100%" onClick={viewDetail}>
+		<SContainer gap={10} justify="start" width="100%" onClick={viewDetail}>
 			<SImg src={props.img} alt="google" />
 			<div style={{ width: '100%' }}>
 				<FlexBox justify="space-between">

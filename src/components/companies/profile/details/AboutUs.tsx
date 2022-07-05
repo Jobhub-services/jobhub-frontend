@@ -5,7 +5,7 @@ import { EditIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { useAppSelector } from '@/utils/appHooks';
 import { useState } from 'react';
-import { profileDispatcher } from '@/modules/actions/company/profile.actions';
+import { profileAction } from '@/modules/actions/company/profile.actions';
 
 const SAboutUs = styled.pre<any>`
 	display: -webkit-box;
@@ -38,7 +38,7 @@ const AboutUs = () => {
 		setShow(true);
 	};
 	const onSave = () => {
-		profileDispatcher.setAttribute(text, 'description');
+		profileAction.setAttribute(text, 'description');
 		setShow(false);
 	};
 	const handleText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {

@@ -2,7 +2,7 @@ import { colors } from '@/assets/theme';
 import styled from 'styled-components';
 
 export const STitle = styled.h2`
-	margin: 10px 0;
+	margin: 0 0;
 	font-size: 18px;
 	color: ${colors.BLUE_DARK_4};
 `;

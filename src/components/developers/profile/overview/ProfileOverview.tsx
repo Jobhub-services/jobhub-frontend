@@ -2,9 +2,21 @@ import { TwitterLogo, WebsiteLogo } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { useAppSelector } from '@/utils/appHooks';
 import { Button, FlexBox, GithubIcon, HrDivider, LinkedinLogo } from 'staak-ui';
-import { Languages, Skills, WorkExperience, Education, Certification, Summary, SocialProfile } from '@/components/developers/profile/overview/utils';
+import {
+	Languages,
+	Skills,
+	WorkExperience,
+	Education,
+	Certification,
+	Summary,
+	SocialProfile,
+	DesiredLocation,
+	DesiredRoles,
+	Salary,
+	JobType,
+} from '@/components/developers/profile/overview/utils';
 import styled from 'styled-components';
-import { ProfileAvatar } from '@/components/developers/profile/common/';
+import { ProfileAvatar, WantsElem } from '@/components/developers/profile/common/';
 
 const LefSide = styled.div`
 	width: 25%;
@@ -20,7 +32,7 @@ const RightSide = styled.div`
 
 const ProfileOverview = () => {
 	const { developerInfo } = useAppSelector(({ user }) => user.userInfo);
-	const { role, address } = useAppSelector((state) => state.developerProfile.profile);
+	const { role, address, status } = useAppSelector((state) => state.developerProfile.profile);
 	return (
 		<div>
 			<FlexBox style={{ padding: '20px 20px', borderBottom: `1px solid ${colors.BLACK_12}` }} justify="space-between" align="start">
@@ -30,14 +42,24 @@ const ProfileOverview = () => {
 					location={address}
 					role={role?.primary_role?.name}
 					experience={role?.experience}
+					overview
+					status={status}
 				/>
 				<SocialProfile />
 			</FlexBox>
 			<FlexBox width="100%" gap={15} align="start">
 				<LefSide>
+					<Salary />
+					<HrDivider top={15} />
+					<JobType />
+					<HrDivider top={15} />
 					<Skills />
 					<HrDivider top={15} />
 					<Languages />
+					<HrDivider top={15} />
+					<DesiredRoles />
+					<HrDivider top={15} />
+					<DesiredLocation />
 				</LefSide>
 				<RightSide>
 					<Summary />
@@ -47,6 +69,8 @@ const ProfileOverview = () => {
 					<Education />
 					<HrDivider top={15} />
 					<Certification />
+					<HrDivider top={15} />
+					<WantsElem />
 				</RightSide>
 			</FlexBox>
 		</div>

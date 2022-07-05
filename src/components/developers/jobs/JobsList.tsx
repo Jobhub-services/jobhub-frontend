@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import JobCard from '@/components/developers/jobs/JobCard';
+import JobCard from '@/components/developers/_common/JobCard';
 import Google from '@/assets/icons/google.jpg';
-import Facebook from '@/assets/icons/facebook.png';
+import { useAppSelector } from '@/utils/appHooks';
+import DataEmpty from '@/components/common/DataEmpty';
 
 const SWrapper = styled.div<any>`
 	display: grid;
@@ -10,221 +11,38 @@ const SWrapper = styled.div<any>`
 	gap: 20px;
 `;
 const JobsList = () => {
+	const { jobInfo } = useAppSelector((state) => state.developerJobs);
+	const { content } = jobInfo;
+	if (content?.length === 0)
+		return <DataEmpty title="No data found" description="No content match your criteria. Try searching for something else" />;
 	return (
 		<SWrapper>
-			<JobCard
-				id="1"
-				title="Remote Platform Database Administrator"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Google}
-				createdAt="2022-06-12T20:20:00"
-				company_name="Google"
-				work_location={{ country: 'Antigua and Barbuda', city: 'Antigua and' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'France', city: 'Paris' },
-				]}
-				start_salary="130000"
-				end_salary="200000"
-				currency={{ code: 'USD' }}
-				salary_type="Annually"
-				featured
-				saved
-			/>
-			<JobCard
-				id="1"
-				title="Remote Senior Fullstack Rails Engineer (Rails 7/Hotwire/Tailwind/ViewComponents)"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Facebook}
-				createdAt="2022-06-10"
-				company_name="Facebook"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_remotly
-				applied
-			/>
-			<JobCard
-				id="1"
-				title="Remote Platform Database Administrator"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Google}
-				createdAt="2022-06-03"
-				company_name="IBM"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-				]}
-				start_salary="20"
-				end_salary="50"
-				currency={{ code: 'USD' }}
-				salary_type="Hourly"
-			/>
-			<JobCard
-				id="1"
-				title="Remote Senior Fullstack Rails Engineer (Rails 7/Hotwire/Tailwind/ViewComponents)"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Facebook}
-				createdAt="2022-06-11"
-				company_name="Facebook"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-				]}
-			/>
-			<JobCard
-				id="1"
-				title="Remote Platform Database Administrator"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Google}
-				createdAt="2022-06-12T20:20:00"
-				company_name="Google"
-				work_location={{ country: 'Antigua and Barbuda', city: 'Antigua and' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'France', city: 'Paris' },
-				]}
-				start_salary="130000"
-				end_salary="200000"
-				currency={{ code: 'USD' }}
-				salary_type="Annually"
-				featured
-				saved
-			/>
-			<JobCard
-				id="1"
-				title="Remote Senior Fullstack Rails Engineer (Rails 7/Hotwire/Tailwind/ViewComponents)"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Facebook}
-				createdAt="2022-06-10"
-				company_name="Facebook"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_remotly
-				applied
-			/>
-			<JobCard
-				id="1"
-				title="Remote Platform Database Administrator"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Google}
-				createdAt="2022-06-03"
-				company_name="IBM"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-				]}
-				start_salary="20"
-				end_salary="50"
-				currency={{ code: 'USD' }}
-				salary_type="Hourly"
-			/>
-			<JobCard
-				id="1"
-				title="Remote Senior Fullstack Rails Engineer (Rails 7/Hotwire/Tailwind/ViewComponents)"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Facebook}
-				createdAt="2022-06-11"
-				company_name="Facebook"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-				]}
-			/>
-			<JobCard
-				id="1"
-				title="Remote Platform Database Administrator"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Google}
-				createdAt="2022-06-12T20:20:00"
-				company_name="Google"
-				work_location={{ country: 'Antigua and Barbuda', city: 'Antigua and' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'France', city: 'Paris' },
-				]}
-				start_salary="130000"
-				end_salary="200000"
-				currency={{ code: 'USD' }}
-				salary_type="Annually"
-				featured
-				saved
-			/>
-			<JobCard
-				id="1"
-				title="Remote Senior Fullstack Rails Engineer (Rails 7/Hotwire/Tailwind/ViewComponents)"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Facebook}
-				createdAt="2022-06-10"
-				company_name="Facebook"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_remotly
-				applied
-			/>
-			<JobCard
-				id="1"
-				title="Remote Platform Database Administrator"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Google}
-				createdAt="2022-06-03"
-				company_name="IBM"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-				]}
-				start_salary="20"
-				end_salary="50"
-				currency={{ code: 'USD' }}
-				salary_type="Hourly"
-			/>
-			<JobCard
-				id="1"
-				title="Remote Senior Fullstack Rails Engineer (Rails 7/Hotwire/Tailwind/ViewComponents)"
-				category="Software Engineering"
-				job_type="Full time"
-				duration="Permanent"
-				avatar={Facebook}
-				createdAt="2022-06-11"
-				company_name="Facebook"
-				work_location={{ country: 'Germany', city: 'Berlin' }}
-				hire_location={[
-					{ country: 'Germany', city: 'Berlin' },
-					{ country: 'Germany', city: 'Berlin' },
-				]}
-			/>
+			{content?.map((elem, idx) => {
+				return (
+					<JobCard
+						key={idx}
+						_id={elem._id}
+						title={elem.title}
+						category={elem.category}
+						job_type={elem.job_type}
+						duration={elem.duration}
+						avatar={Google}
+						createdAt={elem.createdAt}
+						createdBy={elem.createdBy}
+						work_location={elem.work_location}
+						hire_location={elem.hire_location}
+						work_remotly={elem.work_remotly}
+						hire_remotly={elem.hire_remotly}
+						start_salary={elem.start_salary}
+						end_salary={elem.end_salary}
+						currency={elem.currency}
+						salary_type={elem.salary_type}
+						featured
+						saved
+						applied={elem.applied}
+					/>
+				);
+			})}
 		</SWrapper>
 	);
 };

@@ -1,6 +1,7 @@
 import { CameraIcon } from '@/assets/icons';
 import Jerome from '@/assets/icons/jerome.jpg';
 import { colors } from '@/assets/theme';
+import { CProfileStatus } from '@/constants/developer/profile.constants';
 import { ProfileAvatarProps } from '@/models/component/developer';
 import { profileAction } from '@/modules/actions/developer/profile.actions';
 import { useAppSelector } from '@/utils/appHooks';
@@ -56,7 +57,7 @@ const SH2 = styled.h2`
 	margin: 5px 0;
 	color: ${colors.BLACK_3};
 `;
-const ProfileAvatar = ({ firstname, lastname, location, size, role, experience }: ProfileAvatarProps) => {
+const ProfileAvatar = ({ firstname, lastname, location, size, role, experience, status, overview }: ProfileAvatarProps) => {
 	const { avatar } = useAppSelector((state) => state.developerProfile.profile);
 	const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { files } = event.target;
@@ -74,15 +75,28 @@ const ProfileAvatar = ({ firstname, lastname, location, size, role, experience }
 						<UserIcon width="60px" height="60px" color={colors.BLACK_10} />
 					)}
 				</AvatarContainer>
-				<ImgSpan htmlFor="avatar">
-					<CameraIcon width="20px" height="20px" />
-				</ImgSpan>
-				<FInput onChange={handleAvatar} type={'file'} name="resume" id="avatar" />
+				{!overview && (
+					<>
+						<ImgSpan htmlFor="avatar">
+							<CameraIcon width="20px" height="20px" />
+						</ImgSpan>
+						<FInput onChange={handleAvatar} type={'file'} name="resume" id="avatar" />
+					</>
+				)}
 			</SContainer>
 			<div>
-				<SH2>
-					{firstname} {lastname}
-				</SH2>
+				<FlexBox justify="start" gap={30}>
+					<SH2>
+						{firstname} {lastname}
+					</SH2>
+					{status && (
+						<FlexBox justify="start" gap={10}>
+							{CProfileStatus[status!].icon}
+							<span>{CProfileStatus[status!].value}</span>
+						</FlexBox>
+					)}
+				</FlexBox>
+
 				<FlexBox justify="start" gap={5}>
 					{location?.country && location.country.name !== '' && (
 						<FlexBox gap={10}>

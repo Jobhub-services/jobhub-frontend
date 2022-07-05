@@ -50,12 +50,9 @@ export const profileAction = {
 				dataToSend = {
 					[attr]: data,
 				};
-			console.log(dataToSend);
 			const response = await httpClient.put(`${USERS_SERVICE}/developer/profile`, dataToSend);
-
 			if (response.data) {
 				const content = response.data?.content![attr];
-				console.log(response.data, content, dataToSend);
 				profileDispatcher.setAttribute(content, attr);
 			}
 		} catch (e: any) {

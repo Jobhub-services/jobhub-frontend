@@ -5,6 +5,8 @@ import ProfileDetails from '@/components/companies/profile/ProfileDetails';
 import { useAppSelector } from '@/utils/appHooks';
 import { TabPane } from 'staak-ui';
 import styled from 'styled-components';
+import { profileAction } from '@/modules/actions/company/profile.actions';
+import { useEffect } from 'react';
 
 const SContainer = styled.div`
 	height: 100%;
@@ -13,6 +15,9 @@ const SContainer = styled.div`
 `;
 const CompanyProfile = () => {
 	const { isLoading } = useAppSelector((state) => state.companyProfile);
+	useEffect(() => {
+		profileAction.getProfile();
+	}, []);
 	return (
 		<SContainer>
 			<div

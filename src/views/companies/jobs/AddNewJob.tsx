@@ -10,7 +10,7 @@ import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 import { HEADER_HIEGHT } from '@/constants/app.constants';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';
-import Alert from './Alert';
+import Alert from '@/components/common/Alert';
 import { jobDispatcher } from '@/modules/actions/company/job.actions';
 
 /* component style */

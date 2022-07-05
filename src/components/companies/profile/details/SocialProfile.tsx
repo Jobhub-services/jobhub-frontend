@@ -2,7 +2,7 @@ import { EditIcon, FacebookIcon, LinkedInSolidIcon, WorldIcon } from '@/assets/i
 import { colors } from '@/assets/theme';
 import { PopModel } from '@/components/common';
 import { SpanTitle, SButton, SSpan } from '@/components/companies/profile/common/common.style';
-import { profileDispatcher } from '@/modules/actions/company/profile.actions';
+import { profileAction } from '@/modules/actions/company/profile.actions';
 import { TSocialProfile } from '@/types/company/profile.type';
 import { useAppSelector } from '@/utils/appHooks';
 import { useState } from 'react';
@@ -17,7 +17,10 @@ const SocialProfile = () => {
 	const [social, setSocial] = useState<TSocialProfile>({ linkedin: '', website: '', facebook: '', twitter: '' });
 	const [show, setShow] = useState(false);
 	const dataEmpty =
-		social_profile?.website === '' && social_profile?.linkedin === '' && social_profile?.facebook === '' && social_profile?.twitter === '';
+		(!social_profile?.website || social_profile?.website === '') &&
+		(!social_profile?.linkedin || social_profile?.linkedin === '') &&
+		(!social_profile?.facebook || social_profile?.facebook === '') &&
+		(!social_profile?.twitter || social_profile?.twitter === '');
 	const onShow = () => {
 		setShow(true);
 		setSocial(social_profile!);
@@ -30,7 +33,7 @@ const SocialProfile = () => {
 	};
 	const onSave = () => {
 		setShow(false);
-		profileDispatcher.setAttribute(social, 'social_profile');
+		profileAction.setAttribute(social, 'social_profile');
 	};
 	return (
 		<div>
@@ -45,7 +48,7 @@ const SocialProfile = () => {
 				</SButton>
 			</FlexBox>
 			<div>
-				{social_profile?.website !== '' && (
+				{social_profile?.website && social_profile?.website !== '' && (
 					<FlexBox justify="start" align="start" gap={10} className="mt-15">
 						<WorldIcon width="20px" height="20px" color={colors.BLACK_7} />
 						<FlexBox gap={10}>
@@ -56,7 +59,7 @@ const SocialProfile = () => {
 						</FlexBox>
 					</FlexBox>
 				)}
-				{social_profile?.linkedin !== '' && (
+				{social_profile?.linkedin && social_profile?.linkedin !== '' && (
 					<FlexBox justify="start" align="start" gap={10} className="mt-15">
 						<LinkedInSolidIcon width="20px" height="20px" color={colors.BLACK_7} />
 						<FlexBox gap={10}>
@@ -67,7 +70,7 @@ const SocialProfile = () => {
 						</FlexBox>
 					</FlexBox>
 				)}
-				{social_profile?.facebook !== '' && (
+				{social_profile?.facebook && social_profile?.facebook !== '' && (
 					<FlexBox justify="start" align="start" gap={10} className="mt-15">
 						<FacebookIcon width="20px" height="20px" color={colors.BLACK_7} />
 						<FlexBox gap={10}>
@@ -78,7 +81,7 @@ const SocialProfile = () => {
 						</FlexBox>
 					</FlexBox>
 				)}
-				{social_profile?.twitter !== '' && (
+				{social_profile?.twitter && social_profile?.twitter !== '' && (
 					<FlexBox justify="start" align="start" gap={10} className="mt-15">
 						<TwitterIcon width="20px" height="20px" color={colors.BLACK_7} />
 						<FlexBox gap={10}>

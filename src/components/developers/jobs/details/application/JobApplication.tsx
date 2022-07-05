@@ -5,6 +5,7 @@ import Questions from '@/components/developers/jobs/details/application/Question
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions, jobDispatcher } from '@/modules/actions/developer/jobs.actions';
 import { useSearchParams } from 'react-router-dom';
+import Applied from '@/assets/icons/applied.png';
 
 const JobApplication = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -13,7 +14,7 @@ const JobApplication = () => {
 	const { jobApplication } = useAppSelector((state) => state.developerJobs);
 	const handleInput = (event: any, value?: string, name?: string) => {
 		let tmp = { ...jobApplication };
-		tmp[name as 'resume' | 'notice_period'] = value;
+		tmp[name as 'motivation' | 'notice_period'] = value;
 		jobDispatcher.setJobApplication(tmp);
 	};
 	const handleDate = (date: Date | null) => {
@@ -22,23 +23,31 @@ const JobApplication = () => {
 		jobDispatcher.setJobApplication(tmp);
 	};
 	const handleApp = () => {
-		jobActions.setJobApplication(jobApplication!);
+		let data = { ...jobApplication };
+		data.jobId = jobDetails?._id;
+		jobActions.setJobApplication(data!);
 	};
 	const onClose = () => {
 		searchParams.delete('detail');
 		setSearchParams(searchParams);
 	};
-	//console.log(new Date(null));
+	if (jobDetails?.applied) {
+		return (
+			<FlexBox>
+				<img src={Applied} alt="applied" />
+			</FlexBox>
+		);
+	}
 	return (
 		<div>
 			<STitle>
 				{developerInfo?.firstName} {developerInfo?.lastName}
 			</STitle>
-			<TextAreaField height="130px" name="resume" onDataChange={handleInput}>
+			<TextAreaField height="130px" name="motivation" onDataChange={handleInput}>
 				Let us know why you are a good fit.
 			</TextAreaField>
 			{jobDetails?.questions?.length! > 0 && <Questions questions={jobDetails?.questions} />}
-			<div>
+			<div className="mt-10">
 				<STitle>Availability</STitle>
 				<FlexBox gap={20}>
 					<InputDateField

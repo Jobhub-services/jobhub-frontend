@@ -2,7 +2,7 @@ import { EditIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { SpanTitle, SButton } from '@/components/companies/profile/common/common.style';
 import KeywordsElem from '@/components/companies/profile/common/KeywordsElem';
-import { profileDispatcher } from '@/modules/actions/company/profile.actions';
+import { profileDispatcher, profileAction } from '@/modules/actions/company/profile.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { useState } from 'react';
 import { Button, FlexBox, PlusIcon, TagInput } from 'staak-ui';
@@ -18,6 +18,7 @@ const KeyWords = () => {
 	};
 	const onSave = () => {
 		setShow(false);
+		profileAction.setAttribute(keywords, 'keywords');
 	};
 	return (
 		<div>

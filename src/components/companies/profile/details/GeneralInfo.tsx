@@ -6,11 +6,11 @@ import { EditIcon, PlusIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { Button, FlexBox } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
-import { profileDispatcher } from '@/modules/actions/company/profile.actions';
+import { profileAction } from '@/modules/actions/company/profile.actions';
 
 const GeneralInfo = () => {
 	const { generalinfo } = useAppSelector((state) => state.companyProfile.profile);
-	const [genInfo, setGenInfo] = useState<{ company_size?: string; founded?: string; industry?: string; company_name?: string }>({});
+	const [genInfo, setGenInfo] = useState<{ company_size?: string; founded?: string; industry?: string }>({});
 	const [show, setShow] = useState(false);
 	const empty =
 		(!generalinfo?.company_size || generalinfo?.company_size === '') &&
@@ -19,14 +19,14 @@ const GeneralInfo = () => {
 
 	const onSave = () => {
 		setShow(false);
-		profileDispatcher.setAttribute(genInfo, 'generalinfo');
+		profileAction.setAttribute(genInfo, 'generalinfo');
 	};
 	const onShow = () => {
 		setShow(true);
 	};
 	const handleInput = (event: any, value?: string, name?: string) => {
 		let tmp = { ...genInfo };
-		tmp[name as 'industry' | 'company_name'] = value;
+		tmp.industry = value;
 		setGenInfo(tmp);
 	};
 	const handlePicker = (event: any, value: string, label: string, name: string) => {
@@ -54,9 +54,6 @@ const GeneralInfo = () => {
 			<GeneralInfoElem generalinfo={generalinfo} />
 			{show && (
 				<div className="mt-20">
-					<InputField name="company_name" onDataChange={handleInput} value={generalinfo?.company_name}>
-						Company name
-					</InputField>
 					<InputPickerField className="mt-10" name="company_size" title="Company size" onChange={handlePicker} value={generalinfo?.company_size}>
 						<InputPickerField.Option value="Seed (1 - 10 employees)">Seed (1 - 10 Employees)</InputPickerField.Option>
 						<InputPickerField.Option value="Early (11 - 50 employees)">Early (11 - 50 Employees)</InputPickerField.Option>
