@@ -1,22 +1,17 @@
 import { colors } from '@/assets/theme';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
-import { HeartFilledIcon, HeartIcon, StarIcon, UnavailableIcon } from '@/assets/icons';
+import { HeartFilledIcon, HeartIcon, UnavailableIcon } from '@/assets/icons';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Button, CloseIcon, FlexBox, Headline, HrDivider, IconButton, TabPane } from 'staak-ui';
-import JobHeader from '@/components/developers/jobs/details/JobHeader';
-import JobDescription from '@/components/developers/jobs/details/JobDescription';
-import Role from '@/components/developers/jobs/details/Role';
-import Location from '@/components/developers/jobs/details/Location';
-import Skills from '@/components/developers/jobs/details/Skills';
-import Compensation from '@/components/developers/jobs/details/Compensation';
-import Qualifications from '@/components/developers/jobs/details/Qualifications';
 import JobApplication from '@/components/developers/jobs/details/application/JobApplication';
 import styled, { keyframes } from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useRef } from 'react';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import ErrorHandler from '@/components/developers/jobs/details/application/ErrorHandler';
+import JobMetaInfo from '@/components/developers/jobs/details/JobMetaInfo';
+import JobGeneralInfo from '@/components/developers/jobs/details/JobGeneralInfo';
 
 const width = keyframes`
     from{
@@ -28,14 +23,6 @@ const width = keyframes`
 `;
 const ScrollContainer = styled.div`
 	padding: 0 10px;
-`;
-const SFeat = styled.span<any>`
-	background-color: ${(props) => props.color};
-	color: white;
-	border-radius: 5px;
-	padding: 1px 5px;
-	font-size: 12px;
-	font-weight: 500;
 `;
 const MainContainer = styled.div<any>`
 	cursor: pointer;
@@ -74,14 +61,7 @@ const SBody = styled(FlexBox)`
 	gap: 15px !important;
 	height: calc(100% - 62px);
 `;
-const LeftContainer = styled.div`
-	width: 23%;
-	border: 1px solid ${colors.BLACK_12};
-	border-radius: 8px;
-	padding: 10px 15px;
-	height: 100%;
-	overflow: auto;
-`;
+
 const RightContainer = styled.div`
 	width: 77%;
 	border: 1px solid ${colors.BLACK_12};
@@ -95,9 +75,9 @@ const JobDetails = () => {
 	const navigate = useNavigate();
 	const parentRef = useRef(null);
 	const newPost = Math.abs(new Date(jobDetails?.createdAt!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
-	const qualificationIsEmpty = jobDetails?.requirements || jobDetails?.education?.length! > 0 || jobDetails?.certification?.length! > 0;
-	const locationIsEmpty = jobDetails?.work_location || jobDetails?.hire_location?.length! > 0 || jobDetails?.visa_sponsorship;
-	const roleIsEmpty =
+	const qualificationIsEmpty: any = jobDetails?.requirements || jobDetails?.education?.length! > 0 || jobDetails?.certification?.length! > 0;
+	const locationIsEmpty: any = jobDetails?.work_location || jobDetails?.hire_location?.length! > 0 || jobDetails?.visa_sponsorship;
+	const roleIsEmpty: any =
 		jobDetails?.job_type || jobDetails?.duration || jobDetails?.duration_range || jobDetails?.category || jobDetails?.company_division;
 	const backUp = (e: any) => {
 		if (e.target === parentRef.current) navigate('/jobs');
@@ -144,46 +124,19 @@ const JobDetails = () => {
 						</FlexBox>
 						<HrDivider color={colors.BLACK_12} top={0} side={0} />
 						<SBody>
-							<LeftContainer className="staak_scrollbar">
-								<FlexBox justify="start" gap={15}>
-									{jobDetails?.featured && (
-										<SFeat color={colors.RED_BASE}>
-											<FlexBox justify="end" gap={5}>
-												<StarIcon color={'white'} width="13px" height="13px" />
-												<span>Featured</span>
-											</FlexBox>
-										</SFeat>
-									)}
-									{newPost < 7 && <SFeat color={colors.YELLOW_BASE}>New</SFeat>}
-								</FlexBox>
-								{roleIsEmpty && (
-									<>
-										<Role />
-										<HrDivider color={colors.BLACK_12} top={10} side={0} />
-									</>
-								)}
-								{locationIsEmpty && (
-									<>
-										<Location />
-										<HrDivider color={colors.BLACK_12} top={10} side={0} />
-									</>
-								)}
-								{jobDetails?.skills?.length! > 0 && <Skills />}
-							</LeftContainer>
+							<JobMetaInfo
+								storeData={jobDetails}
+								newPost={newPost}
+								featured={jobDetails?.featured}
+								locationIsEmpty={locationIsEmpty!}
+								roleIsEmpty={roleIsEmpty!}
+								skills={jobDetails?.skills}
+							/>
 							<RightContainer>
 								<TabPane activeItem={state.activeTab} paneWidth="60%">
 									<TabPane.Pane name="Overview" title="Overview">
 										<ScrollContainer className="staak_scrollbar">
-											<JobHeader />
-											<JobDescription />
-											<HrDivider color={colors.BLACK_12} top={10} side={0} />
-											<Compensation />
-											{qualificationIsEmpty && (
-												<>
-													<HrDivider color={colors.BLACK_12} top={10} side={0} />
-													<Qualifications />
-												</>
-											)}
+											<JobGeneralInfo qualificationIsEmpty={qualificationIsEmpty!} storeData={jobDetails} />
 										</ScrollContainer>
 									</TabPane.Pane>
 									<TabPane.Pane name="Application" title="Application">

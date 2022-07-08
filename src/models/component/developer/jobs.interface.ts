@@ -21,3 +21,17 @@ export interface PHeaderNav extends PNav {
 export interface PQuestion extends StandardProps {
 	questions?: { _id?: string; question?: string }[];
 }
+
+export interface PJobMetaInfo extends StandardProps {
+	featured?: boolean;
+	newPost?: number;
+	roleIsEmpty?: boolean;
+	locationIsEmpty?: boolean;
+	skills?: string[];
+	storeData: any;
+}
+
+export interface PJobGeneralInfo extends StandardProps {
+	qualificationIsEmpty?: boolean;
+	storeData: any;
+}

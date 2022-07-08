@@ -9,8 +9,14 @@ export const applicationDispatcher = {
 	setIsLoading(loading: boolean) {
 		dispatchToStore(storeActions.setIsLoading({ loading }));
 	},
+	setIsDetailLoading(loading: boolean) {
+		dispatchToStore(storeActions.setIsDetailLoading({ loading }));
+	},
 	setApplications(applications: any) {
 		dispatchToStore(storeActions.setApplications(applications));
+	},
+	setApplication(application: any) {
+		dispatchToStore(storeActions.setApplication(application));
 	},
 };
 export const applicationActions = {
@@ -25,6 +31,19 @@ export const applicationActions = {
 		} catch {
 		} finally {
 			applicationDispatcher.setIsLoading(false);
+		}
+	},
+	async getApplication(id: string) {
+		applicationDispatcher.setIsDetailLoading(true);
+		try {
+			const response = await httpClient.get(`${JOBS_SERVICE}/application/show/${id}`);
+			const responseData = response.data;
+			if (responseData) {
+				applicationDispatcher.setApplication(responseData.content);
+			}
+		} catch {
+		} finally {
+			applicationDispatcher.setIsDetailLoading(false);
 		}
 	},
 };

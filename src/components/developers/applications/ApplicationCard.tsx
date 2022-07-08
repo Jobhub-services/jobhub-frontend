@@ -11,13 +11,16 @@ import moment from 'moment';
 const SPre = styled.pre<any>`
 	display: -webkit-box;
 	color: ${colors.BLACK_7};
-	margin: 10px 0;
+	margin: 0;
 	font-family: inherit;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: pre-line;
+`;
+const SubBody = styled.div`
+	padding: 5px 15px 10px 15px;
 `;
 const SStatus = styled.span<any>`
 	display: inline-block;
@@ -32,8 +35,7 @@ const SSpan = styled.span`
 	color: ${colors.BLACK_9};
 `;
 const SBody = styled.div`
-	padding: 15px 15px;
-	height: 135px;
+	height: 130px;
 `;
 const SFooter = styled(FlexBox)`
 	padding: 10px 15px !important;
@@ -48,7 +50,9 @@ const ApplicationCard = (props: PApplicationCard) => {
 				<FlexBox>
 					<ApplicationAvatar img={props.avatar} title={props.jobId?.title} subtitle={props.company?.name} applicationId={props._id} />
 				</FlexBox>
-				<SPre>{props.motivation}</SPre>
+				<SubBody>
+					<SPre>{props.motivation}</SPre>
+				</SubBody>
 			</SBody>
 			<SFooter justify="space-between">
 				<FlexBox gap={5}>
@@ -57,7 +61,7 @@ const ApplicationCard = (props: PApplicationCard) => {
 				</FlexBox>
 				<FlexBox gap={5}>
 					<ClockIcon color={colors.BLACK_9} />
-					<SSpan>Posted {posted_at}</SSpan>
+					<SSpan>Applied {posted_at}</SSpan>
 				</FlexBox>
 			</SFooter>
 		</SContainer>

@@ -94,13 +94,12 @@ const CompanyDetail = () => {
 										<GeneralInfo
 											_id={overview._id}
 											social_profile={overview.social_profile}
-											headquarters={overview.headquarters}
-											company_size={overview.company_size}
-											founded={overview.founded}
+											headquarter={overview.headquarter}
+											generalinfo={overview.generalinfo}
 										/>
 									</LeftContainer>
 									<RightContainer>
-										<About _id="1" about={overview?.about} />
+										<About _id="1" description={overview?.description} />
 										<HrDivider top={10} side={0} />
 										<Keywords _id={overview._id} keywords={overview.keywords} />
 									</RightContainer>

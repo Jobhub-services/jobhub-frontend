@@ -2,19 +2,18 @@ import { DescriptionIcon, ResponsibleIcon } from '@/assets/icons';
 import TitleIcon from '@/components/common/jobs/TitleIcon';
 import { SP } from '@/components/developers/jobs/details/common.style';
 import { IconProps } from '@/models/component';
-import { useAppSelector } from '@/utils/appHooks';
+import { TJobDetails } from '@/types/developer/job.type';
 
-const JobDescription = () => {
-	const { jobDetails } = useAppSelector((state) => state.developerJobs);
+const JobDescription = ({ data, className }: { data: TJobDetails; className?: string }) => {
 	return (
-		<div className="mt-15">
+		<div className={className}>
 			<div>
 				<TitleIcon title="Description" icon={(props: IconProps) => <DescriptionIcon {...props} />} />
-				<SP>{jobDetails?.description}</SP>
+				<SP>{data?.description}</SP>
 			</div>
 			<div>
 				<TitleIcon title="Responsabilities" icon={(props: IconProps) => <ResponsibleIcon {...props} />} />
-				<SP>{jobDetails?.responsabilities}</SP>
+				<SP>{data?.responsabilities}</SP>
 			</div>
 		</div>
 	);

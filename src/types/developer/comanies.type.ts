@@ -1,12 +1,14 @@
 export type TCompanyData = {
 	_id: string;
-	about?: string;
+	description?: string;
 	avatar?: string;
-	name?: string;
-	industry?: string;
-	headquarters?: { country?: string; city?: string; street?: string };
-	founded?: string;
-	company_size?: string;
+	generalinfo?: {
+		industry?: string;
+		founded?: string;
+		company_size?: string;
+	};
+	companyName?: string;
+	headquarter?: { country?: string; city?: string; street?: string };
 	number_job?: number;
 };
 
@@ -18,4 +20,5 @@ export type TCompanyDetail = TCompanyData & {
 		facebook?: string;
 		linkedin?: string;
 	};
+	company_division?: string[];
 };

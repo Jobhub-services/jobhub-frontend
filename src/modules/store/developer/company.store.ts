@@ -28,15 +28,18 @@ const initialState: ICompanyState = {
 				'Fitness',
 			],
 			headquarters: { country: 'USA', city: 'California', street: '1600 street of old company' },
-			company_size: '1 - 10 Employee',
-			founded: '2015-02-20T23:20:10',
+			generalinfo: {
+				company_size: '1 - 10 Employee',
+				founded: '2015-02-20T23:20:10',
+				industry: 'Health, wellness & fitness',
+			},
 			social_profile: {
 				website: 'https://www.company.org',
 				facebook: 'https://www.facebook.com/company',
 				twitter: 'https://www.twitter.com/company',
 				linkedin: 'https://www.linkedin.com/company',
 			},
-			about: `DataArt is a global software engineering firm that takes a uniquely human approach to solving problems. 
+			description: `DataArt is a global software engineering firm that takes a uniquely human approach to solving problems. 
 
 DataArt has earned the trust of some of the world’s leading brands and most discerning clients, including Nasdaq, Travelport, Ocado, Centrica/Hive, Paddy Power Betfair, IWG, Univision, Meetup and Apple Leisure Group among others. 
 

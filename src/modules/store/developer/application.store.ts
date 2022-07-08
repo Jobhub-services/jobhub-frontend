@@ -3,10 +3,23 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IApplicationState = {
 	isLoading: false,
+	isDetailLoading: false,
 	applicationInfo: {
 		content: [],
 		count: 0,
 		size: 0,
+	},
+	applicationDetails: {
+		_id: '',
+		responses: [],
+		notice_period: '',
+		start_date: null,
+		jobId: {
+			_id: '',
+		},
+		company: {
+			_id: '',
+		},
 	},
 };
 
@@ -18,8 +31,15 @@ const reducerSlice = createSlice({
 			const { loading } = action.payload;
 			state.isLoading = loading;
 		},
+		setIsDetailLoading: (state, action) => {
+			const { loading } = action.payload;
+			state.isDetailLoading = loading;
+		},
 		setApplications: (state, action) => {
 			state.applicationInfo = action.payload;
+		},
+		setApplication: (state, action) => {
+			state.applicationDetails = action.payload;
 		},
 	},
 });

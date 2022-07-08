@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const SAboutUs = styled.pre<any>`
 	display: -webkit-box;
-	margin: 5px 0;
+	margin: 0 0;
 	font-family: inherit;
 	-webkit-line-clamp: ${(props) => (props.allText ? 'none' : 10)};
 	-webkit-box-orient: vertical;
@@ -20,14 +20,14 @@ const Small = styled.span`
 	color: ${colors.PURPLE_BASE};
 	cursor: pointer;
 `;
-const About = ({ about }: PCompanyCard) => {
+const About = ({ description }: PCompanyCard) => {
 	const [allText, setAllText] = useState(false);
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
 				<STitle>About</STitle>
 			</FlexBox>
-			<SAboutUs allText={allText}>{about}</SAboutUs>
+			<SAboutUs allText={allText}>{description}</SAboutUs>
 			<Small
 				onClick={() => {
 					setAllText(!allText);

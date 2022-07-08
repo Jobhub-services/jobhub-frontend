@@ -53,12 +53,12 @@ const CompanyCard = (props: PCompanyCard) => {
 			{ replace: true }
 		);
 	};
-	const { street, city, country } = props.headquarters!;
-	const founded = dateWithMonthName(props.founded!);
+	const { street, city, country } = props.headquarter ?? {};
+	const founded = dateWithMonthName(props?.generalinfo?.founded!);
 	return (
 		<SContainer>
 			<SBody>
-				<CompanyAvatar _id={props._id} avatar={props.avatar} name={props.name} industry={props.industry} />
+				<CompanyAvatar _id={props._id} avatar={props.avatar} name={props.companyName} industry={props?.generalinfo?.industry} />
 				<div style={{ padding: '0 15px' }}>
 					<FlexBox justify="start" className="mt-5" gap={5}>
 						<LocationFillIcon color={colors.BLACK_10} width="18px" height="18px" />
@@ -66,7 +66,7 @@ const CompanyCard = (props: PCompanyCard) => {
 							{street ? `${street},` : ''} {city ? `${city},` : ''} {country ? `${country}.` : ''}
 						</SSpan>
 					</FlexBox>
-					<SPre>{props.about}</SPre>
+					<SPre>{props.description}</SPre>
 				</div>
 			</SBody>
 			<SFooter justify="space-between">
@@ -74,7 +74,7 @@ const CompanyCard = (props: PCompanyCard) => {
 					{founded && (
 						<>
 							<CalendarFillIcon color={colors.BLACK_10} width="20px" height="20px" />
-							<SSpan>{dateWithMonthName(props.founded!)}</SSpan>
+							<SSpan>{dateWithMonthName(props?.generalinfo?.founded!)}</SSpan>
 						</>
 					)}
 				</FlexBox>

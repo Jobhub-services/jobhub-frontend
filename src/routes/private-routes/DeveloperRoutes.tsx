@@ -1,7 +1,16 @@
 import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Overview } from '@/views/companies';
-import { DeveloperProfile, ViewJobs, ViewApplications, ViewCompanies, CompanyDetail, ProfileSettings, JobDetails } from '@/views/developers';
+import {
+	DeveloperProfile,
+	ViewJobs,
+	ViewApplications,
+	ViewCompanies,
+	CompanyDetail,
+	ProfileSettings,
+	JobDetails,
+	ApplicationDetails,
+} from '@/views/developers';
 
 const DeveloperRoutes: FC = () => {
 	return (
@@ -12,7 +21,9 @@ const DeveloperRoutes: FC = () => {
 			<Route path="jobs" element={<ViewJobs />}>
 				<Route path="detail/:id" element={<JobDetails />} />
 			</Route>
-			<Route path="applications" element={<ViewApplications />} />
+			<Route path="applications" element={<ViewApplications />}>
+				<Route path="detail/:id" element={<ApplicationDetails />} />
+			</Route>
 			<Route path="companies" element={<ViewCompanies />}>
 				<Route path="detail/:id" element={<CompanyDetail />} />
 			</Route>

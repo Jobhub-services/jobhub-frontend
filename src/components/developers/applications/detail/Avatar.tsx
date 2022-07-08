@@ -5,18 +5,14 @@ import { ClockIcon, DetailIcon } from '@/assets/icons';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { applicationActions } from '@/modules/actions/developer/application.actions';
+import moment from 'moment';
 
 const SContainer = styled(FlexBox)`
 	cursor: pointer;
-	padding: 15px 15px 5px 15px;
-	transition: all 0.2s;
-	&:hover {
-		background-color: ${colors.PURPLE_1};
-	}
 `;
 const SImg = styled.img`
-	width: 35px;
-	height: 35px;
+	width: 45px;
+	height: 45px;
 	border-radius: 7px;
 `;
 
@@ -37,29 +33,24 @@ const SSpan = styled.span`
 `;
 const Span = styled.span<any>`
 	color: ${colors.PURPLE_BASE};
+	font-weight: 600;
 `;
 
-const ApplicationAvatar = (props: PApplicationAvatar) => {
-	const navigate = useNavigate();
-	const handleClick = () => {
-		applicationActions.getApplication(props.applicationId);
-		navigate(`detail/${props.applicationId}`);
-	};
-
+const Avatar = (props: PApplicationAvatar) => {
+	const posted_at = moment(new Date(props.createdAt!)).fromNow();
 	return (
-		<SContainer gap={10} justify="start" width="100%" onClick={handleClick}>
-			<SImg src={props.img} alt="google" />
-			<div style={{ width: '100%' }}>
-				<SH3>{props.title}</SH3>
-				<FlexBox justify="space-between" gap={20} className="mt-5">
-					<SSpan>{props.subtitle}</SSpan>
-					<FlexBox gap={5} onClick={handleClick}>
-						<Span>More details</Span>
-						<DetailIcon color={colors.PURPLE_BASE} />
+		<div>
+			<SContainer gap={10} justify="start" width="100%">
+				<SImg src={props.img} alt="google" />
+				<div>
+					<SH3>{props.title}</SH3>
+					<FlexBox justify="start" gap={20} className="mt-5">
+						<SSpan>Applied {posted_at} </SSpan>
+						<Span>at {props.subtitle}</Span>
 					</FlexBox>
-				</FlexBox>
-			</div>
-		</SContainer>
+				</div>
+			</SContainer>
+		</div>
 	);
 };
-export default ApplicationAvatar;
+export default Avatar;

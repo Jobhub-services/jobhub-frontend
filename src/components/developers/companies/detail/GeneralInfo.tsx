@@ -5,25 +5,26 @@ import { TCompanyDetail } from '@/types/developer/comanies.type';
 import { dateWithMonthName } from '@/utils/helpers';
 import { FaceBookLogo, FlexBox, HrDivider, LinkedinLogo } from 'staak-ui';
 
-const GeneralInfo = ({ headquarters, social_profile, founded, company_size }: TCompanyDetail) => {
+const GeneralInfo = ({ headquarter, social_profile, generalinfo }: TCompanyDetail) => {
 	const getLink = (link: string): string => {
 		if (!link) return '';
 		const l = link.split('//');
 		if (l.length === 0) return '';
 		return l[1];
 	};
+	const { founded, company_size } = generalinfo ?? {};
 	return (
 		<div>
 			<STitle>General Info</STitle>
-			<div className="mt-15">
+			<div className="mt-10">
 				<FlexBox justify="start" gap={5}>
 					<LocationFillIcon color={colors.BLACK_9} />
 					<SSubTitle>Headquarter</SSubTitle>
 				</FlexBox>
 				<SSpan className="mt-5">
-					{headquarters?.street ? `${headquarters?.street}, ` : ''}
-					{headquarters?.city ? `${headquarters?.city}, ` : ''}
-					{headquarters?.country ? `${headquarters?.country}.` : ''}
+					{headquarter?.street ? `${headquarter?.street}, ` : ''}
+					{headquarter?.city ? `${headquarter?.city}, ` : ''}
+					{headquarter?.country ? `${headquarter?.country}.` : ''}
 				</SSpan>
 			</div>
 			{founded && (

@@ -29,15 +29,15 @@ const SSpan = styled.span`
 	color: ${colors.BLACK_8};
 	font-weight: 500;
 `;
-const Avatar = ({ name, industry, avatar }: PCompanyCard) => {
+const Avatar = ({ companyName, generalinfo, avatar }: PCompanyCard) => {
 	return (
 		<FlexBox gap={10} justify="start">
-			<ImgCont Size={80 + 10}>
-				<SImg src={avatar} alt="avatar" width={80} height={80} />
+			<ImgCont Size={70 + 10}>
+				<SImg src={avatar} alt="avatar" width={70} height={70} />
 			</ImgCont>
 			<div style={{ width: '100%' }}>
-				<SH3>{name}</SH3>
-				<SSpan>{industry}</SSpan>
+				<SH3>{companyName}</SH3>
+				<SSpan>{generalinfo?.industry}</SSpan>
 			</div>
 		</FlexBox>
 	);

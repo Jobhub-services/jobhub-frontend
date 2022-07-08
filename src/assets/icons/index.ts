@@ -52,8 +52,10 @@ import LocationFillIcon from './LocationFillIcon';
 import WorldColorIcon from './WorldColorIcon';
 import JobHiringIcon from './JobHiringIcon';
 import SecurityConfigIcon from './SecurityConfigIcon';
+import PendingIcon from './PendingIcon';
 
 export {
+	PendingIcon,
 	SecurityConfigIcon,
 	JobHiringIcon,
 	WorldColorIcon,
