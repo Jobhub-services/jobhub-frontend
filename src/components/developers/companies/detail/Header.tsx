@@ -16,7 +16,7 @@ const Header = ({ avatar }: PCompanyCard) => {
 	};
 	return (
 		<SContainer gap={10} justify="space-between">
-			<Avatar _id="" avatar={avatar} name="Amazon Inc." industry="Health, wellness & fitness" />
+			<Avatar _id="" avatar={avatar} companyName="Amazon Inc." generalinfo={{ industry: 'Health, wellness & fitness' }} />
 			<IconButton width="30px" height="30px" circle onClick={onClose}>
 				<CloseIcon color={colors.BLACK_8} />
 			</IconButton>

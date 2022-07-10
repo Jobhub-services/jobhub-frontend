@@ -1,5 +1,5 @@
 import { FlexBox } from 'staak-ui';
-import SideBar from '@/components/developers/profile/settings/SIdeBar';
+import SideBar from '@/components/developers/profile/settings/SideBar';
 const ProfileSettings = () => {
 	return (
 		<FlexBox>
