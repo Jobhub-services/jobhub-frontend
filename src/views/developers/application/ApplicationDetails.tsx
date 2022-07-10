@@ -8,7 +8,7 @@ import styled, { keyframes } from 'styled-components';
 import { ApplicantIcon, FlexBox, JobIcon, TabPane } from 'staak-ui';
 import ApplicationInfo from '@/components/developers/applications/detail/ApplicationInfo';
 import { colors } from '@/assets/theme';
-import { CompanyIcon, NewCompanyIcon } from '@/assets/icons';
+import { NewCompanyIcon } from '@/assets/icons';
 import JobDescription from '@/components/developers/applications/detail/JobDescription';
 import CompanyInfo from '@/components/developers/applications/detail/CompanyInfo';
 

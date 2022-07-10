@@ -27,6 +27,7 @@ const reducerSlice = createSlice({
 	name: 'talentApplication',
 	initialState,
 	reducers: {
+		setLoading: (state, action) => {},
 		setIsLoading: (state, action) => {
 			const { loading } = action.payload;
 			state.isLoading = loading;
@@ -38,7 +39,7 @@ const reducerSlice = createSlice({
 		setApplications: (state, action) => {
 			state.applicationInfo = action.payload;
 		},
-		setApplication: (state, action) => {
+		setApplication: (state: any, action: any) => {
 			state.applicationDetails = action.payload;
 		},
 	},

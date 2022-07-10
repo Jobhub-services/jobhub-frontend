@@ -4,7 +4,7 @@ import { FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 
 const ContainerStyled = styled(FlexBox)`
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
 	width: 100%;

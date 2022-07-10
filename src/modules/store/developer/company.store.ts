@@ -27,7 +27,7 @@ const initialState: ICompanyState = {
 				'Health',
 				'Fitness',
 			],
-			headquarters: { country: 'USA', city: 'California', street: '1600 street of old company' },
+			headquarter: { country: 'USA', city: 'California', street: '1600 street of old company' },
 			generalinfo: {
 				company_size: '1 - 10 Employee',
 				founded: '2015-02-20T23:20:10',
