@@ -1,3 +1,4 @@
+import { colors } from '@/assets/theme';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { ApplicationsList } from '@/components/developers/applications';
 import { applicationActions } from '@/modules/actions/developer/application.actions';
@@ -20,9 +21,16 @@ const ViewApplications = () => {
 	}, []);
 	return (
 		<SContainer>
-			<SubContainer>{!isLoading && <ApplicationsList />}</SubContainer>
-			<Outlet />
-			{isLoading && <LoadingScreen />}
+			{isLoading ? (
+				<LoadingScreen />
+			) : (
+				<>
+					<SubContainer>
+						<h1 style={{ color: `${colors.PURPLE_BASE}`, margin: '5px 0', fontSize: '24px' }}>Applications</h1> <ApplicationsList />
+					</SubContainer>
+					<Outlet />
+				</>
+			)}
 		</SContainer>
 	);
 };

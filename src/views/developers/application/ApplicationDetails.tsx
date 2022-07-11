@@ -1,8 +1,8 @@
 import Header from '@/components/developers/applications/detail/Header';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { useAppSelector } from '@/utils/appHooks';
-import { useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import styled, { keyframes } from 'styled-components';
 import { ApplicantIcon, FlexBox, JobIcon, TabPane } from 'staak-ui';
@@ -11,6 +11,7 @@ import { colors } from '@/assets/theme';
 import { NewCompanyIcon } from '@/assets/icons';
 import JobDescription from '@/components/developers/applications/detail/JobDescription';
 import CompanyInfo from '@/components/developers/applications/detail/CompanyInfo';
+import { applicationActions } from '@/modules/actions/developer/application.actions';
 
 const APP_DETAIL_HEADER_HEIGHT = 92;
 
@@ -75,9 +76,13 @@ const companyTitle = (
 	</FlexBox>
 );
 const ApplicationDetails = () => {
-	const { isDetailLoading } = useAppSelector((state) => state.talentApplications);
+	const { id } = useParams();
+	const { isDetailLoading, applicationDetails } = useAppSelector((state) => state.talentApplications);
 	const navigate = useNavigate();
 	const parentRef = useRef(null);
+	useEffect(() => {
+		if (id && applicationDetails?._id !== id) applicationActions.getApplication(id);
+	}, []);
 	//functions
 	const backUp = (e: any) => {
 		if (e.target === parentRef.current) navigate(-1);
@@ -87,27 +92,30 @@ const ApplicationDetails = () => {
 		<>
 			<MainContainer ref={parentRef} onClick={backUp}>
 				<DetailContainer>
-					<SubContainer>
-						<SHeader>
-							<Header />
-						</SHeader>
-						<SBody>
-							<TabPane activeItem={'Application'} paneWidth="45%" paneJustify="center">
-								<TabPane.Pane name="Application" title={appTitle}>
-									<ApplicationInfo />
-								</TabPane.Pane>
-								<TabPane.Pane name="Job" title={jobTitle}>
-									<JobDescription />
-								</TabPane.Pane>
-								<TabPane.Pane name="Company" title={companyTitle}>
-									<CompanyInfo />
-								</TabPane.Pane>
-							</TabPane>
-						</SBody>
-					</SubContainer>
+					{isDetailLoading ? (
+						<LoadingScreen />
+					) : (
+						<SubContainer>
+							<SHeader>
+								<Header />
+							</SHeader>
+							<SBody>
+								<TabPane activeItem={'Application'} paneWidth="45%" paneJustify="center">
+									<TabPane.Pane name="Application" title={appTitle}>
+										<ApplicationInfo />
+									</TabPane.Pane>
+									<TabPane.Pane name="Job" title={jobTitle}>
+										<JobDescription />
+									</TabPane.Pane>
+									<TabPane.Pane name="Company" title={companyTitle}>
+										<CompanyInfo />
+									</TabPane.Pane>
+								</TabPane>
+							</SBody>
+						</SubContainer>
+					)}
 				</DetailContainer>
 			</MainContainer>
-			{isDetailLoading && <LoadingScreen />}
 		</>
 	);
 };

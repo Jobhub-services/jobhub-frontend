@@ -2,7 +2,7 @@ import { colors } from '@/assets/theme';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { HeartFilledIcon, HeartIcon, UnavailableIcon } from '@/assets/icons';
 import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, CloseIcon, FlexBox, Headline, HrDivider, IconButton, TabPane } from 'staak-ui';
 import JobApplication from '@/components/developers/jobs/details/application/JobApplication';
 import styled, { keyframes } from 'styled-components';
@@ -23,6 +23,8 @@ const width = keyframes`
 `;
 const ScrollContainer = styled.div`
 	padding: 0 10px;
+	width: 100%;
+	height: 100%;
 `;
 const MainContainer = styled.div<any>`
 	cursor: pointer;
@@ -69,9 +71,10 @@ const RightContainer = styled.div`
 	height: 100%;
 `;
 const JobDetails = () => {
+	const { id } = useParams();
 	const { jobDetails, errors, succesApplication, isDetailLoading } = useAppSelector((state) => state.developerJobs);
 	const loc = useLocation();
-	const { pathname, state } = loc as { pathname: string; state: { activeTab: string } };
+	const { state } = loc as { state: { activeTab: string } };
 	const navigate = useNavigate();
 	const parentRef = useRef(null);
 	const newPost = Math.abs(new Date(jobDetails?.createdAt!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
@@ -83,75 +86,77 @@ const JobDetails = () => {
 		if (e.target === parentRef.current) navigate('/jobs');
 	};
 	useEffect(() => {
-		const jobId = pathname.split('/').at(-1);
-		if (jobDetails?._id !== jobId) {
-			jobActions.getJob(jobId!);
+		if (id && jobDetails?._id !== id) {
+			jobActions.getJob(id);
 		}
 	}, []);
 	return (
 		<>
 			<MainContainer ref={parentRef} showed={true} onClick={backUp}>
 				<DetailContainer showed={true}>
-					<SubContainer>
-						<FlexBox justify="space-between" height="62px" style={{ padding: '5px 10px' }}>
-							<FlexBox gap={10}>
-								<IconButton width="30px" height="30px" circle onClick={() => navigate(-1)}>
-									<CloseIcon color={colors.BLACK_8} />
-								</IconButton>
-								<Headline variant="h2" size="sm">
-									Job details
-								</Headline>
+					{isDetailLoading ? (
+						<LoadingScreen />
+					) : (
+						<SubContainer>
+							<FlexBox justify="space-between" height="62px" style={{ padding: '5px 10px' }}>
+								<FlexBox gap={10}>
+									<IconButton width="30px" height="30px" circle onClick={() => navigate(-1)}>
+										<CloseIcon color={colors.BLACK_8} />
+									</IconButton>
+									<Headline variant="h2" size="sm">
+										Job details
+									</Headline>
+								</FlexBox>
+								<FlexBox gap={0}>
+									<Button
+										variant="text"
+										size="md"
+										color={jobDetails?.saved ? 'red' : 'purple'}
+										startIcon={jobDetails?.saved ? <HeartFilledIcon /> : <HeartIcon />}
+									>
+										Save
+									</Button>
+									<Button
+										style={{ background: 'none', color: `${colors.RED_BASE}` }}
+										variant="text"
+										size="md"
+										color={jobDetails?.saved ? 'red' : 'purple'}
+										startIcon={<UnavailableIcon />}
+									>
+										Not interested
+									</Button>
+								</FlexBox>
 							</FlexBox>
-							<FlexBox gap={0}>
-								<Button
-									variant="text"
-									size="md"
-									color={jobDetails?.saved ? 'red' : 'purple'}
-									startIcon={jobDetails?.saved ? <HeartFilledIcon /> : <HeartIcon />}
-								>
-									Save
-								</Button>
-								<Button
-									style={{ background: 'none', color: `${colors.RED_BASE}` }}
-									variant="text"
-									size="md"
-									color={jobDetails?.saved ? 'red' : 'purple'}
-									startIcon={<UnavailableIcon />}
-								>
-									Not interested
-								</Button>
-							</FlexBox>
-						</FlexBox>
-						<HrDivider color={colors.BLACK_12} top={0} side={0} />
-						<SBody>
-							<JobMetaInfo
-								storeData={jobDetails}
-								newPost={newPost}
-								featured={jobDetails?.featured}
-								locationIsEmpty={locationIsEmpty!}
-								roleIsEmpty={roleIsEmpty!}
-								skills={jobDetails?.skills}
-							/>
-							<RightContainer>
-								<TabPane activeItem={state.activeTab} paneWidth="60%">
-									<TabPane.Pane name="Overview" title="Overview">
-										<ScrollContainer className="staak_scrollbar">
-											<JobGeneralInfo qualificationIsEmpty={qualificationIsEmpty!} storeData={jobDetails} />
-										</ScrollContainer>
-									</TabPane.Pane>
-									<TabPane.Pane name="Application" title="Application">
-										<ScrollContainer className="staak_scrollbar">
-											<JobApplication />
-										</ScrollContainer>
-									</TabPane.Pane>
-								</TabPane>
-							</RightContainer>
-						</SBody>
-					</SubContainer>
+							<HrDivider color={colors.BLACK_12} top={0} side={0} />
+							<SBody>
+								<JobMetaInfo
+									storeData={jobDetails}
+									newPost={newPost}
+									featured={jobDetails?.featured}
+									locationIsEmpty={locationIsEmpty!}
+									roleIsEmpty={roleIsEmpty!}
+									skills={jobDetails?.skills}
+								/>
+								<RightContainer>
+									<TabPane activeItem={state.activeTab} paneWidth="60%">
+										<TabPane.Pane name="Overview" title="Overview">
+											<ScrollContainer className="staak_scrollbar">
+												<JobGeneralInfo qualificationIsEmpty={qualificationIsEmpty!} storeData={jobDetails} />
+											</ScrollContainer>
+										</TabPane.Pane>
+										<TabPane.Pane name="Application" title="Application">
+											<ScrollContainer className="staak_scrollbar">
+												<JobApplication />
+											</ScrollContainer>
+										</TabPane.Pane>
+									</TabPane>
+								</RightContainer>
+							</SBody>
+						</SubContainer>
+					)}
 				</DetailContainer>
 			</MainContainer>
 			{(errors?.status || succesApplication?.status) && <ErrorHandler />}
-			{isDetailLoading && <LoadingScreen />}
 		</>
 	);
 };

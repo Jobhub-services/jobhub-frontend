@@ -20,13 +20,18 @@ const ViewJobs = () => {
 	}, []);
 	return (
 		<SContainer>
-			<SubContainer>
-				<JobHeader />
-				{!isLoading && <JobsList />}
-			</SubContainer>
-			<JobsFilter />
-			<Outlet />
-			{isLoading && <LoadingScreen />}
+			{isLoading ? (
+				<LoadingScreen />
+			) : (
+				<>
+					<SubContainer>
+						<JobHeader />
+						<JobsList />
+					</SubContainer>
+					<JobsFilter />
+					<Outlet />
+				</>
+			)}
 		</SContainer>
 	);
 };

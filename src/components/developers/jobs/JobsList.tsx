@@ -9,6 +9,9 @@ const SWrapper = styled.div<any>`
 	padding: 15px 0;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 20px;
+	@media only screen and (max-width: 1600px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
 `;
 const JobsList = () => {
 	const { jobInfo } = useAppSelector((state) => state.developerJobs);

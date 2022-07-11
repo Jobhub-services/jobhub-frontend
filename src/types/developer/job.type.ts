@@ -1,3 +1,5 @@
+export type TLoading = 'isLoading' | 'isDetailLoading' | 'isApplicationSubmited';
+
 export type JobInfoData = {
 	_id: string;
 	title?: string;
@@ -39,5 +41,5 @@ export type TJobApplication = {
 	motivation?: string;
 	start_date?: string;
 	notice_period?: string;
-	responses?: { question?: string; response?: string }[];
+	responses?: { question?: string; response?: string; qcontent?: string }[];
 };

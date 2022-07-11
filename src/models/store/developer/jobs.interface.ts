@@ -4,12 +4,13 @@ export interface IJobsState {
 	filterClosed?: boolean;
 	isLoading?: boolean;
 	isDetailLoading?: boolean;
+	isApplicationSubmited?: boolean;
 	showDetails?: boolean;
 	jobInfo: {
 		content?: JobInfoData[];
-		size?: number;
-		count?: number;
-		pages?: number;
+		size?: number | null;
+		count?: number | null;
+		pages?: number | null;
 	};
 	jobDetails?: TJobDetails;
 	jobApplication?: TJobApplication;

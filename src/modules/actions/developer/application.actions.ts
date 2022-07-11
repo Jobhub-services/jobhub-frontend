@@ -6,11 +6,8 @@ import { API_PATHS } from '@/constants/api.constants';
 const { JOBS_SERVICE } = API_PATHS;
 
 export const applicationDispatcher = {
-	setIsLoading(loading: boolean) {
-		dispatchToStore(storeActions.setIsLoading({ loading }));
-	},
-	setIsDetailLoading(loading: boolean) {
-		dispatchToStore(storeActions.setIsDetailLoading({ loading }));
+	setLoading(loading: boolean, attr: 'isLoading' | 'isDetailLoading' = 'isLoading') {
+		dispatchToStore(storeActions.setLoading({ loading, attr }));
 	},
 	setApplications(applications: any) {
 		dispatchToStore(storeActions.setApplications(applications));
@@ -21,7 +18,7 @@ export const applicationDispatcher = {
 };
 export const applicationActions = {
 	async getApplications() {
-		applicationDispatcher.setIsLoading(true);
+		applicationDispatcher.setLoading(true);
 		try {
 			const response = await httpClient.get(`${JOBS_SERVICE}/application/my`);
 			const responseData = response.data;
@@ -30,11 +27,11 @@ export const applicationActions = {
 			}
 		} catch {
 		} finally {
-			applicationDispatcher.setIsLoading(false);
+			applicationDispatcher.setLoading(false);
 		}
 	},
 	async getApplication(id: string) {
-		applicationDispatcher.setIsDetailLoading(true);
+		applicationDispatcher.setLoading(true, 'isDetailLoading');
 		try {
 			const response = await httpClient.get(`${JOBS_SERVICE}/application/show/${id}`);
 			const responseData = response.data;
@@ -43,7 +40,7 @@ export const applicationActions = {
 			}
 		} catch {
 		} finally {
-			applicationDispatcher.setIsDetailLoading(false);
+			applicationDispatcher.setLoading(false, 'isDetailLoading');
 		}
 	},
 };

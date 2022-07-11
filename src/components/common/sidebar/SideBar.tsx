@@ -17,7 +17,7 @@ const SyledContainer = styled.div<CompaniesOverview.SideBarProps>`
 const SideBar = (props: CompaniesOverview.SideBarProps) => {
 	const { userType } = useAppSelector(({ user }) => user.userInfo);
 	return (
-		<SyledContainer width={props.width}>
+		<SyledContainer>
 			<FlexBox flexDirection="column" align="flex-start" style={{ marginTop: '10px' }}>
 				{userType === 'company' ? <CompanySide /> : userType === 'developer' && <DeveloperSide />}
 			</FlexBox>

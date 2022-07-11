@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IJobsState } from '@/models/store/developer/jobs.interface';
+import { TLoading } from '@/types/developer/job.type';
 
 const initialState: IJobsState = {
 	filterClosed: true,
@@ -8,9 +9,9 @@ const initialState: IJobsState = {
 	showDetails: false,
 	jobInfo: {
 		content: [],
-		size: 0,
-		count: 0,
-		pages: 1,
+		size: null,
+		count: null,
+		pages: null,
 	},
 	jobDetails: {
 		_id: '',
@@ -58,13 +59,9 @@ const reducerSlice = createSlice({
 			const { closed } = action.payload;
 			state.filterClosed = closed;
 		},
-		setIsLoading: (state, action) => {
-			const { loading } = action.payload;
-			state.isLoading = loading;
-		},
-		setIsDetailLoading: (state, action) => {
-			const { loading } = action.payload;
-			state.isDetailLoading = loading;
+		setLoading: (state, action) => {
+			const { loading, attr } = action.payload;
+			state[attr as TLoading] = loading;
 		},
 		setShowDetails: (state, action) => {
 			const { show } = action.payload;

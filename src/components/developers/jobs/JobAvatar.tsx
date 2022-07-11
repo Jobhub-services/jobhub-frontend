@@ -5,6 +5,7 @@ import { PJobAvatar } from '@/models/component/developer/jobs.interface';
 import { EmpolyeesIcon } from '@/assets/icons';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
+import { useAppSelector } from '@/utils/appHooks';
 
 const SContainer = styled(FlexBox)`
 	cursor: pointer;
@@ -36,9 +37,10 @@ const Span = styled.span<any>`
 `;
 
 const JobAvatar = (props: PJobAvatar) => {
+	const { jobDetails } = useAppSelector((state) => state.developerJobs);
 	const navigate = useNavigate();
 	const viewDetail = () => {
-		jobActions.getJob(props._id);
+		if (jobDetails?._id !== props._id) jobActions.getJob(props._id);
 		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Overview' } });
 	};
 	return (

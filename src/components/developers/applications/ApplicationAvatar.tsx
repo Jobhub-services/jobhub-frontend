@@ -5,6 +5,7 @@ import { ClockIcon, DetailIcon } from '@/assets/icons';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { applicationActions } from '@/modules/actions/developer/application.actions';
+import { useAppSelector } from '@/utils/appHooks';
 
 const SContainer = styled(FlexBox)`
 	cursor: pointer;
@@ -40,9 +41,10 @@ const Span = styled.span<any>`
 `;
 
 const ApplicationAvatar = (props: PApplicationAvatar) => {
+	const { applicationDetails } = useAppSelector((state) => state.talentApplications);
 	const navigate = useNavigate();
 	const handleClick = () => {
-		applicationActions.getApplication(props.applicationId);
+		if (applicationDetails?._id !== props.applicationId) applicationActions.getApplication(props.applicationId);
 		navigate(`detail/${props.applicationId}`);
 	};
 

@@ -8,6 +8,7 @@ import { ClockIcon, DotIcon, HeartFilledIcon, HeartIcon, LocationIcon, MoneyIcon
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
+import { useAppSelector } from '@/utils/appHooks';
 
 const SHeader = styled(FlexBox)`
 	border-top-left-radius: 8px;
@@ -68,9 +69,10 @@ const SButton = styled(FlexBox)`
 	color: ${colors.BLACK_4};
 `;
 const JobCard = (props: PJobCard) => {
+	const { jobDetails } = useAppSelector((state) => state.developerJobs);
 	const navigate = useNavigate();
 	const onApply = () => {
-		jobActions.getJob(props._id);
+		if (jobDetails?._id !== props._id) jobActions.getJob(props._id);
 		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Application' } });
 	};
 	const handleSelect = () => {};
