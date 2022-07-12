@@ -31,10 +31,9 @@ const SSpan = styled.span`
 const AboutUs = () => {
 	const { profile } = useAppSelector((state) => state.companyProfile);
 	const [show, setShow] = useState(false);
-	const [text, setText] = useState('');
+	const [text, setText] = useState(profile.description!);
 	const [allText, setAllText] = useState(false);
 	const addSummary = () => {
-		setText(profile.description!);
 		setShow(true);
 	};
 	const onSave = () => {
@@ -75,7 +74,7 @@ const AboutUs = () => {
 			</div>
 			{show && (
 				<div className="mt-15">
-					<TextArea placeholder="Company description" value={text} onChange={handleText} height="150px" />
+					<TextArea placeholder="Company description" value={profile.description!} onChange={handleText} height="150px" />
 					<FlexBox className="mt-15" justify="end" gap={10}>
 						<Button
 							size="md"

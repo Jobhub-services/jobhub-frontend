@@ -6,9 +6,11 @@ import { FlexBox } from 'staak-ui';
 import { PProfileAvatar } from '@/models/component/companies/profile.interface';
 import { SSpan, SData } from '@/components/companies/profile/common/common.style';
 import { useAppSelector } from '@/utils/appHooks';
+import { profileAction } from '@/modules/actions/company/profile.actions';
 
 const SImg = styled.img`
 	border-radius: 50%;
+	object-fit: cover;
 `;
 
 const AvatarContainer = styled.div<any>`
@@ -57,16 +59,20 @@ const SH2 = styled.h2`
 	color: ${colors.BLACK_3};
 `;
 const ProfileAvatar = ({ overview }: PProfileAvatar) => {
-	const { headquarter } = useAppSelector((state) => state.companyProfile.profile);
+	const { headquarter, avatar } = useAppSelector((state) => state.companyProfile.profile);
 	const { userInfo } = useAppSelector((state) => state.user);
 	const { companyInfo } = userInfo;
-	console.log(userInfo);
-	const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {};
+	const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { files } = event.target;
+		let data = new FormData();
+		data.append('avatar', files![0]!);
+		profileAction.setAttribute(data, 'avatar');
+	};
 	return (
 		<FlexBox gap={20} justify="start">
 			<SContainer>
 				<AvatarContainer size={80 + 10}>
-					<SImg src={Google} alt="avatar" width={80} height={80} />
+					<SImg src={avatar} alt="avatar" width={80} height={80} />
 				</AvatarContainer>
 				{!overview && (
 					<>

@@ -7,10 +7,11 @@ import { colors } from '@/assets/theme';
 import { Button, FlexBox } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
 import { profileAction } from '@/modules/actions/company/profile.actions';
+import { CCompanySizes } from '@/constants/company/profile.constants';
 
 const GeneralInfo = () => {
 	const { generalinfo } = useAppSelector((state) => state.companyProfile.profile);
-	const [genInfo, setGenInfo] = useState<{ company_size?: string; founded?: string; industry?: string }>({});
+	const [genInfo, setGenInfo] = useState<{ company_size?: string; founded?: string; industry?: string }>(generalinfo!);
 	const [show, setShow] = useState(false);
 	const empty =
 		(!generalinfo?.company_size || generalinfo?.company_size === '') &&
@@ -55,12 +56,12 @@ const GeneralInfo = () => {
 			{show && (
 				<div className="mt-20">
 					<InputPickerField className="mt-10" name="company_size" title="Company size" onChange={handlePicker} value={generalinfo?.company_size}>
-						<InputPickerField.Option value="Seed (1 - 10 employees)">Seed (1 - 10 Employees)</InputPickerField.Option>
-						<InputPickerField.Option value="Early (11 - 50 employees)">Early (11 - 50 Employees)</InputPickerField.Option>
-						<InputPickerField.Option value="Mid-size (51 - 200 employees)">Mid-size (51 - 200 employees)</InputPickerField.Option>
-						<InputPickerField.Option value="Large (201 - 500 employees)">Large (201 - 500 employees)</InputPickerField.Option>
-						<InputPickerField.Option value="Very Large (501 - 1000 employees)">Very Large (501 - 1000 employees)</InputPickerField.Option>
-						<InputPickerField.Option value="Massive (1001+ employees)">Massive (1001+ employees)</InputPickerField.Option>
+						<InputPickerField.Option value="Seed (1 - 10 employees)">{CCompanySizes.Seed}</InputPickerField.Option>
+						<InputPickerField.Option value="Early (11 - 50 employees)">{CCompanySizes.Early}</InputPickerField.Option>
+						<InputPickerField.Option value="Mid-size (51 - 200 employees)">{CCompanySizes['Mid-size']}</InputPickerField.Option>
+						<InputPickerField.Option value="Large (201 - 500 employees)">{CCompanySizes.Large}</InputPickerField.Option>
+						<InputPickerField.Option value="Very Large (501 - 1000 employees)">{CCompanySizes['Very Large']}</InputPickerField.Option>
+						<InputPickerField.Option value="Massive (1001+ employees)">{CCompanySizes.Massive}</InputPickerField.Option>
 					</InputPickerField>
 					<InputDateField
 						name="founded"

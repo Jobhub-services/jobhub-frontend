@@ -50,6 +50,21 @@ const initialState: IJobsState = {
 	errors: {
 		status: false,
 	},
+	filterInfo: {
+		job_categories: [],
+		job_type: {
+			full_time: false,
+			part_time: false,
+			permanent: false,
+			temporary: false,
+		},
+		job_salary: {
+			hourly: {},
+			monthly: {},
+			annually: {},
+			currencies: [],
+		},
+	},
 };
 const reducerSlice = createSlice({
 	name: 'developerJobs',
@@ -78,6 +93,9 @@ const reducerSlice = createSlice({
 		},
 		setErrors: (state, action) => {
 			state.errors = action.payload;
+		},
+		setFilters: (state, action) => {
+			state.filterInfo = action.payload;
 		},
 		setSuccessApplication: (state, action) => {
 			if (action.payload.status) {

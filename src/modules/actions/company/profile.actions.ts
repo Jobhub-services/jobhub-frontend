@@ -22,10 +22,10 @@ export const profileAction = {
 		profileDispatcher.setIsLoading(true);
 		try {
 			let dataToSend = data;
-			dataToSend = {
-				[attr]: data,
-			};
-			console.log(dataToSend);
+			if (attr !== 'avatar')
+				dataToSend = {
+					[attr]: data,
+				};
 			const response = await httpClient.put(`${USERS_SERVICE}/company/profile`, dataToSend);
 			if (response.data) {
 				const content = response.data?.content![attr];

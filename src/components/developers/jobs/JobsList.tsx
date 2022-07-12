@@ -18,6 +18,7 @@ const JobsList = () => {
 	const { content } = jobInfo;
 	if (content?.length === 0)
 		return <DataEmpty title="No data found" description="No content match your criteria. Try searching for something else" />;
+	console.log(content);
 	return (
 		<SWrapper>
 			{content?.map((elem, idx) => {
@@ -40,8 +41,8 @@ const JobsList = () => {
 						end_salary={elem.end_salary}
 						currency={elem.currency}
 						salary_type={elem.salary_type}
-						featured
-						saved
+						featured={elem.featured}
+						saved={elem.saved}
 						applied={elem.applied}
 					/>
 				);

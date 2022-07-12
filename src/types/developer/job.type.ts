@@ -43,3 +43,25 @@ export type TJobApplication = {
 	notice_period?: string;
 	responses?: { question?: string; response?: string; qcontent?: string }[];
 };
+
+export type TJobType = { full_time?: boolean; part_time?: boolean; permanent?: boolean; temporary?: boolean };
+export type TValueLabel = { value?: string; label?: string };
+export type TFWorkLocation = { remote?: boolean; countries?: TValueLabel[] };
+export type TJobSalary = {
+	hourly?: {
+		checked?: boolean;
+		from?: string;
+		to?: string;
+	};
+	monthly?: {
+		checked?: boolean;
+		from?: string;
+		to?: string;
+	};
+	annually?: {
+		checked?: boolean;
+		from?: string;
+		to?: string;
+	};
+	currencies?: TValueLabel[];
+};

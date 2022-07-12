@@ -2,7 +2,7 @@ import { EditIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { InputField, InputPickerField } from '@/components/common';
 import { SpanTitle, SButton, SSpan, SData } from '@/components/companies/profile/common/common.style';
-import { profileDispatcher, profileAction } from '@/modules/actions/company/profile.actions';
+import { profileAction } from '@/modules/actions/company/profile.actions';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useState } from 'react';
@@ -11,6 +11,9 @@ import { Button, FlexBox, PlusIcon } from 'staak-ui';
 const Headquarters = () => {
 	const { headquarter } = useAppSelector((state) => state.companyProfile.profile);
 	const { countries } = useAppSelector((state) => state.metadata);
+	const [localHeadquarter, setLocalHeadquarter] = useState<{ city?: string; street?: string; country?: { _id?: string; name?: string } }>(
+		headquarter!
+	);
 	const [show, setShow] = useState(false);
 	const notEmpty =
 		(headquarter?.city && headquarter?.city !== '') ||
@@ -22,21 +25,20 @@ const Headquarters = () => {
 	}, []);
 
 	const handleInput = (event: any, value?: string, name?: string) => {
-		let tmp = { ...headquarter };
+		let tmp = { ...localHeadquarter };
 		tmp[name as 'street' | 'city'] = value;
-		console.log(tmp);
-		profileDispatcher.setAttribute(tmp, 'headquarter');
+		setLocalHeadquarter(tmp!);
 	};
 	const handlePicker = (event: any, value: string, label: string, name: string) => {
-		let tmp = { ...headquarter };
+		let tmp = { ...localHeadquarter };
 		tmp.country = { _id: value, name: label };
-		profileDispatcher.setAttribute(tmp, 'headquarter');
+		setLocalHeadquarter(tmp!);
 	};
 	const onShow = () => {
 		setShow(true);
 	};
 	const onSave = () => {
-		let tmp = { country: headquarter?.country._id, city: headquarter?.city, street: headquarter?.street };
+		let tmp = { country: localHeadquarter?.country?._id, city: localHeadquarter?.city, street: localHeadquarter?.street };
 		setShow(false);
 		profileAction.setAttribute(tmp, 'headquarter');
 	};

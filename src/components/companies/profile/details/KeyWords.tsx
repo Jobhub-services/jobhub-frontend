@@ -9,16 +9,17 @@ import { Button, FlexBox, PlusIcon, TagInput } from 'staak-ui';
 
 const KeyWords = () => {
 	const { keywords } = useAppSelector((state) => state.companyProfile.profile);
+	const [localKeywords, setLocalKeywords] = useState<string[]>([]);
 	const [show, setShow] = useState(false);
 	const addKeywords = () => {
 		setShow(true);
 	};
 	const handleInputTag = (event: any, value: string[], name?: string) => {
-		profileDispatcher.setAttribute(value, 'keywords');
+		setLocalKeywords(value);
 	};
 	const onSave = () => {
 		setShow(false);
-		profileAction.setAttribute(keywords, 'keywords');
+		profileAction.setAttribute(localKeywords, 'keywords');
 	};
 	return (
 		<div>

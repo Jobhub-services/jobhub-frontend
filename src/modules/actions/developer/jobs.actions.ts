@@ -33,16 +33,21 @@ export const jobDispatcher = {
 	setSuccessApplication(data: any) {
 		dispatchToStore(storeActions.setSuccessApplication(data));
 	},
+	setFilters(params: any) {
+		dispatchToStore(storeActions.setFilters(params));
+	},
 };
 export const jobActions = {
 	async setClosedFilter(closed: boolean) {
 		jobDispatcher.setClosedFilter(closed);
 	},
-	async getJobs() {
-		const storeState = getState();
-		if (!storeState.developerJobs.jobInfo.size) jobDispatcher.setLoading(true);
+	async getJobs(loading: boolean = true, params: any = {}) {
+		jobDispatcher.setLoading(loading);
 		try {
-			const response = await httpClient.get(`${JOBS_SERVICE}/talent`);
+			const param = {
+				params: params,
+			};
+			const response = await httpClient.get(`${JOBS_SERVICE}/talent`, param);
 			const responseData = response.data;
 			if (responseData) jobDispatcher.setJobs(responseData);
 		} catch (e: any) {

@@ -16,4 +16,5 @@ export type TProfileInfo = {
 		industry?: string;
 		company_size?: string;
 	};
+	avatar?: string;
 };

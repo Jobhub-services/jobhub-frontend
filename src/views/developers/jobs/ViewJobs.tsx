@@ -14,9 +14,9 @@ const SubContainer = styled.div`
 	padding: 10px 20px;
 `;
 const ViewJobs = () => {
-	const { isLoading } = useAppSelector((state) => state.developerJobs);
+	const { isLoading, jobInfo } = useAppSelector((state) => state.developerJobs);
 	useEffect(() => {
-		jobActions.getJobs();
+		jobActions.getJobs(!jobInfo.size);
 	}, []);
 	return (
 		<SContainer>

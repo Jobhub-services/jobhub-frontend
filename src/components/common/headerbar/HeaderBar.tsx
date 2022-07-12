@@ -23,13 +23,14 @@ const SContainer = styled(FlexBox)`
 	width: 100%;
 `;
 const SIcon = styled.div`
+	display: flex;
 	padding: 2px 5px;
 	margin-left: 10px;
 	cursor: pointer;
 	border-radius: 8px;
 	transition: all 0.1s ease-in-out;
 	&:hover {
-		background-color: ${colors.PURPLE_3};
+		background-color: ${colors.PURPLE_1};
 	}
 `;
 const HeaderBar = () => {

@@ -10,6 +10,7 @@ import { FlexBox, UserIcon } from 'staak-ui';
 import styled from 'styled-components';
 const SImg = styled.img`
 	border-radius: 50%;
+	object-fit: cover;
 `;
 const AvatarContainer = styled.div<any>`
 	display: flex;
