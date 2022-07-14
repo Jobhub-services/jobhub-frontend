@@ -2,6 +2,7 @@ import { IAppState } from '@/models/store/metadata.interface';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IAppState = {
+	appExpanded: true,
 	countries: {
 		count: 0,
 		size: 0,
@@ -40,6 +41,10 @@ const reducerSlice = createSlice({
 	name: 'metadata',
 	initialState,
 	reducers: {
+		setAppExpanded: (state, action) => {
+			const { expanded } = action.payload;
+			state.appExpanded = expanded;
+		},
 		isLoading: (state, action) => {
 			const { loading } = action.payload;
 			state.isLoading = loading;

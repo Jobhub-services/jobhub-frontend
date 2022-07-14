@@ -1,14 +1,16 @@
 import { STitle } from '@/components/developers/jobs/filter/common.style';
-import { PJobType } from '@/models/component/developer/jobs.interface';
+import { PFJobType } from '@/models/component/common/common.interface';
 import { TJobType } from '@/types/developer/job.type';
 import { useEffect, useState } from 'react';
 import { CheckBox, FlexBox } from 'staak-ui';
 
-const JobType = (props: PJobType) => {
+const JobType = (props: PFJobType) => {
 	const [jobType, setJobType] = useState<TJobType>({});
+
 	useEffect(() => {
 		setJobType(props?.jobType ?? {});
 	}, [props.clear]);
+
 	const handleBox = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = event.target;
 		let tmp = { ...jobType };

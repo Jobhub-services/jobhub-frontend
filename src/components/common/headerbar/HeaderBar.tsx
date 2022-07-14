@@ -6,6 +6,7 @@ import DeveloperHeader from './DeveloperHeader';
 import CompanyHeader from './CompanyHeader';
 import { ListIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
+import { metadataDispatcher } from '@/modules/actions/metadata.actions';
 
 const SyledContainer = styled.div`
 	position: sticky;
@@ -35,10 +36,14 @@ const SIcon = styled.div`
 `;
 const HeaderBar = () => {
 	const { userType } = useAppSelector(({ user }) => user.userInfo);
+	const { appExpanded } = useAppSelector((state) => state.metadata);
+	const handleClick = () => {
+		metadataDispatcher.setAppExpanded(!appExpanded);
+	};
 	return (
 		<SyledContainer>
 			<FlexBox gap={10}>
-				<SIcon>
+				<SIcon onClick={handleClick}>
 					<ListIcon color={colors.PURPLE_BASE} width="30px" height="30px" />
 				</SIcon>
 				<SContainer justify="space-between">

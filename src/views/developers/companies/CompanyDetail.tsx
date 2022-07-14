@@ -1,4 +1,4 @@
-import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
+import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import styled, { keyframes } from 'styled-components';
 import { Header, About, GeneralInfo, Keywords, JobsList, COMPANY_HEADER_HEIGHT } from '@/components/developers/companies/detail';
 import { FlexBox, HrDivider, TabPane } from 'staak-ui';
@@ -21,7 +21,7 @@ const MainContainer = styled.div<any>`
 	position: fixed;
 	right: 0;
 	top: ${HEADER_HIEGHT}px;
-	width: calc(${(props) => (props.showed ? `100% - ${ASIDE_WIDTH}px` : '0')});
+	width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
 	height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;

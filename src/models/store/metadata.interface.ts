@@ -1,6 +1,7 @@
 import { TLanguages } from '@/types/metadata.type';
 
 export interface IAppState {
+	appExpanded?: boolean;
 	isLoading?: boolean;
 	countries?: {
 		count?: number;

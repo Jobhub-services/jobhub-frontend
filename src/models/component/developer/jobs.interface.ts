@@ -1,6 +1,6 @@
 import { PNav } from '@/models/component/common/common.interface';
 import { StandardProps } from '@/models/component';
-import { JobInfoData, TFWorkLocation, TJobSalary, TJobType, TValueLabel } from '@/types/developer/job.type';
+import { JobInfoData, TFWorkLocation, TJobSalary, TValueLabel } from '@/types/developer/job.type';
 
 export interface PJobCard extends StandardProps, JobInfoData {}
 
@@ -36,11 +36,6 @@ export interface PJobGeneralInfo extends StandardProps {
 	storeData: any;
 }
 
-export interface PJobType extends StandardProps {
-	jobType?: TJobType;
-	clear?: boolean;
-	onChange?: (value: TJobType, name?: string) => void;
-}
 export interface PCompanySize extends StandardProps {
 	companySize?: string[];
 	clear?: boolean;
@@ -54,12 +49,6 @@ export interface PFWorkLocation extends StandardProps {
 
 export interface PFJobCategories extends StandardProps {
 	jobCategories?: TValueLabel[];
-	clear?: boolean;
-	onChange?: (value: TValueLabel[], name?: string) => void;
-}
-
-export interface PFSkills extends StandardProps {
-	skills?: TValueLabel[];
 	clear?: boolean;
 	onChange?: (value: TValueLabel[], name?: string) => void;
 }

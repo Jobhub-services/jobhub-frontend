@@ -7,9 +7,9 @@ import { AppByJobs, AppData } from '@/models/store/company/applications.interfac
 
 const { APPLICANTS_SERVICE } = API_PATHS;
 
-const applicationsDispatcher = {
-	setIsLoading(loading: boolean) {
-		dispatchToStore(storeActions.setIsLoading({ loading }));
+export const applicationsDispatcher = {
+	setIsLoading(loading: boolean, attr: 'isLoading' | 'isDetailLoading' = 'isLoading') {
+		dispatchToStore(storeActions.setIsLoading({ loading, attr }));
 	},
 	setClosedFilter(closed: boolean) {
 		dispatchToStore(storeActions.closeFilter({ closed }));
@@ -37,23 +37,24 @@ export const applicationsActions = {
 	async setClosedFilter(closed: boolean) {
 		applicationsDispatcher.setClosedFilter(closed);
 	},
-	async getApplicantsByJobs(status: ApplicationStatus = 'new') {
+	async getApplicantsByJobs(status: ApplicationStatus = 'new', params: any = {}) {
 		applicationsDispatcher.setIsLoading(true);
 		try {
 			const param = {
 				params: {
-					groupBy: 'job',
+					byJob: true,
 					status: status,
+					...params,
 				},
 			};
 			const response = await httpClient.get(`${APPLICANTS_SERVICE}/show`, param);
-			if (response.data) applicationsDispatcher.setApplicantsByJobs(response.data);
+			//if (response.data) applicationsDispatcher.setApplicantsByJobs(response.data);
 		} catch (e: any) {
 		} finally {
 			applicationsDispatcher.setIsLoading(false);
 		}
 	},
-	async getShowApplicants(status: ApplicationStatus = 'new', params?: any) {
+	async getShowApplicants(params: any = {}, status: ApplicationStatus = 'new') {
 		applicationsDispatcher.setIsLoading(true);
 		try {
 			const param = {
@@ -70,7 +71,7 @@ export const applicationsActions = {
 		}
 	},
 	async getApplicantDetails(status: ApplicationStatus, id?: string) {
-		applicationsDispatcher.setIsLoading(true);
+		applicationsDispatcher.setIsLoading(true, 'isDetailLoading');
 		try {
 			const param = {
 				params: {
@@ -82,7 +83,7 @@ export const applicationsActions = {
 			if (response.data) applicationsDispatcher.setApplicantDetails(response.data);
 		} catch (e: any) {
 		} finally {
-			applicationsDispatcher.setIsLoading(false);
+			applicationsDispatcher.setIsLoading(false, 'isDetailLoading');
 		}
 	},
 	async setApplicationStatus(status: ApplicationStatus, applicantId: string) {

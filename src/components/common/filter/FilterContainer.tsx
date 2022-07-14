@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '@/assets/theme';
-import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
+import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { FlexBox, Headline, IconButton, Button } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
 import { StandardProps } from '@/models/component';
@@ -17,7 +17,7 @@ const actionsMap = { job: jobActions, applications: applicationsActions, talent:
 const FContainer = styled.div<any>`
 	position: fixed;
 	top: ${HEADER_HIEGHT}px;
-	left: ${ASIDE_WIDTH}px;
+	left: ${EXPANDED_ASIDE_WIDTH}px;
 	background: white;
 	width: ${(props) => (props.closed ? '0' : props.width)};
 	overflow-x: hidden;

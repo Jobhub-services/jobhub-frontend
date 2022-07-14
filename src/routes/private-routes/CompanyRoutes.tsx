@@ -2,10 +2,8 @@ import React, { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Overview, JobOverview, AddNewJob, ApplicantsOverview, TalentsView, CompanyProfile } from '@/views/companies';
 import JobDetails from '@/components/companies/jobs/showjob/details/JobDetails';
-import ApplicationDetails from '@/components/companies/applicants/details/ApplicationDetails';
-import ApplicantsByJob from '@/components/companies/applicants/ApplicantsByJob';
-import ApplicantLayout from '@/components/companies/applicants/ApplicantLayout';
-import ApplicantsSearch from '@/components/companies/applicants/ApplicantsSearch';
+import ApplicationDetails from '@/views/companies/applicants/ApplicationDetails';
+import ApplicantsSearch from '@/views/companies/applicants/ApplicantsSearch';
 
 const CompanyRoutes: FC = () => {
 	return (
@@ -20,12 +18,10 @@ const CompanyRoutes: FC = () => {
 			</Route>
 			<Route path="talents" element={<TalentsView />} />
 			<Route path="applicants/:status" element={<ApplicantsOverview />}>
-				<Route path="" element={<ApplicantLayout />}>
-					<Route path="" element={<ApplicantsByJob />} />
-					<Route path="search" element={<ApplicantsSearch />} />
-				</Route>
 				<Route path="detail/:id" element={<ApplicationDetails />} />
-				<Route path="/applicants/:status" element={<Navigate to="/:status" />} />
+			</Route>
+			<Route path="applicants/search/:status" element={<ApplicantsSearch />}>
+				<Route path="detail/:id" element={<ApplicationDetails />} />
 			</Route>
 			<Route path="company/profile/:username" element={<CompanyProfile />} />
 			<Route path="*" element={<Navigate to="/" />} />

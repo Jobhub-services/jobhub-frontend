@@ -1,16 +1,27 @@
 import styled from 'styled-components';
 import { FlexBox, Tag, Button } from 'staak-ui';
 import { LinkedinIcon, GithubIcon } from 'staak-ui';
-import { CalendarIcon, CVIcon } from '@/assets/icons';
+import { CalendarFillIcon, CVIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { ApplicantCardProps } from '@/models/component/companies/applications/applications.interface';
-import { useSearchParams, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { Avatar } from '@/components/companies/_common';
 import { ApplicationStatus } from '@/types/company/applications.type';
+import { useAppSelector } from '@/utils/appHooks';
 
 const Status: { [key in ApplicationStatus]?: ApplicationStatus } = { new: 'process', process: 'interview', interview: 'hired' };
 
+const SP = styled.p`
+	display: -webkit-box;
+	margin: 10px 0;
+	font-family: inherit;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
+`;
 const CustomizedButton = styled(Button)`
 	font-size: 12px !important;
 	font-weight: 500 !important;
@@ -39,16 +50,15 @@ const SButton = styled.div<any>`
 `;
 
 const ApplicationCard = (props: ApplicantCardProps) => {
+	const { applicantDetails } = useAppSelector((state) => state.applications);
 	const { status } = useParams();
-	const [searchParams, setSearchParams] = useSearchParams({});
-	function viewDetails(id: string) {
-		applicationsActions.getApplicantDetails(status as ApplicationStatus, id);
-		searchParams.set('detail', id);
-		setSearchParams(searchParams);
+	const navigate = useNavigate();
+	function viewDetails() {
+		if (applicantDetails._id !== props._id) applicationsActions.getApplicantDetails(status as ApplicationStatus, props._id);
+		navigate(`detail/${props._id}`);
 	}
 	function onStatusChange(event: any, status: ApplicationStatus) {
-		console.log('status of the candidat ', status, props.applicantId);
-		applicationsActions.setApplicationStatus(status, props.applicantId);
+		applicationsActions.setApplicationStatus(status, props._id);
 	}
 	return (
 		<SCard>
@@ -56,13 +66,13 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 				<FlexBox align="flex-start">
 					<Avatar size={50} img={props.img} name={props.name} role={props.role} status="ready" />
 				</FlexBox>
-				<CustomizedButton onClick={() => viewDetails(props.applicantId)} variant="text">
+				<CustomizedButton onClick={viewDetails} variant="text">
 					View details
 				</CustomizedButton>
 			</FlexBox>
 			<div style={{ padding: '10px 10px 0 10px' }}>
 				<div>
-					<p style={{ height: '45px', overflow: 'hidden', margin: '10px 0' }}>{props.cover_letter}</p>
+					<SP>{props.cover_letter}</SP>
 				</div>
 				<FlexBox justify="flex-start" className="mt-10">
 					<span style={{ color: `${colors.BLACK_9}`, fontWeight: '500' }}>Skills</span>
@@ -112,7 +122,7 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 						</CustomizedButton>
 					</FlexBox>
 					<FlexBox gap={5}>
-						<CalendarIcon width="18px" height="18px" color={colors.BLACK_9} />
+						<CalendarFillIcon width="18px" height="18px" color={colors.BLACK_9} />
 						<SSpan>{props.applied}</SSpan>
 					</FlexBox>
 				</FlexBox>

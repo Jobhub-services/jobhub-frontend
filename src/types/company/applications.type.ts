@@ -1,4 +1,5 @@
 import { InterviewInfo } from '@/types/interview.type';
+import { TValueLabel } from '@/types/common.type';
 
 export type ApplicationStatus = 'declined' | 'hired' | 'process' | 'new' | 'interview';
 export type InterviewStatus = 'On Progress' | 'Finished' | 'Pending';
@@ -17,8 +18,8 @@ export type WorkExperienceType = {
 };
 
 export type ApplicantsShortInfo = {
+	_id: string;
 	applicationStatus?: ApplicationStatus;
-	applicantId: string;
 	img?: string;
 	name?: string;
 	role?: string;
@@ -60,9 +61,14 @@ export type ApplicantsByJob = {
 
 export type FilterType = {
 	jobTitle?: string;
-	country?: { id: string; label: string }[];
-	applicantRole?: string[];
+	country?: TValueLabel[];
+	applicantRole?: TValueLabel[];
 	applicationDate?: [Date | null, Date | null];
-	occupationType?: 'full_time' | 'part_time' | 'temporary' | 'permanent' | '';
-	skills?: { id: string; label: string }[];
+	occupationType?: {
+		full_time?: boolean;
+		part_time?: boolean;
+		temporary?: boolean;
+		permanent?: boolean;
+	};
+	skills?: TValueLabel[];
 };

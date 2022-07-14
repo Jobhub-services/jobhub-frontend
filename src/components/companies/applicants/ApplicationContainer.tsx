@@ -3,7 +3,7 @@ import { colors } from '@/assets/theme';
 import { FlexBox, Button } from 'staak-ui';
 import ApplicationCard from './ApplicationCard';
 import { ApplicationContainerProps } from '@/models/component/companies/applications/applications.interface';
-import { createSearchParams, useNavigate, useSearchParams } from 'react-router-dom';
+import { createSearchParams, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 
 const SHeader = styled(FlexBox)`
 	justify-content: space-between !important;
@@ -17,6 +17,14 @@ const SButton = styled(Button)`
 const STitle = styled.div`
 	font-size: 18px;
 	font-weight: 600;
+	display: -webkit-box;
+	margin: 0;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
 `;
 const SSpan = styled.span<any>`
 	font-size: 13px;
@@ -36,6 +44,7 @@ const CardContainer = styled.div<any>`
 	padding: 10px 15px;
 `;
 const ApplicationContainer = (props: ApplicationContainerProps) => {
+	const { status } = useParams();
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 	function handleClick() {
@@ -44,7 +53,7 @@ const ApplicationContainer = (props: ApplicationContainerProps) => {
 	function allApplicants() {
 		searchParams.set('jobId', props.jobId);
 		const params = createSearchParams(searchParams);
-		navigate(`search?${params}`);
+		navigate(`/applicants/search/${status}/?${params}`);
 	}
 	return (
 		<AppContainer>
@@ -69,7 +78,7 @@ const ApplicationContainer = (props: ApplicationContainerProps) => {
 					return (
 						<ApplicationCard
 							key={idx}
-							applicantId={elem.applicantId}
+							_id={elem._id}
 							img={elem.img}
 							name={elem.name}
 							role={elem.role}

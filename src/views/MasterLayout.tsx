@@ -2,7 +2,7 @@ import { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import { FlexBox } from 'staak-ui';
 import { HeaderBar, SideBar } from '@/components/common';
-import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
+import { COLLAPSED_ASIDE_WIDTH, EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { userActions } from '@/modules/actions/user.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import PrivateRoutes from '@/routes/PrivateRoutes';
@@ -21,8 +21,9 @@ const StyledFlexBox = styled(FlexBox)`
 	width: 100%;
 `;
 
-const MainContent = styled.div`
-	width: calc(100% - ${ASIDE_WIDTH}px);
+const MainContent = styled.div<any>`
+	width: calc(100% - ${(props) => (props.expanded ? EXPANDED_ASIDE_WIDTH : COLLAPSED_ASIDE_WIDTH)}px);
+	transition: width 0.2s ease-in-out;
 	overflow-y: auto;
 	height: 100%;
 `;
@@ -35,6 +36,8 @@ const MainContainer = styled.div`
 `;
 const MasterLayout: FC = () => {
 	const { userInfoLoaded } = useAppSelector((state) => state.user);
+	const { appExpanded } = useAppSelector((state) => state.metadata);
+
 	useEffect(() => {
 		if (!userInfoLoaded) userActions.getUserInfo();
 	}, []);
@@ -43,7 +46,7 @@ const MasterLayout: FC = () => {
 			<HeaderBar />
 			<StyledFlexBox align="flex-start" className="staak_scrollbar">
 				<SideBar />
-				<MainContent className="staak_scrollbar">
+				<MainContent className="staak_scrollbar" expanded={appExpanded}>
 					<MainContainer>
 						<PrivateRoutes />
 					</MainContainer>

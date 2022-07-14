@@ -1,18 +1,19 @@
 import { ApplicantsByJob, ApplicantsShortInfo, FilterType, ApplicantAllInfo } from '@/types/company/applications.type';
 
 type PaginationType = {
-	total?: number;
+	size?: number;
 	pages?: number;
-	currentPage?: number;
+	count?: number;
 };
 export type AppData = PaginationType & {
-	applicants: ApplicantsShortInfo[];
+	content: ApplicantsShortInfo[];
 };
 export type AppByJobs = PaginationType & {
-	applicants: ApplicantsByJob[];
+	content: ApplicantsByJob[];
 };
 export interface IApplicationsState {
 	isLoading?: boolean;
+	isDetailLoading?: boolean;
 	filterClosed?: boolean;
 	applicantsByJobs: AppByJobs;
 	showApplicants: AppData;

@@ -1,5 +1,7 @@
 import { StandardProps } from '@/models/component';
-import { FilterType } from '@/types';
+import { FilterType, TValueLabel } from '@/types';
+import { TJobType } from '@/types/developer/job.type';
+
 export interface PNav extends StandardProps {
 	title?: string;
 	badge?: string;
@@ -20,4 +22,16 @@ export interface FilterContianerProps extends StandardProps {
 export interface ITitleIcon extends StandardProps {
 	title?: string;
 	icon: React.ReactNode;
+}
+
+export interface PFSkills extends StandardProps {
+	skills?: TValueLabel[];
+	clear?: boolean;
+	onChange?: (value: TValueLabel[], name?: string) => void;
+}
+
+export interface PFJobType extends StandardProps {
+	jobType?: TJobType;
+	clear?: boolean;
+	onChange?: (value: TJobType, name?: string) => void;
 }

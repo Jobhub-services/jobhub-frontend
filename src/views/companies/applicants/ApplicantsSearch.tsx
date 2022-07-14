@@ -1,30 +1,37 @@
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import ApplicantsHeader from '@/components/companies/applicants/header/ApplicantsHeader';
 import ApplicationsFilter from '@/components/companies/applicants/filter/ApplicationFilter';
+import { Outlet, useLocation, Route, useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import ApplicantsAll from '@/components/companies/applicants/ApplicantsAll';
 import styled from 'styled-components';
-import { Outlet, useParams, useLocation, useNavigate } from 'react-router-dom';
-import ApplicantsByJob from '@/components/companies/applicants/ApplicantsByJob';
 import { useAppSelector } from '@/utils/appHooks';
-import { useEffect } from 'react';
-import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { ApplicationStatus } from '@/types/company/applications.type';
+import { applicationsActions } from '@/modules/actions/company/applications.actions';
+import { useEffect } from 'react';
 
 const MainContainer = styled.div`
 	position: relative;
 	height: 100%;
 `;
 
-const ApplicantsOverview = () => {
+const ApplicantsSearch = () => {
 	const navigate = useNavigate();
 	const { status } = useParams();
+	const [searchParams] = useSearchParams();
 	const { pathname, search } = useLocation();
 	const { isLoading } = useAppSelector((state) => state.applications);
+
 	useEffect(() => {
-		applicationsActions.getApplicantsByJobs(status as ApplicationStatus);
+		console.log('hello i am redering search comoonenet -------------');
+		let params: { [x: string]: string } = {};
+		for (var [key, value] of searchParams.entries()) params[key] = value;
+		applicationsActions.getShowApplicants(params, status as ApplicationStatus);
 	}, [status]);
+
 	const onChangeTab = (status: string) => {
+		console.log(search, pathname);
 		let path = pathname.split('/');
-		path[2] = status;
+		path[3] = status;
 		navigate(`${path.join('/')}${search}`);
 	};
 	return (
@@ -34,8 +41,8 @@ const ApplicantsOverview = () => {
 			) : (
 				<>
 					<div style={{ width: '100%', padding: '10px 15px', height: '100%' }}>
-						<ApplicantsHeader viewType="byjob" onChangeTab={onChangeTab} />
-						<ApplicantsByJob />
+						<ApplicantsHeader viewType="search" onChangeTab={onChangeTab} />
+						<ApplicantsAll />
 					</div>
 					<Outlet />
 				</>
@@ -45,4 +52,4 @@ const ApplicantsOverview = () => {
 	);
 };
 
-export default ApplicantsOverview;
+export default ApplicantsSearch;

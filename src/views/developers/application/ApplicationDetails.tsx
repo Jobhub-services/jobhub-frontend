@@ -1,5 +1,5 @@
 import Header from '@/components/developers/applications/detail/Header';
-import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
+import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -32,7 +32,7 @@ const MainContainer = styled.div<any>`
 	position: fixed;
 	right: 0;
 	top: ${HEADER_HIEGHT}px;
-	width: calc(100% - ${ASIDE_WIDTH}px);
+	width: calc(100% - ${EXPANDED_ASIDE_WIDTH}px);
 	height: calc(100% - ${HEADER_HIEGHT}px);
 	background-color: #2c2c2c3b;
 `;

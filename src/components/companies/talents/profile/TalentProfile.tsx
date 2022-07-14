@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colors } from '@/assets/theme';
-import { HEADER_HIEGHT, ASIDE_WIDTH } from '@/constants/app.constants';
+import { HEADER_HIEGHT, EXPANDED_ASIDE_WIDTH } from '@/constants/app.constants';
 import { useAppSelector } from '@/utils/appHooks';
 import { FlexBox, IconButton, Headline, HrDivider, Button, TabPane } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
@@ -29,7 +29,7 @@ const MainContainer = styled.div<any>`
 	position: fixed;
 	right: 0;
 	top: ${HEADER_HIEGHT}px;
-	width: calc(${(props) => (props.showed ? `100% - ${ASIDE_WIDTH}px` : '0')});
+	width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
 	height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;

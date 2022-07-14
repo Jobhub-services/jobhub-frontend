@@ -6,7 +6,10 @@ import { TLanguages } from '@/types/metadata.type';
 
 const { METADATA_SERVICE } = API_PATHS;
 
-const metadataDispatcher = {
+export const metadataDispatcher = {
+	setAppExpanded(expanded: boolean) {
+		dispatchToStore(storeActions.setAppExpanded({ expanded }));
+	},
 	setIsLoading(laoding: boolean) {
 		dispatchToStore(storeActions.isLoading({ laoding }));
 	},

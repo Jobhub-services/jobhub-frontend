@@ -13,3 +13,5 @@ export type FilterType = 'applications' | 'job' | 'talent' | 'developerJobs';
 export type StoreState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 export type StatusType = 'ready' | 'open' | 'closed';
+
+export type TValueLabel = { value?: string; label?: string };

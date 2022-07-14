@@ -3,27 +3,35 @@ import { Button, FlexBox, InputPicker } from 'staak-ui';
 import HeaderTab from './HeaderTab';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { createSearchParams, useParams, useSearchParams } from 'react-router-dom';
 
-const ApplicantsHeader = () => {
-	const navigate = useNavigate();
+const SORT_MAP = { des: 'Newest job', asc: 'Oldest job' };
+const SORT_MAP_APP = { des: 'Newest applicant', asc: 'Oldest applicant' };
+
+const ApplicantsHeader = ({ viewType, onChangeTab }: { viewType: 'byjob' | 'search'; onChangeTab: (status: string) => void }) => {
 	const { status } = useParams();
-	const { pathname, search } = useLocation();
+	const [searchParams, setSearchParams] = useSearchParams();
 	const { filterClosed, applicantsByJobs } = useAppSelector((state) => state.applications);
-	const { total } = applicantsByJobs;
+	const { count } = applicantsByJobs;
 
-	function onChangeTab(status: string) {
-		let path = pathname.split('/');
-		path[2] = status;
-		navigate(`${path.join('/')}${search}`);
-	}
+	const handleChange = (event: any, value: string, label: string, name: string) => {
+		const sort = searchParams.get('sort') ?? 'des';
+		searchParams.set('sort', value);
+		setSearchParams(searchParams);
+		let params: any = {};
+		for (const [k, v] of searchParams.entries()) params[k] = v;
+		if (sort !== value) {
+			if (viewType === 'byjob') applicationsActions.getApplicantsByJobs(status as any, params);
+			else applicationsActions.getShowApplicants(params, status as any);
+		}
+	};
 	return (
 		<FlexBox justify="space-between">
 			<FlexBox gap={20}>
-				<HeaderTab onClick={onChangeTab} title="New Applicants" badge={`${total}`} active={status === 'new'} status="new" />
-				<HeaderTab onClick={onChangeTab} title="In Process" badge={`${total}`} active={status === 'process'} status="process" />
-				<HeaderTab onClick={onChangeTab} title="Hired" badge={`${total}`} active={status === 'hired'} status="hired" />
-				<HeaderTab onClick={onChangeTab} title="Declined" badge={`${total}`} active={status === 'declined'} status="declined" />
+				<HeaderTab onClick={onChangeTab} title="New Applicants" badge={`${count}`} active={status === 'new'} status="new" />
+				<HeaderTab onClick={onChangeTab} title="In Process" badge={`${count}`} active={status === 'process'} status="process" />
+				<HeaderTab onClick={onChangeTab} title="Hired" badge={`${count}`} active={status === 'hired'} status="hired" />
+				<HeaderTab onClick={onChangeTab} title="Declined" badge={`${count}`} active={status === 'declined'} status="declined" />
 			</FlexBox>
 			<FlexBox gap={10}>
 				<Button
@@ -34,9 +42,18 @@ const ApplicantsHeader = () => {
 				>
 					Filter
 				</Button>
-				<InputPicker placeholder="Sort application by" width="300px">
-					<InputPicker.Option>Newest</InputPicker.Option>
-					<InputPicker.Option>Oldest</InputPicker.Option>
+				<InputPicker
+					placeholder="Sort application by"
+					width="300px"
+					onChange={handleChange}
+					value={
+						viewType === 'byjob'
+							? SORT_MAP[(searchParams.get('sort') as 'des' | 'asc') ?? 'des']
+							: SORT_MAP_APP[(searchParams.get('sort') as 'des' | 'asc') ?? 'des']
+					}
+				>
+					<InputPicker.Option value="des">Newest {viewType === 'byjob' ? 'job' : 'applicant'}</InputPicker.Option>
+					<InputPicker.Option value="asc">Oldest {viewType === 'byjob' ? 'job' : 'applicant'}</InputPicker.Option>
 				</InputPicker>
 			</FlexBox>
 		</FlexBox>

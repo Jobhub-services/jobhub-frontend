@@ -1,7 +1,7 @@
 import { colors } from '@/assets/theme';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { HeartFilledIcon, HeartIcon, UnavailableIcon } from '@/assets/icons';
-import { ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
+import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Button, CloseIcon, FlexBox, Headline, HrDivider, IconButton, TabPane } from 'staak-ui';
 import JobApplication from '@/components/developers/jobs/details/application/JobApplication';
@@ -31,7 +31,7 @@ const MainContainer = styled.div<any>`
 	position: fixed;
 	right: 0;
 	top: ${HEADER_HIEGHT}px;
-	width: calc(${(props) => (props.showed ? `100% - ${ASIDE_WIDTH}px` : '0')});
+	width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
 	height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
