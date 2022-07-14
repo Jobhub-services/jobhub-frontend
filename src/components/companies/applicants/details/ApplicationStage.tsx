@@ -16,13 +16,13 @@ const LAST_ITEM = Stages.length - 1;
 const Container = styled.div``;
 
 const ApplicationStage = () => {
-	const { applicationStatus, applicantId } = useAppSelector((state) => state.applications.applicantDetails);
+	const { applicationStatus, _id } = useAppSelector((state) => state.applications.applicantDetails);
 	const [popModelClosed, setPopModelClosed] = useState(true);
 	const currentStage = Status.indexOf(applicationStatus!);
 	console.log('current status is ', applicationStatus);
 	console.log('current stage value is ', currentStage);
 	function nextStage() {
-		applicationsActions.setApplicationStatus(Status[currentStage + 1], applicantId);
+		applicationsActions.setApplicationStatus(Status[currentStage + 1], _id);
 	}
 	function onClosed() {
 		setPopModelClosed(!popModelClosed);
@@ -61,7 +61,7 @@ const ApplicationStage = () => {
 					<TextArea name="comment" placeholder="Comment" width="400px"></TextArea>
 				</PopModel.Body>
 				<PopModel.Footer>
-					<Button width="100%" onClick={() => applicationsActions.setApplicationStatus('declined', applicantId)}>
+					<Button width="100%" onClick={() => applicationsActions.setApplicationStatus('declined', _id)}>
 						Confirme
 					</Button>
 				</PopModel.Footer>

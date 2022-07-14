@@ -5,7 +5,7 @@ import { Button } from 'staak-ui';
 
 const InterviewSchedule = () => {
 	const { createInterview } = useAppSelector((state) => state.interview);
-	const { applicantId } = useAppSelector((state) => state.applications.applicantDetails);
+	const { _id } = useAppSelector((state) => state.applications.applicantDetails);
 	function handleInput(name: string, value: string) {
 		let tmp: any = { ...createInterview };
 		tmp[name] = value;
@@ -23,7 +23,7 @@ const InterviewSchedule = () => {
 	}
 	function onSubmit() {
 		const tmp: any = { ...createInterview };
-		tmp.applicantId = applicantId;
+		tmp._id = _id;
 		interviewActions.create(tmp);
 	}
 	return (

@@ -22,14 +22,12 @@ const ApplicantsSearch = () => {
 	const { isLoading } = useAppSelector((state) => state.applications);
 
 	useEffect(() => {
-		console.log('hello i am redering search comoonenet -------------');
 		let params: { [x: string]: string } = {};
 		for (var [key, value] of searchParams.entries()) params[key] = value;
 		applicationsActions.getShowApplicants(params, status as ApplicationStatus);
 	}, [status]);
 
 	const onChangeTab = (status: string) => {
-		console.log(search, pathname);
 		let path = pathname.split('/');
 		path[3] = status;
 		navigate(`${path.join('/')}${search}`);

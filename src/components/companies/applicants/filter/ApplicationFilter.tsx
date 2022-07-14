@@ -78,7 +78,7 @@ const ApplicationsFilter = () => {
 	};
 
 	return (
-		<FilterContianer title="Applications Searcher" type="applications" onApply={onApply} onClear={onClear}>
+		<FilterContianer title="Applications filters" type="applications" onApply={onApply} onClear={onClear}>
 			<FilterContianer.Body>
 				<div>
 					<div>
