@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FlexBox, Tag } from 'staak-ui';
 import { colors } from '@/assets/theme';
-import { CalendarIcon, CompanyIcon, LocationIcon } from '@/assets/icons';
+import { CalendarFillIcon, CompanyIcon, LocationIcon } from '@/assets/icons';
 import styled from 'styled-components';
 import { WorkExperienceProps } from '@/models/component/companies/applications/applications.interface';
 
@@ -25,17 +25,23 @@ const SLink = styled.a`
 	color: ${colors.PURPLE_BASE};
 	text-decoration: underline !important;
 `;
-
+const STitle = styled.div`
+	font-size: 14px;
+	font-weight: 500;
+	color: ${colors.BLACK_4};
+`;
 const WorkExperience = ({ title, jobType, company, location, dateRange, description, link, style, className }: WorkExperienceProps) => {
 	const [descShowed, setDescShowed] = useState(false);
 	return (
 		<div className={className} style={{ ...style }}>
 			<FlexBox justify="space-between">
-				<div>{title}</div>
-				<Tag color={colors.GREEN_CLEAR_4}>{jobType}</Tag>
+				<STitle>{title}</STitle>
+				<Tag size="12px" color={colors.GREEN_CLEAR_4}>
+					{jobType}
+				</Tag>
 			</FlexBox>
-			<FlexBox justify="space-between" className="mt-5">
-				<FlexBox gap={60}>
+			<FlexBox justify="space-between" className="mt-15">
+				<FlexBox gap={50}>
 					<FlexBox gap={5}>
 						<CompanyIcon width="17px" height="17px" color={colors.BLACK_9} />
 						<SSpan>{company}</SSpan>
@@ -46,12 +52,12 @@ const WorkExperience = ({ title, jobType, company, location, dateRange, descript
 					</FlexBox>
 				</FlexBox>
 				<FlexBox gap={10}>
-					<CalendarIcon width="15px" height="15px" color={colors.BLACK_9} />
+					<CalendarFillIcon color={colors.BLACK_9} />
 					<SSpan>{dateRange}</SSpan>
 				</FlexBox>
 			</FlexBox>
 			{description && (
-				<div className="mt-5">
+				<div className="mt-10">
 					<DescTitle
 						onClick={() => {
 							setDescShowed(!descShowed);

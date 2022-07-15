@@ -4,7 +4,7 @@ import EducationCard from './EducationCard';
 import CertificationCard from './CertificationCard';
 import WorkExperience from '@/components/companies/_common/WorkExperience';
 import styled from 'styled-components';
-import { TalentAllInfo } from '@/types/talent.type';
+import { TalentAllInfo } from '@/types/company/talent.type';
 
 const STitle = styled.h2`
 	margin: 10px 0;
@@ -17,7 +17,7 @@ const GeneralInfo = (props: TalentAllInfo) => {
 		<div className="staak_scrollbar" style={{ padding: '0 15px', overflow: 'auto' }}>
 			<div>
 				<STitle>Professional Summary</STitle>
-				<p>{props.professional_summary}</p>
+				<p>{props.summary}</p>
 			</div>
 			<div>
 				<STitle>Skills</STitle>
@@ -27,6 +27,7 @@ const GeneralInfo = (props: TalentAllInfo) => {
 					})}
 				</FlexBox>
 			</div>
+			<HrDivider top={15} side={0} />
 			<div className="mt-15">
 				<STitle>Work Experience</STitle>
 				<div>
@@ -37,9 +38,11 @@ const GeneralInfo = (props: TalentAllInfo) => {
 									key={idx}
 									title={elem.title}
 									jobType={elem.job_type}
-									company={elem.company}
+									company={elem.company_name}
 									location={elem.location}
-									dateRange={`${elem.startDate?.toDateString()} - ${elem.endDate?.toDateString()}`}
+									dateRange={`${elem.startDate ? new Date(elem.startDate).toDateString() : 'N/A'} - ${
+										elem.endDate ? new Date(elem.endDate)?.toDateString() : 'N/A'
+									}`}
 									description={elem.description}
 								/>
 								<HrDivider key={idx} top={15} side={0} />
@@ -56,9 +59,11 @@ const GeneralInfo = (props: TalentAllInfo) => {
 							<>
 								<EducationCard
 									key={idx}
-									title={elem.degree!}
+									title={elem.title!}
 									university={elem.school!}
-									date={`${elem.startDate?.toDateString()} - ${elem.endDate?.toDateString()}`}
+									date={`${elem.startDate ? new Date(elem.startDate).toDateString() : 'N/A'} - ${
+										elem.endDate ? new Date(elem.endDate)?.toDateString() : 'N/A'
+									}`}
 								/>
 								<HrDivider key={idx} top={15} side={0} />
 							</>
@@ -74,10 +79,13 @@ const GeneralInfo = (props: TalentAllInfo) => {
 						return (
 							<>
 								<CertificationCard
+									key={idx}
 									title={elem.title!}
-									date={elem.date?.toDateString()}
+									issuedDate={elem.issuedDate ? new Date(elem.issuedDate)?.toDateString() : 'N/A'}
+									expirationDate={elem.expirationDate ? new Date(elem.expirationDate)?.toDateString() : 'N/A'}
 									provider={elem.provider}
 									description={elem.description}
+									certificationId={elem.certificationId}
 									link={elem.link}
 								/>
 								<HrDivider key={idx} top={15} side={0} />

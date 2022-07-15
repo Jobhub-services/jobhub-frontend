@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { profileAction } from '@/modules/actions/developer/profile.actions';
 import { PlusIcon } from '@/assets/icons';
 import { metadataActions } from '@/modules/actions/metadata.actions';
+import { CExperience } from '@/constants/developer/profile.constants';
 
 const SubTitle = styled.span`
 	font-weight: 500;
@@ -110,16 +111,13 @@ const Roles = () => {
 								})}
 							</InputPickerField>
 							<InputPickerField name="experience" title="Experience" onChange={handleInput} value={inputData?.experience}>
-								<InputPickerField.Option value="1 years">1 years</InputPickerField.Option>
-								<InputPickerField.Option value="2 years">2 years</InputPickerField.Option>
-								<InputPickerField.Option value="3 years">3 years</InputPickerField.Option>
-								<InputPickerField.Option value="4 years">4 years</InputPickerField.Option>
-								<InputPickerField.Option value="5 years">5 years</InputPickerField.Option>
-								<InputPickerField.Option value="6 years">6 years</InputPickerField.Option>
-								<InputPickerField.Option value="7 years">7 years</InputPickerField.Option>
-								<InputPickerField.Option value="8 years">8 years</InputPickerField.Option>
-								<InputPickerField.Option value="9 years">9 years</InputPickerField.Option>
-								<InputPickerField.Option value="10+ years">10+ years</InputPickerField.Option>
+								{CExperience.map((elem, idx) => {
+									return (
+										<InputPickerField.Option key={idx} value={elem}>
+											{elem}
+										</InputPickerField.Option>
+									);
+								})}
 							</InputPickerField>
 						</FlexBox>
 						<TagPickerField className="mt-15 mb-15" name="other_roles" title="Open to the following roles" onChange={handleTag} values={otherRoles}>

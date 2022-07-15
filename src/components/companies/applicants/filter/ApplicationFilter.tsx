@@ -1,5 +1,5 @@
 import FilterContianer from '@/components/common/filter/FilterContainer';
-import { DateRangePicker, Input, InputPicker, TagPicker } from 'staak-ui';
+import { DateRangePicker, Input, TagPicker } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
@@ -7,7 +7,7 @@ import { applicationsActions, applicationsDispatcher } from '@/modules/actions/c
 import { createSearchParams, useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { metadataActions } from '@/modules/actions/metadata.actions';
-import Skills from '@/components/companies/applicants/filter/Skills';
+import Skills from '@/components/companies/_common/filter/Skills';
 import OccupationType from '@/components/companies/applicants/filter/OccupationType';
 import { ApplicationStatus } from '@/types/company/applications.type';
 
@@ -90,9 +90,9 @@ const ApplicationsFilter = () => {
 						<TagPicker placeholder="Choose applicants roles" name="applicantRole" values={localFilters.applicantRole ?? []} onChange={handleChange}>
 							{roles?.content?.map((elem, idx) => {
 								return (
-									<InputPicker.Option key={idx} value={elem._id}>
+									<TagPicker.Option key={idx} value={elem._id}>
 										{elem.name}
-									</InputPicker.Option>
+									</TagPicker.Option>
 								);
 							})}
 						</TagPicker>
@@ -103,9 +103,9 @@ const ApplicationsFilter = () => {
 							{countries?.content?.map((elem, idx) => {
 								const tmp = elem.name + '(' + elem.code + ')';
 								return (
-									<InputPicker.Option key={idx} value={elem._id}>
+									<TagPicker.Option key={idx} value={elem._id}>
 										{tmp}
-									</InputPicker.Option>
+									</TagPicker.Option>
 								);
 							})}
 						</TagPicker>

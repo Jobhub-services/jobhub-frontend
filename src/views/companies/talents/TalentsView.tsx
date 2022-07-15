@@ -1,17 +1,32 @@
 import styled from 'styled-components';
-import { TalentsHeader, TalentsFilter, TalentProfile, CardContainer } from '@/components/companies/talents';
+import { TalentsHeader, TalentsFilter, CardContainer } from '@/components/companies/talents';
+import { useAppSelector } from '@/utils/appHooks';
+import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { useEffect } from 'react';
+import { talentsActions } from '@/modules/actions/company/talents.actions';
+import { Outlet } from 'react-router-dom';
 
 const MainContainer = styled.div`
 	position: relative;
 `;
 
 const TalentsView = () => {
+	const { isLoading } = useAppSelector((state) => state.talent);
+	useEffect(() => {
+		talentsActions.getTalents();
+	}, []);
 	return (
 		<MainContainer>
-			<TalentsHeader />
-			<CardContainer />
+			{isLoading ? (
+				<LoadingScreen />
+			) : (
+				<>
+					<TalentsHeader />
+					<CardContainer />
+				</>
+			)}
+			<Outlet />
 			<TalentsFilter />
-			<TalentProfile />
 		</MainContainer>
 	);
 };

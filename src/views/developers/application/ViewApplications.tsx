@@ -26,7 +26,8 @@ const ViewApplications = () => {
 			) : (
 				<>
 					<SubContainer>
-						<h1 style={{ color: `${colors.PURPLE_BASE}`, margin: '5px 0', fontSize: '24px' }}>Applications</h1> <ApplicationsList />
+						<h1 style={{ color: `${colors.PURPLE_BASE}`, margin: '5px 0', fontSize: '24px' }}>Applications</h1>
+						<ApplicationsList />
 					</SubContainer>
 					<Outlet />
 				</>

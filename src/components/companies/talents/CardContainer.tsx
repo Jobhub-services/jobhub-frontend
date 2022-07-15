@@ -1,23 +1,22 @@
 import styled from 'styled-components';
 import { TalentCard } from '@/components/companies/talents';
 import { useAppSelector } from '@/utils/appHooks';
-import { useEffect } from 'react';
-import { talentsActions } from '@/modules/actions/company/talents.actions';
 
 const SContainer = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	padding: 5px 40px 10px 40px;
 	gap: 20px;
+	@media only screen and (max-width: 1640px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
 `;
+
 const CardContainer = () => {
-	const { talents } = useAppSelector((state) => state.talent.showTalents);
-	useEffect(() => {
-		talentsActions.getTalents();
-	}, []);
+	const { showTalents } = useAppSelector((state) => state.talent);
 	return (
 		<SContainer>
-			{talents?.map((elem, idx) => {
+			{showTalents?.content?.map((elem, idx) => {
 				return <TalentCard key={idx} {...elem} />;
 			})}
 		</SContainer>

@@ -1,24 +1,27 @@
-import { TalentShortInfo } from '@/types/talent.type';
-import { TalentAllInfo } from './../../../types/talent.type';
+import { TalentShortInfo } from '@/types/company/talent.type';
+import { TalentAllInfo } from '@/types/company/talent.type';
 import dispatchToStore from '@/utils/store';
 import { storeActions } from '@/modules/store/company/talents.store';
 import { httpClient } from '@/config/httpClient/HttpClient';
 import { API_PATHS } from '@/constants/api.constants';
 
-const { TALENT_SERVICE } = API_PATHS;
+const { USERS_SERVICE } = API_PATHS;
 
-const talentsDispatcher = {
+export const talentsDispatcher = {
 	setClosedFilter(closed: boolean) {
 		dispatchToStore(storeActions.closeFilter({ closed }));
 	},
-	setIsLoading(loading: boolean) {
-		dispatchToStore(storeActions.setIsLoading({ loading }));
+	setIsLoading(loading: boolean, attr: 'isLoading' | 'isDetailLoading' = 'isLoading') {
+		dispatchToStore(storeActions.setIsLoading({ loading, attr }));
 	},
 	setTalentDetails(data: TalentAllInfo) {
 		dispatchToStore(storeActions.setTalentDetails(data));
 	},
-	setTalents(data: { total?: number; pages?: number; currentPage?: number; talents?: TalentShortInfo[] }) {
+	setTalents(data: { size?: number; pages?: number; count?: number; content?: TalentShortInfo[] }) {
 		dispatchToStore(storeActions.setTalents(data));
+	},
+	setFilters(data: any) {
+		dispatchToStore(storeActions.setFilters(data));
 	},
 };
 
@@ -28,21 +31,29 @@ export const talentsActions = {
 	},
 
 	async getTalentDetails(talentId: string) {
-		talentsDispatcher.setIsLoading(true);
+		talentsDispatcher.setIsLoading(true, 'isDetailLoading');
 		try {
-			const response = await httpClient.get(`${TALENT_SERVICE}/show/detail/${talentId}`);
-			if (response.data) talentsDispatcher.setTalentDetails(response.data);
+			const response = await httpClient.get(`${USERS_SERVICE}/compan/talents/${talentId}`);
+			if (response.data) {
+				const data = response.data;
+				talentsDispatcher.setTalentDetails(data.content);
+			}
 		} catch (e: any) {
 		} finally {
-			talentsDispatcher.setIsLoading(false);
+			talentsDispatcher.setIsLoading(false, 'isDetailLoading');
 		}
 	},
 
-	async getTalents() {
+	async getTalents(params: any = {}) {
 		talentsDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.get(`${TALENT_SERVICE}/show`);
-			if (response.data) talentsDispatcher.setTalents(response.data);
+			const config = {
+				params: params,
+			};
+			const response = await httpClient.get(`${USERS_SERVICE}/compan/talents`, config);
+			if (response.data) {
+				talentsDispatcher.setTalents(response.data);
+			}
 		} catch (e: any) {
 		} finally {
 			talentsDispatcher.setIsLoading(false);

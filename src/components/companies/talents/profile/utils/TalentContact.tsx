@@ -1,4 +1,4 @@
-import { EmailIcon, HomeIcon, LinkedInSolidIcon, PhoneIcon, TwitterIcon, WorldIcon } from '@/assets/icons';
+import { EmailIcon, HomeIcon, LinkedInSolidIcon, MoneyIcon, PhoneIcon, TwitterIcon, WorldIcon } from '@/assets/icons';
 import { GithubIcon } from 'staak-ui';
 import { FlexBox, HrDivider } from 'staak-ui';
 import { colors } from '@/assets/theme';
@@ -7,16 +7,41 @@ import { ContactProps } from '@/models/component/companies/talents/talents.inter
 
 const SLink = styled.a`
 	color: ${colors.PURPLE_BASE};
-	display: block;
+	display: -webkit-box;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
 `;
 const SSpan = styled.span`
 	color: ${colors.BLACK_7};
+`;
+const SIcon = styled.span`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 const TalentContact = (props: ContactProps) => {
 	return (
 		<div style={{ flexGrow: '1' }}>
 			<FlexBox justify="start" align="start" gap={10} className="mb-15">
-				<HomeIcon width="20px" height="20px" color={colors.BLACK_7} />
+				<SIcon>
+					<MoneyIcon width="20px" height="20px" color={colors.BLACK_7} />
+				</SIcon>
+				<div>
+					<SSpan>Salary</SSpan>
+					<div>
+						{props.salary} {props.currency}
+					</div>
+				</div>
+			</FlexBox>
+			<HrDivider top={10} side={20} />
+			<FlexBox justify="start" align="start" gap={10} className="mb-15">
+				<SIcon>
+					<HomeIcon width="20px" height="20px" color={colors.BLACK_7} />
+				</SIcon>
 				<div>
 					<SSpan>Address</SSpan>
 					<div>
@@ -26,7 +51,9 @@ const TalentContact = (props: ContactProps) => {
 			</FlexBox>
 			<HrDivider top={10} side={20} />
 			<FlexBox justify="start" align="start" gap={10} className="mb-15">
-				<EmailIcon width="20px" height="20px" color={colors.BLACK_7} />
+				<SIcon>
+					<EmailIcon width="20px" height="20px" color={colors.BLACK_7} />
+				</SIcon>
 				<div>
 					<SSpan>Email</SSpan>
 					<div>{props.email}</div>
@@ -42,17 +69,21 @@ const TalentContact = (props: ContactProps) => {
 			</FlexBox>
 			<HrDivider top={10} side={20} />
 			<FlexBox justify="start" align="start" gap={10} className="mb-15">
-				<LinkedInSolidIcon width="20px" height="20px" color={colors.BLACK_7} />
+				<SIcon>
+					<LinkedInSolidIcon width="20px" height="20px" color={colors.BLACK_7} />
+				</SIcon>
 				<div>
 					<SSpan>LinkedIn</SSpan>
 					<SLink target="_blank" href={props.linkedin}>
-						{props.linkedin ?? 'N/A'}
+						{props.linkedin + 'sdfsdfkmsdlfmsdfkmsdlfksmdlfkmsldkfmlsdkfmlsdkfmlsdkfmlsdkf' ?? 'N/A'}
 					</SLink>
 				</div>
 			</FlexBox>
 			<HrDivider top={10} side={20} />
 			<FlexBox justify="start" align="start" gap={10} className="mb-15">
-				<WorldIcon width="20px" height="20px" color={colors.BLACK_7} />
+				<SIcon>
+					<WorldIcon width="20px" height="20px" color={colors.BLACK_7} />
+				</SIcon>
 				<div>
 					<SSpan>Website</SSpan>
 					<SLink target="_blank" href={props.website}>
@@ -62,7 +93,9 @@ const TalentContact = (props: ContactProps) => {
 			</FlexBox>
 			<HrDivider top={10} side={20} />
 			<FlexBox justify="start" align="start" gap={10}>
-				<GithubIcon width="20px" height="20px" color={colors.BLACK_7} />
+				<SIcon>
+					<GithubIcon width="20px" height="20px" color={colors.BLACK_7} />
+				</SIcon>
 				<div>
 					<SSpan>Git</SSpan>
 					<SLink target="_blank" href={props.git}>
@@ -72,7 +105,9 @@ const TalentContact = (props: ContactProps) => {
 			</FlexBox>
 			<HrDivider top={10} side={20} />
 			<FlexBox justify="start" align="start" gap={10}>
-				<TwitterIcon width="20px" height="20px" color={colors.BLACK_7} />
+				<SIcon>
+					<TwitterIcon width="20px" height="20px" color={colors.BLACK_7} />
+				</SIcon>
 				<div>
 					<SSpan>Twiter</SSpan>
 					<SLink target="_blank" href="https://twiter.com/jerombell45">

@@ -1,13 +1,15 @@
-import { TalentAllInfo, TalentShortInfo } from '@/types/talent.type';
+import { TalentAllInfo, TalentShortInfo, TFilter } from '@/types/company/talent.type';
 
 export interface ITalentState {
 	filterClosed?: boolean;
 	isLoading?: boolean;
+	isDetailLoading?: boolean;
 	showTalents: {
-		total?: number;
+		count?: number;
 		pages?: number;
-		currentPage?: number;
-		talents?: TalentShortInfo[];
+		size?: number;
+		content?: TalentShortInfo[];
 	};
 	talentDetails: TalentAllInfo;
+	filter: TFilter;
 }

@@ -1,6 +1,7 @@
 import { StatusElemProps } from '@/models/component/companies/common.interface';
 import { StatusColors } from '@/constants/company/common.constants';
 import styled from 'styled-components';
+import { FlexBox } from 'staak-ui';
 
 const Circle = styled.span<StatusElemProps>`
 	display: inline-block;
@@ -12,14 +13,20 @@ const Circle = styled.span<StatusElemProps>`
 const Status = styled.span<StatusElemProps>`
 	color: ${(props) => StatusColors[props.status!]};
 	font-weight: 500;
-	margin-left: 10px;
+	display: -webkit-box;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
 `;
 const StatusElem = ({ title, status, style, className }: StatusElemProps) => {
 	return (
-		<div style={{ ...style }} className={` ${className}`}>
+		<FlexBox justify="start" style={{ ...style }} className={` ${className}`} gap={10}>
 			<Circle status={status} />
 			<Status status={status}>{title}</Status>
-		</div>
+		</FlexBox>
 	);
 };
 

@@ -1,4 +1,4 @@
-import { FlexBox } from 'staak-ui';
+import { FlexBox, UserIcon } from 'staak-ui';
 import styled from 'styled-components';
 import { StatusColors } from '@/constants/company/common.constants';
 import { AvatarProps } from '@/models/component/companies/common.interface';
@@ -21,9 +21,17 @@ const SubTitle = styled.span`
 `;
 const SH3 = styled.h3`
 	margin: 0;
+	display: -webkit-box;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
 `;
 const SImg = styled.img`
 	border-radius: 40%;
+	object-fit: cover;
 `;
 const SSpan = styled.span`
 	display: block;
@@ -35,7 +43,7 @@ const Avatar = ({ img, name, role, status, experience, size, color }: AvatarProp
 	return (
 		<FlexBox justify="start" gap={10}>
 			<SAvatar size={size! + 10} status={status} color={color}>
-				<SImg src={img} alt="women" width={size} height={size} />
+				{img ? <SImg src={img} alt="women" width={size} height={size} /> : <UserIcon color={colors.BLACK_10} />}
 			</SAvatar>
 			<div>
 				<SH3>{name}</SH3>

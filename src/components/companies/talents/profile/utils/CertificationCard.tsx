@@ -2,7 +2,7 @@ import { CertificationProps } from '@/models/component/companies/talents/talents
 import { colors } from '@/assets/theme';
 import styled from 'styled-components';
 import { FlexBox } from 'staak-ui';
-import { CalendarIcon, CertificateIcon } from '@/assets/icons';
+import { CalendarFillIcon, CertificateIcon } from '@/assets/icons';
 import { useState } from 'react';
 
 const STitle = styled.div`
@@ -26,7 +26,7 @@ const DescTitle = styled.span`
 `;
 const Description = styled.p<any>`
 	margin: 5px 0;
-	height: ${(props) => (props.showed ? '100px' : '0')};
+	height: ${(props) => (props.showed ? '100%' : '0')};
 	overflow: hidden;
 `;
 const SLink = styled.a`
@@ -34,22 +34,30 @@ const SLink = styled.a`
 	color: ${colors.PURPLE_BASE};
 	text-decoration: underline !important;
 `;
-const CertificationCard = ({ title, provider, date, description, link }: CertificationProps) => {
+const CertificationCard = ({ title, provider, issuedDate, expirationDate, description, link, certificationId }: CertificationProps) => {
 	const [descShowed, setDescShowed] = useState(false);
 	return (
 		<div>
 			<STitle>{title}</STitle>
-			<FlexBox justify="space-between" className="mt-5">
-				<FlexBox gap={5}>
-					<CertificateIcon color={colors.BLACK_8} />
-					<div>
-						<SubTitle>Provider </SubTitle>
-						<SSpan>{provider}</SSpan>
-					</div>
-				</FlexBox>
+			<FlexBox justify="space-between" className="mt-10">
+				<div>
+					<FlexBox justify="start" gap={5}>
+						<CertificateIcon color={colors.BLACK_8} />
+						<FlexBox justify="start" gap={10}>
+							<SubTitle>Provider </SubTitle>
+							<SSpan>{provider}</SSpan>
+						</FlexBox>
+					</FlexBox>
+					<FlexBox justify="start" gap={10} className="mt-10">
+						<SubTitle>Certification ID </SubTitle>
+						<SSpan>{certificationId ?? 'N/A'}</SSpan>
+					</FlexBox>
+				</div>
 				<FlexBox gap={10}>
-					<CalendarIcon width="17px" height="17px" color={colors.BLACK_8} />
-					<SSpan>{date}</SSpan>
+					<CalendarFillIcon color={colors.BLACK_9} />
+					<SSpan>
+						{issuedDate} - {expirationDate}
+					</SSpan>
 				</FlexBox>
 			</FlexBox>
 			<div className="mt-5">

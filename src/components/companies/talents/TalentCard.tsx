@@ -6,7 +6,7 @@ import StatusElem from '@/components/companies/_common/StatusElem';
 import { TitleStatus } from '@/constants/company/talent.contants';
 import { CardProps } from '@/models/component/companies/talents/talents.interface';
 import { Avatar } from '@/components/companies/_common';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
 
@@ -22,40 +22,52 @@ const SButton = styled(Button)`
 	align-items: center;
 `;
 const SubTitle = styled.span`
-	display: block;
 	color: ${colors.BLACK_8};
+	display: -webkit-box;
 	font-size: 13px;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
 `;
 const Sp = styled.p`
 	font-size: 13px;
 	margin: 5px 0;
-	height: 40px;
+	display: -webkit-box;
 	color: ${colors.BLACK_7};
+	font-family: inherit;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
 	overflow: hidden;
+	white-space: pre-line;
 `;
-
 const TalentCard = (props: CardProps) => {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const { talentId } = useAppSelector((state) => state.talent.talentDetails);
-	function viewProfile() {
-		searchParams.set('detail', props.talentId);
-		setSearchParams(searchParams);
-		if (props.talentId === talentId) talentsActions.getTalentDetails(props.talentId);
-	}
+	const navigate = useNavigate();
+	const { _id } = useAppSelector((state) => state.talent.talentDetails);
+	const viewProfile = () => {
+		navigate(`detail/${props._id}`);
+		if (props._id !== _id) talentsActions.getTalentDetails(props._id);
+	};
 	return (
 		<SCard>
-			<Avatar status={props.status} img={props.img} name={props.name} role={props.main_role} />
-			<FlexBox justify="space-between" className="mt-10">
-				<FlexBox gap={5}>
+			<Avatar status={props.status} img={props.avatar} name={props.user?.fullName} role={props.role?.primary_role} />
+			<FlexBox justify="space-between" className="mt-10" gap={10}>
+				<FlexBox justify="start" gap={5} width="50%">
 					<LocationIcon width="18px" height="18px" color={colors.BLACK_8} />
-					<SubTitle>{props.address?.country ?? 'N/A'}</SubTitle>
+					<SubTitle>
+						{props.address?.country ?? 'N/A'}
+						{props.address?.city ? `, ${props.address?.city}` : ''}
+					</SubTitle>
 				</FlexBox>
 				<StatusElem title={TitleStatus[props.status!]} status={props.status} />
 			</FlexBox>
 			<div>
 				<div className="mt-10">
-					<div>Description</div>
-					<Sp>{props.professional_summary}</Sp>
+					<div>Summary</div>
+					<Sp>{props.summary}</Sp>
 				</div>
 				<div className="mt-10">
 					<div>Skills</div>
