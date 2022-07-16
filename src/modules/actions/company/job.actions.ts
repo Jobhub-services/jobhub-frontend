@@ -7,18 +7,16 @@ import { httpClient } from '@/config/httpClient/HttpClient';
 import { API_PATHS } from '@/constants/api.constants';
 import { transformErrors } from '@/utils/validations';
 import { JobDetails, JobOrderType, ShowJobInfo } from '@/types/company/jobs.type';
+import { JobInstance } from '@/constants/company/job.contants';
 
 const { JOBS_SERVICE } = API_PATHS;
 
 export const jobDispatcher = {
-	setIsLoading(isLoading: boolean) {
-		dispatchToStore(storeActions.setIsLoading({ isLoading }));
+	setIsLoading(isLoading: boolean, attr: 'isLoading' | 'isDetailLoading' = 'isLoading') {
+		dispatchToStore(storeActions.setIsLoading({ isLoading, attr }));
 	},
 	setClosedFilter(closed: boolean) {
 		dispatchToStore(storeActions.closeFilter({ closed }));
-	},
-	setOrderBy(order: JobOrderType) {
-		dispatchToStore(storeActions.setOrderBy({ order }));
 	},
 	saveJobData(data: JobInfo) {
 		dispatchToStore(storeActions.saveJobData(data));
@@ -43,9 +41,6 @@ export const jobActions = {
 	async setClosedFilter(closed: boolean) {
 		jobDispatcher.setClosedFilter(closed);
 	},
-	async setJobOrder(order: JobOrderType) {
-		jobDispatcher.setOrderBy(order);
-	},
 	async create(payload: JobInfo) {
 		jobDispatcher.setIsLoading(true);
 		jobDispatcher.setJobErrors([]);
@@ -65,6 +60,7 @@ export const jobActions = {
 			const response = await httpClient.post(`${JOBS_SERVICE}/company`, tmp);
 			const responseData = response.data;
 			if (responseData) {
+				jobDispatcher.createJob(JobInstance);
 				jobDispatcher.setJobCreated(true);
 				//jobDispatcher.createJob(initialState.createJob);
 			}
@@ -72,17 +68,24 @@ export const jobActions = {
 			const response: AxiosResponse = e?.response;
 			if (response) {
 				const data = response.data;
-				const errors = transformErrorsToArray(data);
-				jobDispatcher.setJobErrors(errors);
+				let errors = {};
+				if (data.message) errors = data;
+				else errors = transformErrorsToArray(data);
+				jobDispatcher.setJobErrors({ status: true, content: errors });
 			}
 		} finally {
 			jobDispatcher.setIsLoading(false);
 		}
 	},
-	async getJobs() {
+	async getJobs(params: any = {}) {
 		jobDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.get(`${JOBS_SERVICE}/company`);
+			const config = {
+				params: {
+					...params,
+				},
+			};
+			const response = await httpClient.get(`${JOBS_SERVICE}/company`, config);
 			const responseData = response.data;
 			if (responseData) {
 				jobDispatcher.getJobs(responseData);
@@ -101,7 +104,7 @@ export const jobActions = {
 		}
 	},
 	async getJobDetails(id: string) {
-		jobDispatcher.setIsLoading(true);
+		jobDispatcher.setIsLoading(true, 'isDetailLoading');
 		try {
 			const response = await httpClient.get(`${JOBS_SERVICE}/company/${id}`);
 			const responseData = response.data;
@@ -118,11 +121,32 @@ export const jobActions = {
 				jobDispatcher.setJobErrors(errors);
 			}
 		} finally {
-			jobDispatcher.setIsLoading(false);
+			jobDispatcher.setIsLoading(false, 'isDetailLoading');
 		}
 	},
 	async saveJobData(data: JobInfo) {
 		jobDispatcher.saveJobData(data);
+	},
+	async deleteJob(id: string) {
+		jobDispatcher.setIsLoading(true, 'isDetailLoading');
+		try {
+			const response = await httpClient.delete(`${JOBS_SERVICE}/company/${id}`);
+			const responseData = response.data;
+			if (responseData) {
+				jobDispatcher.getJobDetails(responseData.content);
+			}
+		} catch (e: any) {
+			const response: AxiosResponse = e?.response;
+			if (response) {
+				const data = response.data;
+				let errors = {};
+				if (data.message) errors = { password: data.message };
+				else errors = transformErrors(data);
+				jobDispatcher.setJobErrors(errors);
+			}
+		} finally {
+			jobDispatcher.setIsLoading(false, 'isDetailLoading');
+		}
 	},
 	// get constants
 };

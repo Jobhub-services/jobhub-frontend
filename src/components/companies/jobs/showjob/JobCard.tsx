@@ -1,13 +1,12 @@
 import { Button, FlexBox, IconButton, Tag, DropDown } from 'staak-ui';
 import styled from 'styled-components';
-import { LocationIcon, CalendarIcon, MoneyIcon } from '@/assets/icons';
+import { LocationIcon, MoneyIcon, CalendarFillIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { DotIcon } from '@/assets/icons';
 import { JobCardProps } from '@/models/component';
 import TextAvatar from './TextAvatar';
 import StatusElem from '@/components/companies/_common/StatusElem';
 import { StatusTitle } from '@/constants/company/job.contants';
-import LocationElem from '@/components/companies/jobs/_common/LocationElem';
 import AvatarList from './details/AvatarList';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions } from '@/modules/actions/company/job.actions';
@@ -18,9 +17,21 @@ const SContainer = styled.div`
 	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
 	border-radius: 8px;
 `;
+const SHeader = styled(FlexBox)`
+	padding: 15px 15px 5px 15px;
+	transition: 0.2s ease-in-out;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	cursor: pointer;
+	&:hover {
+		background-color: ${colors.PURPLE_1};
+	}
+`;
+const SContent = styled.div`
+	padding: 5px 15px 15px 15px;
+`;
 const SBody = styled.div`
-	height: 260px;
-	padding: 15px 15px;
+	height: 225px;
 `;
 
 const SFooter = styled(FlexBox)`
@@ -35,10 +46,10 @@ const SSpan = styled.span`
 `;
 const SPar = styled.pre`
 	display: -webkit-box;
-	margin: 5px 0;
+	margin: 0 0;
 	font-family: inherit;
 	font-size: 13px;
-	-webkit-line-clamp: 3;
+	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
 	text-overflow: ellipsis;
 	overflow: hidden;
@@ -53,15 +64,15 @@ const RedSpan = styled.span`
 const JobCard = (props: JobCardProps) => {
 	const navigate = useNavigate();
 	const { jobDetails } = useAppSelector((state) => state.job);
-	function handleClick(event: any, value?: string) {
+	const handleClick = (event: any, value: string) => {
 		if (jobDetails._id !== props._id) jobActions.getJobDetails(props._id);
-		navigate(`details/${props._id}`, { replace: true });
-	}
-	function onClick() {}
+		navigate(`details/${props._id}`);
+	};
+	const onClick = () => {};
 	return (
 		<SContainer>
 			<SBody>
-				<FlexBox justify="space-between" align="flex-start">
+				<SHeader justify="space-between" align="flex-start">
 					<TextAvatar title={props.title} subtitle={props.category} />
 					<DropDown listPosition="left" onSelect={handleClick}>
 						<DropDown.Title>
@@ -73,44 +84,48 @@ const JobCard = (props: JobCardProps) => {
 						<DropDown.Item>Edit</DropDown.Item>
 						<DropDown.Item>Delete</DropDown.Item>
 					</DropDown>
-				</FlexBox>
-				<SPar>{props.description}</SPar>
-				<FlexBox justify="space-between">
-					<FlexBox gap={10} justify="flex-start">
-						<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.BLUE_CLEAR_5} size="12px">
-							{props.job_type}
-						</Tag>
-						<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.GREEN_CLEAR_5} size="12px">
-							{props.duration}
-						</Tag>
-					</FlexBox>
-					<StatusElem title={StatusTitle[props.status!]} status={props.status} />
-				</FlexBox>
-				<FlexBox justify="space-between" className="mt-10">
-					<div>
-						<FlexBox gap={5} justify="flex-start">
-							<MoneyIcon width="18px" height="18px" color={colors.BLACK_9} />
-							<SSpan>
-								{props.start_salary ?? 'N/A'}-{props.end_salary ?? 'N/A'} {props.currency?.code}
-							</SSpan>
+				</SHeader>
+				<SContent>
+					<SPar>{props.description}</SPar>
+					<FlexBox justify="space-between" className="mt-10">
+						<FlexBox gap={10} justify="flex-start">
+							<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.BLUE_CLEAR_5} size="12px">
+								{props.job_type}
+							</Tag>
+							<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.GREEN_CLEAR_5} size="12px">
+								{props.duration}
+							</Tag>
 						</FlexBox>
-						<FlexBox gap={5} justify="start" align="flex-start" className="mt-5">
-							<LocationIcon width="18px" height="18px" color={colors.BLACK_9} />
-							<FlexBox gap={10} justify="start">
-								{props.work_remotly && <LocationElem size={12} country={'Remote'} />}
-								<LocationElem size={12} country={props.work_location?.country ?? 'N/A'} city={props.work_location?.city ?? 'N/A'} />
+						<StatusElem title={StatusTitle[props.status!]} status={props.status} />
+					</FlexBox>
+					<FlexBox justify="space-between" className="mt-20">
+						<div>
+							<FlexBox gap={5} justify="flex-start">
+								<MoneyIcon width="18px" height="18px" color={colors.BLACK_9} />
+								<SSpan>
+									{props.start_salary ?? 'N/A'}-{props.end_salary ?? 'N/A'} {props.currency?.code}
+								</SSpan>
 							</FlexBox>
+							<FlexBox gap={5} justify="start" align="flex-start" className="mt-10">
+								<LocationIcon width="18px" height="18px" color={colors.BLACK_9} />
+								<FlexBox gap={10} justify="start">
+									{props.work_remotly && <SSpan>Remote</SSpan>}
+									<SSpan>
+										{props.work_location?.country ?? 'N/A'}, {props.work_location?.city ?? 'N/A'}
+									</SSpan>
+								</FlexBox>
+							</FlexBox>
+						</div>
+						<FlexBox gap={5}>
+							<CalendarFillIcon color={colors.BLACK_9} />
+							<SSpan>{new Date(props.createdAt!).toDateString()}</SSpan>
 						</FlexBox>
-					</div>
-					<FlexBox gap={5}>
-						<CalendarIcon width="18px" height="18px" color={colors.BLACK_9} />
-						<SSpan>{new Date(props.createdAt!).toDateString()}</SSpan>
 					</FlexBox>
-				</FlexBox>
+				</SContent>
 			</SBody>
 			<SFooter justify="space-between">
 				<div>
-					<Button variant="light" size="md" onClick={handleClick}>
+					<Button variant="light" size="sm" onClick={handleClick}>
 						Details
 					</Button>
 				</div>

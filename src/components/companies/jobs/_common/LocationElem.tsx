@@ -12,7 +12,7 @@ const SDash = styled.span<any>`
 	display: inline-block;
 	width: 6px;
 	height: 3px;
-	background: ${colors.BLUE_DARK_4};
+	background: ${colors.BLUE_CLEAR_4};
 `;
 const LocationElem = ({ country, city, size }: ILocationElem) => {
 	return (

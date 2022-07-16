@@ -5,23 +5,29 @@ import { colors } from '@/assets/theme';
 
 const SH3 = styled.h3`
 	margin: 0;
+	display: -webkit-box;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
 `;
-const SSpan = styled.span`
+const SubTitle = styled.span`
+	display: block;
+	color: ${colors.BLACK_8};
+	margin-top: 2px;
 	font-size: 13px;
-	color: ${colors.BLACK_7};
-	margin-top: 5px;
 `;
-const SGap = styled(FlexBox)`
-	gap: ${(props) => props.gap}px;
-`;
+
 const TextAvatar = (props: TextAvatarProps) => {
 	return (
-		<SGap gap={10} align="flex-start">
+		<FlexBox gap={10} align="flex-start">
 			<div>
 				<SH3>{props.title}</SH3>
-				<SSpan>{props.subtitle}</SSpan>
+				<SubTitle>{props.subtitle}</SubTitle>
 			</div>
-		</SGap>
+		</FlexBox>
 	);
 };
 

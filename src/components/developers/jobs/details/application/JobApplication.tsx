@@ -8,7 +8,6 @@ import { useSearchParams } from 'react-router-dom';
 import Applied from '@/assets/icons/applied.png';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 
 const Container = styled.div`
 	position: relative;
@@ -17,7 +16,7 @@ const Container = styled.div`
 `;
 const JobApplication = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
-	const { jobDetails, jobApplication, succesApplication, isApplicationSubmited } = useAppSelector((state) => state.developerJobs);
+	const { jobDetails, jobApplication, isApplicationSubmited } = useAppSelector((state) => state.developerJobs);
 	const { developerInfo } = useAppSelector((state) => state.user.userInfo);
 	const handleInput = (event: any, value?: string, name?: string) => {
 		let tmp = { ...jobApplication };

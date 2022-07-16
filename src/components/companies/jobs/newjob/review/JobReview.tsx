@@ -10,19 +10,10 @@ import Qualifications from './utils/Qualification';
 import { useAppSelector } from '@/utils/appHooks';
 import { colors } from '@/assets/theme';
 import Role from './utils/Role';
-import { jobActions } from '@/modules/actions/company/job.actions';
 
 const JobReview = (props: JobReviewProps) => {
 	const { createJob } = useAppSelector((state) => state.job);
 	const data = createJob;
-
-	function handleNext(event: React.SyntheticEvent) {
-		jobActions.create(createJob);
-		if (props.onNext) props.onNext(event);
-	}
-	function handlePrevious(event: React.SyntheticEvent) {
-		if (props.onPreviouse) props.onPreviouse(event);
-	}
 	return (
 		<>
 			<FlexBox justify="flex-start" align="flex-start">
@@ -46,12 +37,6 @@ const JobReview = (props: JobReviewProps) => {
 					<HrDivider color={colors.BLACK_12} top={20} />
 					<Qualifications />
 				</div>
-			</FlexBox>
-			<FlexBox gap={10} align="flex-start" justify="flex-start">
-				<Button variant="outlined" onClick={handlePrevious}>
-					Back
-				</Button>
-				<Button onClick={handleNext}>Create</Button>
 			</FlexBox>
 		</>
 	);

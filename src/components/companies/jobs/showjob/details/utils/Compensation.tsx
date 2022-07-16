@@ -11,7 +11,7 @@ const Compensation = (props: JobDetails) => {
 			<STitle>Compensation</STitle>
 			<div>
 				<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
-				<span style={{ marginLeft: '20px', color: `${colors.BLACK_2}` }}>
+				<span style={{ color: `${colors.BLACK_2}` }}>
 					{props.start_salary} - {props.end_salary} {props.currency?.code.toUpperCase()} / {props.salary_type}
 				</span>
 			</div>

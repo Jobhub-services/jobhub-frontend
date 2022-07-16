@@ -32,6 +32,7 @@ export type JobInfo = {
 export interface IJobState {
 	filterClosed?: boolean;
 	isLoading?: boolean;
+	isDetailLoading?: boolean;
 	createJob: JobInfo;
 	jobCreated: boolean;
 	showJob: {
@@ -48,7 +49,10 @@ export interface IJobState {
 	};
 	jobsOrderedBy?: JobOrderType;
 	errors: {
-		job?: { key: string; value: string }[];
+		job?: {
+			status?: boolean;
+			content?: any;
+		};
 		categories?: { [key: string]: string };
 		currencies?: { [key: string]: string };
 		division?: { [key: string]: string };

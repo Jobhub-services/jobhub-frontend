@@ -4,6 +4,7 @@ import { colors } from '@/assets/theme';
 import { JobDetails } from '@/types/company/jobs.type';
 import { dateWithMonthName } from '@/utils/helpers';
 const Role = (props: JobDetails) => {
+	console.log(props.duration_range);
 	return (
 		<div>
 			<STitle>Job Role</STitle>
@@ -22,9 +23,9 @@ const Role = (props: JobDetails) => {
 						{props.job_type ? <Tag color={colors.BLUE_CLEAR_5}>{props.job_type}</Tag> : 'N/A'}
 						{props.duration ? <Tag color={colors.GREEN_CLEAR_5}>{props.duration}</Tag> : 'N/A'}
 					</FlexBox>
-					{props.duration_range && (
+					{Array.isArray(props.duration_range) && props.duration_range.length > 0 && props.duration_range[0] && (
 						<FlexBox gap={5} justify="flex-start" className="mt-10">
-							<SSpan>{dateWithMonthName(props.duration_range[0]!)}-</SSpan>
+							<SSpan>{dateWithMonthName(props.duration_range[0]!)}</SSpan>
 							<SSpan>{dateWithMonthName(props.duration_range[1]!)}</SSpan>
 						</FlexBox>
 					)}

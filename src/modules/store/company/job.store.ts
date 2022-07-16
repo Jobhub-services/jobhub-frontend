@@ -1,35 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IJobState } from '@/models/store/company/job.interface';
+import { JobInstance } from '@/constants/company/job.contants';
 
 export const initialState: IJobState = {
 	filterClosed: true,
 	isLoading: false,
 	jobCreated: false,
-	createJob: {
-		title: '',
-		description: '',
-		responsabilities: '',
-		company_division: null,
-		category: { id: '', name: '' },
-		job_type: '',
-		duration: '',
-		duration_range: [null, null],
-		salary_type: '',
-		start_salary: '',
-		end_salary: '',
-		currency: { id: '', name: '' },
-		benefits: '',
-		work_remotly: false,
-		hire_remotly: false,
-		visa_sponsorship: false,
-		work_location: [{ country: { id: '', name: '' }, city: '' }],
-		hire_location: [{ country: { id: '', name: '' }, city: '' }],
-		education: [],
-		certification: [],
-		skills: [],
-		requirements: '',
-		questions: [''],
-	},
+	createJob: JobInstance,
 	showJob: {
 		content: [],
 		count: 0,
@@ -64,9 +41,10 @@ export const initialState: IJobState = {
 		questions: [],
 	},
 	filters: {},
-	jobsOrderedBy: 'newest',
 	errors: {
-		job: [],
+		job: {
+			status: false,
+		},
 		currencies: {},
 		categories: {},
 		division: {},
@@ -82,8 +60,8 @@ const reducerSlices = createSlice({
 			state.filterClosed = closed;
 		},
 		setIsLoading: (state, action) => {
-			const { isLoading } = action.payload;
-			state.isLoading = isLoading;
+			const { isLoading, attr } = action.payload;
+			state[attr as 'isLoading' | 'isDetailLoading'] = isLoading;
 		},
 		setJobCreated: (state, action) => {
 			const { created } = action.payload;
@@ -100,12 +78,7 @@ const reducerSlices = createSlice({
 		},
 
 		createJob: (state, action) => {
-			const { createJob } = action.payload;
-			state.createJob = createJob;
-		},
-		setOrderBy: (state, action) => {
-			const { order } = action.payload;
-			state.jobsOrderedBy = order;
+			state.createJob = action.payload;
 		},
 		setJobErrors: (state, action) => {
 			state.errors.job = action.payload;

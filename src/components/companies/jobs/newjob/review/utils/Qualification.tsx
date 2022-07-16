@@ -11,7 +11,6 @@ const TagWrapper = styled(FlexBox)`
 	justify-content: flex-start !important;
 	flex-wrap: wrap;
 	gap: 10px !important;
-	margin-left: 20px;
 `;
 const Qualifications = (props: JobReviewProps) => {
 	const { createJob } = useAppSelector((state) => state.job);
@@ -21,23 +20,29 @@ const Qualifications = (props: JobReviewProps) => {
 			<STitle>Qualifications</STitle>
 			<div className="mt-10">
 				<TitleIcon title="Education" icon={(props: IconProps) => <GraduationCapIcon {...props} />} />
-				<SUl>
-					{data.education!.length > 0
-						? data.education?.map((elem, idx) => {
-								return <li key={idx}>{elem}</li>;
-						  })
-						: 'N/A'}
-				</SUl>
+
+				{data.education!.length > 0 ? (
+					<SUl>
+						{data.education?.map((elem, idx) => {
+							return <li key={idx}>{elem}</li>;
+						})}
+					</SUl>
+				) : (
+					'N/A'
+				)}
 			</div>
 			<div className="mt-10">
 				<TitleIcon title="Certification" icon={(props: IconProps) => <CertificateIcon {...props} />} />
-				<SUl>
-					{data.certification!.length > 0
-						? data.certification?.map((elem, idx) => {
-								return <li key={idx}>{elem}</li>;
-						  })
-						: 'N/A'}
-				</SUl>
+
+				{data.certification!.length > 0 ? (
+					<SUl>
+						{data.certification?.map((elem, idx) => {
+							return <li key={idx}>{elem}</li>;
+						})}
+					</SUl>
+				) : (
+					'N/A'
+				)}
 			</div>
 			<div className="mt-10">
 				<TitleIcon title="Skills" icon={(props: IconProps) => <SkillsIcon {...props} />} />
@@ -55,13 +60,16 @@ const Qualifications = (props: JobReviewProps) => {
 			</div>
 			<div className="mt-10">
 				<TitleIcon title="Questions" icon={(props: IconProps) => <QuestionIcon {...props} />} />
-				<SUl>
-					{data.questions!.length > 0 && data.questions![0] !== ''
-						? data.questions?.map((elem, idx) => {
-								return <li key={idx}>{elem}</li>;
-						  })
-						: 'N/A'}
-				</SUl>
+
+				{data.questions!.length > 0 && data.questions![0] !== '' ? (
+					<SUl>
+						{data.questions?.map((elem, idx) => {
+							return <li key={idx}>{elem}</li>;
+						})}
+					</SUl>
+				) : (
+					'N/A'
+				)}
 			</div>
 		</div>
 	);

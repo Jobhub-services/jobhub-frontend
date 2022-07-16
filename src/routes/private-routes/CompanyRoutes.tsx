@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
-import { Overview, JobOverview, AddNewJob, ApplicantsOverview, TalentsView, CompanyProfile, TalentProfile } from '@/views/companies';
-import JobDetails from '@/components/companies/jobs/showjob/details/JobDetails';
+import { Overview, JobOverview, AddNewJob, ApplicantsOverview, TalentsView, CompanyProfile, TalentProfile, JobDetails } from '@/views/companies';
 import ApplicationDetails from '@/views/companies/applicants/ApplicationDetails';
 import ApplicantsSearch from '@/views/companies/applicants/ApplicantsSearch';
 

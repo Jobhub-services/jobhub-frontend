@@ -15,22 +15,28 @@ const Location = (props: JobDetails) => {
 			<div>
 				<div className="mt-20">
 					<SSubTitle>Work Location</SSubTitle>
-					<FlexBox justify="start" gap={2}>
-						<SSpan>{props.work_location?.country}</SSpan>
-						<span style={{ display: 'inline-block', width: '6px', height: '3px', background: `${colors.BLUE_DARK_4}` }}></span>
-						<SSpan>{props.work_location?.city}</SSpan>
-					</FlexBox>
+					{!props.work_location?.country && !props.work_location?.country && !props.work_remotly ? (
+						<SSpan>N/A</SSpan>
+					) : (
+						<FlexBox justify="start" gap={2}>
+							{props.work_remotly && <SSpan>Remote</SSpan>}
+							<SSpan>
+								{props.work_location?.country}
+								{props.work_location?.city ? `, ${props.work_location?.city}` : ''}
+							</SSpan>
+						</FlexBox>
+					)}
 				</div>
 				<div className="mt-20">
 					<SSubTitle>Hiring Location</SSubTitle>
-					<Wrapper>
+					<Wrapper gap={3}>
+						{props.hire_remotly && <SSpan>Remote</SSpan>}
 						{props.hire_location?.map((elem, idx) => {
 							return (
-								<FlexBox justify="start" gap={2} key={idx}>
-									<SSpan>{elem.country}</SSpan>
-									<span style={{ display: 'inline-block', width: '6px', height: '3px', background: `${colors.BLUE_DARK_4}` }}></span>
-									<SSpan>{elem.city}</SSpan>
-								</FlexBox>
+								<SSpan key={idx}>
+									{elem.country}
+									{elem.city ? `, ${elem.city}` : ''}
+								</SSpan>
 							);
 						})}
 					</Wrapper>

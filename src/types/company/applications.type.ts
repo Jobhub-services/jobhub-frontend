@@ -20,40 +20,35 @@ export type WorkExperienceType = {
 export type ApplicantsShortInfo = {
 	_id: string;
 	applicationStatus?: ApplicationStatus;
-	img?: string;
+	avatar?: string;
 	name?: string;
 	role?: string;
 	experience_duration?: string;
 	cover_letter?: string;
-	skils?: { value: string; label: string }[];
+	skils?: string[];
 	linkedIn?: string;
 	github?: string;
 	cv?: string;
 	applied?: string;
 	job?: {
 		title?: string;
-		role?: string;
-		applied?: Date | null;
+		category?: string;
+		applied?: string;
 	};
 };
 export type ApplicantAllInfo = ApplicantsShortInfo & {
 	email?: string;
 	phone?: string;
 	website?: string;
-	start_working?: Date | null;
+	start_working?: string;
 	notice_period?: string;
 	questions?: QuestionType[];
 	work_experience?: WorkExperienceType[];
 	interviews?: InterviewInfo[];
-	job?: {
-		title?: string;
-		category?: string;
-		applied?: Date | null;
-	};
 };
 
 export type ApplicantsByJob = {
-	jobId: string;
+	_id: string;
 	title?: string;
 	category?: string;
 	applicants?: ApplicantsShortInfo[];

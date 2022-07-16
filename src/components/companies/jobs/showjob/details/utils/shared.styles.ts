@@ -9,7 +9,7 @@ export const STitle = styled.h2`
 
 export const SP = styled.pre`
 	font-family: inherit;
-	margin-left: 20px;
+	//margin-left: 20px;
 	margin-top: 5px;
 	color: ${colors.BLACK_2};
 	white-space: pre-line;

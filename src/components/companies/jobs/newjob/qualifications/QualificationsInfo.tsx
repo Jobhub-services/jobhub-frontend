@@ -54,11 +54,30 @@ const QualificationsInfo = (props: any) => {
 				<div style={{ width: '95%' }}>
 					<h3>Experience details</h3>
 					<FlexBox gap={15} className="mt-10" justify="flex-start" align="flex-start">
-						<TagInputField name="education" title="Education" values={data.education} onChange={handleInputTag} />
-						<TagInputField name="certification" title="Certification" values={data.certification} onChange={handleInputTag} />
+						<TagInputField
+							name="education"
+							placeholder="Write required education and press enter"
+							title="Education"
+							values={data.education}
+							onChange={handleInputTag}
+						/>
+						<TagInputField
+							name="certification"
+							title="Certification"
+							placeholder="Write required and press enter "
+							values={data.certification}
+							onChange={handleInputTag}
+						/>
 					</FlexBox>
 					<FlexBox gap={15} className="mt-10" align="flex-start" justify="flex-start">
-						<TagPickerField name="skills" title="Skills" values={data.skills} onChange={handleTagPicker} onDataChange={handleChangeData}>
+						<TagPickerField
+							name="skills"
+							title="Skills"
+							placeholder="Select required skills"
+							values={data.skills}
+							onChange={handleTagPicker}
+							onDataChange={handleChangeData}
+						>
 							{localSkills?.map((elem, idx) => {
 								return (
 									<TagPickerField.Option key={idx} value={elem._id!}>

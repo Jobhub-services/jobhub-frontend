@@ -18,7 +18,7 @@
 		"react-router-dom": "^6.2.2",
 		"redux-persist": "^6.0.0",
 		"redux-saga": "^1.1.3",
-		"staak-ui": "^1.8.5",
+		"staak-ui": "^1.8.6",
 		"styled-components": "5.3.5",
 		"web-vitals": "^2.1.4"
 	},

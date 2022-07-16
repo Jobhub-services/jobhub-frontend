@@ -1,13 +1,19 @@
 import { Tag, FlexBox } from 'staak-ui';
 import { CertificateIcon, GraduationCapIcon, QuestionIcon, RequirementIcon, SkillsIcon } from '@/assets/icons';
 import { IconProps } from '@/models/component';
-import { STitle, SP } from './shared.styles';
+import { STitle, SP } from '@/components/companies/jobs/showjob/details/utils/shared.styles';
 import TitleIcon from '@/components/common/jobs/TitleIcon';
 import styled from 'styled-components';
 import { JobDetails } from '@/types/company/jobs.type';
 
 const SUl = styled.ul`
 	margin-top: 0;
+	margin-inline-start: 0;
+	padding-inline-start: 20px;
+`;
+const SkillsWarrap = styled(FlexBox)`
+	flex-wrap: wrap;
+	margin-top: 5px;
 `;
 const Qualifications = (props: JobDetails) => {
 	return (
@@ -40,11 +46,11 @@ const Qualifications = (props: JobDetails) => {
 			<div className="mt-10">
 				<TitleIcon title="Skills" icon={(props: IconProps) => <SkillsIcon {...props} />} />
 				{props.skills!.length > 0 ? (
-					<FlexBox justify="start" gap={10} style={{ marginLeft: '20px', marginTop: '5px' }}>
+					<SkillsWarrap justify="start" gap={10}>
 						{props.skills?.map((elem, idx) => {
 							return <Tag key={idx}>{elem}</Tag>;
 						})}
-					</FlexBox>
+					</SkillsWarrap>
 				) : (
 					'N/A'
 				)}

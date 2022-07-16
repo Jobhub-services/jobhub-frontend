@@ -64,7 +64,7 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 		<SCard>
 			<FlexBox justify="space-between" style={{ padding: '8px 10px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 				<FlexBox align="flex-start">
-					<Avatar size={50} img={props.img} name={props.name} role={props.role} status="ready" />
+					<Avatar size={50} img={props.avatar} name={props.name} role={props.role} status="ready" />
 				</FlexBox>
 				<CustomizedButton onClick={viewDetails} variant="text">
 					View details
@@ -78,7 +78,7 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 					<span style={{ color: `${colors.BLACK_9}`, fontWeight: '500' }}>Skills</span>
 					<FlexBox gap={10} className="ml-10">
 						{props.skils?.map((elem, idx) => {
-							return <Tag key={idx}>{elem.label}</Tag>;
+							return <Tag key={idx}>{elem}</Tag>;
 						})}
 					</FlexBox>
 				</FlexBox>

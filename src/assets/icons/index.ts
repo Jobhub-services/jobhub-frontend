@@ -54,8 +54,10 @@ import JobHiringIcon from './JobHiringIcon';
 import SecurityConfigIcon from './SecurityConfigIcon';
 import PendingIcon from './PendingIcon';
 import ListIcon from './ListIcon';
+import CloseIcon from './CloseIcon';
 
 export {
+	CloseIcon,
 	ListIcon,
 	PendingIcon,
 	SecurityConfigIcon,

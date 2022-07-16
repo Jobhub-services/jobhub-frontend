@@ -21,13 +21,16 @@ const JobOverview = (props: StandardProps) => {
 	}, []);
 	return (
 		<Container>
-			<div style={{ padding: '10px 40px 10px 40px', height: 'inherit' }}>
-				<JobHeader />
-				<ShowJobs />
-			</div>
+			{isLoading ? (
+				<LoadingScreen />
+			) : (
+				<div style={{ padding: '10px 40px 10px 40px', height: 'inherit' }}>
+					<JobHeader />
+					<ShowJobs />
+				</div>
+			)}
 			<Outlet />
 			<JobFilter />
-			{isLoading && <LoadingScreen />}
 		</Container>
 	);
 };

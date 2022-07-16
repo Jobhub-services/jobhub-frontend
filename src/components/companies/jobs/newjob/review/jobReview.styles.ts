@@ -4,6 +4,7 @@ import { colors } from '@/assets/theme';
 
 export const SUl = styled.ul`
 	margin-top: 0;
+	padding-inline-start: 20px;
 `;
 
 export const StyledGap = styled(FlexBox)`
@@ -17,7 +18,6 @@ export const SPre = styled.pre`
 	font-family: inherit;
 	color: ${colors.BLACK_2};
 	line-height: 25px;
-	margin-left: 20px;
 	margin-top: 0;
 `;
 

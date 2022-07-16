@@ -1,7 +1,7 @@
 import { IconProps } from '@/models/component';
 import { JobReviewProps } from '@/models/component';
 import { useAppSelector } from '@/utils/appHooks';
-import { SPre, STitle } from '../jobReview.styles';
+import { SPre, STitle } from '@/components/companies/jobs/newjob/review/jobReview.styles';
 import { BenefitIcon, MoneyIcon } from '@/assets/icons';
 import TitleIcon from '@/components/common/jobs/TitleIcon';
 import { colors } from '@/assets/theme';
@@ -18,7 +18,7 @@ const Compensation = (props: JobReviewProps) => {
 			<STitle>Compensation</STitle>
 			<div>
 				<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
-				<div style={{ marginLeft: '20px' }}>
+				<div className="mt-10">
 					<SSpan>{data.start_salary !== '' ? data.start_salary : 'N/A'}</SSpan>-
 					<SSpan>
 						{data.end_salary !== '' ? data.end_salary : 'N/A'} / {data.salary_type}
