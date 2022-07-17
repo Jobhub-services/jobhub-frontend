@@ -16,7 +16,8 @@ import {
 	JobType,
 } from '@/components/developers/profile/overview/utils';
 import styled from 'styled-components';
-import { ProfileAvatar, WantsElem } from '@/components/developers/profile/common/';
+import { WantsElem } from '@/components/developers/profile/common/';
+import ProfileAvatar from '@/components/developers/_common/ProfileAvatar';
 
 const LefSide = styled.div`
 	width: 25%;
@@ -32,7 +33,8 @@ const RightSide = styled.div`
 
 const ProfileOverview = () => {
 	const { developerInfo } = useAppSelector(({ user }) => user.userInfo);
-	const { role, address, status } = useAppSelector((state) => state.developerProfile.profile);
+	const { role, address, status, avatar } = useAppSelector((state) => state.developerProfile.profile);
+
 	return (
 		<div>
 			<FlexBox style={{ padding: '20px 20px', borderBottom: `1px solid ${colors.BLACK_12}` }} justify="space-between" align="start">
@@ -44,6 +46,7 @@ const ProfileOverview = () => {
 					experience={role?.experience}
 					overview
 					status={status}
+					avatar={avatar}
 				/>
 				<SocialProfile />
 			</FlexBox>

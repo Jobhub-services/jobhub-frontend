@@ -55,8 +55,12 @@ import SecurityConfigIcon from './SecurityConfigIcon';
 import PendingIcon from './PendingIcon';
 import ListIcon from './ListIcon';
 import CloseIcon from './CloseIcon';
+import ProtectIcon from './ProtectIcon';
+import GeneralSettingsIcon from './GeneralSettingIcon';
 
 export {
+	GeneralSettingsIcon,
+	ProtectIcon,
 	CloseIcon,
 	ListIcon,
 	PendingIcon,

@@ -21,8 +21,8 @@ export const profileDispatcher = {
 };
 
 export const profileAction = {
-	async getProfile() {
-		profileDispatcher.setIsLoading(true);
+	async getProfile(loading: boolean = true) {
+		profileDispatcher.setIsLoading(loading);
 		try {
 			const response = await httpClient.get(`${USERS_SERVICE}/developer/profile`);
 			if (response.data) {

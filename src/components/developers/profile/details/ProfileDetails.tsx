@@ -1,4 +1,4 @@
-import ProfileAvatar from '@/components/developers/profile/common/ProfileAvatar';
+import ProfileAvatar from '@/components/developers/_common/ProfileAvatar';
 import Education from '@/components/developers/profile/details/utils/Education';
 import Location from '@/components/developers/profile/details/utils/Location';
 import Languages from '@/components/developers/profile/details/utils/Languages';
@@ -12,6 +12,7 @@ import { useAppSelector } from '@/utils/appHooks';
 import { Button, FlexBox, HrDivider } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const LefSide = styled.div`
 	width: 28%;
@@ -27,7 +28,8 @@ const RightSide = styled.div`
 `;
 const ProfileDetails = () => {
 	const { developerInfo } = useAppSelector(({ user }) => user.userInfo);
-	const { address } = useAppSelector((state) => state.developerProfile.profile);
+	const { address, avatar } = useAppSelector((state) => state.developerProfile.profile);
+
 	return (
 		<div>
 			<FlexBox style={{ padding: '20px 20px', borderBottom: `1px solid ${colors.BLACK_12}` }} justify="space-between">
@@ -35,8 +37,11 @@ const ProfileDetails = () => {
 					firstname={developerInfo?.firstName.charAt(0).toUpperCase() + developerInfo?.firstName.slice(1)!}
 					lastname={developerInfo?.lastName.charAt(0).toUpperCase() + developerInfo?.lastName.slice(1)!}
 					location={address}
+					avatar={avatar}
 				/>
-				<Button>Account settings</Button>
+				<Link to="/settings/account">
+					<Button>Account settings</Button>
+				</Link>
 			</FlexBox>
 			<FlexBox width="100%" gap={15} align="start">
 				<LefSide>

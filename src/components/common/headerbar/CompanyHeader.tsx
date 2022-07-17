@@ -9,6 +9,7 @@ const CompanyHeader = () => {
 	const navigate = useNavigate();
 	const handleItem = (event?: React.SyntheticEvent, value?: string) => {
 		if (value === 'profile') navigate(`company/profile/${username}`);
+		if (value === 'settings') navigate('/settings/account');
 	};
 	return (
 		<>

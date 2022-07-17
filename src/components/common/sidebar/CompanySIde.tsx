@@ -96,8 +96,8 @@ const CompanySide = () => {
 			<NavItem
 				icon={<SettingIcon />}
 				width={widthItems}
-				active={pathname === 'settings/'}
-				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'settings/')}
+				active={pathname.startsWith('/settings')}
+				onClick={(event: React.SyntheticEvent) => changeRoute(event, '/settings/account')}
 			>
 				<NavItem.Content>Settings</NavItem.Content>
 			</NavItem>

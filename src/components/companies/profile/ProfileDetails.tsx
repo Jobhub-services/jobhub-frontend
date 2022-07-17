@@ -3,7 +3,7 @@ import { AboutUs, KeyWords, SocialProfile, Headquarters, CompanyDivision, Genera
 import ProfileAvatar from '@/components/companies/profile/common/ProfileAvatar';
 import { Button, FlexBox, HrDivider } from 'staak-ui';
 import styled from 'styled-components';
-import { useAppSelector } from '@/utils/appHooks';
+import { useNavigate } from 'react-router-dom';
 const LefSide = styled.div`
 	width: 28%;
 	background-color: white;
@@ -18,12 +18,14 @@ const RightSide = styled.div`
 `;
 
 const ProfileDetails = () => {
+	const navigate = useNavigate();
+
 	return (
 		<div>
 			<FlexBox style={{ padding: '20px 20px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 				<FlexBox justify="space-between" width="100%">
 					<ProfileAvatar />
-					<Button>Account settings</Button>
+					<Button onClick={() => navigate('/settings/account')}>Account settings</Button>
 				</FlexBox>
 			</FlexBox>
 			<FlexBox align="start">

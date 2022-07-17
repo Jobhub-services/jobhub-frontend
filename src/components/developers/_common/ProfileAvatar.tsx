@@ -58,8 +58,7 @@ const SH2 = styled.h2`
 	margin: 5px 0;
 	color: ${colors.BLACK_3};
 `;
-const ProfileAvatar = ({ firstname, lastname, location, size, role, experience, status, overview }: ProfileAvatarProps) => {
-	const { avatar } = useAppSelector((state) => state.developerProfile.profile);
+const ProfileAvatar = ({ firstname, lastname, location, size, role, experience, status, overview, avatar }: ProfileAvatarProps) => {
 	const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { files } = event.target;
 		let data = new FormData();

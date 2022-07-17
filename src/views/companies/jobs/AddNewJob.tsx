@@ -25,11 +25,13 @@ const HeaderContainer = styled(FlexBox)`
 	padding: 10px 20px;
 	height: ${HEADER_STEP_HEIGHT}px;
 `;
+
 const StepContent = styled.div`
 	padding: 0px 20px;
 	height: calc(100% - ${HEADER_STEP_HEIGHT}px);
 	overflow-y: auto;
 `;
+
 const SLoading = styled.div`
 	position: fixed;
 	top: ${HEADER_HIEGHT}px;

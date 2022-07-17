@@ -17,8 +17,8 @@ export const applicationDispatcher = {
 	},
 };
 export const applicationActions = {
-	async getApplications() {
-		applicationDispatcher.setLoading(true);
+	async getApplications(loading: boolean = true) {
+		applicationDispatcher.setLoading(loading);
 		try {
 			const response = await httpClient.get(`${JOBS_SERVICE}/application/my`);
 			const responseData = response.data;

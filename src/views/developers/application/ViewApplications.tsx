@@ -15,9 +15,9 @@ const SubContainer = styled.div`
 	padding: 10px 20px;
 `;
 const ViewApplications = () => {
-	const { isLoading } = useAppSelector((state) => state.talentApplications);
+	const { isLoading, applicationInfo } = useAppSelector((state) => state.talentApplications);
 	useEffect(() => {
-		applicationActions.getApplications();
+		if (!applicationInfo?.content || applicationInfo?.content?.length === 0) applicationActions.getApplications(true);
 	}, []);
 	return (
 		<SContainer>

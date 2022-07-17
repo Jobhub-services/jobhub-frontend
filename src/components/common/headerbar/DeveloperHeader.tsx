@@ -9,7 +9,7 @@ const DeveloperHeader = () => {
 	const navigate = useNavigate();
 	const handleItem = (event?: React.SyntheticEvent, value?: string) => {
 		if (value === 'profile') navigate(`profile/${username}`);
-		if (value === 'settings') navigate(`/profile/settings`);
+		if (value === 'settings') navigate(`/settings/account`);
 	};
 	return (
 		<>

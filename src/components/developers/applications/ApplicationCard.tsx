@@ -45,7 +45,7 @@ const SFooter = styled(FlexBox)`
 const ApplicationCard = (props: PApplicationCard) => {
 	const posted_at = moment(new Date(props.createdAt!)).fromNow();
 	return (
-		<SContainer>
+		<SContainer style={props?.style}>
 			<SBody>
 				<FlexBox>
 					<ApplicationAvatar img={props.avatar} title={props.jobId?.title} subtitle={props.company?.name} applicationId={props._id} />

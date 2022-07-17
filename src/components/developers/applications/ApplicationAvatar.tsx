@@ -11,6 +11,8 @@ const SContainer = styled(FlexBox)`
 	cursor: pointer;
 	padding: 15px 15px 5px 15px;
 	transition: all 0.2s;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
 	&:hover {
 		background-color: ${colors.PURPLE_1};
 	}

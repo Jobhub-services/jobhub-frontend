@@ -2,7 +2,7 @@ export type AppProps = {
 	basename: string;
 };
 
-export interface IconProps {
+export interface IconProps extends StandardProps {
 	width?: string;
 	height?: string;
 	color?: string;

@@ -22,4 +22,5 @@ export interface ProfileAvatarProps extends StandardProps {
 	size?: number;
 	status?: StatusType;
 	overview?: boolean;
+	avatar?: string;
 }
