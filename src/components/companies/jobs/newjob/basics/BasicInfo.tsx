@@ -38,15 +38,13 @@ const BasicDetails = (props: JobReviewProps) => {
 	}
 	function handleInputPicker(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) {
 		let tmp = { ...data };
-		if (name === 'category') {
-			const obj = { id: value, name: label };
-			tmp.category = obj;
-		} else {
-			const idx = name as JobStringIndex;
-			tmp[idx] = label;
-		}
+
+		const obj = { id: value, name: label };
+		tmp[name as 'company_division' | 'category'] = obj;
+
 		jobActions.saveJobData(tmp);
 	}
+	console.log(comapny_division);
 	return (
 		<>
 			<FlexBox justify="flex-start" align="flex-start">
@@ -83,13 +81,13 @@ const BasicDetails = (props: JobReviewProps) => {
 							name="company_division"
 							placeholder="Division"
 							title="Company division"
-							value={data.company_division!}
+							value={data?.company_division?.name}
 							onChange={handleInputPicker}
 						>
-							{comapny_division?.map((elem, idx) => {
+							{comapny_division?.content?.map((elem, idx) => {
 								return (
-									<InputPickerField.Option key={idx} value={elem.value!}>
-										{elem.label}
+									<InputPickerField.Option key={idx} value={elem._id!}>
+										{elem.name}
 									</InputPickerField.Option>
 								);
 							})}

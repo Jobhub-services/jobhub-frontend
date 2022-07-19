@@ -4,7 +4,7 @@ import { API_PATHS } from '@/constants/api.constants';
 import dispatchToStore from '@/utils/store';
 import { TLanguages } from '@/types/metadata.type';
 
-const { METADATA_SERVICE } = API_PATHS;
+const { METADATA_SERVICE, USERS_SERVICE } = API_PATHS;
 
 export const metadataDispatcher = {
 	setAppExpanded(expanded: boolean) {
@@ -16,7 +16,7 @@ export const metadataDispatcher = {
 	getCountries(data: { code: string; label: string }) {
 		dispatchToStore(storeActions.setCountries(data));
 	},
-	getComapnyDivision(data: { value: string; label: string }[]) {
+	setComapnyDivision(data: any) {
 		dispatchToStore(storeActions.setCompanyDivision(data));
 	},
 	getJobCategories(data: { value: string; label: string }[]) {
@@ -63,9 +63,10 @@ export const metadataActions = {
 	async getComapnyDivision() {
 		metadataDispatcher.setIsLoading(true);
 		try {
-			const response = await httpClient.get(`${METADATA_SERVICE}/division`);
+			const response = await httpClient.get(`${USERS_SERVICE}/company/division`);
 			const responseData = response.data;
-			if (responseData.data) metadataDispatcher.getComapnyDivision(responseData.data);
+			//console.log(responseData);
+			if (responseData) metadataDispatcher.setComapnyDivision(responseData);
 		} catch (e: any) {
 		} finally {
 			metadataDispatcher.setIsLoading(false);

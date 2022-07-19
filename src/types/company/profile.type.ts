@@ -6,6 +6,7 @@ export type TSocialProfile = {
 };
 
 export type TProfileInfo = {
+	_id?: string;
 	description?: string;
 	keywords?: string[];
 	company_division?: string[];

@@ -24,6 +24,7 @@ const SIcon = styled.span`
 	justify-content: center;
 `;
 const TalentContact = (props: ContactProps) => {
+	console.log(!props.salary || props.salary === '');
 	return (
 		<div style={{ flexGrow: '1' }}>
 			<FlexBox justify="start" align="start" gap={10} className="mb-15">
@@ -33,8 +34,9 @@ const TalentContact = (props: ContactProps) => {
 				<div>
 					<SSpan>Salary</SSpan>
 					<div>
-						{props.salary} {props.currency}
+						{props.salary} {props.currency?.code}
 					</div>
+					{(!props.salary || props.salary === '') && 'N/A'}
 				</div>
 			</FlexBox>
 			<HrDivider top={10} side={20} />
@@ -75,7 +77,7 @@ const TalentContact = (props: ContactProps) => {
 				<div>
 					<SSpan>LinkedIn</SSpan>
 					<SLink target="_blank" href={props.linkedin}>
-						{props.linkedin + 'sdfsdfkmsdlfmsdfkmsdlfksmdlfkmsldkfmlsdkfmlsdkfmlsdkfmlsdkf' ?? 'N/A'}
+						{props.linkedin ?? 'N/A'}
 					</SLink>
 				</div>
 			</FlexBox>

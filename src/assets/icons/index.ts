@@ -57,8 +57,12 @@ import ListIcon from './ListIcon';
 import CloseIcon from './CloseIcon';
 import ProtectIcon from './ProtectIcon';
 import GeneralSettingsIcon from './GeneralSettingIcon';
+import JobColorIcon from './JobColorIcon';
+import MessageColorIcon from './MessageColorIcon';
 
 export {
+	MessageColorIcon,
+	JobColorIcon,
 	GeneralSettingsIcon,
 	ProtectIcon,
 	CloseIcon,

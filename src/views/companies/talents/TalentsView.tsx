@@ -8,6 +8,7 @@ import { Outlet } from 'react-router-dom';
 
 const MainContainer = styled.div`
 	position: relative;
+	height: 100%;
 `;
 
 const TalentsView = () => {

@@ -13,7 +13,10 @@ export interface IAppState {
 		count?: number;
 		size?: number;
 	};
-	comapny_division?: { id?: string; value?: string; label?: string }[];
+	comapny_division?: {
+		size?: number;
+		content?: { _id?: string; name?: string }[];
+	};
 	currencies?: {
 		count?: number;
 		size?: number;

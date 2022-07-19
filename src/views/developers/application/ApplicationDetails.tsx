@@ -57,6 +57,7 @@ const SubContainer = styled.div`
 const SBody = styled.div`
 	height: calc(100% - ${APP_DETAIL_HEADER_HEIGHT}px);
 `;
+
 const appTitle = (
 	<FlexBox gap={10}>
 		<ApplicantIcon width="17px" height="17px" color={colors.PURPLE_BASE} />

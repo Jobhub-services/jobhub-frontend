@@ -1,3 +1,4 @@
+import { JobColorIcon, MessageColorIcon } from '@/assets/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
 	AssesmentsIcon,
@@ -23,7 +24,7 @@ const CompanySide = () => {
 		<>
 			<NavItem
 				className="mb-5"
-				icon={<HealthIcon />}
+				icon={<HealthIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname === '/'}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, '/')}
@@ -32,7 +33,7 @@ const CompanySide = () => {
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<JobIcon />}
+				icon={<JobColorIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname.startsWith('/jobs')}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'jobs')}
@@ -41,7 +42,7 @@ const CompanySide = () => {
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<TalentIcon />}
+				icon={<TalentIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname.startsWith('/talents')}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'talents')}
@@ -50,7 +51,7 @@ const CompanySide = () => {
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<ApplicantIcon />}
+				icon={<ApplicantIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname.startsWith('/applicants')}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'applicants/new')}
@@ -59,7 +60,7 @@ const CompanySide = () => {
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<MessageIcon />}
+				icon={<MessageColorIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname === '/messages'}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'messages')}
@@ -68,7 +69,7 @@ const CompanySide = () => {
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<InvitationIcon />}
+				icon={<InvitationIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname === '/invitation'}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'invitations')}
@@ -77,7 +78,7 @@ const CompanySide = () => {
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<ScheduleIcon />}
+				icon={<ScheduleIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname === '/schedule'}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'schedule')}
@@ -86,7 +87,7 @@ const CompanySide = () => {
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<AssesmentsIcon />}
+				icon={<AssesmentsIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname === 'assesments/'}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'assesments/')}
@@ -94,7 +95,7 @@ const CompanySide = () => {
 				<NavItem.Content>Assements</NavItem.Content>
 			</NavItem>
 			<NavItem
-				icon={<SettingIcon />}
+				icon={<SettingIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname.startsWith('/settings')}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, '/settings/account')}

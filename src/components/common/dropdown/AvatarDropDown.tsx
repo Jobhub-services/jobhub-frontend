@@ -12,6 +12,16 @@ const StyledIcon = styled.img`
 	border-radius: 50%;
 	transition-duration: 0.4s;
 	cursor: pointer;
+	object-fit: cover;
+`;
+const SIcon = styled.span`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	border: 1px solid ${colors.BLACK_11};
 `;
 const AvatarDropDown = (props: AvatarDropDownProps) => {
 	const { userInfo } = useAppSelector((state) => state.user);
@@ -26,7 +36,13 @@ const AvatarDropDown = (props: AvatarDropDownProps) => {
 		<DropDown trigger="hover" listPosition="right" onSelect={handleSelect}>
 			<DropDown.Title>
 				<FlexBox gap={10}>
-					<StyledIcon width={40} src={Jerom} />
+					{props.avatar ? (
+						<StyledIcon width={40} src={props.avatar} />
+					) : (
+						<SIcon>
+							<UserIcon width="40px" height="30px" />
+						</SIcon>
+					)}
 					<span>{userInfo.username}</span>
 				</FlexBox>
 			</DropDown.Title>

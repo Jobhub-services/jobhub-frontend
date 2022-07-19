@@ -13,6 +13,7 @@ export interface PJobAvatar extends StandardProps {
 	img?: string;
 	featured?: boolean;
 	new?: boolean;
+	company_size?: string;
 }
 
 export interface PHeaderNav extends PNav {

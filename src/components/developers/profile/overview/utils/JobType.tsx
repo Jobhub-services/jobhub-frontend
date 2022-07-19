@@ -35,7 +35,9 @@ const JobType = () => {
 						</TagWrapper>
 					</div>
 				)}
-				{!job_type && !Array.isArray(other_job_type) && <SSpan className="mt-15">What type of job are you interested in</SSpan>}
+				{!job_type && (!Array.isArray(other_job_type) || other_job_type.length === 0) && (
+					<SSpan className="mt-15">What type of job are you interested in</SSpan>
+				)}
 			</div>
 		</div>
 	);

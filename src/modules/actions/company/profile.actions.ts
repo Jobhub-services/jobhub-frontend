@@ -36,8 +36,8 @@ export const profileAction = {
 			profileDispatcher.setIsLoading(false);
 		}
 	},
-	async getProfile() {
-		profileDispatcher.setIsLoading(true);
+	async getProfile(loading: boolean = true) {
+		profileDispatcher.setIsLoading(loading);
 		try {
 			const response = await httpClient.get(`${USERS_SERVICE}/company/profile`);
 			if (response.data) {

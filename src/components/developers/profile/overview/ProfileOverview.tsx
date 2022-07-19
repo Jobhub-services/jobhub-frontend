@@ -32,15 +32,15 @@ const RightSide = styled.div`
 `;
 
 const ProfileOverview = () => {
-	const { developerInfo } = useAppSelector(({ user }) => user.userInfo);
+	const { userInfo } = useAppSelector(({ user }) => user);
 	const { role, address, status, avatar } = useAppSelector((state) => state.developerProfile.profile);
 
 	return (
 		<div>
 			<FlexBox style={{ padding: '20px 20px', borderBottom: `1px solid ${colors.BLACK_12}` }} justify="space-between" align="start">
 				<ProfileAvatar
-					firstname={developerInfo?.firstName.charAt(0).toUpperCase() + developerInfo?.firstName.slice(1)!}
-					lastname={developerInfo?.lastName.charAt(0).toUpperCase() + developerInfo?.lastName.slice(1)!}
+					firstname={userInfo?.firstName?.charAt(0).toUpperCase() + userInfo?.firstName?.slice(1)!}
+					lastname={userInfo?.lastName?.charAt(0).toUpperCase() + userInfo?.lastName?.slice(1)!}
 					location={address}
 					role={role?.primary_role?.name}
 					experience={role?.experience}

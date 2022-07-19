@@ -32,9 +32,11 @@ const TalentsFilter = () => {
 	const handleComponentChanges = (value: any, name?: string) => {
 		localFilters[name as 'skills' | 'jobType' | 'status'] = value;
 	};
+
 	const handleChange = (event: any, value: { value: string; label: string }[], name?: string) => {
 		localFilters[name as 'country' | 'roles' | 'experienceYear'] = value;
 	};
+
 	const handleApply = () => {
 		let tmpParams: any = {};
 		if (Array.isArray(localFilters.skills) && localFilters.skills.length > 0) tmpParams['skills'] = localFilters.skills.map((elem) => elem.value);
@@ -49,6 +51,7 @@ const TalentsFilter = () => {
 		talentsActions.getTalents(tmpParams);
 		talentsDispatcher.setFilters(localFilters);
 	};
+
 	const handleClear = () => {
 		talentsDispatcher.setFilters({});
 		setClear(!clear);

@@ -13,6 +13,9 @@ const SWrapper = styled.div`
 	padding: 15px 0;
 	grid-template-columns: repeat(2, 1fr);
 	gap: 20px;
+	@media only screen and (max-width: 1550px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
 `;
 const JobsList = ({ size, jobs }: { size: number; jobs: PJobCard[] }) => {
 	return (

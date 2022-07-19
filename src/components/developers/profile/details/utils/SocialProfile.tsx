@@ -17,8 +17,12 @@ const SocialProfile = () => {
 	const { social_profile } = useAppSelector((state) => state.developerProfile.profile);
 	const [social, setSocial] = useState<SocialProfileType>({ linkedin: '', website: '', git: '', twitter: '' });
 	const [show, setShow] = useState(false);
-	const dataEmpty = social_profile?.website === '' && social_profile?.linkedin === '' && social_profile?.git === '' && social_profile?.twitter === '';
-
+	const dataEmpty =
+		(!social_profile?.website || social_profile?.website === '') &&
+		(!social_profile?.linkedin || social_profile?.linkedin === '') &&
+		(!social_profile?.git || social_profile?.git === '') &&
+		(!social_profile?.twitter || social_profile?.twitter === '');
+	console.log(dataEmpty);
 	function onShow() {
 		setShow(true);
 	}
@@ -45,7 +49,7 @@ const SocialProfile = () => {
 				</SButton>
 			</FlexBox>
 			<div>
-				{social_profile?.website !== '' && (
+				{social_profile?.website && social_profile?.website !== '' && (
 					<FlexBox justify="start" align="start" gap={10} className="mt-15">
 						<WorldIcon width="20px" height="20px" color={colors.BLACK_7} />
 						<FlexBox gap={10}>
@@ -56,7 +60,7 @@ const SocialProfile = () => {
 						</FlexBox>
 					</FlexBox>
 				)}
-				{social_profile?.linkedin !== '' && (
+				{social_profile?.linkedin && social_profile?.linkedin !== '' && (
 					<FlexBox justify="start" align="start" gap={10} className="mt-15">
 						<LinkedInSolidIcon width="20px" height="20px" color={colors.BLACK_7} />
 						<FlexBox gap={10}>
@@ -67,7 +71,7 @@ const SocialProfile = () => {
 						</FlexBox>
 					</FlexBox>
 				)}
-				{social_profile?.git !== '' && (
+				{social_profile?.git && social_profile?.git !== '' && (
 					<FlexBox justify="start" align="start" gap={10} className="mt-15">
 						<GithubIcon width="20px" height="20px" color={colors.BLACK_7} />
 						<FlexBox gap={10}>
@@ -78,7 +82,7 @@ const SocialProfile = () => {
 						</FlexBox>
 					</FlexBox>
 				)}
-				{social_profile?.twitter !== '' && (
+				{social_profile?.twitter && social_profile?.twitter !== '' && (
 					<FlexBox justify="start" align="start" gap={10} className="mt-15">
 						<TwitterIcon width="20px" height="20px" color={colors.BLACK_7} />
 						<FlexBox gap={10}>

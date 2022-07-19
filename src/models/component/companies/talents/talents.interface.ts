@@ -16,7 +16,10 @@ export interface ContactProps extends StandardProps, TalentContact {
 	};
 	email?: string;
 	salary?: string;
-	currency?: string;
+	currency?: {
+		code?: string;
+		name?: string;
+	};
 }
 
 export interface CardProps extends StandardProps, TalentShortInfo {}

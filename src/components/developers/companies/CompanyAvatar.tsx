@@ -42,7 +42,7 @@ const Span = styled.span<any>`
 const CompanyAvatar = (props: PCompanyAvatar) => {
 	const navigate = useNavigate();
 	const handleClick = () => {
-		navigate(`detail/${props._id}`);
+		navigate(`detail/${props._id}`, { state: { activeTab: 'overview' } });
 	};
 	return (
 		<SContainer justify="space-between" width="100%" onClick={handleClick}>

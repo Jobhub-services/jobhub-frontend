@@ -6,7 +6,46 @@ import Amazon from '@/assets/icons/a.png';
 
 const initialState: ICompanyState = {
 	isLoading: false,
+	isDetailLoading: false,
+	filterClosed: true,
+	companies: {
+		count: 0,
+		size: 0,
+		content: [
+			{
+				_id: '1',
+				avatar: Amazon,
+				description:
+					'At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent.',
+				companyName: 'Amazon Inc.',
+				generalinfo: { industry: 'Health, wellness & fitness', founded: '2019-01-08' },
+				headquarter: { country: 'USA', city: 'California', street: '1600 old street of cpmanaies' },
+				number_job: 1,
+			},
+			{
+				_id: '2',
+				avatar: Amazon,
+				description:
+					'At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent.',
+				companyName: 'Amazon Inc.',
+				generalinfo: { industry: 'Health, wellness & fitness', founded: '2019-01-08' },
+				headquarter: { country: 'USA', city: 'California', street: '1600 old street of cpmanaies' },
+				number_job: 20,
+			},
+			{
+				_id: '3',
+				avatar: Amazon,
+				description:
+					'At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent.',
+				companyName: 'Amazon Inc.',
+				generalinfo: { industry: 'Health, wellness & fitness', founded: '2019-01-08' },
+				headquarter: { country: 'USA', city: 'California', street: '1600 old street of cpmanaies' },
+				number_job: 5,
+			},
+		],
+	},
 	companyDetail: {
+		_id: '1',
 		overview: {
 			_id: '1',
 			keywords: [
@@ -62,7 +101,7 @@ Team satisfaction survey 2020
 		jobs: {
 			content: [
 				{
-					_id: '1',
+					_id: '62d2b3053671f8e31edbbc0b',
 					title: 'Remote Platform Database Administrator',
 					category: 'Software Engineering',
 					job_type: 'Full time',
@@ -88,7 +127,7 @@ Team satisfaction survey 2020
 					saved: true,
 				},
 				{
-					_id: '1',
+					_id: '62d2b3053671f8e31edbbc0b',
 					title: 'Remote Platform Database Administrator',
 					category: 'Software Engineering',
 					job_type: 'Full time',
@@ -114,7 +153,7 @@ Team satisfaction survey 2020
 					saved: true,
 				},
 				{
-					_id: '1',
+					_id: '62d2b3053671f8e31edbbc0b',
 					title: 'Remote Platform Database Administrator',
 					category: 'Software Engineering',
 					job_type: 'Full time',
@@ -140,7 +179,7 @@ Team satisfaction survey 2020
 					saved: false,
 				},
 				{
-					_id: '1',
+					_id: '62d2b3053671f8e31edbbc0b',
 					title: 'Remote Platform Database Administrator',
 					category: 'Software Engineering',
 					job_type: 'Full time',
@@ -167,7 +206,7 @@ Team satisfaction survey 2020
 					saved: false,
 				},
 				{
-					_id: '1',
+					_id: '62d2b3053671f8e31edbbc0b',
 					title: 'Remote Platform Database Administrator',
 					category: 'Software Engineering',
 					job_type: 'Full time',
@@ -205,8 +244,18 @@ const reducerSlice = createSlice({
 	initialState,
 	reducers: {
 		setIsLoading: (state, action) => {
-			const { loading } = action.payload;
-			state.isLoading = loading;
+			const { loading, attr } = action.payload;
+			state[attr as 'isDetailLoading' | 'isLoading'] = loading;
+		},
+		closeFilter: (state, action) => {
+			const { closed } = action.payload;
+			state.filterClosed = closed;
+		},
+		setCompanies: (state, action) => {
+			state.companies = action.payload;
+		},
+		setComapnyDetail: (state, action) => {
+			state.companyDetail = action.payload;
 		},
 	},
 });

@@ -25,6 +25,7 @@ const GeneralInfo = (props: TalentAllInfo) => {
 					{props.skills?.map((elem, idx) => {
 						return <Tag key={idx}>{elem}</Tag>;
 					})}
+					{props.skills?.length === 0 && 'N/A'}
 				</FlexBox>
 			</div>
 			<HrDivider top={15} side={0} />
@@ -49,6 +50,7 @@ const GeneralInfo = (props: TalentAllInfo) => {
 							</>
 						);
 					})}
+					{props.work_experience?.length === 0 && 'N/A'}
 				</div>
 			</div>
 			<div className="mt-15">
@@ -69,6 +71,7 @@ const GeneralInfo = (props: TalentAllInfo) => {
 							</>
 						);
 					})}
+					{props.educations?.length === 0 && 'N/A'}
 				</div>
 			</div>
 
@@ -92,6 +95,7 @@ const GeneralInfo = (props: TalentAllInfo) => {
 							</>
 						);
 					})}
+					{props.certifications?.length === 0 && 'N/A'}
 				</div>
 			</div>
 		</div>

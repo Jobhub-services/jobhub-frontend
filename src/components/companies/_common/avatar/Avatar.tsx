@@ -48,7 +48,9 @@ const Avatar = ({ img, name, role, status, experience, size, color }: AvatarProp
 			<div>
 				<SH3>{name}</SH3>
 				<SubTitle>{role}</SubTitle>
-				<SSpan>{experience}</SSpan>
+				<SSpan>
+					{experience} {experience && experience !== '' && 'of experience'}
+				</SSpan>
 			</div>
 		</FlexBox>
 	);

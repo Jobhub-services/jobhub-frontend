@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import JobCard from '@/components/developers/_common/JobCard';
-import Google from '@/assets/icons/google.jpg';
 import { useAppSelector } from '@/utils/appHooks';
 import DataEmpty from '@/components/common/DataEmpty';
 
@@ -18,7 +17,7 @@ const JobsList = () => {
 	const { content } = jobInfo;
 	if (content?.length === 0)
 		return <DataEmpty title="No data found" description="No content match your criteria. Try searching for something else" />;
-	console.log(content);
+
 	return (
 		<SWrapper>
 			{content?.map((elem, idx) => {
@@ -30,7 +29,7 @@ const JobsList = () => {
 						category={elem.category}
 						job_type={elem.job_type}
 						duration={elem.duration}
-						avatar={Google}
+						avatar={elem.avatar}
 						createdAt={elem.createdAt}
 						createdBy={elem.createdBy}
 						work_location={elem.work_location}

@@ -21,6 +21,11 @@ const Small = styled.span`
 	color: ${colors.PURPLE_BASE};
 	cursor: pointer;
 `;
+const SSpan = styled.span`
+	display: inline-block;
+	color: ${colors.BLACK_9};
+`;
+
 const Summary = () => {
 	const { summary } = useAppSelector((state) => state.developerProfile.profile);
 	const [allText, setAllText] = useState(false);
@@ -29,14 +34,20 @@ const Summary = () => {
 			<FlexBox justify="space-between" gap={20}>
 				<SpanTitle>Summary</SpanTitle>
 			</FlexBox>
-			<SSummary allText={allText}>{summary}</SSummary>
-			<Small
-				onClick={() => {
-					setAllText(!allText);
-				}}
-			>
-				{allText ? 'Less' : 'More'}
-			</Small>
+			{summary && summary !== '' ? (
+				<>
+					<SSummary allText={allText}>{summary}</SSummary>
+					<Small
+						onClick={() => {
+							setAllText(!allText);
+						}}
+					>
+						{allText ? 'Less' : 'More'}
+					</Small>
+				</>
+			) : (
+				<SSpan className="mt-10">Tell us about yourself so startups know who you are</SSpan>
+			)}
 		</div>
 	);
 };

@@ -12,7 +12,7 @@ const Role = () => {
 			<STitle>Job Role</STitle>
 			<div>
 				<SSubTitle>Comapny Division</SSubTitle>
-				{data.company_division !== '' ? <SSpan>{data.company_division}</SSpan> : 'N/A'}
+				{data?.company_division?.name !== '' ? <SSpan>{data?.company_division?.name}</SSpan> : 'N/A'}
 			</div>
 			<div className="mt-20">
 				<SSubTitle>Job category</SSubTitle>

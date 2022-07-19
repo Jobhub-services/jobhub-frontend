@@ -86,6 +86,7 @@ const JobDetails = () => {
 		if (e.target === parentRef.current) navigate('/jobs');
 	};
 	useEffect(() => {
+		console.log('job id ', id);
 		if (id && jobDetails?._id !== id) {
 			jobActions.getJob(id);
 		}

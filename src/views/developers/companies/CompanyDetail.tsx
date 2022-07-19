@@ -1,12 +1,28 @@
 import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import styled, { keyframes } from 'styled-components';
 import { Header, About, GeneralInfo, Keywords, JobsList, COMPANY_HEADER_HEIGHT } from '@/components/developers/companies/detail';
-import { FlexBox, HrDivider, TabPane } from 'staak-ui';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { useRef } from 'react';
+import { FlexBox, HrDivider, TabPane, JobIcon, HealthIcon } from 'staak-ui';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 import { useAppSelector } from '@/utils/appHooks';
 import { colors } from '@/assets/theme';
 import Amazon from '@/assets/icons/cmp.jpg';
+import { companiesActions } from '@/modules/actions/developer/companies.actions';
+import { LoadingScreen } from '@/components/common/LoadingScreen';
+
+const jobTitle = (
+	<FlexBox gap={10}>
+		<JobIcon width="17px" height="17px" color={colors.PURPLE_BASE} />
+		<span>Jobs</span>
+	</FlexBox>
+);
+
+const overviewTitle = (
+	<FlexBox gap={10}>
+		<HealthIcon width="17px" height="17px" color={colors.PURPLE_BASE} />
+		<span>Overview</span>
+	</FlexBox>
+);
 
 const width = keyframes`
     from{
@@ -65,52 +81,56 @@ const RightContainer = styled.div`
 const SBody = styled(FlexBox)`
 	align-items: flex-start !important;
 	justify-content: flex-start !important;
-	//gap: 15px !important;
 	height: calc(100% - 62px);
 `;
 
 const CompanyDetail = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const handleChange = (name: string) => {
-		searchParams.set('pane', name);
-		setSearchParams(searchParams);
-	};
-	const { overview, jobs } = useAppSelector((state) => state.companies.companyDetail);
+	const { id } = useParams();
+	const loc = useLocation();
+	const { state } = loc as { state: { activeTab: string } };
+	const { isDetailLoading, companyDetail } = useAppSelector((state) => state.companies);
+	useEffect(() => {
+		if (companyDetail?._id !== id) companiesActions.getCompanyDetail(id!);
+	}, []);
 	const parentRef = useRef(null);
 	const navigate = useNavigate();
 	const onClose = (e: any) => {
-		if (e.target === parentRef.current) navigate('/companies');
+		if (e.target === parentRef.current) navigate(-1);
 	};
 	return (
 		<MainContainer ref={parentRef} showed={true} onClick={onClose}>
 			<DetailContainer showed={true}>
-				<SubContainer>
-					<Header avatar={Amazon} _id={overview._id} />
-					<MainBody>
-						<TabPane onChange={handleChange} activeItem={searchParams.get('pane') ?? 'overview'} paneWidth="30%" paneJustify="center">
-							<TabPane.Pane style={{ padding: '0' }} name="overview" title="Overview">
-								<SBody>
-									<LeftContainer>
-										<GeneralInfo
-											_id={overview._id}
-											social_profile={overview.social_profile}
-											headquarter={overview.headquarter}
-											generalinfo={overview.generalinfo}
-										/>
-									</LeftContainer>
-									<RightContainer>
-										<About _id="1" description={overview?.description} />
-										<HrDivider top={10} side={0} />
-										<Keywords _id={overview._id} keywords={overview.keywords} />
-									</RightContainer>
-								</SBody>
-							</TabPane.Pane>
-							<TabPane.Pane style={{ background: '#f5f8fa' }} name="jobs" title="Jobs">
-								<JobsList size={jobs.size!} jobs={jobs.content!} />
-							</TabPane.Pane>
-						</TabPane>
-					</MainBody>
-				</SubContainer>
+				{isDetailLoading ? (
+					<LoadingScreen />
+				) : (
+					<SubContainer>
+						<Header avatar={Amazon} _id={companyDetail?.overview._id} />
+						<MainBody>
+							<TabPane activeItem={state?.activeTab ?? 'overview'} paneWidth="30%" paneJustify="center">
+								<TabPane.Pane style={{ padding: '0' }} name="overview" title={overviewTitle}>
+									<SBody>
+										<LeftContainer>
+											<GeneralInfo
+												_id={companyDetail?.overview._id}
+												social_profile={companyDetail?.overview.social_profile}
+												headquarter={companyDetail?.overview.headquarter}
+												generalinfo={companyDetail?.overview.generalinfo}
+											/>
+										</LeftContainer>
+										<RightContainer>
+											<About _id="1" description={companyDetail?.overview?.description} />
+											<HrDivider top={10} side={0} />
+											<Keywords _id={companyDetail?.overview._id} keywords={companyDetail?.overview.keywords} />
+										</RightContainer>
+									</SBody>
+								</TabPane.Pane>
+								<TabPane.Pane style={{ background: '#f5f8fa' }} name="jobs" title={jobTitle}>
+									<JobsList size={companyDetail?.jobs.size!} jobs={companyDetail?.jobs.content!} />
+								</TabPane.Pane>
+							</TabPane>
+						</MainBody>
+					</SubContainer>
+				)}
 			</DetailContainer>
 		</MainContainer>
 	);

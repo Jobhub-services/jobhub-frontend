@@ -1,13 +1,12 @@
 import LeftArrowIcon from '@/assets/icons/LeftArrowIcon';
 import { colors } from '@/assets/theme';
-import ApplicationCard from '@/components/developers/applications/ApplicationCard';
-import Google from '@/assets/icons/google.jpg';
+import ApplicationCard from '@/components/companies/applicants/ApplicationCard';
 import { useAppSelector } from '@/utils/appHooks';
 import { Link } from 'react-router-dom';
 import { FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 import { useEffect } from 'react';
-import { applicationActions } from '@/modules/actions/developer/application.actions';
+import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import emptyData from '@/assets/icons/emptyData.png';
 
 const SContainer = styled.div`
@@ -29,35 +28,40 @@ const SIcon = styled.span`
 	display: flex;
 	transform: rotate(180deg);
 `;
-const ApplicationList = () => {
-	const { applicationInfo } = useAppSelector((state) => state.talentApplications);
+
+const LastApplicants = () => {
+	const { showApplicants } = useAppSelector((state) => state.applications);
 	useEffect(() => {
-		if (!applicationInfo?.content || applicationInfo?.content?.length === 0) applicationActions.getApplications(false);
-	}, []);
+		if (!showApplicants?.content || showApplicants?.content?.length === 0) applicationsActions.getShowApplicants({}, 'new');
+	});
 	return (
 		<SContainer className="mt-20">
 			<SH4>Recent applications</SH4>
-			{applicationInfo?.content?.length! > 0 ? (
+			{showApplicants?.content?.length! > 0 ? (
 				<>
-					{applicationInfo?.content?.slice(0, 3).map((elem, idx) => {
+					{showApplicants?.content?.slice(0, 3).map((elem, idx) => {
 						return (
 							<>
 								<ApplicationCard
-									style={{ boxShadow: 'none', border: `1px solid ${colors.BLACK_12}`, marginTop: '20px' }}
 									key={idx}
 									_id={elem._id}
-									avatar={Google}
-									jobId={elem.jobId}
-									createdAt={elem.createdAt}
-									company={elem.company}
-									status={elem.status}
-									motivation={elem.motivation}
+									avatar={elem.avatar}
+									name={elem.name}
+									role={elem.role}
+									experience_duration={elem.experience_duration}
+									cover_letter={elem.cover_letter}
+									skils={elem.skils}
+									applied={elem.applied}
+									linkedIn={elem.linkedIn}
+									github={elem.github}
+									cv={elem.cv}
+									job={elem.job}
 								/>
 							</>
 						);
 					})}
 
-					{applicationInfo?.content?.length! > 3 && (
+					{showApplicants?.content?.length! > 3 && (
 						<div className="mt-20">
 							<Link to="applications">
 								<FlexBox gap={10} style={{ cursor: 'pointer' }}>
@@ -73,11 +77,11 @@ const ApplicationList = () => {
 			) : (
 				<FlexBox flexDirection="column">
 					<img src={emptyData} alt="Empty" width={300} height={300} />
-					<SH4>We have no job recommendations yet.</SH4>
+					<SH4>We have no applications yet.</SH4>
 				</FlexBox>
 			)}
 		</SContainer>
 	);
 };
 
-export default ApplicationList;
+export default LastApplicants;

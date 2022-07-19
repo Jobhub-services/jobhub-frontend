@@ -17,8 +17,8 @@ const DesiredRoles = () => {
 				<SpanTitle>Desired roles</SpanTitle>
 			</FlexBox>
 			<TagWrapper className="mt-10">
-				{role?.other_roles?.length === 0 ? (
-					<SSpan>Add skills to help startups focus on your strengths</SSpan>
+				{!role?.other_roles || role?.other_roles?.length === 0 ? (
+					<SSpan>Add roles to help startups focus on your strengths</SSpan>
 				) : (
 					role?.other_roles?.map((elem, idx) => {
 						return (

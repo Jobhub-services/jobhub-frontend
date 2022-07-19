@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/utils/appHooks';
 import { FlexBox, HrDivider } from 'staak-ui';
-import { SpanTitle, EducationCard } from '@/components/developers/profile/common';
+import { SpanTitle, EducationCard, SSpan } from '@/components/developers/profile/common';
 import { Fragment } from 'react';
 
 const Education = () => {
@@ -21,6 +21,7 @@ const Education = () => {
 						</Fragment>
 					);
 				})}
+				{educations?.length === 0 && <SSpan className="mt-15">List of schools which you have studied at</SSpan>}
 			</div>
 		</div>
 	);

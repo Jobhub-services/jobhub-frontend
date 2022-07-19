@@ -116,7 +116,7 @@ const TalentProfile = () => {
 								<Avatar
 									img={talentDetails.avatar}
 									role={talentDetails.role?.primary_role}
-									name={talentDetails.user?.fullName}
+									name={`${talentDetails?.firstName} ${talentDetails?.lastName}`}
 									status={talentDetails.status}
 									size={80}
 									experience={talentDetails.role?.experience}

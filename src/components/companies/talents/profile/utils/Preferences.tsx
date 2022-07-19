@@ -12,12 +12,7 @@ const Type: { [x: string]: string } = {
 const SPre = styled.pre`
 	font-family: inherit;
 `;
-const Dash = styled.span`
-	display: inline-block;
-	width: 6px;
-	height: 3px;
-	background-color: ${colors.BLUE_DARK_4};
-`;
+
 const SSpan = styled.span`
 	font-weight: 500;
 	color: ${colors.BLACK_9};
@@ -31,6 +26,7 @@ const STitle = styled.h2`
 	font-size: 18px;
 	color: ${colors.BLUE_DARK_4};
 `;
+
 const Preferences = (props: TalentAllInfo) => {
 	return (
 		<div className="staak_scrollbar" style={{ padding: '0 15px' }}>
@@ -44,6 +40,7 @@ const Preferences = (props: TalentAllInfo) => {
 							</FlexBox>
 						);
 					})}
+					{props.languages?.length === 0 && 'N/A'}
 				</FlexBox>
 			</div>
 			<HrDivider top={15} side={20} />
@@ -59,6 +56,7 @@ const Preferences = (props: TalentAllInfo) => {
 								</Tag>
 							);
 						})}
+						{props.role?.other_roles?.length === 0 && 'N/A'}
 					</FlexBox>
 				</FlexBox>
 
@@ -72,6 +70,7 @@ const Preferences = (props: TalentAllInfo) => {
 								</Tag>
 							);
 						})}
+						{props.other_job_type?.length === 0 && 'N/A'}
 					</FlexBox>
 				</FlexBox>
 			</div>
@@ -90,16 +89,18 @@ const Preferences = (props: TalentAllInfo) => {
 					{props.desired_location?.map((elem, idx) => {
 						return (
 							<Tag size="12px" key={idx}>
-								{elem}
+								{elem.name}
 							</Tag>
 						);
 					})}
+					{props.desired_location?.length === 0 && 'N/A'}
 				</FlexBox>
 			</div>
 			<HrDivider top={15} side={20} />
 			<div>
 				<STitle>Wants</STitle>
 				<SPre>{props.wants}</SPre>
+				{!props.wants && props.wants === '' && 'N/A'}
 			</div>
 		</div>
 	);

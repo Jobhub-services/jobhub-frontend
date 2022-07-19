@@ -43,8 +43,9 @@ export type TalentContact = {
 };
 export type TalentShortInfo = {
 	_id: string;
+	firstName?: string;
+	lastName?: string;
 	user?: {
-		fullName?: string;
 		email?: string;
 		username?: string;
 	};
@@ -61,20 +62,28 @@ export type TalentShortInfo = {
 	status?: TalentStatus;
 	summary?: string;
 	skills?: string[];
+	fullName?: string;
 };
 
 export type TalentAllInfo = TalentShortInfo & {
 	job_type?: string;
 	other_job_type?: string[];
 	remote_work?: string;
-	desired_location?: string[];
+	desired_location?: {
+		_id?: string;
+		code?: string;
+		name?: string;
+	}[];
 	wants?: string;
 	work_experience?: WorkExperience[];
 	educations?: Education[];
 	certifications?: Certification[];
 	languages?: Language[];
 	resume?: string;
-	currency?: string;
+	currency?: {
+		name?: string;
+		code?: string;
+	};
 	salary?: string;
 	social_profile?: TalentContact;
 };

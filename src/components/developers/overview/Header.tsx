@@ -16,7 +16,7 @@ const SContainer = styled.div`
 `;
 
 const Header = () => {
-	const { developerInfo } = useAppSelector(({ user }) => user.userInfo);
+	const { userInfo } = useAppSelector(({ user }) => user);
 	const { profile } = useAppSelector((state) => state.developerProfile);
 	useEffect(() => {
 		if (!profile.summary || profile.summary !== '') {
@@ -27,8 +27,8 @@ const Header = () => {
 		<SContainer>
 			<FlexBox align="start" justify="space-between">
 				<ProfileAvatar
-					firstname={developerInfo?.firstName.charAt(0).toUpperCase() + developerInfo?.firstName.slice(1)!}
-					lastname={developerInfo?.lastName.charAt(0).toUpperCase() + developerInfo?.lastName.slice(1)!}
+					firstname={userInfo?.firstName?.charAt(0).toUpperCase() + userInfo?.firstName?.slice(1)!}
+					lastname={userInfo?.lastName?.charAt(0).toUpperCase() + userInfo?.lastName?.slice(1)!}
 					location={profile?.address}
 					role={profile?.role?.primary_role?.name}
 					experience={profile?.role?.experience}

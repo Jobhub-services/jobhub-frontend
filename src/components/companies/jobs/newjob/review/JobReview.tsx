@@ -17,7 +17,7 @@ const JobReview = (props: JobReviewProps) => {
 	return (
 		<>
 			<FlexBox justify="flex-start" align="flex-start">
-				<div style={{ paddingRight: '15px', width: '20%' }}>
+				<div style={{ paddingRight: '15px', width: '20%', position: 'sticky', top: '0' }}>
 					<Role />
 					<HrDivider color={colors.BLACK_12} top={20} />
 					<Location />

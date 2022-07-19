@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Google from '@/assets/icons/google.jpg';
 import { colors } from '@/assets/theme';
-import { CameraIcon } from '@/assets/icons';
+import { CameraIcon, CompanyIcon } from '@/assets/icons';
 import { FlexBox } from 'staak-ui';
 import { PProfileAvatar } from '@/models/component/companies/profile.interface';
 import { SSpan, SData } from '@/components/companies/profile/common/common.style';
@@ -11,6 +11,8 @@ import { profileAction } from '@/modules/actions/company/profile.actions';
 const SImg = styled.img`
 	border-radius: 50%;
 	object-fit: cover;
+	width: 80px;
+	height: 80px;
 `;
 
 const AvatarContainer = styled.div<any>`
@@ -61,7 +63,7 @@ const SH2 = styled.h2`
 const ProfileAvatar = ({ overview }: PProfileAvatar) => {
 	const { headquarter, avatar } = useAppSelector((state) => state.companyProfile.profile);
 	const { userInfo } = useAppSelector((state) => state.user);
-	const { companyInfo } = userInfo;
+
 	const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { files } = event.target;
 		let data = new FormData();
@@ -72,7 +74,7 @@ const ProfileAvatar = ({ overview }: PProfileAvatar) => {
 		<FlexBox gap={20} justify="start">
 			<SContainer>
 				<AvatarContainer size={80 + 10}>
-					<SImg src={avatar} alt="avatar" width={80} height={80} />
+					{avatar ? <SImg src={avatar} alt="company" /> : <CompanyIcon width="45px" height="45px" color={colors.BLACK_7} />}
 				</AvatarContainer>
 				{!overview && (
 					<>
@@ -84,7 +86,7 @@ const ProfileAvatar = ({ overview }: PProfileAvatar) => {
 				)}
 			</SContainer>
 			<div>
-				<SH2>{companyInfo?.companyName?.toUpperCase()}</SH2>
+				<SH2>{userInfo?.companyName?.toUpperCase()}</SH2>
 				{overview ? (
 					<FlexBox flexDirection="column" gap={5} align="start">
 						{headquarter?.street !== '' && <SData>{headquarter?.street}</SData>}

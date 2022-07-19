@@ -56,6 +56,7 @@ const WorkLocation = () => {
 			</div>
 			<div style={{ width: '50%' }}>
 				<TagPickerField
+					placeholder="Select countries"
 					name="desired_location"
 					title="Open to the work in"
 					values={

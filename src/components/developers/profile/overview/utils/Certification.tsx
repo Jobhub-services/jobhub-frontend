@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/utils/appHooks';
 import { FlexBox, HrDivider } from 'staak-ui';
-import { SpanTitle, CertificationCard } from '@/components/developers/profile/common';
+import { SpanTitle, CertificationCard, SSpan } from '@/components/developers/profile/common';
 import { Fragment } from 'react';
 
 const Certification = () => {
@@ -21,6 +21,7 @@ const Certification = () => {
 						</Fragment>
 					);
 				})}
+				{certifications?.length === 0 && <SSpan className="mt-15">Sharing your certifications will help you stand out more.</SSpan>}
 			</div>
 		</div>
 	);

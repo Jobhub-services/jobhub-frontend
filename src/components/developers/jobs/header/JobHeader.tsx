@@ -3,15 +3,34 @@ import HeaderNav from '@/components/developers/jobs/header/HeaderNav';
 import { FilterIcon } from '@/assets/icons';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
+import { useSearchParams } from 'react-router-dom';
 
+// os mean Only Saved
 const JobHeader = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
 	const { filterClosed, jobInfo } = useAppSelector((state) => state.developerJobs);
-	const onChangeTab = () => {};
+	const onChangeTab = (value: string) => {
+		let val = '0';
+		value === 'Saved' ? (val = '1') : (val = '0');
+		const currentOs = searchParams.get('os') ?? '0';
+		if (currentOs !== val) {
+			jobActions.getJobs(true);
+		}
+		searchParams.set('os', val);
+		setSearchParams(searchParams);
+	};
+	const os = searchParams.get('os') ?? '0';
 	return (
 		<FlexBox justify="space-between">
 			<FlexBox gap={20}>
-				<HeaderNav onClick={onChangeTab} status="Browse all" active title="Browse all" badge={jobInfo?.count?.toString()} />
-				<HeaderNav onClick={onChangeTab} status="Saved" title="Saved" badge="30" />
+				<HeaderNav
+					onClick={onChangeTab}
+					status="Browse all"
+					active={os === '0'}
+					title="Browse all"
+					badge={jobInfo?.count ? jobInfo?.count?.toString() : '0'}
+				/>
+				<HeaderNav onClick={onChangeTab} status="Saved" active={os === '1'} title="Saved" badge={jobInfo?.count ? jobInfo?.count?.toString() : '0'} />
 			</FlexBox>
 			<FlexBox gap={15}>
 				<Button

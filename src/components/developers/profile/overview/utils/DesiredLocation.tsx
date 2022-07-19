@@ -17,7 +17,7 @@ const DesiredLocation = () => {
 			</FlexBox>
 			<TagWrapper className="mt-10">
 				{desired_location?.length === 0 ? (
-					<SSpan>add locations where you are interesting to work</SSpan>
+					<SSpan>Add locations where you are interesting to work</SSpan>
 				) : (
 					desired_location?.map((elem, idx) => {
 						return (

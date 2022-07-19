@@ -6,7 +6,8 @@ import { ArrowDownIcon, FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 import { CalendarFillIcon, LocationFillIcon } from '@/assets/icons';
 import { dateWithMonthName } from '@/utils/helpers';
-import { createSearchParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 const SPre = styled.pre<any>`
 	display: -webkit-box;
 	color: ${colors.BLACK_2};
@@ -43,15 +44,7 @@ const SFooter = styled(FlexBox)`
 const CompanyCard = (props: PCompanyCard) => {
 	const navigate = useNavigate();
 	const handleDetail = () => {
-		navigate(
-			{
-				pathname: `detail/${props._id}`,
-				search: createSearchParams({
-					pane: 'jobs',
-				}).toString(),
-			},
-			{ replace: true }
-		);
+		navigate(`detail/${props._id}`, { state: { activeTab: 'jobs' } });
 	};
 	const { street, city, country } = props.headquarter ?? {};
 	const founded = dateWithMonthName(props?.generalinfo?.founded!);

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import {
-	Overview,
+	CompanyOverview,
 	JobOverview,
 	AddNewJob,
 	ApplicantsOverview,
@@ -20,7 +20,7 @@ import ApplicantsSearch from '@/views/companies/applicants/ApplicantsSearch';
 const CompanyRoutes: FC = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<Overview />} />
+			<Route path="/" element={<CompanyOverview />} />
 			<Route path="jobs">
 				<Route path="" element={<JobOverview />}>
 					<Route path="details/:id" element={<JobDetails />} />

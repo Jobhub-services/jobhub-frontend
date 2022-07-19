@@ -9,10 +9,17 @@ import { FilterContianerProps } from '@/models/component/common/common.interface
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { jobActions as developerJobActions } from '@/modules/actions/developer/jobs.actions';
+import { companiesActions } from '@/modules/actions/developer/companies.actions';
 import { talentsActions } from '@/modules/actions/company/talents.actions';
 import { useAppSelector } from '@/utils/appHooks';
 
-const actionsMap = { job: jobActions, applications: applicationsActions, talent: talentsActions, developerJobs: developerJobActions };
+const actionsMap = {
+	job: jobActions,
+	applications: applicationsActions,
+	talent: talentsActions,
+	developerJobs: developerJobActions,
+	companies: companiesActions,
+};
 
 const FContainer = styled.div<any>`
 	position: fixed;
@@ -48,7 +55,9 @@ const SBody = styled.div`
 `;
 const FilterContianer = (props: FilterContianerProps) => {
 	const { filterClosed } = useAppSelector((state) => state[props.type]);
+	console.log('filterclosed ', filterClosed);
 	const body = React.Children.map(props.children, (child) => (child?.type.displayName === 'Body' ? child : null));
+	console.log('after get body', 'body');
 	return (
 		<FContainer closed={filterClosed} width={props.width}>
 			<SubContainer>

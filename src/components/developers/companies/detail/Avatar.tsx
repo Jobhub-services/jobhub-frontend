@@ -32,8 +32,8 @@ const SSpan = styled.span`
 const Avatar = ({ companyName, generalinfo, avatar }: PCompanyCard) => {
 	return (
 		<FlexBox gap={10} justify="start">
-			<ImgCont Size={70 + 10}>
-				<SImg src={avatar} alt="avatar" width={70} height={70} />
+			<ImgCont Size={60 + 10}>
+				<SImg src={avatar} alt="avatar" width={60} height={60} />
 			</ImgCont>
 			<div style={{ width: '100%' }}>
 				<SH3>{companyName}</SH3>

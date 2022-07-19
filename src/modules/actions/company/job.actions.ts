@@ -49,14 +49,22 @@ export const jobActions = {
 			let tmp: any = { ...payload };
 			tmp.category = payload.category?.id;
 			tmp.currency = payload.currency?.id;
+			tmp.company_division = payload.company_division?.id;
 			tmp.work_location = payload.work_location?.map((elem) => {
 				return { country: elem.country?.id, city: elem.city };
 			});
-			tmp.hire_location = payload.hire_location?.map((elem) => {
-				return { country: elem.country?.id, city: elem.city };
+			tmp.hire_location = payload.hire_location?.filter((elem) => {
+				if (elem.country?.id !== '' || elem.city !== '') {
+					return { country: elem.country?.id, city: elem.city };
+				}
 			});
 			tmp.skills = payload.skills?.map((elem) => elem.value);
-			tmp.duration_range = [payload.duration_range![0]?.toString(), payload.duration_range![1]?.toString()];
+			tmp.duration_range =
+				payload?.duration_range?.length! > 1 && payload?.duration_range![0] && payload?.duration_range![1]
+					? [(payload.duration_range![0]?.toString(), payload.duration_range![1]?.toString())]
+					: [];
+
+			console.log(tmp);
 			const response = await httpClient.post(`${JOBS_SERVICE}/company`, tmp);
 			const responseData = response.data;
 			if (responseData) {

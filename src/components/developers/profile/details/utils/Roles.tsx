@@ -32,6 +32,7 @@ const Roles = () => {
 	const [otherRoles, setOtherRoles] = useState<{ value?: string; label?: string }[]>([]);
 	const [inputData, setInputData] = useState<any>({});
 	const [show, setShow] = useState(false);
+	const dataEmpty = (!role?.other_roles || role?.other_roles?.length! === 0) && (!role?.primary_role || role?.primary_role?.name === '');
 	useEffect(() => {
 		if (roles?.size === 0) {
 			metadataActions.getRoles();
@@ -94,9 +95,7 @@ const Roles = () => {
 						</SWarraper>
 					</div>
 				)}
-				{role?.other_roles && role?.other_roles?.length! === 0 && role?.primary_role && role?.primary_role?.name === '' && (
-					<SSpan>Select your primary role and the roles you are open to work on</SSpan>
-				)}
+				{dataEmpty && <SSpan>Select your primary role and the roles you are open to work on</SSpan>}
 			</div>
 			{show && (
 				<PopModel closed={!show} onClose={() => setShow(false)}>
@@ -120,7 +119,14 @@ const Roles = () => {
 								})}
 							</InputPickerField>
 						</FlexBox>
-						<TagPickerField className="mt-15 mb-15" name="other_roles" title="Open to the following roles" onChange={handleTag} values={otherRoles}>
+						<TagPickerField
+							className="mt-15 mb-15"
+							name="other_roles"
+							title="Open to the following roles"
+							placeholder="Select other roles"
+							onChange={handleTag}
+							values={otherRoles}
+						>
 							{roles?.content?.map((elem, idx) => {
 								return <TagPickerField.Option value={elem._id!}>{elem.name}</TagPickerField.Option>;
 							})}

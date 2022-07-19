@@ -10,6 +10,11 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
 
+const SWarrap = styled(FlexBox)`
+	flex-wrap: wrap;
+	height: 35px;
+	overflow: hidden;
+`;
 const SCard = styled.div`
 	background: white;
 	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
@@ -53,7 +58,7 @@ const TalentCard = (props: CardProps) => {
 	};
 	return (
 		<SCard>
-			<Avatar status={props.status} img={props.avatar} name={props.user?.fullName} role={props.role?.primary_role} />
+			<Avatar status={props.status} img={props.avatar} name={`${props?.firstName} ${props?.lastName}`} role={props.role?.primary_role} />
 			<FlexBox justify="space-between" className="mt-10" gap={10}>
 				<FlexBox justify="start" gap={5} width="50%">
 					<LocationIcon width="18px" height="18px" color={colors.BLACK_8} />
@@ -71,11 +76,12 @@ const TalentCard = (props: CardProps) => {
 				</div>
 				<div className="mt-10">
 					<div>Skills</div>
-					<FlexBox justify="start" className="mt-5" gap={10}>
-						{props.skills?.map((elem: string, idx: number) => (
+					<SWarrap justify="start" className="mt-5" gap={10}>
+						{props.skills?.slice(0, 3).map((elem: string, idx: number) => (
 							<Tag key={idx}>{elem}</Tag>
 						))}
-					</FlexBox>
+						{props.skills?.length === 0 && <Sp>He hasn't added skills yet</Sp>}
+					</SWarrap>
 				</div>
 			</div>
 			<HrDivider top={15} side={0} />

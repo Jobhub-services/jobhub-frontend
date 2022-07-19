@@ -3,21 +3,20 @@ export enum UserType {
 	COMPANY = 'company',
 }
 interface IDeveloperInfo {
-	firstName: string;
-	lastName: string;
+	firstName?: string;
+	lastName?: string;
 }
 
 interface ICompanyInfo {
-	companyName: string;
+	companyName?: string;
 }
 
-export interface IUser {
+export interface IUser extends IDeveloperInfo, ICompanyInfo {
 	email?: string;
 	username?: string;
 	password?: string;
 	userType?: UserType;
-	developerInfo?: IDeveloperInfo;
-	companyInfo?: ICompanyInfo;
+	avatar?: string;
 }
 
 export interface IUserState {

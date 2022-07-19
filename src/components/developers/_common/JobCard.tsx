@@ -75,7 +75,9 @@ const JobCard = (props: PJobCard) => {
 		if (jobDetails?._id !== props._id) jobActions.getJob(props._id);
 		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Application' } });
 	};
+
 	const handleSelect = () => {};
+
 	const newPost = Math.abs(new Date(props.createdAt!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
 	const posted_at = moment(new Date(props.createdAt!)).fromNow();
 	return (

@@ -5,7 +5,7 @@ import { FlexBox, SearchInput } from 'staak-ui';
 import StaakLogo from '@/assets/theme/StaakLogo';
 
 const DeveloperHeader = () => {
-	const { username } = useAppSelector(({ user }) => user.userInfo);
+	const { username, avatar } = useAppSelector(({ user }) => user.userInfo);
 	const navigate = useNavigate();
 	const handleItem = (event?: React.SyntheticEvent, value?: string) => {
 		if (value === 'profile') navigate(`profile/${username}`);
@@ -27,7 +27,7 @@ const DeveloperHeader = () => {
 			<FlexBox justify="space-between">
 				<FlexBox justify="space-between" gap={20}>
 					<IconDropDown />
-					<AvatarDropDown onClick={handleItem} />
+					<AvatarDropDown onClick={handleItem} avatar={avatar} />
 				</FlexBox>
 			</FlexBox>
 		</>

@@ -12,6 +12,7 @@ const SContainer = styled.div`
 `;
 const SubContainer = styled.div`
 	padding: 10px 20px;
+	height: inherit;
 `;
 const ViewJobs = () => {
 	const { isLoading, jobInfo } = useAppSelector((state) => state.developerJobs);

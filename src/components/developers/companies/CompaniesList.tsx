@@ -1,55 +1,35 @@
 import styled from 'styled-components';
 import CompanyCard from '@/components/developers/companies/CompanyCard';
-import Google from '@/assets/icons/google.jpg';
-import Amazon from '@/assets/icons/a.png';
-import Cmp from '@/assets/icons/cmp.jpg';
+import { useAppSelector } from '@/utils/appHooks';
 
 const SWrapper = styled.div<any>`
 	display: grid;
 	padding: 15px 0;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 20px;
+	@media only screen and (max-width: 1600px) {
+		grid-template-columns: repeat(3, 1fr);
+	}
 `;
 
 const CompaniesList = () => {
+	const { companies } = useAppSelector((state) => state.companies);
 	return (
 		<SWrapper>
-			<CompanyCard
-				_id="1"
-				avatar={Amazon}
-				description="At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent."
-				companyName="Amazon Inc."
-				generalinfo={{ industry: 'Health, wellness & fitness', founded: '2019-01-08' }}
-				headquarter={{ country: 'USA', city: 'California', street: '1600 old street of cpmanaies' }}
-				number_job={1}
-			/>
-			<CompanyCard
-				_id="2"
-				avatar={Google}
-				description="At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent."
-				companyName="Google Inc."
-				generalinfo={{ industry: 'Health, wellness & fitness', founded: '2019-01-08' }}
-				headquarter={{ country: 'USA', city: 'California', street: '1600 old street of cpmanaies' }}
-				number_job={20}
-			/>
-			<CompanyCard
-				_id="3"
-				description="At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent."
-				avatar={Cmp}
-				companyName="Amazon Inc."
-				generalinfo={{ industry: 'Health, wellness & fitness', founded: '2019-01-08' }}
-				headquarter={{ country: 'USA', city: 'California', street: '1600 old street of cpmanaies' }}
-				number_job={5}
-			/>
-			<CompanyCard
-				_id="4"
-				avatar={Google}
-				description="At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent."
-				companyName="Google Inc."
-				generalinfo={{ industry: 'Health, wellness & fitness', founded: '2019-01-08' }}
-				headquarter={{ country: 'USA', city: 'California', street: '1600 old street of cpmanaies' }}
-				number_job={12}
-			/>
+			{companies?.content?.map((elem, idx) => {
+				return (
+					<CompanyCard
+						key={idx}
+						_id={elem._id}
+						avatar={elem.avatar}
+						description={elem.description}
+						companyName={elem.companyName}
+						generalinfo={elem.generalinfo}
+						headquarter={elem.headquarter}
+						number_job={elem.number_job}
+					/>
+				);
+			})}
 		</SWrapper>
 	);
 };

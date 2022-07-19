@@ -14,7 +14,10 @@ const initialState: IAppState = {
 		size: 0,
 		content: [],
 	},
-	comapny_division: [],
+	comapny_division: {
+		size: 0,
+		content: [],
+	},
 	currencies: {
 		count: 0,
 		size: 0,

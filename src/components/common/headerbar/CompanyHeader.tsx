@@ -5,7 +5,7 @@ import StaakLogo from '@/assets/theme/StaakLogo';
 import { useAppSelector } from '@/utils/appHooks';
 
 const CompanyHeader = () => {
-	const { username } = useAppSelector(({ user }) => user.userInfo);
+	const { username, avatar } = useAppSelector(({ user }) => user.userInfo);
 	const navigate = useNavigate();
 	const handleItem = (event?: React.SyntheticEvent, value?: string) => {
 		if (value === 'profile') navigate(`company/profile/${username}`);
@@ -35,7 +35,7 @@ const CompanyHeader = () => {
 				</Button>
 				<FlexBox justify="space-between" gap={20}>
 					<IconDropDown />
-					<AvatarDropDown onClick={handleItem} />
+					<AvatarDropDown onClick={handleItem} avatar={avatar} />
 				</FlexBox>
 			</FlexBox>
 		</>

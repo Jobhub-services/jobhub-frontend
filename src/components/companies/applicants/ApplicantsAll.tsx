@@ -1,5 +1,5 @@
 import { useAppSelector } from '@/utils/appHooks';
-import ApplicationCard from './ApplicationCard';
+import ApplicationCard from '@/components/companies/applicants/ApplicationCard';
 import styled from 'styled-components';
 import DataEmpty from '@/components/common/DataEmpty';
 

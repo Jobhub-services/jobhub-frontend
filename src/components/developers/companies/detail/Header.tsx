@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 const SContainer = styled(FlexBox)`
 	padding: 15px 20px 25px 20px;
+	border-bottom: 1px solid ${colors.BLACK_11};
 `;
 
 const Header = ({ avatar }: PCompanyCard) => {

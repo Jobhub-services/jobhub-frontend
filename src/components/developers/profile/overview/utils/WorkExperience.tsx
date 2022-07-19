@@ -1,6 +1,6 @@
 import { useAppSelector } from '@/utils/appHooks';
 import { FlexBox, HrDivider } from 'staak-ui';
-import { SpanTitle, WorkCard } from '@/components/developers/profile/common';
+import { SpanTitle, WorkCard, SSpan } from '@/components/developers/profile/common';
 import { Fragment } from 'react';
 
 const WorkExperience = () => {
@@ -21,6 +21,7 @@ const WorkExperience = () => {
 						</Fragment>
 					);
 				})}
+				{work_experience?.length === 0 && <SSpan className="mt-15">Tell companies about other positions you have held</SSpan>}
 			</div>
 		</div>
 	);

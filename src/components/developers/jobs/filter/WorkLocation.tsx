@@ -9,10 +9,12 @@ import { CheckBox, TagPicker } from 'staak-ui';
 const WorkLocation = ({ onChange, worklocation, clear }: PFWorkLocation) => {
 	const [localLocation, setLocalLocation] = useState<TFWorkLocation>();
 	const { countries } = useAppSelector((state) => state.metadata);
+
 	useEffect(() => {
 		if (countries?.count === 0) metadataActions.getCountries();
 		setLocalLocation(worklocation);
 	}, [clear]);
+
 	const handleChange = (event: any, value: { value: string; label: string }[], name?: string) => {
 		let tmp = { ...localLocation };
 		tmp.countries = value;

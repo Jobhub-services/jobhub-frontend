@@ -33,7 +33,7 @@ export const talentsActions = {
 	async getTalentDetails(talentId: string) {
 		talentsDispatcher.setIsLoading(true, 'isDetailLoading');
 		try {
-			const response = await httpClient.get(`${USERS_SERVICE}/compan/talents/${talentId}`);
+			const response = await httpClient.get(`${USERS_SERVICE}/company/talents/${talentId}`);
 			if (response.data) {
 				const data = response.data;
 				talentsDispatcher.setTalentDetails(data.content);
@@ -50,7 +50,7 @@ export const talentsActions = {
 			const config = {
 				params: params,
 			};
-			const response = await httpClient.get(`${USERS_SERVICE}/compan/talents`, config);
+			const response = await httpClient.get(`${USERS_SERVICE}/company/talents`, config);
 			if (response.data) {
 				talentsDispatcher.setTalents(response.data);
 			}

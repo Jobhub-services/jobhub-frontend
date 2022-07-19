@@ -64,11 +64,15 @@ const RedSpan = styled.span`
 const JobCard = (props: JobCardProps) => {
 	const navigate = useNavigate();
 	const { jobDetails } = useAppSelector((state) => state.job);
+
 	const handleClick = (event: any, value: string) => {
 		if (jobDetails._id !== props._id) jobActions.getJobDetails(props._id);
 		navigate(`details/${props._id}`);
 	};
 	const onClick = () => {};
+
+	console.log(props);
+
 	return (
 		<SContainer>
 			<SBody>
