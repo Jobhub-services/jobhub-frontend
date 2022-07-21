@@ -5,10 +5,10 @@ import { httpClient } from '@/config/httpClient/HttpClient';
 import { API_PATHS } from '@/constants/api.constants';
 import { AppByJobs, AppData } from '@/models/store/company/applications.interface';
 
-const { APPLICANTS_SERVICE } = API_PATHS;
+const { JOBS_SERVICE } = API_PATHS;
 
 export const applicationsDispatcher = {
-	setIsLoading(loading: boolean, attr: 'isLoading' | 'isDetailLoading' = 'isLoading') {
+	setIsLoading(loading: boolean, attr: 'isLoading' | 'isDetailLoading' | 'isStatusChange' = 'isLoading') {
 		dispatchToStore(storeActions.setIsLoading({ loading, attr }));
 	},
 	setClosedFilter(closed: boolean) {
@@ -37,7 +37,7 @@ export const applicationsActions = {
 	async setClosedFilter(closed: boolean) {
 		applicationsDispatcher.setClosedFilter(closed);
 	},
-	async getApplicantsByJobs(status: ApplicationStatus = 'new', params: any = {}) {
+	async getApplicantsByJobs(status: ApplicationStatus = 'NEW', params: any = {}) {
 		applicationsDispatcher.setIsLoading(true);
 		try {
 			const param = {
@@ -47,14 +47,15 @@ export const applicationsActions = {
 					...params,
 				},
 			};
-			const response = await httpClient.get(`${APPLICANTS_SERVICE}/show`, param);
-			//if (response.data) applicationsDispatcher.setApplicantsByJobs(response.data);
+			const response = await httpClient.get(`${JOBS_SERVICE}/application/company`, param);
+			console.log(response);
+			if (response.data) applicationsDispatcher.setApplicantsByJobs(response.data);
 		} catch (e: any) {
 		} finally {
 			applicationsDispatcher.setIsLoading(false);
 		}
 	},
-	async getShowApplicants(params: any = {}, status: ApplicationStatus = 'new') {
+	async getShowApplicants(params: any = {}, status: ApplicationStatus = 'NEW') {
 		applicationsDispatcher.setIsLoading(true);
 		try {
 			const param = {
@@ -63,7 +64,7 @@ export const applicationsActions = {
 					...params,
 				},
 			};
-			const response = await httpClient.get(`${APPLICANTS_SERVICE}/show`, param);
+			const response = await httpClient.get(`${JOBS_SERVICE}/application/company`, param);
 			if (response.data) applicationsDispatcher.setShowApplicants(response.data);
 		} catch (e: any) {
 		} finally {
@@ -76,22 +77,25 @@ export const applicationsActions = {
 			const param = {
 				params: {
 					status: status,
-					id: id,
 				},
 			};
-			const response = await httpClient.get(`${APPLICANTS_SERVICE}/show/detail`, param);
-			if (response.data) applicationsDispatcher.setApplicantDetails(response.data);
+			const response = await httpClient.get(`${JOBS_SERVICE}/application/show/${id}`, param);
+			const responseData = response.data;
+			console.log(responseData);
+			if (responseData) applicationsDispatcher.setApplicantDetails(responseData.content);
 		} catch (e: any) {
 		} finally {
 			applicationsDispatcher.setIsLoading(false, 'isDetailLoading');
 		}
 	},
 	async setApplicationStatus(status: ApplicationStatus, applicantId: string) {
+		applicationsDispatcher.setIsLoading(true, 'isStatusChange');
 		try {
-			//const response = await httpClient.post(`${APPLICANTS_SERVICE}/status/update`, { applicantId: applicantId, status: status });
-			applicationsDispatcher.setApplicationStatus(status, applicantId);
+			const response = await httpClient.put(`${JOBS_SERVICE}/application/status/${applicantId}`, { status: status });
+			if (response.data) applicationsDispatcher.setApplicationStatus(status, applicantId);
 		} catch (e: any) {
 		} finally {
+			applicationsDispatcher.setIsLoading(false, 'isStatusChange');
 		}
 	},
 };

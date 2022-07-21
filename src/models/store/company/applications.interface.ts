@@ -14,6 +14,7 @@ export type AppByJobs = PaginationType & {
 export interface IApplicationsState {
 	isLoading?: boolean;
 	isDetailLoading?: boolean;
+	isStatusChange?: boolean;
 	filterClosed?: boolean;
 	applicantsByJobs: AppByJobs;
 	showApplicants: AppData;

@@ -54,7 +54,7 @@ const CompanySide = () => {
 				icon={<ApplicantIcon width="20px" height="20px" />}
 				width={widthItems}
 				active={pathname.startsWith('/applicants')}
-				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'applicants/new')}
+				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'applicants/NEW')}
 			>
 				<NavItem.Content>Applicants</NavItem.Content>
 			</NavItem>

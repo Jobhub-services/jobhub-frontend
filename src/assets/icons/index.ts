@@ -59,8 +59,10 @@ import ProtectIcon from './ProtectIcon';
 import GeneralSettingsIcon from './GeneralSettingIcon';
 import JobColorIcon from './JobColorIcon';
 import MessageColorIcon from './MessageColorIcon';
+import LoadingIcon from './LoadingIcon';
 
 export {
+	LoadingIcon,
 	MessageColorIcon,
 	JobColorIcon,
 	GeneralSettingsIcon,

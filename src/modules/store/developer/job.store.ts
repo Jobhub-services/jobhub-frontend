@@ -16,7 +16,7 @@ const initialState: IJobsState = {
 	jobDetails: {
 		_id: '',
 		title: '',
-		createdBy: {},
+		company: {},
 		currency: {},
 		start_salary: '',
 		end_salary: '',

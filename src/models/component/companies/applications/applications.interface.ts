@@ -27,3 +27,15 @@ export interface WorkExperienceProps extends StandardProps {
 	description?: string;
 	link?: string;
 }
+
+export interface PApplicationHeader extends StandardProps {
+	viewType: 'byjob' | 'search';
+	count: number;
+	onChangeTab: (status: string) => void;
+}
+
+export interface PApplicationContact extends StandardProps {
+	linkedIn?: string;
+	git?: string;
+	website?: string;
+}

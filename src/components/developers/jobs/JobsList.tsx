@@ -31,7 +31,7 @@ const JobsList = () => {
 						duration={elem.duration}
 						avatar={elem.avatar}
 						createdAt={elem.createdAt}
-						createdBy={elem.createdBy}
+						company={elem.company}
 						work_location={elem.work_location}
 						hire_location={elem.hire_location}
 						work_remotly={elem.work_remotly}

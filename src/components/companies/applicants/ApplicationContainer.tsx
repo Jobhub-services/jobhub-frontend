@@ -48,10 +48,10 @@ const ApplicationContainer = (props: ApplicationContainerProps) => {
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 	function handleClick() {
-		navigate(`/jobs/details/${props.jobId}`);
+		navigate(`/jobs/details/${props.job_id}`);
 	}
 	function allApplicants() {
-		searchParams.set('jobId', props.jobId);
+		searchParams.set('jobId', props.job_id);
 		const params = createSearchParams(searchParams);
 		navigate(`/applicants/search/${status}/?${params}`);
 	}
@@ -59,11 +59,11 @@ const ApplicationContainer = (props: ApplicationContainerProps) => {
 		<AppContainer>
 			<div>
 				<SHeader>
-					<div>
+					<div style={{ width: '65%' }}>
 						<STitle>{props.title}</STitle>
 						<SSpan opacity={0.6}>{props.category}</SSpan>
 					</div>
-					<FlexBox gap={10}>
+					<FlexBox justify="end" gap={10} width="45%">
 						<SButton size="md" variant="text" onClick={handleClick}>
 							View Job
 						</SButton>
@@ -74,22 +74,23 @@ const ApplicationContainer = (props: ApplicationContainerProps) => {
 				</SHeader>
 			</div>
 			<CardContainer>
-				{props.applicants?.map((elem, idx) => {
+				{props.applications?.map((elem, idx) => {
 					return (
 						<ApplicationCard
 							key={idx}
 							_id={elem._id}
-							img={elem.img}
-							name={elem.name}
+							avatar={elem.avatar}
+							firstName={elem.firstName}
+							lastName={elem.lastName}
 							role={elem.role}
-							experience_duration={elem.experience_duration}
-							cover_letter={elem.cover_letter}
-							skils={elem.skils}
-							applied={elem.applied}
+							motivation={elem.motivation}
+							skills={elem.skills}
+							createdAt={elem.createdAt}
 							linkedIn={elem.linkedIn}
-							github={elem.github}
+							git={elem.git}
 							cv={elem.cv}
-							applicationStatus={elem.applicationStatus}
+							status={elem.status}
+							userStatus={elem.userStatus}
 						/>
 					);
 				})}

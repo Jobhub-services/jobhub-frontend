@@ -18,7 +18,7 @@ const ApplicantsOverview = () => {
 	const navigate = useNavigate();
 	const { status } = useParams();
 	const { pathname, search } = useLocation();
-	const { isLoading } = useAppSelector((state) => state.applications);
+	const { isLoading, applicantsByJobs } = useAppSelector((state) => state.applications);
 	useEffect(() => {
 		applicationsActions.getApplicantsByJobs(status as ApplicationStatus);
 	}, [status]);
@@ -34,7 +34,7 @@ const ApplicantsOverview = () => {
 			) : (
 				<>
 					<div style={{ width: '100%', padding: '10px 15px', height: '100%' }}>
-						<ApplicantsHeader viewType="byjob" onChangeTab={onChangeTab} />
+						<ApplicantsHeader viewType="byjob" onChangeTab={onChangeTab} count={applicantsByJobs?.count!} />
 						<ApplicantsByJob />
 					</div>
 					<Outlet />

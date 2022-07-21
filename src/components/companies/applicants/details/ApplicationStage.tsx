@@ -7,26 +7,32 @@ import { PopModel } from '@/components/common';
 import { ApplicationStatus } from '@/types/company/applications.type';
 import { useAppSelector } from '@/utils/appHooks';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
+import { LoadingIcon } from '@/assets/icons';
 
-const Status: ApplicationStatus[] = ['new', 'process', 'interview', 'hired'];
+const Status: ApplicationStatus[] = ['NEW', 'ACCEPTED', 'IN_PROGRESS', 'HIRED'];
 const Stages = ['New Applicant', 'In-Review', 'Interview'];
 const ButtonStage = ['Process', 'Schedule Interviews', 'Hire'];
 const LAST_ITEM = Stages.length - 1;
 
 const Container = styled.div``;
+const SLoading = styled.div`
+	border: 1px solid ${colors.PURPLE_BASE};
+	border-radius: 7px;
+	padding: 7px;
+	display: flex;
+	width: 100%;
+`;
 
 const ApplicationStage = () => {
-	const { applicationStatus, _id } = useAppSelector((state) => state.applications.applicantDetails);
+	const { applicantDetails, isStatusChange } = useAppSelector((state) => state.applications);
 	const [popModelClosed, setPopModelClosed] = useState(true);
-	const currentStage = Status.indexOf(applicationStatus!);
-	console.log('current status is ', applicationStatus);
-	console.log('current stage value is ', currentStage);
-	function nextStage() {
-		applicationsActions.setApplicationStatus(Status[currentStage + 1], _id);
-	}
-	function onClosed() {
+	const currentStage = Status.indexOf(applicantDetails?.status!);
+	const nextStage = () => {
+		applicationsActions.setApplicationStatus(Status[currentStage + 1], applicantDetails._id);
+	};
+	const onClosed = () => {
 		setPopModelClosed(!popModelClosed);
-	}
+	};
 
 	return (
 		<Container>
@@ -41,12 +47,20 @@ const ApplicationStage = () => {
 				/>
 			</div>
 			<FlexBox justify="start" gap={10} style={{ margin: '15px 0' }}>
-				<Button variant="outlined" width={currentStage !== LAST_ITEM ? '100%' : '50%'} onClick={nextStage}>
-					{ButtonStage[currentStage]}
-				</Button>
-				<Button color="red" variant="outlined" width={currentStage === LAST_ITEM && '50%'} onClick={onClosed}>
-					Decline
-				</Button>
+				{isStatusChange ? (
+					<SLoading>
+						<LoadingIcon color={colors.PURPLE_BASE} />
+					</SLoading>
+				) : (
+					<>
+						<Button variant="outlined" width={currentStage !== LAST_ITEM ? '100%' : '50%'} onClick={nextStage}>
+							{ButtonStage[currentStage]}
+						</Button>
+						<Button color="red" variant="outlined" width={currentStage === LAST_ITEM && '50%'} onClick={onClosed}>
+							Decline
+						</Button>
+					</>
+				)}
 			</FlexBox>
 			<PopModel
 				closed={popModelClosed}
@@ -61,7 +75,7 @@ const ApplicationStage = () => {
 					<TextArea name="comment" placeholder="Comment" width="400px"></TextArea>
 				</PopModel.Body>
 				<PopModel.Footer>
-					<Button width="100%" onClick={() => applicationsActions.setApplicationStatus('declined', _id)}>
+					<Button width="100%" onClick={() => applicationsActions.setApplicationStatus('DECLINED', applicantDetails._id)}>
 						Confirme
 					</Button>
 				</PopModel.Footer>

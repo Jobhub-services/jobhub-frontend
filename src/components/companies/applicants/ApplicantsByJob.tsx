@@ -17,9 +17,7 @@ const ApplicantsByJob = () => {
 	return (
 		<SContainer style={{ padding: '10px 0' }}>
 			{applicantsByJobs.content?.map((elem, idx) => {
-				if (elem.applicants?.length! > 0)
-					return <ApplicationContainer key={idx} jobId={elem.jobId} title={elem.title} category={elem.category} applicants={elem.applicants} />;
-				return <></>;
+				return <ApplicationContainer key={idx} job_id={elem.job_id} title={elem.title} category={elem.category} applications={elem.applications} />;
 			})}
 		</SContainer>
 	);

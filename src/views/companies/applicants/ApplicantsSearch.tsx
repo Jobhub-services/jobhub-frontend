@@ -19,7 +19,7 @@ const ApplicantsSearch = () => {
 	const { status } = useParams();
 	const [searchParams] = useSearchParams();
 	const { pathname, search } = useLocation();
-	const { isLoading } = useAppSelector((state) => state.applications);
+	const { isLoading, showApplicants } = useAppSelector((state) => state.applications);
 
 	useEffect(() => {
 		let params: { [x: string]: string } = {};
@@ -39,7 +39,7 @@ const ApplicantsSearch = () => {
 			) : (
 				<>
 					<div style={{ width: '100%', padding: '10px 15px', height: '100%' }}>
-						<ApplicantsHeader viewType="search" onChangeTab={onChangeTab} />
+						<ApplicantsHeader viewType="search" onChangeTab={onChangeTab} count={showApplicants?.count!} />
 						<ApplicantsAll />
 					</div>
 					<Outlet />

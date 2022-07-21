@@ -12,8 +12,9 @@ export type JobInfoData = {
 	duration?: 'Permanent' | 'Temporary';
 	createdAt?: string | null;
 	avatar?: string;
-	createdBy?: {
+	company?: {
 		companyName?: string;
+		company_size?: string;
 	};
 	salary_type?: string;
 	start_salary?: string;

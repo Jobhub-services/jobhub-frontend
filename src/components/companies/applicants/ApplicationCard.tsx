@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { FlexBox, Tag, Button } from 'staak-ui';
 import { LinkedinIcon, GithubIcon } from 'staak-ui';
-import { CalendarFillIcon, CVIcon } from '@/assets/icons';
+import { CalendarFillIcon, CVIcon, LoadingIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { ApplicantCardProps } from '@/models/component/companies/applications/applications.interface';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -10,8 +10,20 @@ import { Avatar } from '@/components/companies/_common';
 import { ApplicationStatus } from '@/types/company/applications.type';
 import { useAppSelector } from '@/utils/appHooks';
 
-const Status: { [key in ApplicationStatus]?: ApplicationStatus } = { new: 'process', process: 'interview', interview: 'hired' };
+const Status: { [key in ApplicationStatus]?: ApplicationStatus } = { NEW: 'ACCEPTED', ACCEPTED: 'IN_PROGRESS', IN_PROGRESS: 'HIRED' };
 
+const SStatus = styled.div<any>`
+	background-color: ${(props) => props.color};
+	padding: 5px 10px;
+	border-radius: 7px;
+	font-size: 13px;
+	color: ${colors.BLACK_5};
+`;
+const SWarrap = styled(FlexBox)`
+	flex-wrap: wrap;
+	overflow: hidden;
+	height: 35px;
+`;
 const SP = styled.p`
 	display: -webkit-box;
 	margin: 10px 0;
@@ -48,9 +60,20 @@ const SButton = styled.div<any>`
 	font-size: 12px;
 	cursor: pointer;
 `;
-
+const SEmpty = styled.span`
+	color: ${colors.BLACK_9};
+`;
+const SJob = styled.span`
+	display: -webkit-box;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
+`;
 const ApplicationCard = (props: ApplicantCardProps) => {
-	const { applicantDetails } = useAppSelector((state) => state.applications);
+	const { applicantDetails, isStatusChange } = useAppSelector((state) => state.applications);
 	const { status } = useParams();
 	const navigate = useNavigate();
 	function viewDetails() {
@@ -64,7 +87,14 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 		<SCard>
 			<FlexBox justify="space-between" style={{ padding: '8px 10px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 				<FlexBox align="flex-start">
-					<Avatar size={50} img={props.avatar} name={props.name} role={props.role} status="ready" />
+					<Avatar
+						size={50}
+						img={props?.avatar}
+						name={`${props?.firstName} ${props?.lastName}`}
+						role={props.role?.primary_role}
+						status={props?.userStatus}
+						experience={props.role?.experience}
+					/>
 				</FlexBox>
 				<CustomizedButton onClick={viewDetails} variant="text">
 					View details
@@ -72,58 +102,72 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 			</FlexBox>
 			<div style={{ padding: '10px 10px 0 10px' }}>
 				<div>
-					<SP>{props.cover_letter}</SP>
+					<SP>{props?.motivation}</SP>
 				</div>
-				<FlexBox justify="flex-start" className="mt-10">
+				<div className="mt-10">
 					<span style={{ color: `${colors.BLACK_9}`, fontWeight: '500' }}>Skills</span>
-					<FlexBox gap={10} className="ml-10">
-						{props.skils?.map((elem, idx) => {
+					<SWarrap justify="start" gap={10} className="mt-5">
+						{props?.skills?.map((elem, idx) => {
 							return <Tag key={idx}>{elem}</Tag>;
 						})}
-					</FlexBox>
-				</FlexBox>
+						{props?.skills?.length === 0 && <SEmpty>Candidate has not yet added any skills</SEmpty>}
+					</SWarrap>
+				</div>
 				<FlexBox justify="flex-start" className="mt-15" gap={10}>
-					<SButton background={colors.BLUE_CLEAR_5} color={colors.BLUE_BASE}>
-						<LinkedinIcon width="20px" height="20px" color={colors.BLUE_BASE} />
-						<a href={props.linkedIn} target="_blank" rel="noreferrer">
-							LinkedIn
-						</a>
-					</SButton>
-					<SButton background={colors.PURPLE_1} color={colors.PURPLE_BASE}>
-						<CVIcon width="20px" height="20px" color={colors.PURPLE_BASE} />
-						<a href={props.cv} target="_blank" rel="noreferrer">
-							CV (.pdf)
-						</a>
-					</SButton>
-					<SButton background={colors.BLACK_13}>
-						<GithubIcon />
-						<a href={props.github} target="_blank" rel="noreferrer">
-							Git
-						</a>
-					</SButton>
+					{props.linkedIn && (
+						<SButton background={colors.BLUE_CLEAR_5} color={colors.BLUE_BASE}>
+							<LinkedinIcon width="20px" height="20px" color={colors.BLUE_BASE} />
+							<a href={props.linkedIn} target="_blank" rel="noreferrer">
+								LinkedIn
+							</a>
+						</SButton>
+					)}
+					{props.cv && (
+						<SButton background={colors.PURPLE_1} color={colors.PURPLE_BASE}>
+							<CVIcon width="20px" height="20px" color={colors.PURPLE_BASE} />
+							<a href={props.cv} target="_blank" rel="noreferrer">
+								CV (.pdf)
+							</a>
+						</SButton>
+					)}
+					{props.git && (
+						<SButton background={colors.BLACK_13}>
+							<GithubIcon />
+							<a href={props.git} target="_blank" rel="noreferrer">
+								Git
+							</a>
+						</SButton>
+					)}
+					{!props.git && !props.cv && !props.linkedIn && <SEmpty>Candidate has not yet added any social profile</SEmpty>}
 				</FlexBox>
 			</div>
 			<div className="mt-10" style={{ borderTop: `1px solid ${colors.BLACK_12}`, padding: '10px 10px' }}>
 				{props.job && (
 					<FlexBox justify="space-between">
 						<FlexBox justify="start" gap={10}>
-							<span style={{ color: `${colors.BLACK_9}`, fontWeight: '500' }}>Applied to</span>
-							<span style={{}}>Senior frontend developer</span>
+							<span style={{ color: `${colors.BLACK_9}`, fontWeight: '500', whiteSpace: 'nowrap' }}>Applied to</span>
+							<SJob>{props?.job?.title}</SJob>
 						</FlexBox>
 					</FlexBox>
 				)}
 				<FlexBox justify="space-between" className="mt-5">
-					<FlexBox gap={10}>
-						<CustomizedButton size="md" variant="light" onClick={(event: any) => onStatusChange(event, Status[props.applicationStatus!]!)}>
-							Approve
-						</CustomizedButton>
-						<CustomizedButton size="md" color="red" variant="text" onClick={(event: any) => onStatusChange(event, 'declined')}>
-							Decline
-						</CustomizedButton>
-					</FlexBox>
+					{props.status === 'HIRED' || props.status === 'DECLINED' ? (
+						<SStatus color={props.status === 'HIRED' ? colors.GREEN_CLEAR_4 : colors.RED_CLEAR_5}>
+							Candidate {props.status === 'HIRED' ? 'hired' : 'declined'}
+						</SStatus>
+					) : (
+						<FlexBox gap={10}>
+							<CustomizedButton size="md" variant="light" width="90px" onClick={(event: any) => onStatusChange(event, Status[props?.status!]!)}>
+								{isStatusChange ? <LoadingIcon color={colors.PURPLE_BASE} /> : props.status === 'NEW' ? 'Approve' : 'Hire'}
+							</CustomizedButton>
+							<CustomizedButton size="md" color="red" variant="text" width="85px" onClick={(event: any) => onStatusChange(event, 'DECLINED')}>
+								{isStatusChange ? <LoadingIcon color={colors.RED_BASE} /> : 'Decline'}
+							</CustomizedButton>
+						</FlexBox>
+					)}
 					<FlexBox gap={5}>
 						<CalendarFillIcon width="18px" height="18px" color={colors.BLACK_9} />
-						<SSpan>{props.applied}</SSpan>
+						<SSpan>{props?.createdAt && new Date(props?.createdAt).toDateString()}</SSpan>
 					</FlexBox>
 				</FlexBox>
 			</div>

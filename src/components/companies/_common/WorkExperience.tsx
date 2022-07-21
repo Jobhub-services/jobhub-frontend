@@ -4,6 +4,7 @@ import { colors } from '@/assets/theme';
 import { CalendarFillIcon, CompanyIcon, LocationIcon } from '@/assets/icons';
 import styled from 'styled-components';
 import { WorkExperienceProps } from '@/models/component/companies/applications/applications.interface';
+import { CJobType } from '@/constants/company/application.constants';
 
 const SSpan = styled.span<any>`
 	font-size: 13px;
@@ -36,7 +37,7 @@ const WorkExperience = ({ title, jobType, company, location, dateRange, descript
 		<div className={className} style={{ ...style }}>
 			<FlexBox justify="space-between">
 				<STitle>{title}</STitle>
-				<Tag size="12px" color={colors.GREEN_CLEAR_4}>
+				<Tag size="12px" color={CJobType[jobType ?? 'Full time']}>
 					{jobType}
 				</Tag>
 			</FlexBox>

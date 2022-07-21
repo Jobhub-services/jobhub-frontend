@@ -45,10 +45,10 @@ const JobHeader = () => {
 				<STitle>{jobDetails?.title}</STitle>
 				<FlexBox justify="space-between" gap={20}>
 					<FlexBox justify="start" gap={20}>
-						<SSpan>{jobDetails?.createdBy?.companyName ?? 'N/A'}</SSpan>
+						<SSpan>{jobDetails?.company?.companyName ?? 'N/A'}</SSpan>
 						<FlexBox gap={5}>
 							<EmpolyeesIcon width="18px" height="18px" color={colors.BLACK_9} />
-							<Span>{jobDetails}</Span>
+							<Span>{jobDetails?.company?.company_size}</Span>
 						</FlexBox>
 						<Button size="sm" variant="text" style={{ fontSize: '13px' }}>
 							View company details

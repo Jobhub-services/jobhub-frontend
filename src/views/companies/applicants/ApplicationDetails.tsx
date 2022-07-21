@@ -3,7 +3,6 @@ import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { FlexBox, IconButton, Headline, Button, TabPane } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
 import { colors } from '@/assets/theme';
-import Jerome from '@/assets/icons/jerome.jpg';
 import InterviewForm from '@/components/companies/applicants/details/interview/InterviewForm';
 import ApplicationStage from '@/components/companies/applicants/details/ApplicationStage';
 import InterviewsList from '@/components/companies/applicants/details/interview/InterviewsList';
@@ -11,11 +10,12 @@ import ApplicationContact from '@/components/companies/applicants/details/Applic
 import ApplicantProfile from '@/components/companies/applicants/details/ApplicantProfile';
 import ApplicationStatus from '@/components/companies/applicants/details/ApplicationStatus';
 import { useAppSelector } from '@/utils/appHooks';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Avatar } from '@/components/companies/_common';
 import InterviewSchedule from '@/components/companies/applicants/details/interview/InterviewSchedule';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { applicationsActions } from '@/modules/actions/company/applications.actions';
 
 const kwidth = keyframes`
 	from {
@@ -91,9 +91,15 @@ const MainContainer = styled.div<any>`
 `;
 
 const ApplicationDetails = () => {
+	const { id } = useParams();
 	const parentRef = useRef();
 	const navigate = useNavigate();
 	const { applicantDetails, isDetailLoading } = useAppSelector((state) => state.applications);
+
+	useEffect(() => {
+		if (applicantDetails._id !== id) applicationsActions.getApplicantDetails('NEW', id);
+	}, []);
+
 	const onClose = () => {
 		navigate(-1);
 	};
@@ -122,19 +128,25 @@ const ApplicationDetails = () => {
 							<AppContact>
 								<FlexBox justify="space-between">
 									<Avatar
-										img={applicantDetails.img}
+										img={applicantDetails.avatar}
 										size={70}
-										name={applicantDetails.name}
-										role={applicantDetails.role}
-										color={colors.PURPLE_BASE}
-										experience={applicantDetails.experience_duration}
+										name={`${applicantDetails?.firstName} ${applicantDetails?.lastName}`}
+										role={applicantDetails.role?.primary_role}
+										status={applicantDetails?.userStatus}
+										experience={applicantDetails.role?.experience}
 									/>
-									<span style={{ display: 'block', fontSize: '13px', color: `${colors.PURPLE_BASE}`, cursor: 'pointer' }}>View Profile</span>
+									<Link to={`/talents/detail/${applicantDetails?.userId}`}>
+										<span style={{ display: 'block', fontSize: '13px', color: `${colors.PURPLE_BASE}`, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+											View Profile
+										</span>
+									</Link>
 								</FlexBox>
 								<div style={{ background: `${colors.PURPLE_1}`, padding: '5px 10px', borderRadius: '5px', marginTop: '15px' }}>
 									<FlexBox justify="space-between" style={{ fontSize: '12px', padding: '5px 0', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 										<span>Applied jobs</span>
-										<span style={{ color: `${colors.BLACK_4}` }}>{applicantDetails.job?.applied?.toLocaleString()}</span>
+										<span style={{ color: `${colors.BLACK_4}` }}>
+											{applicantDetails?.createdAt && new Date(applicantDetails?.createdAt).toDateString()}
+										</span>
 									</FlexBox>
 									<div style={{ padding: '10px 0' }}>
 										<div>
@@ -143,14 +155,14 @@ const ApplicationDetails = () => {
 										</div>
 									</div>
 								</div>
-								{applicantDetails.applicationStatus !== 'hired' && applicantDetails.applicationStatus !== 'declined' ? (
+								{applicantDetails.status !== 'HIRED' && applicantDetails.status !== 'DECLINED' ? (
 									<ApplicationStage />
 								) : (
-									<ApplicationStatus accepted={applicantDetails.applicationStatus === 'hired'} />
+									<ApplicationStatus accepted={applicantDetails.status === 'HIRED'} />
 								)}
 								<hr style={{ borderTop: `1px solid ${colors.BLACK_13}` }} />
 
-								<ApplicationContact />
+								<ApplicationContact git={applicantDetails?.git} linkedIn={applicantDetails?.linkedIn} website={applicantDetails?.website} />
 							</AppContact>
 							<AppDetails>
 								<TabPane activeItem="applicants" paneWidth="60%">

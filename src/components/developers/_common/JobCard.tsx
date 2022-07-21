@@ -84,7 +84,15 @@ const JobCard = (props: PJobCard) => {
 		<SContainer>
 			<SBody>
 				<SHeader justify="start" align="flex-start" gap={10}>
-					<JobAvatar _id={props._id} new title={props.title} subtitle={props.createdBy?.companyName} img={props.avatar} featured={props.featured} />
+					<JobAvatar
+						_id={props._id}
+						new
+						title={props.title}
+						subtitle={props.company?.companyName}
+						img={props.avatar}
+						featured={props.featured}
+						company_size={props?.company?.company_size}
+					/>
 					<DropDown listPosition="left" onSelect={handleSelect}>
 						<DropDown.Title>
 							<IconButton width="35px" height="20px">

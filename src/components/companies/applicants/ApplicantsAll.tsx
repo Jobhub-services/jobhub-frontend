@@ -22,17 +22,19 @@ const ApplicantsAll = () => {
 					<ApplicationCard
 						key={idx}
 						_id={elem._id}
-						img={elem.img}
-						name={elem.name}
+						avatar={elem.avatar}
+						firstName={elem.firstName}
+						lastName={elem.lastName}
 						role={elem.role}
-						experience_duration={elem.experience_duration}
-						cover_letter={elem.cover_letter}
-						skils={elem.skils}
-						applied={elem.applied}
+						motivation={elem.motivation}
+						skills={elem.skills}
+						createdAt={elem.createdAt}
 						linkedIn={elem.linkedIn}
-						github={elem.github}
+						git={elem.git}
 						cv={elem.cv}
+						status={elem.status}
 						job={elem.job}
+						userStatus={elem.userStatus}
 					/>
 				);
 			})}

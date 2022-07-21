@@ -1,8 +1,13 @@
 import { FlexBox, GithubIcon } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import { EmailIcon, PhoneIcon, LinkedInSolidIcon, WorldIcon } from '@/assets/icons';
+import styled from 'styled-components';
+import { PApplicationContact } from '@/models/component/companies/applications/applications.interface';
 
-const ApplicationContact = () => {
+const Sa = styled.a`
+	color: ${colors.PURPLE_BASE};
+`;
+const ApplicationContact = (props: PApplicationContact) => {
 	return (
 		<div>
 			<h3>Contact</h3>
@@ -25,21 +30,28 @@ const ApplicationContact = () => {
 					<LinkedInSolidIcon width="20px" height="20px" color={colors.BLACK_7} />
 					<div>
 						<div style={{ color: `${colors.BLACK_7}` }}>LinkedIn</div>
-						<div style={{ color: `${colors.PURPLE_BASE}` }}>https://www.linkedin.com/in/</div>
+						<Sa href={props.linkedIn} target="_blank">
+							{props.linkedIn}
+						</Sa>
 					</div>
 				</FlexBox>
 				<FlexBox justify="start" align="start" gap={10} className="mb-15">
 					<WorldIcon width="20px" height="20px" color={colors.BLACK_7} />
 					<div>
 						<div style={{ color: `${colors.BLACK_7}` }}>Website</div>
-						<div style={{ color: `${colors.PURPLE_BASE}` }}>https://www.jerombell45.com</div>
+						<Sa href={props.website} target="_blank">
+							{props.website}
+						</Sa>
 					</div>
 				</FlexBox>
 				<FlexBox justify="start" align="start" gap={10}>
 					<GithubIcon width="20px" height="20px" color={colors.BLACK_7} />
 					<div>
 						<div style={{ color: `${colors.BLACK_7}` }}>Git</div>
-						<div style={{ color: `${colors.PURPLE_BASE}` }}>https://gitlab.com/jerombell45</div>
+						<Sa href={props.git} target="_blank">
+							{props.git}
+						</Sa>
+						{!props.git && <div>N/A</div>}
 					</div>
 				</FlexBox>
 			</div>

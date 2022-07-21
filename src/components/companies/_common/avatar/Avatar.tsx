@@ -34,10 +34,16 @@ const SImg = styled.img`
 	object-fit: cover;
 `;
 const SSpan = styled.span`
-	display: block;
 	color: ${colors.BLACK_7};
 	margin-top: 2px;
 	font-size: 13px;
+	display: -webkit-box;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
 `;
 const Avatar = ({ img, name, role, status, experience, size, color }: AvatarProps) => {
 	return (

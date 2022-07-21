@@ -1,7 +1,7 @@
 import { InterviewInfo } from '@/types/interview.type';
-import { TValueLabel } from '@/types/common.type';
+import { StatusType, TValueLabel } from '@/types/common.type';
 
-export type ApplicationStatus = 'declined' | 'hired' | 'process' | 'new' | 'interview';
+export type ApplicationStatus = 'DECLINED' | 'HIRED' | 'IN_PROGRESS' | 'NEW' | 'ACCEPTED';
 export type InterviewStatus = 'On Progress' | 'Finished' | 'Pending';
 
 export type QuestionType = {
@@ -11,36 +11,50 @@ export type QuestionType = {
 
 export type WorkExperienceType = {
 	title?: string;
-	job_type?: 'part_time' | 'full_time';
-	period?: [Date | null, Date | null];
+	job_type?: 'Part time' | 'Full time';
 	company_name?: string;
-	work_location?: string;
+	location?: {
+		code?: string;
+		name?: string;
+	};
+	startDate?: string;
+	endDate?: string;
+	description?: string;
 };
 
 export type ApplicantsShortInfo = {
 	_id: string;
-	applicationStatus?: ApplicationStatus;
 	avatar?: string;
-	name?: string;
-	role?: string;
-	experience_duration?: string;
-	cover_letter?: string;
-	skils?: string[];
+	firstName?: string;
+	lastName?: string;
+
+	role?: {
+		primary_role?: string;
+		experience?: string;
+	};
+
+	skills?: string[];
 	linkedIn?: string;
-	github?: string;
+	git?: string;
 	cv?: string;
-	applied?: string;
+
 	job?: {
+		job_id?: string;
 		title?: string;
 		category?: string;
-		applied?: string;
+		createdAt?: string;
 	};
+	userStatus?: StatusType;
+	status?: ApplicationStatus;
+	motivation?: string;
+	createdAt?: string;
+	userId?: string;
 };
 export type ApplicantAllInfo = ApplicantsShortInfo & {
 	email?: string;
 	phone?: string;
 	website?: string;
-	start_working?: string;
+	start_date?: string;
 	notice_period?: string;
 	questions?: QuestionType[];
 	work_experience?: WorkExperienceType[];
@@ -48,10 +62,10 @@ export type ApplicantAllInfo = ApplicantsShortInfo & {
 };
 
 export type ApplicantsByJob = {
-	_id: string;
+	job_id: string;
 	title?: string;
 	category?: string;
-	applicants?: ApplicantsShortInfo[];
+	applications?: ApplicantsShortInfo[];
 };
 
 export type FilterType = {
