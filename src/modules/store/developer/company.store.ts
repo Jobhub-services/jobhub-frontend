@@ -1,8 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { ICompanyState } from '@/models/store/developer/companies.interface';
 import Google from '@/assets/icons/google.jpg';
-import Facebook from '@/assets/icons/facebook.png';
-import Amazon from '@/assets/icons/a.png';
 
 const initialState: ICompanyState = {
 	isLoading: false,
@@ -11,38 +9,8 @@ const initialState: ICompanyState = {
 	companies: {
 		count: 0,
 		size: 0,
-		content: [
-			{
-				_id: '1',
-				avatar: Amazon,
-				description:
-					'At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent.',
-				companyName: 'Amazon Inc.',
-				generalinfo: { industry: 'Health, wellness & fitness', founded: '2019-01-08' },
-				headquarter: { country: 'USA', city: 'California', street: '1600 old street of cpmanaies' },
-				number_job: 1,
-			},
-			{
-				_id: '2',
-				avatar: Amazon,
-				description:
-					'At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent.',
-				companyName: 'Amazon Inc.',
-				generalinfo: { industry: 'Health, wellness & fitness', founded: '2019-01-08' },
-				headquarter: { country: 'USA', city: 'California', street: '1600 old street of cpmanaies' },
-				number_job: 20,
-			},
-			{
-				_id: '3',
-				avatar: Amazon,
-				description:
-					'At air up it is our mission to support the well-being of consumers and enable a more sustainable lifestyle by offering a globally unique, refillable drinking system. We have harnessed the physiological science behind taste perception to add flavor to water using just scent.',
-				companyName: 'Amazon Inc.',
-				generalinfo: { industry: 'Health, wellness & fitness', founded: '2019-01-08' },
-				headquarter: { country: 'USA', city: 'California', street: '1600 old street of cpmanaies' },
-				number_job: 5,
-			},
-		],
+		pages: 0,
+		content: [],
 	},
 	companyDetail: {
 		_id: '1',
@@ -80,23 +48,23 @@ const initialState: ICompanyState = {
 			},
 			description: `DataArt is a global software engineering firm that takes a uniquely human approach to solving problems. 
 
-DataArt has earned the trust of some of the world’s leading brands and most discerning clients, including Nasdaq, Travelport, Ocado, Centrica/Hive, Paddy Power Betfair, IWG, Univision, Meetup and Apple Leisure Group among others. 
+				DataArt has earned the trust of some of the world’s leading brands and most discerning clients, including Nasdaq, Travelport, Ocado, Centrica/Hive, Paddy Power Betfair, IWG, Univision, Meetup and Apple Leisure Group among others. 
 
 
-DATAART IN NUMBERS
+				DATAART IN NUMBERS
 
-4000+ professionals.
-23 years in operation.
-22 offices in the USA, Europe, and Latin America.
-11 countries.
-<10 % attrition rate.
-31% women.
-Glassdoor review score — 4.8.
-Team satisfaction survey 2020
+				4000+ professionals.
+				23 years in operation.
+				22 offices in the USA, Europe, and Latin America.
+				11 countries.
+				<10 % attrition rate.
+				31% women.
+				Glassdoor review score — 4.8.
+				Team satisfaction survey 2020
 
-95 % of our team members are ready to recommend us as a good employer to their friends.
-92 % of our team members are ready to spend 2+ more years of their career with us.
-75 % are satisfied with their total deal with DataArt.`,
+				95 % of our team members are ready to recommend us as a good employer to their friends.
+				92 % of our team members are ready to spend 2+ more years of their career with us.
+				75 % are satisfied with their total deal with DataArt.`,
 		},
 		jobs: {
 			content: [
@@ -108,7 +76,7 @@ Team satisfaction survey 2020
 					duration: 'Permanent',
 					avatar: Google,
 					createdAt: '2022-06-19T18:20:00',
-					createdBy: {
+					company: {
 						companyName: 'Google',
 					},
 					work_location: { country: 'Antigua and Barbuda', city: 'Antigua and' },
@@ -125,113 +93,6 @@ Team satisfaction survey 2020
 					salary_type: 'Annually',
 					featured: true,
 					saved: true,
-				},
-				{
-					_id: '62d2b3053671f8e31edbbc0b',
-					title: 'Remote Platform Database Administrator',
-					category: 'Software Engineering',
-					job_type: 'Full time',
-					duration: 'Permanent',
-					avatar: Facebook,
-					createdAt: '2022-06-12T20:20:00',
-					createdBy: {
-						companyName: 'Google',
-					},
-					work_location: { country: 'Antigua and Barbuda', city: 'Antigua and' },
-					hire_location: [
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'France', city: 'Paris' },
-					],
-					start_salary: '130000',
-					end_salary: '200000',
-					currency: { code: 'USD' },
-					salary_type: 'Annually',
-					featured: false,
-					saved: true,
-				},
-				{
-					_id: '62d2b3053671f8e31edbbc0b',
-					title: 'Remote Platform Database Administrator',
-					category: 'Software Engineering',
-					job_type: 'Full time',
-					duration: 'Permanent',
-					avatar: Amazon,
-					createdAt: '2022-06-12T20:20:00',
-					createdBy: {
-						companyName: 'Google',
-					},
-					work_location: { country: 'Antigua and Barbuda', city: 'Antigua and' },
-					hire_location: [
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'France', city: 'Paris' },
-					],
-					start_salary: '130000',
-					end_salary: '200000',
-					currency: { code: 'USD' },
-					salary_type: 'Annually',
-					featured: false,
-					saved: false,
-				},
-				{
-					_id: '62d2b3053671f8e31edbbc0b',
-					title: 'Remote Platform Database Administrator',
-					category: 'Software Engineering',
-					job_type: 'Full time',
-					duration: 'Permanent',
-					avatar: Amazon,
-					createdAt: '2022-06-12T20:20:00',
-					createdBy: {
-						companyName: 'Google',
-					},
-					work_location: { country: 'Antigua and Barbuda', city: 'Antigua and' },
-					hire_location: [
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'France', city: 'Paris' },
-					],
-					start_salary: '130000',
-					end_salary: '200000',
-					currency: { code: 'USD' },
-					salary_type: 'Annually',
-					hire_remotly: true,
-					featured: true,
-					saved: false,
-				},
-				{
-					_id: '62d2b3053671f8e31edbbc0b',
-					title: 'Remote Platform Database Administrator',
-					category: 'Software Engineering',
-					job_type: 'Full time',
-					duration: 'Permanent',
-					avatar: Amazon,
-					createdAt: '2022-06-12T20:20:00',
-					createdBy: {
-						companyName: 'Google',
-					},
-					work_location: { country: 'Antigua and Barbuda', city: 'Antigua and' },
-					hire_location: [
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'Germany', city: 'Berlin' },
-						{ country: 'France', city: 'Paris' },
-					],
-					start_salary: '130000',
-					end_salary: '200000',
-					currency: { code: 'USD' },
-					salary_type: 'Annually',
-					hire_remotly: true,
-					featured: true,
-					saved: false,
-					applied: true,
 				},
 			],
 			size: 3,
@@ -256,6 +117,9 @@ const reducerSlice = createSlice({
 		},
 		setComapnyDetail: (state, action) => {
 			state.companyDetail = action.payload;
+		},
+		setFilters: (state, action) => {
+			state.filters = action.payload;
 		},
 	},
 });

@@ -30,11 +30,11 @@ const Location = (props: JobDetails) => {
 				<div className="mt-20">
 					<SSubTitle>Hiring Location</SSubTitle>
 					<Wrapper gap={3}>
-						{props.hire_remotly && <SSpan>Remote</SSpan>}
+						{props.hire_remotly && <SSpan>Everywhere</SSpan>}
 						{props.hire_location?.map((elem, idx) => {
 							return (
 								<SSpan key={idx}>
-									{elem.country}
+									{elem.country?.name}
 									{elem.city ? `, ${elem.city}` : ''}
 								</SSpan>
 							);

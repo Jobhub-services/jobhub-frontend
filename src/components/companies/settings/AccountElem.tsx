@@ -15,7 +15,7 @@ const AccountElem = () => {
 	useEffect(() => {
 		const tmp = {
 			username: userInfo?.username,
-			companyName: userInfo?.companyInfo?.companyName,
+			companyName: userInfo?.companyName,
 			email: userInfo?.email,
 		};
 		setLocalData(tmp);

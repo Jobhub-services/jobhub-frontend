@@ -41,23 +41,23 @@ export type ShowJobInfo = {
 		code: string;
 		name: string;
 	};
-	createdAt?: Date | null;
+	createdAt?: string;
 	work_location?: { country: string; city: string };
 	work_remotly?: boolean;
-	applicants?: string[]; // list of image ulr path
+	applications?: string[]; // list of image ulr path
 	salary_type?: string;
 };
 
 export type JobDetails = ShowJobInfo & {
 	responsabilities?: string;
 	company_division?: string;
-	duration_range?: [Date | null, Date | null];
-	hire_location?: { country: string; city: string }[];
+	duration_range?: [string, string];
+	hire_location?: { country: { name?: string }; city: string }[];
 	hire_remotly?: boolean;
 	visa_sponsorship?: boolean;
 	education?: string[];
 	certification?: string[];
-	skills?: { value: string; label: string }[];
+	skills?: string[];
 	requirements?: string;
 	benefits?: string;
 	questions?: string[];

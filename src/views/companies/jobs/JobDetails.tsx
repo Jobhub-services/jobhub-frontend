@@ -14,10 +14,7 @@ import { IconProps } from '@/models/component';
 import Location from '@/components/companies/jobs/showjob/details/utils/Location';
 import Role from '@/components/companies/jobs/showjob/details/utils/Role';
 import Avatar from '@/components/companies/jobs/showjob/details/AvatarList';
-import Women from '@/assets/icons/women.jpg';
-import Man from '@/assets/icons/man.jpg';
-import Jerome from '@/assets/icons/jerome.jpg';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '@/utils/appHooks';
 import { dateWithMonthName } from '@/utils/helpers';
 import { StatusTitle } from '@/constants/company/job.contants';
@@ -137,10 +134,14 @@ const JobDetails = () => {
 								<div>
 									<FlexBox justify="space-between">
 										<STitle>Applicants</STitle>
-										{jobDetails.applicants && jobDetails.applicants!.length > 0 && <SMButton>See All</SMButton>}
+										{jobDetails.applications && jobDetails.applications!.length > 0 && (
+											<Link to={`/applicants/search/NEW/?jobId=${jobDetails._id}`}>
+												<SMButton>See All</SMButton>
+											</Link>
+										)}
 									</FlexBox>
-									{jobDetails.applicants && jobDetails.applicants!.length > 0 ? (
-										<Avatar totalAvatar={50} img={[`${Women}`, `${Man}`, `${Jerome}`, `${Women}`]} />
+									{jobDetails?.applications && jobDetails?.applications!.length > 0 ? (
+										<Avatar totalAvatar={jobDetails.applications?.length ?? 0} img={jobDetails?.applications} />
 									) : (
 										<RedSpan>No Applicants Yet</RedSpan>
 									)}
@@ -160,6 +161,8 @@ const JobDetails = () => {
 									work_location={jobDetails.work_location}
 									hire_location={jobDetails.hire_location}
 									visa_sponsorship={jobDetails.visa_sponsorship}
+									work_remotly={jobDetails.work_remotly}
+									hire_remotly={jobDetails.hire_remotly}
 								/>
 							</LeftContainer>
 							<RightContainer className="staak_scrollbar">

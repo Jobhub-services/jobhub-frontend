@@ -17,7 +17,7 @@ const Container = styled.div`
 const JobApplication = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const { jobDetails, jobApplication, isApplicationSubmited } = useAppSelector((state) => state.developerJobs);
-	const { developerInfo } = useAppSelector((state) => state.user.userInfo);
+	const { userInfo } = useAppSelector((state) => state.user);
 	const handleInput = (event: any, value?: string, name?: string) => {
 		let tmp = { ...jobApplication };
 		tmp[name as 'motivation' | 'notice_period'] = value;
@@ -49,7 +49,7 @@ const JobApplication = () => {
 			{isApplicationSubmited && <LoadingScreen />}
 			<>
 				<STitle>
-					{developerInfo?.firstName} {developerInfo?.lastName}
+					{userInfo?.firstName} {userInfo?.lastName}
 				</STitle>
 				<TextAreaField height="130px" name="motivation" onDataChange={handleInput} value={jobApplication?.motivation}>
 					Let us know why you are a good fit.

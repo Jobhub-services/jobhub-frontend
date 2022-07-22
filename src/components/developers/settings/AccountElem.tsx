@@ -12,11 +12,12 @@ const Container = styled.div`
 const AccountElem = () => {
 	const { userInfo } = useAppSelector((state) => state.user);
 	const [localData, setLocalData] = useState<{ username?: string; lastName?: string; email?: string; firstName?: string }>({});
+
 	useEffect(() => {
 		const tmp = {
 			username: userInfo?.username,
-			lastName: userInfo?.developerInfo?.lastName,
-			firstName: userInfo?.developerInfo?.firstName,
+			lastName: userInfo?.lastName,
+			firstName: userInfo?.firstName,
 			email: userInfo?.email,
 		};
 		setLocalData(tmp);

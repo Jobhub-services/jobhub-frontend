@@ -36,7 +36,7 @@ const JobsList = ({ size, jobs }: { size: number; jobs: PJobCard[] }) => {
 							duration={job.duration}
 							avatar={job.avatar}
 							createdAt={job.createdAt}
-							createdBy={job.createdBy}
+							company={job.company}
 							work_location={job.work_location}
 							hire_location={job.hire_location}
 							start_salary={job.start_salary}

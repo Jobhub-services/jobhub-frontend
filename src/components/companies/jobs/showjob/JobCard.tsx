@@ -10,7 +10,7 @@ import { StatusTitle } from '@/constants/company/job.contants';
 import AvatarList from './details/AvatarList';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions } from '@/modules/actions/company/job.actions';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const SContainer = styled.div`
 	background: white;
@@ -70,9 +70,6 @@ const JobCard = (props: JobCardProps) => {
 		navigate(`details/${props._id}`);
 	};
 	const onClick = () => {};
-
-	console.log(props);
-
 	return (
 		<SContainer>
 			<SBody>
@@ -115,7 +112,8 @@ const JobCard = (props: JobCardProps) => {
 								<FlexBox gap={10} justify="start">
 									{props.work_remotly && <SSpan>Remote</SSpan>}
 									<SSpan>
-										{props.work_location?.country ?? 'N/A'}, {props.work_location?.city ?? 'N/A'}
+										{props.work_location?.country ?? 'N/A'}
+										{`, ${props.work_location?.city ?? 'N/A'}`}
 									</SSpan>
 								</FlexBox>
 							</FlexBox>
@@ -133,8 +131,10 @@ const JobCard = (props: JobCardProps) => {
 						Details
 					</Button>
 				</div>
-				{props.applicants!.length > 0 ? (
-					<AvatarList size={35} totalAvatar={50} img={props.applicants} onClick={onClick} />
+				{props.applications!.length > 0 ? (
+					<Link to={`/applicants/search/NEW/?jobId=${props._id}`}>
+						<AvatarList size={35} totalAvatar={props.applications?.length ?? 0} img={props.applications} onClick={onClick} />
+					</Link>
 				) : (
 					<RedSpan>No Applicants Yet</RedSpan>
 				)}

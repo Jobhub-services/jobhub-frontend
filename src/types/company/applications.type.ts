@@ -5,8 +5,8 @@ export type ApplicationStatus = 'DECLINED' | 'HIRED' | 'IN_PROGRESS' | 'NEW' | '
 export type InterviewStatus = 'On Progress' | 'Finished' | 'Pending';
 
 export type QuestionType = {
-	question?: string;
-	answer?: string;
+	question?: { question?: string };
+	response?: string;
 };
 
 export type WorkExperienceType = {
@@ -56,7 +56,7 @@ export type ApplicantAllInfo = ApplicantsShortInfo & {
 	website?: string;
 	start_date?: string;
 	notice_period?: string;
-	questions?: QuestionType[];
+	responses?: QuestionType[];
 	work_experience?: WorkExperienceType[];
 	interviews?: InterviewInfo[];
 };

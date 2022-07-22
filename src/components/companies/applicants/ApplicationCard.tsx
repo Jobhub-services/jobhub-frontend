@@ -76,15 +76,16 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 	const { applicantDetails, isStatusChange } = useAppSelector((state) => state.applications);
 	const { status } = useParams();
 	const navigate = useNavigate();
-	function viewDetails() {
+	const viewDetails = () => {
 		if (applicantDetails._id !== props._id) applicationsActions.getApplicantDetails(status as ApplicationStatus, props._id);
-		navigate(`detail/${props._id}`);
-	}
-	function onStatusChange(event: any, status: ApplicationStatus) {
+		const tmp = status ?? 'NEW';
+		navigate(`/applicants/${tmp}/detail/${props._id}`);
+	};
+	const onStatusChange = (event: any, status: ApplicationStatus) => {
 		applicationsActions.setApplicationStatus(status, props._id);
-	}
+	};
 	return (
-		<SCard>
+		<SCard className={props.className}>
 			<FlexBox justify="space-between" style={{ padding: '8px 10px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 				<FlexBox align="flex-start">
 					<Avatar

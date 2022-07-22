@@ -112,7 +112,7 @@ const TalentContact = (props: ContactProps) => {
 				</SIcon>
 				<div>
 					<SSpan>Twiter</SSpan>
-					<SLink target="_blank" href="https://twiter.com/jerombell45">
+					<SLink target="_blank" href={props.twitter}>
 						{props.twitter ?? 'N/A'}
 					</SLink>
 				</div>

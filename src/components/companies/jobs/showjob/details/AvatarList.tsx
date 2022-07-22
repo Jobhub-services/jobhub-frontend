@@ -1,7 +1,11 @@
 import { colors } from '@/assets/theme';
 import React from 'react';
-import { FlexBox } from 'staak-ui';
+import { FlexBox, UserIcon } from 'staak-ui';
 import styled from 'styled-components';
+
+const SFlexBox = styled(FlexBox)`
+	cursor: pointer;
+`;
 const SToolTip = styled.span`
 	visibility: hidden;
 	background-color: ${colors.BLACK_3};
@@ -59,11 +63,13 @@ const AvatarList = ({ img, totalAvatar, size, onClick }: any) => {
 		if (onClick) onClick();
 	}
 	return (
-		<FlexBox justify="start">
+		<SFlexBox justify="start">
 			{img?.map((elem: string, index: number) => {
+				let tmp = <UserIcon />;
+				if (elem) tmp = <SImg src={elem} alt={'.'} width={size} height={size} />;
 				return (
 					<SAvatar size={size + 7} key={index}>
-						<SImg src={elem} alt={elem} width={size} height={size} />
+						{tmp}
 					</SAvatar>
 				);
 			})}
@@ -73,7 +79,7 @@ const AvatarList = ({ img, totalAvatar, size, onClick }: any) => {
 					<SToolTip onClick={handleClick}>Total number of apllicants is {totalAvatar}</SToolTip>
 				</SAvatar>
 			)}
-		</FlexBox>
+		</SFlexBox>
 	);
 };
 AvatarList.defaultProps = {

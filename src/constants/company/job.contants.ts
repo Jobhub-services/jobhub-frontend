@@ -11,7 +11,7 @@ export const JobInstance: JobInfo = {
 	title: '',
 	description: '',
 	responsabilities: '',
-	company_division: null,
+	company_division: { id: '', name: '' },
 	category: { id: '', name: '' },
 	job_type: '',
 	duration: '',

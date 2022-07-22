@@ -68,15 +68,15 @@ const ApplicantProfile = () => {
 			</div>
 			<div>
 				<SH3>Questions</SH3>
-				{applicantDetails?.questions?.map((elem, idx) => {
+				{applicantDetails?.responses?.map((elem, idx) => {
 					return (
 						<div key={idx}>
-							<div style={{ margin: '5px 0' }}>{elem.question}</div>
-							<SDiv>{elem.answer}</SDiv>
+							<div style={{ margin: '5px 0' }}>{elem.question?.question}</div>
+							<SDiv>{elem.response}</SDiv>
 						</div>
 					);
 				})}
-				{applicantDetails?.questions?.length === 0 && 'N/A'}
+				{applicantDetails?.responses?.length === 0 && 'N/A'}
 			</div>
 			<div>
 				<SH3>Availability</SH3>

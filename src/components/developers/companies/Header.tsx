@@ -4,11 +4,11 @@ import { useAppSelector } from '@/utils/appHooks';
 import { Headline, FlexBox, Button } from 'staak-ui';
 
 const Header = () => {
-	const { filterClosed } = useAppSelector((state) => state.companies);
+	const { filterClosed, companies } = useAppSelector((state) => state.companies);
 	return (
 		<FlexBox justify="space-between">
 			<Headline variant="h2" size="sm">
-				ِCompanies
+				{companies?.count ?? 0} Companies
 			</Headline>
 			<FlexBox gap={15}>
 				<Button

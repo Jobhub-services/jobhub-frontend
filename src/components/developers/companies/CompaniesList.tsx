@@ -14,6 +14,9 @@ const SWrapper = styled.div<any>`
 
 const CompaniesList = () => {
 	const { companies } = useAppSelector((state) => state.companies);
+
+	console.log(companies);
+
 	return (
 		<SWrapper>
 			{companies?.content?.map((elem, idx) => {

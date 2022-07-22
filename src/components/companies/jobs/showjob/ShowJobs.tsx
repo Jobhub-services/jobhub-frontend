@@ -35,7 +35,7 @@ const ShowJobs = () => {
 						currency={elem.currency}
 						work_location={elem.work_location}
 						work_remotly={elem.work_remotly}
-						applicants={elem.applicants}
+						applications={elem.applications}
 					/>
 				);
 			})}

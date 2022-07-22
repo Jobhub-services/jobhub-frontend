@@ -89,7 +89,7 @@ const Preferences = (props: TalentAllInfo) => {
 					{props.desired_location?.map((elem, idx) => {
 						return (
 							<Tag size="12px" key={idx}>
-								{elem.name}
+								{elem}
 							</Tag>
 						);
 					})}

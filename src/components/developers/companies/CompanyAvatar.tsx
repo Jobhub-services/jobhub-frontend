@@ -47,10 +47,10 @@ const CompanyAvatar = (props: PCompanyAvatar) => {
 	return (
 		<SContainer justify="space-between" width="100%" onClick={handleClick}>
 			<FlexBox gap={10} justify="start">
-				<SImg src={props.avatar} alt="google" />
+				<SImg src={props.avatar} alt="img" />
 				<div style={{ width: '100%' }}>
 					<SH3>{props.name}</SH3>
-					<SSpan>{props.industry}.</SSpan>
+					<SSpan>{props.industry ?? 'N/A'}.</SSpan>
 				</div>
 			</FlexBox>
 			<ArrowDownIcon color={colors.PURPLE_BASE} style={{ width: '15px', height: '15px', transform: 'rotate(-90deg)', fontWeight: 'bold' }} />

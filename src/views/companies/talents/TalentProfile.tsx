@@ -94,7 +94,7 @@ const TalentProfile = () => {
 	const backUp = (e: any) => {
 		if (e.target === parentRef.current) navigate(-1);
 	};
-
+	console.log(talentDetails);
 	return (
 		<MainContainer showed={true} ref={parentRef} onClick={backUp}>
 			<DetailContainer showed={true}>

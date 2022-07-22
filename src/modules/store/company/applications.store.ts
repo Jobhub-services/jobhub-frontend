@@ -35,7 +35,7 @@ const initialState: IApplicationsState = {
 		website: '',
 		start_date: '',
 		notice_period: '',
-		questions: [],
+		responses: [],
 		work_experience: [],
 		interviews: [
 			{

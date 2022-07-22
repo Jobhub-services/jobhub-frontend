@@ -53,7 +53,7 @@ export const jobActions = {
 			tmp.work_location = payload.work_location?.map((elem) => {
 				return { country: elem.country?.id, city: elem.city };
 			});
-			tmp.hire_location = payload.hire_location?.filter((elem) => {
+			tmp.hire_location = payload.hire_location?.map((elem) => {
 				if (elem.country?.id !== '' || elem.city !== '') {
 					return { country: elem.country?.id, city: elem.city };
 				}
@@ -64,7 +64,6 @@ export const jobActions = {
 					? [(payload.duration_range![0]?.toString(), payload.duration_range![1]?.toString())]
 					: [];
 
-			console.log(tmp);
 			const response = await httpClient.post(`${JOBS_SERVICE}/company`, tmp);
 			const responseData = response.data;
 			if (responseData) {

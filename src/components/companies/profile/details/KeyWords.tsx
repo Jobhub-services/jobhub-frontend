@@ -36,7 +36,7 @@ const KeyWords = () => {
 			{<KeywordsElem keywords={keywords} />}
 			{show && (
 				<div className="mt-20">
-					<TagInput name="education" title="Education" values={keywords} onChange={handleInputTag} />
+					<TagInput name="keywords" placeholder="Write your keyword and press enter" values={keywords} onChange={handleInputTag} />
 					<FlexBox className="mt-15" justify="end" gap={10}>
 						<Button
 							size="md"

@@ -35,6 +35,7 @@ const SJob = styled.span`
 `;
 const SBody = styled.div`
 	//padding: 15px 15px;
+	height: 160px;
 `;
 const SFooter = styled(FlexBox)`
 	padding: 10px 15px !important;
@@ -58,8 +59,9 @@ const CompanyCard = (props: PCompanyCard) => {
 						<SSpan>
 							{street ? `${street},` : ''} {city ? `${city},` : ''} {country ? `${country}.` : ''}
 						</SSpan>
+						{!street && !city && !country && 'N/A'}
 					</FlexBox>
-					<SPre>{props.description}</SPre>
+					<SPre>{props.description ?? 'N/A'}</SPre>
 				</div>
 			</SBody>
 			<SFooter justify="space-between">
@@ -72,7 +74,7 @@ const CompanyCard = (props: PCompanyCard) => {
 					)}
 				</FlexBox>
 				<SJob onClick={handleDetail}>
-					{props.number_job} open jobs <ArrowDownIcon color={colors.PURPLE_BASE} style={{ transform: 'rotate(-90deg)', fontWeight: 'bold' }} />
+					{props.number_job ?? 0} open jobs <ArrowDownIcon color={colors.PURPLE_BASE} style={{ transform: 'rotate(-90deg)', fontWeight: 'bold' }} />
 				</SJob>
 			</SFooter>
 		</SContainer>

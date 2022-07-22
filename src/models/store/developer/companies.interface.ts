@@ -10,6 +10,7 @@ export interface ICompanyState {
 		content?: TCompanyData[];
 		size?: number;
 		count?: number;
+		pages?: number;
 	};
 	companyDetail: {
 		_id: string;
@@ -22,5 +23,8 @@ export interface ICompanyState {
 	};
 	filters?: {
 		headquarters?: TValueLabel[];
+		company_size?: TValueLabel[];
+		industry?: string[];
+		keywords?: string[];
 	};
 }

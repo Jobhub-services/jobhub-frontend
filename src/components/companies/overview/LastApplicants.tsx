@@ -32,7 +32,7 @@ const SIcon = styled.span`
 const LastApplicants = () => {
 	const { showApplicants } = useAppSelector((state) => state.applications);
 	useEffect(() => {
-		if (!showApplicants?.content || showApplicants?.content?.length === 0) applicationsActions.getShowApplicants({}, 'new');
+		if (!showApplicants?.content || showApplicants?.content?.length === 0) applicationsActions.getShowApplicants({}, 'NEW');
 	});
 	return (
 		<SContainer className="mt-20">
@@ -43,19 +43,22 @@ const LastApplicants = () => {
 						return (
 							<>
 								<ApplicationCard
+									className="mt-15"
 									key={idx}
 									_id={elem._id}
 									avatar={elem.avatar}
-									name={elem.name}
+									firstName={elem.firstName}
+									lastName={elem.lastName}
 									role={elem.role}
-									experience_duration={elem.experience_duration}
-									cover_letter={elem.cover_letter}
-									skils={elem.skils}
-									applied={elem.applied}
+									motivation={elem.motivation}
+									skills={elem.skills}
+									createdAt={elem.createdAt}
 									linkedIn={elem.linkedIn}
-									github={elem.github}
+									git={elem.git}
 									cv={elem.cv}
+									status={elem.status}
 									job={elem.job}
+									userStatus={elem.userStatus}
 								/>
 							</>
 						);

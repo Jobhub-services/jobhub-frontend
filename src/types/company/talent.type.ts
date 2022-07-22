@@ -69,11 +69,7 @@ export type TalentAllInfo = TalentShortInfo & {
 	job_type?: string;
 	other_job_type?: string[];
 	remote_work?: string;
-	desired_location?: {
-		_id?: string;
-		code?: string;
-		name?: string;
-	}[];
+	desired_location?: string[];
 	wants?: string;
 	work_experience?: WorkExperience[];
 	educations?: Education[];
