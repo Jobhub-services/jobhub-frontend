@@ -1,3 +1,4 @@
+import { TValueLabel } from '@/types';
 import { ShowJobInfo, JobDetails } from '@/types/company/jobs.type';
 import { JobOrderType } from '@/types/company/jobs.type';
 
@@ -42,11 +43,14 @@ export interface IJobState {
 		size?: number;
 	};
 	jobDetails: JobDetails;
+
 	filters: {
-		job_type?: {
-			full_time: false;
-		};
+		job_type?: { full_time?: boolean; part_time?: boolean; permanent?: boolean; temporary?: boolean };
+		createdAt?: [Date | null, Date | null];
+		visa_sponsorship?: boolean;
+		category?: TValueLabel[];
 	};
+
 	jobsOrderedBy?: JobOrderType;
 	errors: {
 		job?: {

@@ -6,7 +6,6 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import { useAppSelector } from '@/utils/appHooks';
 import { colors } from '@/assets/theme';
-import Amazon from '@/assets/icons/cmp.jpg';
 import { companiesActions } from '@/modules/actions/developer/companies.actions';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 
@@ -104,28 +103,28 @@ const CompanyDetail = () => {
 					<LoadingScreen />
 				) : (
 					<SubContainer>
-						<Header avatar={Amazon} _id={companyDetail?.overview._id} />
+						<Header avatar={companyDetail?.avatar} _id={companyDetail?._id} />
 						<MainBody>
 							<TabPane activeItem={state?.activeTab ?? 'overview'} paneWidth="30%" paneJustify="center">
 								<TabPane.Pane style={{ padding: '0' }} name="overview" title={overviewTitle}>
 									<SBody>
 										<LeftContainer>
 											<GeneralInfo
-												_id={companyDetail?.overview._id}
-												social_profile={companyDetail?.overview.social_profile}
-												headquarter={companyDetail?.overview.headquarter}
-												generalinfo={companyDetail?.overview.generalinfo}
+												_id={companyDetail?._id}
+												social_profile={companyDetail?.social_profile}
+												headquarter={companyDetail?.headquarter}
+												generalinfo={companyDetail?.generalinfo}
 											/>
 										</LeftContainer>
 										<RightContainer>
-											<About _id="1" description={companyDetail?.overview?.description} />
+											<About _id="1" description={companyDetail?.description} />
 											<HrDivider top={10} side={0} />
-											<Keywords _id={companyDetail?.overview._id} keywords={companyDetail?.overview.keywords} />
+											<Keywords _id={companyDetail?._id} keywords={companyDetail?.keywords} />
 										</RightContainer>
 									</SBody>
 								</TabPane.Pane>
 								<TabPane.Pane style={{ background: '#f5f8fa' }} name="jobs" title={jobTitle}>
-									<JobsList size={companyDetail?.jobs.size!} jobs={companyDetail?.jobs.content!} />
+									<JobsList size={companyDetail?.jobs?.length ?? 0} jobs={companyDetail?.jobs ?? []} />
 								</TabPane.Pane>
 							</TabPane>
 						</MainBody>

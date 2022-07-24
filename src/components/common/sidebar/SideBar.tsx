@@ -21,7 +21,11 @@ const SideBar = (props: CompaniesOverview.SideBarProps) => {
 	return (
 		<SyledContainer expanded={appExpanded}>
 			<FlexBox flexDirection="column" align="flex-start" style={{ marginTop: '10px' }}>
-				{userType === 'company' ? <CompanySide /> : userType === 'developer' && <DeveloperSide />}
+				{userType === 'company' ? (
+					<CompanySide appExpanded={appExpanded!} />
+				) : (
+					userType === 'developer' && <DeveloperSide appExpanded={appExpanded!} />
+				)}
 			</FlexBox>
 		</SyledContainer>
 	);

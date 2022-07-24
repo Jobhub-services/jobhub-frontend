@@ -17,7 +17,6 @@ const ApplicationsList = () => {
 	const { applicationInfo } = useAppSelector((state) => state.talentApplications);
 	if (applicationInfo?.content?.length === 0)
 		return <DataEmpty title="No application found" description="You have not yet submitted any application" />;
-
 	return (
 		<SWrapper>
 			{applicationInfo?.content?.map((elem, idx) => {
@@ -25,7 +24,6 @@ const ApplicationsList = () => {
 					<ApplicationCard
 						key={idx}
 						_id={elem._id}
-						avatar={Google}
 						jobId={elem.jobId}
 						createdAt={elem.createdAt}
 						company={elem.company}

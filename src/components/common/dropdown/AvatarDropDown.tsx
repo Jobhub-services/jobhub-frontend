@@ -37,7 +37,7 @@ const AvatarDropDown = (props: AvatarDropDownProps) => {
 			<DropDown.Title>
 				<FlexBox gap={10}>
 					{props.avatar ? (
-						<StyledIcon width={40} src={props.avatar} />
+						<StyledIcon width={40} height={40} src={props.avatar} />
 					) : (
 						<SIcon>
 							<UserIcon width="40px" height="30px" />

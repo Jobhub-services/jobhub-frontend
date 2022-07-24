@@ -7,6 +7,7 @@ import { metadataActions } from '@/modules/actions/metadata.actions';
 import React from 'react';
 import { useAppSelector } from '@/utils/appHooks';
 import { JobStringIndex } from '@/types/company/jobs.type';
+import { HeaderContainer, StyledHeadline, StepContent } from '@/components/companies/jobs/newjob/newjob.styles';
 
 const BasicDetails = (props: JobReviewProps) => {
 	const { createJob } = useAppSelector((state) => state.job);
@@ -44,114 +45,121 @@ const BasicDetails = (props: JobReviewProps) => {
 
 		jobActions.saveJobData(tmp);
 	}
-	console.log(comapny_division);
+
 	return (
 		<>
-			<FlexBox justify="flex-start" align="flex-start">
-				<div style={{ padding: '0px 15px 0 0', width: '50%' }}>
-					<h3>General information</h3>
-					<InputField placeholder="Title" name="title" onChange={handleInput} value={data.title}>
-						Title
-					</InputField>
-					<TextAreaField
-						className="mt-10"
-						placeholder="Description"
-						name="description"
-						height="200px"
-						onChange={handleInput}
-						value={data.description}
-					>
-						Job Description
-					</TextAreaField>
-					<TextAreaField
-						className="mt-10"
-						placeholder="Responsabilities"
-						name="responsabilities"
-						height="190px"
-						onChange={handleInput}
-						value={data.responsabilities}
-					>
-						Job Responsabilities
-					</TextAreaField>
-				</div>
-				<div style={{ padding: '0px 0px 0px 15px', width: '50%' }}>
-					<div>
-						<h3>Job function</h3>
-						<InputPickerField
-							name="company_division"
-							placeholder="Division"
-							title="Company division"
-							value={data?.company_division?.name}
-							onChange={handleInputPicker}
-						>
-							{comapny_division?.content?.map((elem, idx) => {
-								return (
-									<InputPickerField.Option key={idx} value={elem._id!}>
-										{elem.name}
-									</InputPickerField.Option>
-								);
-							})}
-						</InputPickerField>
-						<InputPickerField
+			<HeaderContainer justify="space-between">
+				<StyledHeadline variant="h2" size="md">
+					Basic Informations
+				</StyledHeadline>
+				<FlexBox gap={10} align="flex-start" justify="flex-start">
+					<Button variant="outlined" onClick={handlePrevious}>
+						Back
+					</Button>
+					<Button onClick={handleNext}>Save & Continue</Button>
+				</FlexBox>
+			</HeaderContainer>
+			<StepContent className="staak_scrollbar">
+				<FlexBox justify="flex-start" align="flex-start">
+					<div style={{ padding: '0px 15px 0 0', width: '50%' }}>
+						<h3>General information</h3>
+						<InputField placeholder="Title" name="title" onChange={handleInput} value={data.title}>
+							Title
+						</InputField>
+						<TextAreaField
 							className="mt-10"
-							name="category"
-							placeholder="Category"
-							title="Category"
-							value={data.category?.name}
-							onChange={handleInputPicker}
+							placeholder="Description"
+							name="description"
+							height="200px"
+							onChange={handleInput}
+							value={data.description}
 						>
-							{job_categories?.content?.map((elem, idx) => {
-								return (
-									<InputPickerField.Option key={idx} value={elem._id!}>
-										{elem.name}
-									</InputPickerField.Option>
-								);
-							})}
-						</InputPickerField>
+							Job Description
+						</TextAreaField>
+						<TextAreaField
+							className="mt-10"
+							placeholder="Responsabilities"
+							name="responsabilities"
+							height="190px"
+							onChange={handleInput}
+							value={data.responsabilities}
+						>
+							Job Responsabilities
+						</TextAreaField>
 					</div>
-					<div>
-						<h3>Employment type & Duration</h3>
+					<div style={{ padding: '0px 0px 0px 15px', width: '50%' }}>
 						<div>
-							<label>Type</label>
-							<FlexBox className="mt-10" gap={15} justify="flex-start">
-								<Radio name="job_type" value="Full time" checked={data.job_type === 'Full time'} onChange={handleInput}>
-									Full time
-								</Radio>
-								<Radio name="job_type" value="Part time" checked={data.job_type === 'Part time'} onChange={handleInput}>
-									Part-time
-								</Radio>
-							</FlexBox>
+							<h3>Job function</h3>
+							<InputPickerField
+								name="company_division"
+								placeholder="Division"
+								title="Company division"
+								value={data?.company_division?.name}
+								onChange={handleInputPicker}
+							>
+								{comapny_division?.content?.map((elem, idx) => {
+									return (
+										<InputPickerField.Option key={idx} value={elem._id!}>
+											{elem.name}
+										</InputPickerField.Option>
+									);
+								})}
+							</InputPickerField>
+							<InputPickerField
+								className="mt-10"
+								name="category"
+								placeholder="Category"
+								title="Category"
+								value={data.category?.name}
+								onChange={handleInputPicker}
+							>
+								{job_categories?.content?.map((elem, idx) => {
+									return (
+										<InputPickerField.Option key={idx} value={elem._id!}>
+											{elem.name}
+										</InputPickerField.Option>
+									);
+								})}
+							</InputPickerField>
 						</div>
-						<div className="mt-15">
-							<label>Duration</label>
-							<FlexBox className="mt-10" gap={15} justify="flex-start">
-								<Radio name="duration" value="Permanent" checked={data.duration === 'Permanent'} onChange={handleInput}>
-									Permanent
-								</Radio>
-								<Radio name="duration" value="Temporary" checked={data.duration === 'Temporary'} onChange={handleInput}>
-									Temporary/Seasonal
-								</Radio>
-							</FlexBox>
-						</div>
-						{data.duration === 'Temporary' && (
-							<div className="mt-15">
-								<DateRangePicker
-									placeholder="Start date - End Date"
-									onChange={handleDate}
-									startDate={data.duration_range![0]}
-									endDate={data.duration_range![1]}
-								/>
+						<div>
+							<h3>Employment type & Duration</h3>
+							<div>
+								<label>Type</label>
+								<FlexBox className="mt-10" gap={15} justify="flex-start">
+									<Radio name="job_type" value="Full time" checked={data.job_type === 'Full time'} onChange={handleInput}>
+										Full time
+									</Radio>
+									<Radio name="job_type" value="Part time" checked={data.job_type === 'Part time'} onChange={handleInput}>
+										Part-time
+									</Radio>
+								</FlexBox>
 							</div>
-						)}
+							<div className="mt-15">
+								<label>Duration</label>
+								<FlexBox className="mt-10" gap={15} justify="flex-start">
+									<Radio name="duration" value="Permanent" checked={data.duration === 'Permanent'} onChange={handleInput}>
+										Permanent
+									</Radio>
+									<Radio name="duration" value="Temporary" checked={data.duration === 'Temporary'} onChange={handleInput}>
+										Temporary/Seasonal
+									</Radio>
+								</FlexBox>
+							</div>
+							{data.duration === 'Temporary' && (
+								<div className="mt-15">
+									<DateRangePicker
+										placeholder="Start date - End Date"
+										onChange={handleDate}
+										startDate={data.duration_range![0]}
+										endDate={data.duration_range![1]}
+									/>
+								</div>
+							)}
+						</div>
 					</div>
-				</div>
-			</FlexBox>
-			<FlexBox className="mt-10" gap={15} align="flex-start" justify="flex-start">
-				<Button variant="outlined" onClick={handlePrevious}>
-					Back
-				</Button>
-				<Button onClick={handleNext}>Save & Continue</Button>
-			</FlexBox>
+				</FlexBox>
+			</StepContent>
 		</>
 	);
 };

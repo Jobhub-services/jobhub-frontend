@@ -45,10 +45,10 @@ export const companiesActions = {
 	async getCompanyDetail(id: string) {
 		companiesDispatcher.setIsLoading(true, 'isDetailLoading');
 		try {
-			const response = await httpClient.get(`${'JOBS_SERVICE'}/application/my${id}`);
+			const response = await httpClient.get(`${USERS_SERVICE}/developer/companies/${id}`);
 			const responseData = response.data;
 			if (responseData) {
-				companiesDispatcher.setCompanyDetail(responseData);
+				companiesDispatcher.setCompanyDetail(responseData.content);
 			}
 		} catch {
 		} finally {

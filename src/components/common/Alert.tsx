@@ -12,11 +12,13 @@ const show = keyframes`
 	from{opacity:0}
 	to{opacity:1}
 `;
+
 interface PAlert {
 	children?: React.ReactNode;
 	className?: string;
 	color?: 'red' | 'green';
 	closed?: boolean;
+	show?: boolean;
 	onCloseCallback?: () => void;
 }
 const AlertColors: { [x in 'red' | 'green']: { background: string; icon: string } } = {
@@ -53,7 +55,7 @@ const SBody = styled.div`
 const Alert = (props: PAlert) => {
 	const [closed, setClosed] = useState(false);
 	useEffect(() => {
-		setClosed(false);
+		setClosed(props.show ?? false);
 		const interval = setInterval(() => {
 			setClosed(true);
 			if (props.onCloseCallback) props.onCloseCallback();

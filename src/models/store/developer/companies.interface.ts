@@ -12,14 +12,9 @@ export interface ICompanyState {
 		count?: number;
 		pages?: number;
 	};
-	companyDetail: {
+	companyDetail: TCompanyDetail & {
 		_id: string;
-		overview: TCompanyDetail;
-		jobs: {
-			content?: JobInfoData[];
-			size?: number;
-			count?: number;
-		};
+		jobs?: JobInfoData[];
 	};
 	filters?: {
 		headquarters?: TValueLabel[];

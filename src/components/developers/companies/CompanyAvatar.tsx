@@ -35,9 +35,6 @@ const SSpan = styled.span`
 	color: ${colors.BLACK_8};
 	font-weight: 500;
 `;
-const Span = styled.span<any>`
-	color: ${colors.PURPLE_BASE};
-`;
 
 const CompanyAvatar = (props: PCompanyAvatar) => {
 	const navigate = useNavigate();

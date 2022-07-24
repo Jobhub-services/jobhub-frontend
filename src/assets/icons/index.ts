@@ -60,8 +60,18 @@ import GeneralSettingsIcon from './GeneralSettingIcon';
 import JobColorIcon from './JobColorIcon';
 import MessageColorIcon from './MessageColorIcon';
 import LoadingIcon from './LoadingIcon';
+import CompanyColorIcon from './CompanyColorIcon';
+import ApplicationColorIcon from './ApplicationColorIcon';
+import OverviewColorIcon from './OverviewColorIcon';
+import FindTalentsColorIcon from './FindTalentsColorIcon';
+import SettingsColorIcon from './SettingsColorIcon';
 
 export {
+	SettingsColorIcon,
+	FindTalentsColorIcon,
+	OverviewColorIcon,
+	ApplicationColorIcon,
+	CompanyColorIcon,
 	LoadingIcon,
 	MessageColorIcon,
 	JobColorIcon,

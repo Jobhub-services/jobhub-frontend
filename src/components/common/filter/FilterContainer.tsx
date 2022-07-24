@@ -55,9 +55,7 @@ const SBody = styled.div`
 `;
 const FilterContianer = (props: FilterContianerProps) => {
 	const { filterClosed } = useAppSelector((state) => state[props.type]);
-	console.log('filterclosed ', filterClosed);
 	const body = React.Children.map(props.children, (child) => (child?.type.displayName === 'Body' ? child : null));
-	console.log('after get body', 'body');
 	return (
 		<FContainer closed={filterClosed} width={props.width}>
 			<SubContainer>

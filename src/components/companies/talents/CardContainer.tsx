@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { TalentCard } from '@/components/companies/talents';
 import { useAppSelector } from '@/utils/appHooks';
+import DataEmpty from '@/components/common/DataEmpty';
 
 const SContainer = styled.div`
 	display: grid;
@@ -14,6 +15,7 @@ const SContainer = styled.div`
 
 const CardContainer = () => {
 	const { showTalents } = useAppSelector((state) => state.talent);
+	if (showTalents?.content?.length === 0) return <DataEmpty title="No talent founds" description="There is no talent that matches your criteria" />;
 	return (
 		<SContainer>
 			{showTalents?.content?.map((elem, idx) => {

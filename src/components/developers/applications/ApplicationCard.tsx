@@ -48,7 +48,7 @@ const ApplicationCard = (props: PApplicationCard) => {
 		<SContainer style={props?.style}>
 			<SBody>
 				<FlexBox>
-					<ApplicationAvatar img={props.avatar} title={props.jobId?.title} subtitle={props.company?.name} applicationId={props._id} />
+					<ApplicationAvatar img={props.company?.avatar} title={props.jobId?.title} subtitle={props.company?.companyName} applicationId={props._id} />
 				</FlexBox>
 				<SubBody>
 					<SPre>{props.motivation}</SPre>

@@ -7,7 +7,7 @@ import { colors } from '@/assets/theme';
 import { Button, FlexBox } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
 import { profileAction } from '@/modules/actions/company/profile.actions';
-import { CCompanySizes } from '@/constants/company/profile.constants';
+import { CCompanySizes, CCompanySizesArray } from '@/constants/company/profile.constants';
 
 const GeneralInfo = () => {
 	const { generalinfo } = useAppSelector((state) => state.companyProfile.profile);
@@ -55,7 +55,14 @@ const GeneralInfo = () => {
 			<GeneralInfoElem generalinfo={generalinfo} />
 			{show && (
 				<div className="mt-20">
-					<InputPickerField className="mt-10" name="company_size" title="Company size" onChange={handlePicker} value={generalinfo?.company_size}>
+					<InputPickerField
+						className="mt-10"
+						name="company_size"
+						placeholder="Company size"
+						title="Company size"
+						onChange={handlePicker}
+						value={generalinfo?.company_size}
+					>
 						<InputPickerField.Option value="Seed (1 - 10 employees)">{CCompanySizes.Seed}</InputPickerField.Option>
 						<InputPickerField.Option value="Early (11 - 50 employees)">{CCompanySizes.Early}</InputPickerField.Option>
 						<InputPickerField.Option value="Mid-size (51 - 200 employees)">{CCompanySizes['Mid-size']}</InputPickerField.Option>
@@ -66,11 +73,12 @@ const GeneralInfo = () => {
 					<InputDateField
 						name="founded"
 						title="Foundation date"
+						placeholder="Foundation date"
 						className="mt-10"
 						onChange={handleDate}
 						date={genInfo?.founded && genInfo?.founded !== '' ? new Date(genInfo?.founded!) : null}
 					/>
-					<InputField name="industry" className="mt-10" onDataChange={handleInput} value={generalinfo?.industry}>
+					<InputField name="industry" className="mt-10" placeholder="Industry" onDataChange={handleInput} value={generalinfo?.industry}>
 						Industry
 					</InputField>
 

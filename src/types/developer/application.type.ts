@@ -1,4 +1,4 @@
-export type ApplicationStatus = 'NEW' | 'IN_PROGRESS' | 'REFUSED' | 'ACCEPTED';
+export type ApplicationStatus = 'NEW' | 'IN_PROGRESS' | 'DECLINED' | 'ACCEPTED' | 'HIRED';
 
 export type TApplicationData = {
 	_id: string;
@@ -6,13 +6,13 @@ export type TApplicationData = {
 	createdAt?: string;
 	company?: {
 		_id?: string;
-		name?: string;
+		companyName?: string;
+		avatar?: string;
 	};
 	jobId: {
 		_id?: string;
 		title?: string;
 	};
-	avatar?: string;
 	motivation?: string;
 };
 

@@ -38,7 +38,9 @@ export const initialState: IJobState = {
 		benefits: '',
 		questions: [],
 	},
-	filters: {},
+	filters: {
+		category: [],
+	},
 	errors: {
 		job: {
 			status: false,
@@ -70,6 +72,9 @@ const reducerSlices = createSlice({
 		},
 		setJobDetails: (state, action) => {
 			state.jobDetails = action.payload;
+		},
+		setFilters: (state, action) => {
+			state.filters = action.payload;
 		},
 		saveJobData: (state, action) => {
 			state.createJob = action.payload;

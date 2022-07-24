@@ -1,4 +1,4 @@
-import { JobColorIcon, MessageColorIcon } from '@/assets/icons';
+import { ApplicationColorIcon, JobColorIcon, MessageColorIcon, OverviewColorIcon, SettingsColorIcon, FindTalentsColorIcon } from '@/assets/icons';
 import { useLocation, useNavigate } from 'react-router-dom';
 import {
 	AssesmentsIcon,
@@ -13,7 +13,7 @@ import {
 	ApplicantIcon,
 } from 'staak-ui';
 
-const CompanySide = () => {
+const CompanySide = ({ appExpanded }: { appExpanded: boolean }) => {
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
 	const widthItems = '96%';
@@ -24,41 +24,41 @@ const CompanySide = () => {
 		<>
 			<NavItem
 				className="mb-5"
-				icon={<HealthIcon width="20px" height="20px" />}
+				icon={<OverviewColorIcon width="25px" height="25px" />}
 				width={widthItems}
 				active={pathname === '/'}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, '/')}
 			>
-				<NavItem.Content>Overview</NavItem.Content>
+				<NavItem.Content>{appExpanded ? 'Overview' : ''}</NavItem.Content>
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<JobColorIcon width="20px" height="20px" />}
+				icon={<JobColorIcon width="25px" height="25px" />}
 				width={widthItems}
 				active={pathname.startsWith('/jobs')}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'jobs')}
 			>
-				<NavItem.Content>Jobs</NavItem.Content>
+				<NavItem.Content>{appExpanded ? 'Jobs' : ''}</NavItem.Content>
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<TalentIcon width="20px" height="20px" />}
+				icon={<FindTalentsColorIcon width="25px" height="25px" />}
 				width={widthItems}
 				active={pathname.startsWith('/talents')}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'talents')}
 			>
-				<NavItem.Content>Talents</NavItem.Content>
+				<NavItem.Content>{appExpanded ? 'Talents' : ''}</NavItem.Content>
 			</NavItem>
 			<NavItem
 				className="mb-5"
-				icon={<ApplicantIcon width="20px" height="20px" />}
+				icon={<ApplicationColorIcon width="25px" height="25px" />}
 				width={widthItems}
 				active={pathname.startsWith('/applicants')}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'applicants/NEW')}
 			>
-				<NavItem.Content>Applicants</NavItem.Content>
+				<NavItem.Content>{appExpanded ? 'Applicants' : ''}</NavItem.Content>
 			</NavItem>
-			<NavItem
+			{/*<NavItem
 				className="mb-5"
 				icon={<MessageColorIcon width="20px" height="20px" />}
 				width={widthItems}
@@ -93,14 +93,14 @@ const CompanySide = () => {
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'assesments/')}
 			>
 				<NavItem.Content>Assements</NavItem.Content>
-			</NavItem>
+			</NavItem>*/}
 			<NavItem
-				icon={<SettingIcon width="20px" height="20px" />}
+				icon={<SettingsColorIcon width="25px" height="25px" />}
 				width={widthItems}
 				active={pathname.startsWith('/settings')}
 				onClick={(event: React.SyntheticEvent) => changeRoute(event, '/settings/account')}
 			>
-				<NavItem.Content>Settings</NavItem.Content>
+				<NavItem.Content>{appExpanded ? 'Settings' : ''}</NavItem.Content>
 			</NavItem>
 		</>
 	);

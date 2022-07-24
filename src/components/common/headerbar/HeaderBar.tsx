@@ -30,6 +30,7 @@ const SIcon = styled.div`
 	cursor: pointer;
 	border-radius: 8px;
 	transition: all 0.1s ease-in-out;
+	background-color: ${colors.PURPLE_1};
 	&:hover {
 		background-color: ${colors.PURPLE_1};
 	}
@@ -37,9 +38,11 @@ const SIcon = styled.div`
 const HeaderBar = () => {
 	const { userType } = useAppSelector(({ user }) => user.userInfo);
 	const { appExpanded } = useAppSelector((state) => state.metadata);
+
 	const handleClick = () => {
 		metadataDispatcher.setAppExpanded(!appExpanded);
 	};
+
 	return (
 		<SyledContainer>
 			<FlexBox gap={10}>

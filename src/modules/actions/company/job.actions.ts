@@ -36,6 +36,9 @@ export const jobDispatcher = {
 	setJobErrors(errors: any) {
 		dispatchToStore(storeActions.setJobErrors(errors));
 	},
+	setFilters(data: any) {
+		dispatchToStore(storeActions.setFilters(data));
+	},
 };
 export const jobActions = {
 	async setClosedFilter(closed: boolean) {
@@ -50,14 +53,16 @@ export const jobActions = {
 			tmp.category = payload.category?.id;
 			tmp.currency = payload.currency?.id;
 			tmp.company_division = payload.company_division?.id;
-			tmp.work_location = payload.work_location?.map((elem) => {
-				return { country: elem.country?.id, city: elem.city };
-			});
-			tmp.hire_location = payload.hire_location?.map((elem) => {
-				if (elem.country?.id !== '' || elem.city !== '') {
+			tmp.work_location = payload.work_location
+				?.filter((elem) => elem.country?.id !== '' || elem.city !== '')
+				.map((elem) => {
 					return { country: elem.country?.id, city: elem.city };
-				}
-			});
+				});
+			tmp.hire_location = payload.hire_location
+				?.filter((elem) => elem.country?.id !== '' || elem.city !== '')
+				.map((elem) => {
+					return { country: elem.country?.id, city: elem.city };
+				});
 			tmp.skills = payload.skills?.map((elem) => elem.value);
 			tmp.duration_range =
 				payload?.duration_range?.length! > 1 && payload?.duration_range![0] && payload?.duration_range![1]

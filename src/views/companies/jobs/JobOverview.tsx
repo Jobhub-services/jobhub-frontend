@@ -4,7 +4,7 @@ import ShowJobs from '@/components/companies/jobs/showjob/ShowJobs';
 import styled from 'styled-components';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import JobHeader from '@/components/companies/jobs/showjob/JobHeader';
-import JobFilter from '@/components/companies/jobs/showjob/JobFilter';
+import JobFilter from '@/components/companies/jobs/showjob/filter/JobFilter';
 import { Outlet } from 'react-router-dom';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';

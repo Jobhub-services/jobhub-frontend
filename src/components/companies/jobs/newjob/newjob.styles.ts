@@ -1,6 +1,12 @@
-import { Button, IconButton, FlexBox } from 'staak-ui';
+import { Button, IconButton, FlexBox, Headline } from 'staak-ui';
 import styled from 'styled-components';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
+
+const HEADER_STEP_HEIGHT = 65;
+
+export const StyledHeadline = styled(Headline)`
+	margin: 0px;
+`;
 
 export const SButton = styled(Button)`
 	background-color: transparent !important;
@@ -18,4 +24,16 @@ export const SIcon = styled(IconButton)`
 		border: 1px solid ${Colors.RED_BASE} !important;
 		background-color: ${Colors.RED_CLEAR_5} !important;
 	}
+`;
+
+export const HeaderContainer = styled(FlexBox)`
+	border-bottom: 1px solid ${Colors.BLACK_12};
+	padding: 10px 20px;
+	height: ${HEADER_STEP_HEIGHT}px;
+`;
+
+export const StepContent = styled.div`
+	padding: 0px 20px;
+	height: calc(100% - ${HEADER_STEP_HEIGHT}px);
+	overflow-y: auto;
 `;

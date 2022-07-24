@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Button, FlexBox, Headline } from 'staak-ui';
 import { StepProgress } from '@/components/companies/_common/wizard';
 import BasicDetails from '@/components/companies/jobs/newjob/basics/BasicInfo';
-import AdditionalInfo from '@/components/companies/jobs/newjob/details/DetailedInfo';
+import DetailedInfo from '@/components/companies/jobs/newjob/details/DetailedInfo';
 import AddTests from '@/components/companies/jobs/newjob/qualifications/QualificationsInfo';
 import JobReview from '@/components/companies/jobs/newjob/review/JobReview';
 import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
@@ -17,20 +17,6 @@ import { SuccessIcon } from '@/assets/icons';
 import { JobInstance } from '@/constants/company/job.contants';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import JobErrors from '@/components/companies/jobs/newjob/JobErrors';
-
-const HEADER_STEP_HEIGHT = 65;
-
-const HeaderContainer = styled(FlexBox)`
-	border-bottom: 1px solid ${Colors.BLACK_12};
-	padding: 10px 20px;
-	height: ${HEADER_STEP_HEIGHT}px;
-`;
-
-const StepContent = styled.div`
-	padding: 0px 20px;
-	height: calc(100% - ${HEADER_STEP_HEIGHT}px);
-	overflow-y: auto;
-`;
 
 const SLoading = styled.div`
 	position: fixed;
@@ -54,9 +40,6 @@ const StepContainer = styled.div`
 	//top: calc(${HEADER_HIEGHT}px + 20px);
 `;
 
-const StyledHeadline = styled(Headline)`
-	margin: 0px;
-`;
 const SContainer = styled.div`
 	padding: 0 0 15px 0;
 	background: white;
@@ -88,21 +71,18 @@ const AddNewJob = () => {
 		for (var i = 0; i < step; i++) udpate = udpate && validSteps![i];
 		if (udpate) setCurrentStep(step);
 	};
+
 	const handleNext = () => {
-		if (currentStep === 3) {
-			let tmpJob = { ...createJob };
-			tmpJob.questions = tmpJob.questions?.filter((elem) => elem !== '');
-			jobActions.create(tmpJob);
-		} else {
-			const tmp = [...validSteps!];
-			tmp[currentStep!] = true;
-			setCurrentStep(currentStep! + 1);
-			setvalidSteps(tmp);
-		}
+		const tmp = [...validSteps!];
+		tmp[currentStep!] = true;
+		setCurrentStep(currentStep! + 1);
+		setvalidSteps(tmp);
 	};
+
 	const handlePreviouse = () => {
 		setCurrentStep(currentStep! > 0 ? currentStep! - 1 : 0);
 	};
+
 	const browseJobs = () => {
 		jobDispatcher.setJobCreated(false);
 		jobDispatcher.createJob(JobInstance);
@@ -113,23 +93,19 @@ const AddNewJob = () => {
 		jobDispatcher.setJobCreated(false);
 		jobDispatcher.createJob(JobInstance);
 	};
-	let step, title;
+	let step;
 	switch (currentStep) {
 		case 0:
 			step = <BasicDetails onNext={handleNext} />;
-			title = 'Basic Informations';
 			break;
 		case 1:
-			step = <AdditionalInfo onNext={handleNext} onPreviouse={handlePreviouse} />;
-			title = 'Detailed Informations';
+			step = <DetailedInfo onNext={handleNext} onPreviouse={handlePreviouse} />;
 			break;
 		case 2:
 			step = <AddTests onNext={handleNext} onPreviouse={handlePreviouse} />;
-			title = 'Qualifications';
 			break;
 		case 3:
 			step = <JobReview onPreviouse={handlePreviouse} />;
-			title = 'Job Review';
 	}
 	return (
 		<>
@@ -169,23 +145,7 @@ const AddNewJob = () => {
 						]}
 					/>
 				</StepContainer>
-				<SContainer>
-					<HeaderContainer justify="space-between">
-						<StyledHeadline variant="h2" size="md">
-							{title}
-						</StyledHeadline>
-
-						{currentStep === 3 && (
-							<FlexBox gap={10} align="flex-start" justify="flex-start">
-								<Button variant="outlined" onClick={handlePreviouse}>
-									Back
-								</Button>
-								<Button onClick={handleNext}>Create</Button>
-							</FlexBox>
-						)}
-					</HeaderContainer>
-					<StepContent className="staak_scrollbar">{step}</StepContent>
-				</SContainer>
+				<SContainer>{step}</SContainer>
 				{isLoading && (
 					<SLoading>
 						<LoadingScreen />

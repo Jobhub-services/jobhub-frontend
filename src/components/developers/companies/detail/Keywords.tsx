@@ -16,6 +16,7 @@ const Keywords = ({ keywords }: TCompanyDetail) => {
 					{keywords?.map((elem, idx) => {
 						return <Tag key={idx}>{elem}</Tag>;
 					})}
+					{keywords?.length === 0 && 'N/A'}
 				</SWrrap>
 			}
 		</div>

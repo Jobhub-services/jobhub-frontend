@@ -46,7 +46,6 @@ const ApplicationList = () => {
 									style={{ boxShadow: 'none', border: `1px solid ${colors.BLACK_12}`, marginTop: '20px' }}
 									key={idx}
 									_id={elem._id}
-									avatar={Google}
 									jobId={elem.jobId}
 									createdAt={elem.createdAt}
 									company={elem.company}

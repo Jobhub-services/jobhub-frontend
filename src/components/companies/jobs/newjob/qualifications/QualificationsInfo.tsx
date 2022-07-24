@@ -6,6 +6,7 @@ import { JobArrayStringIndex, JobStringIndex } from '@/types/company/jobs.type';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import { useEffect, useState } from 'react';
 import { metadataActions } from '@/modules/actions/metadata.actions';
+import { HeaderContainer, StyledHeadline, StepContent } from '@/components/companies/jobs/newjob/newjob.styles';
 
 const QualificationsInfo = (props: any) => {
 	const { createJob } = useAppSelector((state) => state.job);
@@ -50,62 +51,69 @@ const QualificationsInfo = (props: any) => {
 	}
 	return (
 		<>
-			<FlexBox flexDirection="column" align="flex-start">
-				<div style={{ width: '95%' }}>
-					<h3>Experience details</h3>
-					<FlexBox gap={15} className="mt-10" justify="flex-start" align="flex-start">
-						<TagInputField
-							name="education"
-							placeholder="Write required education and press enter"
-							title="Education"
-							values={data.education}
-							onChange={handleInputTag}
-						/>
-						<TagInputField
-							name="certification"
-							title="Certification"
-							placeholder="Write required and press enter "
-							values={data.certification}
-							onChange={handleInputTag}
-						/>
-					</FlexBox>
-					<FlexBox gap={15} className="mt-10" align="flex-start" justify="flex-start">
-						<TagPickerField
-							name="skills"
-							title="Skills"
-							placeholder="Select required skills"
-							values={data.skills}
-							onChange={handleTagPicker}
-							onDataChange={handleChangeData}
+			<HeaderContainer justify="space-between">
+				<StyledHeadline variant="h2" size="md">
+					Qualifications
+				</StyledHeadline>
+				<FlexBox gap={10} align="flex-start" justify="flex-start">
+					<Button variant="outlined" onClick={handlePrevious}>
+						Back
+					</Button>
+					<Button onClick={handleNext}>Save & Continue</Button>
+				</FlexBox>
+			</HeaderContainer>
+			<StepContent className="staak_scrollbar">
+				<FlexBox flexDirection="column" align="flex-start">
+					<div style={{ width: '95%' }}>
+						<h3>Experience details</h3>
+						<FlexBox gap={15} className="mt-10" justify="flex-start" align="flex-start">
+							<TagInputField
+								name="education"
+								placeholder="Write required education and press enter"
+								title="Education"
+								values={data.education}
+								onChange={handleInputTag}
+							/>
+							<TagInputField
+								name="certification"
+								title="Certification"
+								placeholder="Write required and press enter "
+								values={data.certification}
+								onChange={handleInputTag}
+							/>
+						</FlexBox>
+						<FlexBox gap={15} className="mt-10" align="flex-start" justify="flex-start">
+							<TagPickerField
+								name="skills"
+								title="Skills"
+								placeholder="Select required skills"
+								values={data.skills}
+								onChange={handleTagPicker}
+								onDataChange={handleChangeData}
+							>
+								{localSkills?.map((elem, idx) => {
+									return (
+										<TagPickerField.Option key={idx} value={elem._id!}>
+											{elem.name}
+										</TagPickerField.Option>
+									);
+								})}
+							</TagPickerField>
+						</FlexBox>
+						<TextAreaField
+							className="mt-10"
+							placeholder="Requirements"
+							name="requirements"
+							height="120px"
+							value={data.requirements}
+							onChange={handleTxt}
 						>
-							{localSkills?.map((elem, idx) => {
-								return (
-									<TagPickerField.Option key={idx} value={elem._id!}>
-										{elem.name}
-									</TagPickerField.Option>
-								);
-							})}
-						</TagPickerField>
-					</FlexBox>
-					<TextAreaField
-						className="mt-10"
-						placeholder="Requirements"
-						name="requirements"
-						height="120px"
-						value={data.requirements}
-						onChange={handleTxt}
-					>
-						Job Requirements
-					</TextAreaField>
-				</div>
-				<Questions />
-			</FlexBox>
-			<FlexBox gap={15} className="mt-10" align="flex-start" justify="flex-start">
-				<Button variant="outlined" onClick={handlePrevious}>
-					Back
-				</Button>
-				<Button onClick={handleNext}>Save & Continue</Button>
-			</FlexBox>
+							Job Requirements
+						</TextAreaField>
+					</div>
+					<Questions />
+				</FlexBox>
+			</StepContent>
 		</>
 	);
 };

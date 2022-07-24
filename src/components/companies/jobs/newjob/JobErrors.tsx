@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import Alert from '@/components/common/Alert';
 import { jobDispatcher } from '@/modules/actions/company/job.actions';
 import parse from 'html-react-parser';
-import { HrDivider } from 'staak-ui';
+import { FlexBox, HrDivider } from 'staak-ui';
 import { colors } from '@/assets/theme';
+import { ToastContainer } from 'react-toastify';
+import { pushNotification } from '@/utils/helpers';
 
 /* component style */
 const ErrorContainer = styled.div`
@@ -17,47 +19,23 @@ const ErrorContainer = styled.div`
 `;
 
 const JobErrors = () => {
-	const { errors, jobCreated } = useAppSelector((state) => state.job);
+	const { errors } = useAppSelector((state) => state.job);
+	if (errors?.job?.status && errors?.job?.content) {
+		if (Array.isArray(errors?.job?.content)) {
+			errors.job.content.forEach((elem) => {
+				const Tmp = <span style={{ color: `${'white'}` }}>{parse(elem.value)}</span>;
+				pushNotification.error(Tmp);
+			});
+		} else {
+			Object.keys(errors?.job?.content).forEach((elem) => {
+				pushNotification.error(elem);
+			});
+		}
+		jobDispatcher.setJobErrors({ content: {}, status: false });
+	}
 	return (
 		<ErrorContainer>
-			{errors?.job?.status && (
-				<Alert
-					className="mt-15"
-					onCloseCallback={() => {
-						jobDispatcher.setJobErrors({ status: false });
-					}}
-				>
-					{Array.isArray(errors?.job?.content)
-						? errors?.job?.content?.map((elem: any, idx: number) => {
-								return (
-									<>
-										<div key={idx} className="mt-10">
-											<span style={{ color: `${colors.BLACK_4}` }}>{parse(elem.value)}</span>
-										</div>
-										<HrDivider top={10} side={40} />
-									</>
-								);
-						  })
-						: Object.keys(errors?.job?.content).map((key, idx) => {
-								return (
-									<div key={idx} className="mt-10">
-										{errors?.job?.content[key]}
-									</div>
-								);
-						  })}
-				</Alert>
-			)}
-			{jobCreated && (
-				<Alert
-					className="mt-15"
-					color="green"
-					onCloseCallback={() => {
-						jobDispatcher.setJobCreated(false);
-					}}
-				>
-					Job created succefully
-				</Alert>
-			)}
+			<ToastContainer />
 		</ErrorContainer>
 	);
 };

@@ -52,7 +52,7 @@ const ApplicationAvatar = (props: PApplicationAvatar) => {
 
 	return (
 		<SContainer gap={10} justify="start" width="100%" onClick={handleClick}>
-			<SImg src={props.img} alt="google" />
+			<SImg src={props.img} alt="img" />
 			<div style={{ width: '100%' }}>
 				<SH3>{props.title}</SH3>
 				<FlexBox justify="space-between" gap={20} className="mt-5">

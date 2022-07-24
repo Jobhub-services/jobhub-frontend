@@ -26,23 +26,26 @@ const WorkLocation = () => {
 		jobActions.saveJobData(tmp);
 	}
 	function handleCheckBox(event: React.ChangeEvent<HTMLInputElement>) {
-		const value = event.target.value;
+		const { checked, name } = event.target;
 		let tmp = { ...data };
-		tmp.work_remotly = value === 'false';
+		tmp[name as 'visa_sponsorship' | 'work_remotly'] = checked;
 		jobActions.saveJobData(tmp);
 	}
-	function handleInputPicker(event: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string, index: number) {
+	const handleInputPicker = (event: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string, index: number) => {
 		let tmp = { ...data };
 		let tmpArray = [...tmp.work_location!];
 		tmpArray[index] = { country: { id: value, name: label }, city: tmpArray[index].city };
 		tmp.work_location = tmpArray;
 		jobActions.saveJobData(tmp);
-	}
+	};
 	return (
 		<div>
 			<div>Work location</div>
 			<div style={{ marginTop: '12px' }}>
-				<CheckBox name="work_remotly" value={data.work_remotly} checked={data.work_remotly} onChange={handleCheckBox}>
+				<CheckBox name="visa_sponsorship" value={data.visa_sponsorship} checked={data.visa_sponsorship} onChange={handleCheckBox}>
+					Visa sponsorship
+				</CheckBox>
+				<CheckBox className="mt-15" name="work_remotly" value={data.work_remotly} checked={data.work_remotly} onChange={handleCheckBox}>
 					Allow Remote Workers
 				</CheckBox>
 				{data.work_location?.map((elem, idx) => {

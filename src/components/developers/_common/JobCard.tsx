@@ -108,11 +108,11 @@ const JobCard = (props: PJobCard) => {
 					<div style={{ width: '63%' }}>
 						<FlexBox align="start" justify="start" gap={5}>
 							<div>Category :</div>
-							<SSpan>{props.category}</SSpan>
+							<SSpan>{props.category ?? 'N/A'}</SSpan>
 						</FlexBox>
 						<FlexBox gap={5} align="start" justify="start" className="mt-15">
-							<div style={{ width: '20%' }}>Hires in :</div>
-							<SLoc style={{ width: '80%' }}>
+							<div style={{ whiteSpace: 'nowrap' }}>Hires in :</div>
+							<SLoc>
 								{props.hire_remotly
 									? 'Everywhere'
 									: props.hire_location?.length! > 0
@@ -137,6 +137,7 @@ const JobCard = (props: PJobCard) => {
 							<SLoc>
 								{props.work_remotly ? `Remote. ` : ''}
 								{props.work_location?.city ? `${props.work_location?.city},` : ''} {props.work_location?.country}
+								{!props.work_remotly && props.work_location && 'N/A'}
 							</SLoc>
 						</FlexBox>
 						<FlexBox gap={10} justify="end" className="mt-15">

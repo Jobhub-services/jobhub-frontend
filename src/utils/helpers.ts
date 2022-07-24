@@ -1,3 +1,5 @@
+import { toast } from 'react-toastify';
+
 const dateOptions: any = { day: 'numeric', month: 'short', year: 'numeric' };
 export function toString(value: any): string {
 	if (typeof value === 'object') {
@@ -15,4 +17,23 @@ export function getGMTOffset(): string {
 export function dateWithMonthName(value: string | Date): string | null {
 	if (!value || value === '') return null;
 	return new Date(value).toLocaleDateString('en-US', dateOptions);
+}
+
+export namespace pushNotification {
+	export const success = (content: any) => {
+		toast.success(content);
+	};
+	export const error = (content: any) => {
+		toast.error(content, {
+			position: 'top-right',
+			autoClose: 7000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			rtl: false,
+			pauseOnFocusLoss: true,
+			draggable: true,
+			pauseOnHover: true,
+			theme: 'colored',
+		});
+	};
 }
