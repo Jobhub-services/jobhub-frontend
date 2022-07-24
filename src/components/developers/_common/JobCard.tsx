@@ -10,6 +10,8 @@ import { useNavigate } from 'react-router-dom';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
 
+const NEW_JOB_PERIOD = 3;
+
 const SHeader = styled(FlexBox)`
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
@@ -157,7 +159,7 @@ const JobCard = (props: PJobCard) => {
 									</FlexBox>
 								</SFeat>
 							)}
-							{newPost < 7 && <SFeat color={colors.YELLOW_BASE}>New</SFeat>}
+							{newPost < NEW_JOB_PERIOD && <SFeat color={colors.YELLOW_BASE}>New</SFeat>}
 						</FlexBox>
 					</div>
 				</SubBody>

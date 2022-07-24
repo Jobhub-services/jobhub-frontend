@@ -37,3 +37,7 @@ export namespace pushNotification {
 		});
 	};
 }
+
+export const checkScrollToButtom = (el: HTMLElement, offset = 20): boolean => {
+	return el.scrollHeight - offset <= el.offsetHeight + el.scrollTop;
+};

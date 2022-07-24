@@ -1,4 +1,5 @@
 import { StatusType } from '@/types/common.type';
+
 export type JobStringIndex =
 	| 'title'
 	| 'salary_type'
