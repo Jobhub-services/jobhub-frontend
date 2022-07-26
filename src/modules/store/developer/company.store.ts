@@ -10,6 +10,7 @@ const initialState: ICompanyState = {
 		size: 0,
 		pages: 0,
 		content: [],
+		page: 0,
 	},
 	companyDetail: {
 		_id: '',
@@ -29,7 +30,29 @@ const reducerSlice = createSlice({
 			state.filterClosed = closed;
 		},
 		setCompanies: (state, action) => {
-			state.companies = action.payload;
+			const { data, reset } = action.payload;
+			let tmp = {};
+			if (reset) {
+				tmp = {
+					content: [],
+					size: 0,
+					count: 0,
+					pages: 0,
+					page: 0,
+				};
+			} else {
+				tmp = {
+					content:
+						(state.companies?.page ?? 0) <= (state.companies?.pages ?? 0)
+							? [...(state.companies?.content ?? []), ...(data?.content ?? [])]
+							: state.companies?.content ?? [],
+					size: data?.size ?? 0,
+					count: data?.count ?? 0,
+					pages: data?.pages ?? 0,
+					page: state.companies?.page! < data?.pages ? (state.companies?.page ?? 0) + 1 : state.companies?.page,
+				};
+			}
+			state.companies = tmp;
 		},
 		setComapnyDetail: (state, action) => {
 			state.companyDetail = action.payload;

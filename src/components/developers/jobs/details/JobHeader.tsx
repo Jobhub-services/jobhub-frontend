@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { ClockIcon, CompanyIcon, EmpolyeesIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import moment from 'moment';
-import Google from '@/assets/icons/google.jpg';
 
 const Container = styled(FlexBox)`
 	width: 100%;
@@ -34,8 +33,8 @@ const JobHeader = () => {
 	const posted_at = moment(new Date(jobDetails?.createdAt!)).fromNow();
 	return (
 		<Container justify="start" gap={10}>
-			{jobDetails?.avatar ? (
-				<SImg src={jobDetails?.avatar} alt="company" />
+			{jobDetails?.company?.avatar ? (
+				<SImg src={jobDetails?.company?.avatar} alt="company" />
 			) : (
 				<SIcon>
 					<CompanyIcon width="28px" height="28px" color={colors.BLACK_7} />

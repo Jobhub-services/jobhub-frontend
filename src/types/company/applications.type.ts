@@ -1,8 +1,7 @@
-import { InterviewInfo } from '@/types/interview.type';
+import { InterviewInfo } from '@/types/company/interview.type';
 import { StatusType, TValueLabel } from '@/types/common.type';
 
 export type ApplicationStatus = 'DECLINED' | 'HIRED' | 'IN_PROGRESS' | 'NEW' | 'ACCEPTED';
-export type InterviewStatus = 'On Progress' | 'Finished' | 'Pending';
 
 export type QuestionType = {
 	question?: { question?: string };

@@ -21,8 +21,8 @@ export const jobDispatcher = {
 	setJobApplication(application: TJobApplication) {
 		dispatchToStore(storeActions.setJobApplication(application));
 	},
-	setJobs(data: any) {
-		dispatchToStore(storeActions.setJobs(data));
+	setJobs(data: any, reset: boolean = false) {
+		dispatchToStore(storeActions.setJobs({ data, reset }));
 	},
 	setJob(data: TJobDetails) {
 		dispatchToStore(storeActions.setJob(data));
@@ -41,8 +41,9 @@ export const jobActions = {
 	async setClosedFilter(closed: boolean) {
 		jobDispatcher.setClosedFilter(closed);
 	},
-	async getJobs(loading: boolean = true, params: any = {}) {
+	async getJobs(loading: boolean = true, params: any = {}, reset: boolean = false) {
 		jobDispatcher.setLoading(loading);
+		if (reset) jobDispatcher.setJobs({}, reset);
 		try {
 			const param = {
 				params: params,

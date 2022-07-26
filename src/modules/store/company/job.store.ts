@@ -12,6 +12,7 @@ export const initialState: IJobState = {
 		count: 0,
 		pages: 0,
 		size: 0,
+		page: 0,
 	},
 	jobDetails: {
 		_id: '',
@@ -68,7 +69,29 @@ const reducerSlices = createSlice({
 			state.jobCreated = created;
 		},
 		setShowJobs: (state, action) => {
-			state.showJob = action.payload;
+			const { data, reset } = action.payload;
+			let tmp = {};
+			if (reset) {
+				tmp = {
+					content: [],
+					size: 0,
+					count: 0,
+					pages: 0,
+					page: 0,
+				};
+			} else {
+				tmp = {
+					content:
+						(state.showJob?.page ?? 0) <= (state.showJob?.pages ?? 0)
+							? [...(state.showJob.content ?? []), ...(data?.content ?? [])]
+							: state.showJob.content ?? [],
+					size: data?.size ?? 0,
+					count: data?.count ?? 0,
+					pages: data?.pages ?? 0,
+					page: state.showJob?.page! < data?.pages ? (state.showJob?.page ?? 0) + 1 : state.showJob?.page,
+				};
+			}
+			state.showJob = tmp;
 		},
 		setJobDetails: (state, action) => {
 			state.jobDetails = action.payload;

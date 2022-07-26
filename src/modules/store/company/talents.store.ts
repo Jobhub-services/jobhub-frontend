@@ -32,7 +32,29 @@ const reducerSlices = createSlice({
 			state.talentDetails = action.payload;
 		},
 		setTalents: (state, action) => {
-			state.showTalents = action.payload;
+			const { data, reset } = action.payload;
+			let tmp = {};
+			if (reset) {
+				tmp = {
+					content: [],
+					size: 0,
+					count: 0,
+					pages: 0,
+					page: 0,
+				};
+			} else {
+				tmp = {
+					content:
+						(state.showTalents?.page ?? 0) <= (state.showTalents?.pages ?? 0)
+							? [...(state.showTalents.content ?? []), ...(data?.content ?? [])]
+							: state.showTalents.content ?? [],
+					size: data?.size ?? 0,
+					count: data?.count ?? 0,
+					pages: data?.pages ?? 0,
+					page: state.showTalents?.page! < data?.pages ? (state.showTalents?.page ?? 0) + 1 : state.showTalents?.page,
+				};
+			}
+			state.showTalents = tmp;
 		},
 		setFilters: (state, action) => {
 			state.filter = action.payload;

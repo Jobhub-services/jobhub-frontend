@@ -3,17 +3,22 @@ import styled from 'styled-components';
 import { FlexBox } from 'staak-ui';
 import LastApplicants from '@/components/companies/overview/LastApplicants';
 import TalentRecommendation from '@/components/companies/overview/TalentRecommendation';
-
+const MainContainer = styled.div`
+	height: 100%;
+	overflow-y: auto;
+`;
 const SContainer = styled(FlexBox)`
 	padding: 15px;
 `;
 const CompanyOverview = () => {
 	return (
-		<SContainer flexDirection="column">
-			<Header />
-			<TalentRecommendation />
-			<LastApplicants />
-		</SContainer>
+		<MainContainer className="staak_scrollbar">
+			<SContainer flexDirection="column">
+				<Header />
+				<TalentRecommendation />
+				<LastApplicants />
+			</SContainer>
+		</MainContainer>
 	);
 };
 

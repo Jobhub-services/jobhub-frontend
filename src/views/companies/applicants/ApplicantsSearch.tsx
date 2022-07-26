@@ -13,6 +13,11 @@ const MainContainer = styled.div`
 	position: relative;
 	height: 100%;
 `;
+const SubContainer = styled.div`
+	overflow-y: auto;
+	padding: 10px 15px;
+	height: inherit;
+`;
 
 const ApplicantsSearch = () => {
 	const navigate = useNavigate();
@@ -38,10 +43,10 @@ const ApplicantsSearch = () => {
 				<LoadingScreen />
 			) : (
 				<>
-					<div style={{ width: '100%', padding: '10px 15px', height: '100%' }}>
+					<SubContainer className="staak_scrollbar">
 						<ApplicantsHeader viewType="search" onChangeTab={onChangeTab} count={showApplicants?.count!} />
 						<ApplicantsAll />
-					</div>
+					</SubContainer>
 					<Outlet />
 				</>
 			)}

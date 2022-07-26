@@ -15,7 +15,6 @@ const SWrapper = styled.div<any>`
 const JobsList = () => {
 	const { jobInfo } = useAppSelector((state) => state.developerJobs);
 	const { content } = jobInfo;
-	console.log(content);
 	if (content?.length === 0)
 		return <DataEmpty title="No data found" description="No content match your criteria. Try searching for something else" />;
 
@@ -30,7 +29,6 @@ const JobsList = () => {
 						category={elem.category}
 						job_type={elem.job_type}
 						duration={elem.duration}
-						avatar={elem.avatar}
 						createdAt={elem.createdAt}
 						company={elem.company}
 						work_location={elem.work_location}

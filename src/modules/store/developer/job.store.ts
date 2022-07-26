@@ -9,9 +9,10 @@ const initialState: IJobsState = {
 	showDetails: false,
 	jobInfo: {
 		content: [],
-		size: null,
-		count: null,
-		pages: null,
+		size: 0,
+		count: 0,
+		pages: 0,
+		page: 0,
 	},
 	jobDetails: {
 		_id: '',
@@ -86,7 +87,30 @@ const reducerSlice = createSlice({
 			state.jobApplication = action.payload;
 		},
 		setJobs: (state, action) => {
-			state.jobInfo = action.payload;
+			const { data, reset } = action.payload;
+			let tmp = {};
+			if (reset) {
+				tmp = {
+					content: [],
+					size: 0,
+					count: 0,
+					pages: 0,
+					page: 0,
+				};
+			} else {
+				tmp = {
+					content:
+						(state.jobInfo?.page ?? 0) <= (state.jobInfo?.pages ?? 0)
+							? [...(state.jobInfo.content ?? []), ...(data?.content ?? [])]
+							: state.jobInfo.content ?? [],
+					size: data?.size ?? 0,
+					count: data?.count ?? 0,
+					pages: data?.pages ?? 0,
+					page: state.jobInfo?.page! < data?.pages ? (state.jobInfo?.page ?? 0) + 1 : state.jobInfo?.page,
+				};
+			}
+			//console.log(tmp);
+			state.jobInfo = tmp;
 		},
 		setJob: (state, action) => {
 			state.jobDetails = action.payload;

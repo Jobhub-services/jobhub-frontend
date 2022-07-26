@@ -41,7 +41,7 @@ const Avatar = (props: PApplicationAvatar) => {
 	return (
 		<div>
 			<SContainer gap={10} justify="start" width="100%">
-				<SImg src={props.img} alt="google" />
+				<SImg src={props.img} alt="img" />
 				<div>
 					<SH3>{props.title}</SH3>
 					<FlexBox justify="start" gap={20} className="mt-5">

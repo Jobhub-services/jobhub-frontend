@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import OccupationType from '@/components/companies/jobs/showjob/filter/OccupationType';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import { jobActions, jobDispatcher } from '@/modules/actions/company/job.actions';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
 
 export const STitle = styled.h3`
 	margin: 10px 0;
@@ -15,6 +16,7 @@ export const STitle = styled.h3`
 const JobFilter = () => {
 	const { filters } = useAppSelector((state) => state.job);
 	const { job_categories } = useAppSelector((state) => state.metadata);
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [clear, setClear] = useState(false);
 	let localFilters: typeof filters = { ...filters };
 
@@ -42,7 +44,8 @@ const JobFilter = () => {
 	const onApply = () => {
 		let tmpFilters: any = { ...localFilters };
 		if (localFilters?.category?.length! > 0) tmpFilters.category = localFilters.category?.map((elem) => elem.value);
-		jobActions.getJobs(tmpFilters);
+		setSearchParams(createSearchParams(tmpFilters));
+		jobActions.getJobs(true, tmpFilters, true);
 		jobDispatcher.setClosedFilter(true);
 		//console.log(tmpFilters);
 	};

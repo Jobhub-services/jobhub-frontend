@@ -1,6 +1,11 @@
-export type InterviewStatus = 'Pending' | 'On Progress' | 'Finished';
+export enum InterviewStatus {
+	PENDING = 'PENDING',
+	IN_PROGRESS = 'IN_PROGRESS',
+	FINISHED = 'FINISHED',
+}
 
 export type InterviewInfo = {
+	_id: string;
 	title?: string;
 	startDate?: Date | null;
 	endDate?: Date | null;

@@ -4,7 +4,7 @@ import { LinkedinIcon, GithubIcon } from 'staak-ui';
 import { CalendarFillIcon, CVIcon, LoadingIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { ApplicantCardProps } from '@/models/component/companies/applications/applications.interface';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { Avatar } from '@/components/companies/_common';
 import { ApplicationStatus } from '@/types/company/applications.type';
@@ -73,17 +73,22 @@ const SJob = styled.span`
 	white-space: pre-line;
 `;
 const ApplicationCard = (props: ApplicantCardProps) => {
+	const { pathname } = useLocation();
 	const { applicantDetails, isStatusChange } = useAppSelector((state) => state.applications);
 	const { status } = useParams();
 	const navigate = useNavigate();
+
 	const viewDetails = () => {
 		if (applicantDetails._id !== props._id) applicationsActions.getApplicantDetails(status as ApplicationStatus, props._id);
 		const tmp = status ?? 'NEW';
-		navigate(`/applicants/${tmp}/detail/${props._id}`);
+		const path = pathname.startsWith('/applicants') ? `detail/${props._id}` : `/applicants/${tmp}/detail/${props._id}`;
+		navigate(`${path}`);
 	};
+
 	const onStatusChange = (event: any, status: ApplicationStatus) => {
 		applicationsActions.setApplicationStatus(status, props._id);
 	};
+
 	return (
 		<SCard className={props.className}>
 			<FlexBox justify="space-between" style={{ padding: '8px 10px', borderBottom: `1px solid ${colors.BLACK_12}` }}>

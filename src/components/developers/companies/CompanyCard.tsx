@@ -52,7 +52,7 @@ const CompanyCard = (props: PCompanyCard) => {
 	return (
 		<SContainer>
 			<SBody>
-				<CompanyAvatar _id={props._id} avatar={props.avatar} name={props.companyName} industry={props?.generalinfo?.industry} />
+				<CompanyAvatar _id={props._id} avatar={props.avatar} companyName={props.companyName} industry={props?.generalinfo?.industry} />
 				<div style={{ padding: '0 15px' }}>
 					<FlexBox justify="start" className="mt-5" gap={5}>
 						<LocationFillIcon color={colors.BLACK_10} width="18px" height="18px" />

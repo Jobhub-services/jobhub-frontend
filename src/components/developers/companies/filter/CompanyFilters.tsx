@@ -5,6 +5,7 @@ import { companiesActions, companiesDispatcher } from '@/modules/actions/develop
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useState } from 'react';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
 import { TagInput, TagPicker } from 'staak-ui';
 import styled from 'styled-components';
 
@@ -16,6 +17,8 @@ export const STitle = styled.h3`
 const CompanyFilters = () => {
 	const { countries } = useAppSelector((state) => state.metadata);
 	const { filters } = useAppSelector((state) => state.companies);
+	const [searchParams, setSearchParams] = useSearchParams();
+
 	const [clear, setClear] = useState(false);
 	let localFilters: typeof filters = filters;
 
@@ -24,14 +27,15 @@ const CompanyFilters = () => {
 	}, [clear]);
 
 	const onApply = () => {
-		const tmp = {
+		const tmp: any = {
 			headquarters: localFilters?.headquarters?.map((elem) => elem.value),
 			company_size: localFilters?.company_size?.map((elem) => elem.value),
 			industry: localFilters?.industry,
 			keywords: localFilters?.keywords,
 		};
 		companiesDispatcher.setFilters(localFilters);
-		companiesActions.getCompanies(true, tmp);
+		setSearchParams(createSearchParams(tmp));
+		companiesActions.getCompanies(true, tmp, true);
 	};
 
 	const onClear = () => {

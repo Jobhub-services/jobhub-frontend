@@ -22,13 +22,14 @@ const actionsMap = {
 };
 
 const FContainer = styled.div<any>`
-	position: fixed;
-	top: ${HEADER_HIEGHT}px;
-	left: ${EXPANDED_ASIDE_WIDTH}px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
 	background: white;
 	width: ${(props) => (props.closed ? '0' : props.width)};
 	overflow-x: hidden;
-	height: calc(100% - ${HEADER_HIEGHT}px);
+	//height: calc(100% - ${HEADER_HIEGHT}px);
 	box-shadow: 2px -5px 20px -15px ${colors.BLACK_7};
 	transition: width 0.2s, visibility 50ms;
 `;

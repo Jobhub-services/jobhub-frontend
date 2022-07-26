@@ -27,8 +27,8 @@ export const jobDispatcher = {
 	setJobCreated(created: boolean) {
 		dispatchToStore(storeActions.setJobCreated({ created }));
 	},
-	getJobs(data: ShowJobInfo) {
-		dispatchToStore(storeActions.setShowJobs(data));
+	setJobs(data: any, reset: boolean = false) {
+		dispatchToStore(storeActions.setShowJobs({ data, reset }));
 	},
 	getJobDetails(data: JobDetails) {
 		dispatchToStore(storeActions.setJobDetails(data));
@@ -89,18 +89,17 @@ export const jobActions = {
 			jobDispatcher.setIsLoading(false);
 		}
 	},
-	async getJobs(params: any = {}) {
-		jobDispatcher.setIsLoading(true);
+	async getJobs(loading: boolean = true, params: any = {}, reset: boolean = false) {
+		jobDispatcher.setIsLoading(loading);
+		if (reset) jobDispatcher.setJobs({}, true);
 		try {
 			const config = {
-				params: {
-					...params,
-				},
+				params: params,
 			};
 			const response = await httpClient.get(`${JOBS_SERVICE}/company`, config);
 			const responseData = response.data;
 			if (responseData) {
-				jobDispatcher.getJobs(responseData);
+				jobDispatcher.setJobs(responseData);
 			}
 		} catch (e: any) {
 			const response: AxiosResponse = e?.response;

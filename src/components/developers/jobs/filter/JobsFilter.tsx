@@ -8,29 +8,34 @@ import CompanySize from '@/components/developers/jobs/filter/CompanySize';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobActions, jobDispatcher } from '@/modules/actions/developer/jobs.actions';
 import { useState } from 'react';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
 
 const JobsFilter = () => {
 	const { filterInfo } = useAppSelector((state) => state.developerJobs);
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [clear, setClear] = useState(false);
-	let localFilters: typeof filterInfo = {};
+	let localFilters: typeof filterInfo = { ...filterInfo };
 	const onApply = () => {
-		console.log(localFilters);
 		jobDispatcher.setFilters(localFilters);
-		let tmp = {
-			job_categories: localFilters?.job_categories?.map((elem) => elem.value),
-			skills: localFilters?.skills?.map((elem) => elem.value),
-			work_location: {
+		//console.log('local filters ', localFilters);
+		let tmp: any = {};
+		if (localFilters?.job_categories?.length! > 0) tmp.job_categories = localFilters?.job_categories?.map((elem) => elem.value);
+		if (localFilters?.skills?.length! > 0) tmp.skills = localFilters?.skills?.map((elem) => elem.value);
+		if (localFilters?.company_size?.length! > 0) tmp.company_size = localFilters?.company_size;
+		if (localFilters?.job_type) tmp.job_type = localFilters?.job_type;
+		if (localFilters?.work_location)
+			tmp.work_location = {
 				remote: localFilters?.work_location?.remote,
 				countries: localFilters?.work_location?.countries?.map((elem) => elem.value),
-			},
-			job_type: localFilters.job_type,
-			job_salary: {
+			};
+		if (localFilters?.job_salary)
+			tmp.job_salary = {
 				...localFilters.job_salary,
 				currencies: localFilters.job_salary?.currencies?.map((elem) => elem.value),
-			},
-			company_size: localFilters.company_size,
-		};
-		jobActions.getJobs(false, tmp);
+			};
+		//console.log('tmp filters ', tmp);
+		setSearchParams(createSearchParams(tmp));
+		jobActions.getJobs(true, tmp, true);
 	};
 	const handleJobType = (value: any, name?: string) => {
 		localFilters[name as 'job_type' | 'company_size' | 'job_categories' | 'work_location' | 'skills' | 'job_salary'] = value;

@@ -5,6 +5,6 @@ export interface PCompanyCard extends StandardProps, TCompanyData {}
 export interface PCompanyAvatar extends StandardProps {
 	_id: string;
 	avatar?: string;
-	name?: string;
+	companyName?: string;
 	industry?: string;
 }

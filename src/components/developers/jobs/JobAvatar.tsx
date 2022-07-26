@@ -3,7 +3,7 @@ import { FlexBox } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import { PJobAvatar } from '@/models/component/developer/jobs.interface';
 import { CompanyIcon, EmpolyeesIcon } from '@/assets/icons';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
 
@@ -11,11 +11,20 @@ const SContainer = styled(FlexBox)`
 	cursor: pointer;
 `;
 const SImg = styled.img`
-	width: 40px;
-	height: 40px;
-	border-radius: 7px;
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: cover;
 `;
 
+const ImgContainer = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+`;
 const SH3 = styled.h3`
 	display: -webkit-box;
 	margin: 0;
@@ -53,14 +62,16 @@ const JobAvatar = (props: PJobAvatar) => {
 	return (
 		<SContainer gap={10} justify="start" width="100%" onClick={viewDetail}>
 			{props.img ? (
-				<SImg src={props.img} alt="company" />
+				<ImgContainer>
+					<SImg src={props.img} alt="img" />
+				</ImgContainer>
 			) : (
 				<SIcon>
 					<CompanyIcon width="28px" height="28px" color={colors.BLACK_7} />
 				</SIcon>
 			)}
 
-			<div style={{ width: '100%' }}>
+			<div style={{ width: 'calc(100% - 40px)' }}>
 				<FlexBox justify="space-between">
 					<SH3>{props.title}</SH3>
 				</FlexBox>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const SImg = styled.img`
 	border-radius: 40%;
+	object-fit: cover;
 `;
 
 const ImgCont = styled(FlexBox)<any>`

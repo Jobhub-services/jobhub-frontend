@@ -12,8 +12,8 @@ export const companiesDispatcher = {
 	setClosedFilter(closed: boolean) {
 		dispatchToStore(storeActions.closeFilter({ closed }));
 	},
-	setCompanies(data: any) {
-		dispatchToStore(storeActions.setCompanies(data));
+	setCompanies(data: any, reset: boolean = false) {
+		dispatchToStore(storeActions.setCompanies({ data, reset }));
 	},
 	setCompanyDetail(data: any) {
 		dispatchToStore(storeActions.setComapnyDetail(data));
@@ -26,8 +26,9 @@ export const companiesActions = {
 	async setClosedFilter(closed: boolean) {
 		companiesDispatcher.setClosedFilter(closed);
 	},
-	async getCompanies(loading: boolean = true, params: any = {}) {
+	async getCompanies(loading: boolean = true, params: any = {}, reset: boolean = false) {
 		companiesDispatcher.setIsLoading(loading);
+		if (reset) companiesDispatcher.setCompanies({}, true);
 		try {
 			const config = {
 				params: params,

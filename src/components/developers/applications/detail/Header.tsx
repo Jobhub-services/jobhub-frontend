@@ -18,8 +18,8 @@ const Header = () => {
 	return (
 		<SContainer gap={10} justify="space-between">
 			<Avatar
-				img={Google}
-				title={applicationDetails?.jobId?.title}
+				img={applicationDetails?.company?.avatar}
+				title={applicationDetails?.job?.title}
 				subtitle={applicationDetails?.company?.companyName}
 				applicationId={applicationDetails?._id!}
 				createdAt={applicationDetails?.createdAt}

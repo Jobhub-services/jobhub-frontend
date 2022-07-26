@@ -10,6 +10,7 @@ import { useAppSelector } from '@/utils/appHooks';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import { CExperience } from '@/constants/company/talent.contants';
 import { talentsActions, talentsDispatcher } from '@/modules/actions/company/talents.actions';
+import { createSearchParams, useSearchParams } from 'react-router-dom';
 
 const SH3 = styled.h3`
 	font-size: 14px;
@@ -21,6 +22,7 @@ const SH3 = styled.h3`
 const TalentsFilter = () => {
 	const { countries, roles } = useAppSelector((state) => state.metadata);
 	const { filter } = useAppSelector((state) => state.talent);
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [clear, setClear] = useState(false);
 	let localFilters: typeof filter = { ...filter };
 
@@ -47,8 +49,8 @@ const TalentsFilter = () => {
 		if (Array.isArray(localFilters.status) && localFilters.status.length > 0) tmpParams['status'] = localFilters.status;
 		if (localFilters.jobType) tmpParams['jobType'] = localFilters.jobType;
 
-		console.log(localFilters);
-		talentsActions.getTalents(tmpParams);
+		setSearchParams(createSearchParams(tmpParams));
+		talentsActions.getTalents(true, tmpParams, true);
 		talentsDispatcher.setFilters(localFilters);
 	};
 

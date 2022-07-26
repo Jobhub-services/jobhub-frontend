@@ -11,6 +11,7 @@ export interface ICompanyState {
 		size?: number;
 		count?: number;
 		pages?: number;
+		page?: number;
 	};
 	companyDetail: TCompanyDetail & {
 		_id: string;

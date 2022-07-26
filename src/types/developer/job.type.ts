@@ -1,4 +1,4 @@
-export type TLoading = 'isLoading' | 'isDetailLoading' | 'isApplicationSubmited';
+export type TLoading = 'isLoading' | 'isDetailLoading' | 'isApplicationSubmited' | 'isDataFetching';
 
 export type JobInfoData = {
 	_id: string;
@@ -11,10 +11,10 @@ export type JobInfoData = {
 	job_type?: 'Full time' | 'Part time';
 	duration?: 'Permanent' | 'Temporary';
 	createdAt?: string | null;
-	avatar?: string;
 	company?: {
 		companyName?: string;
 		company_size?: string;
+		avatar?: string;
 	};
 	salary_type?: string;
 	start_salary?: string;

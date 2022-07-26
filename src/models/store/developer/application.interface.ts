@@ -9,6 +9,8 @@ export interface IApplicationState {
 		content?: TApplicationData[];
 		count?: number;
 		size?: number;
+		pages?: number;
+		page?: number;
 	};
 	applicationDetails?: TApplicationData & {
 		responses?: {
@@ -17,7 +19,7 @@ export interface IApplicationState {
 		}[];
 		notice_period?: string;
 		start_date?: string | null;
-		jobId: TJobDetails;
+		job: TJobDetails;
 		company: TCompanyDetail;
 	};
 }

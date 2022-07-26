@@ -70,6 +70,7 @@ const JobCard = (props: JobCardProps) => {
 		navigate(`details/${props._id}`);
 	};
 	const onClick = () => {};
+
 	return (
 		<SContainer>
 			<SBody>

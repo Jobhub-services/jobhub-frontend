@@ -7,6 +7,7 @@ export interface ITalentState {
 	showTalents: {
 		count?: number;
 		pages?: number;
+		page?: number;
 		size?: number;
 		content?: TalentShortInfo[];
 	};

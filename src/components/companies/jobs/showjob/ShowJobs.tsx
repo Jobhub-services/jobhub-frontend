@@ -15,10 +15,11 @@ const SWrapper = styled.div`
 
 const ShowJobs = () => {
 	const { content } = useAppSelector((state) => state.job.showJob);
-	if (content.length === 0) return <DataEmpty title="No data found" description="No content match your criteria. Try searching for something else" />;
+	if (content?.length === 0)
+		return <DataEmpty title="No data found" description="No content match your criteria. Try searching for something else" />;
 	return (
 		<SWrapper>
-			{content.map((elem, idx) => {
+			{content?.map((elem, idx) => {
 				return (
 					<JobCard
 						key={idx}

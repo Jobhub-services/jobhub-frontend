@@ -3,6 +3,7 @@ import { JobInfoData, TJobDetails, TJobApplication, TJobType, TValueLabel, TFWor
 export interface IJobsState {
 	filterClosed?: boolean;
 	isLoading?: boolean;
+	isDataFetching?: boolean;
 	isDetailLoading?: boolean;
 	isApplicationSubmited?: boolean;
 	showDetails?: boolean;
@@ -19,6 +20,7 @@ export interface IJobsState {
 		size?: number | null;
 		count?: number | null;
 		pages?: number | null;
+		page?: number;
 	};
 	jobDetails?: TJobDetails;
 	jobApplication?: TJobApplication;

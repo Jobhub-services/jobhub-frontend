@@ -5,6 +5,7 @@ import About from '@/components/developers/companies/detail/About';
 import styled from 'styled-components';
 
 const RightCont = styled.div`
+	width: 70%;
 	padding: 0 10px;
 `;
 const CompanyInfo = () => {

@@ -10,14 +10,14 @@ const SContainer = styled(FlexBox)`
 	border-bottom: 1px solid ${colors.BLACK_11};
 `;
 
-const Header = ({ avatar }: PCompanyCard) => {
+const Header = ({ avatar, companyName, _id, generalinfo }: PCompanyCard) => {
 	const navigate = useNavigate();
 	const onClose = () => {
 		navigate(-1);
 	};
 	return (
 		<SContainer gap={10} justify="space-between">
-			<Avatar _id="" avatar={avatar} companyName="Amazon Inc." generalinfo={{ industry: 'Health, wellness & fitness' }} />
+			<Avatar _id={_id} avatar={avatar} companyName={companyName} generalinfo={generalinfo} />
 			<IconButton width="30px" height="30px" circle onClick={onClose}>
 				<CloseIcon color={colors.BLACK_8} />
 			</IconButton>

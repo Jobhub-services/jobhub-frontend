@@ -37,10 +37,11 @@ export interface IJobState {
 	createJob: JobInfo;
 	jobCreated: boolean;
 	showJob: {
-		content: ShowJobInfo[];
+		content?: ShowJobInfo[];
 		count?: number;
 		pages?: number;
 		size?: number;
+		page?: number;
 	};
 	jobDetails: JobDetails;
 

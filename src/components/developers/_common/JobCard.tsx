@@ -37,6 +37,12 @@ const SFooter = styled(FlexBox)`
 const SSpan = styled.span`
 	font-weight: 500;
 	color: ${colors.BLACK_9};
+	display: -webkit-box;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
 `;
 const SFeat = styled.span<any>`
 	background-color: ${(props) => props.color};
@@ -91,7 +97,7 @@ const JobCard = (props: PJobCard) => {
 						new
 						title={props.title}
 						subtitle={props.company?.companyName}
-						img={props.avatar}
+						img={props.company?.avatar}
 						featured={props.featured}
 						company_size={props?.company?.company_size}
 					/>
@@ -109,7 +115,7 @@ const JobCard = (props: PJobCard) => {
 				<SubBody justify="space-between" align="start" gap={10} className="mt-5">
 					<div style={{ width: '63%' }}>
 						<FlexBox align="start" justify="start" gap={5}>
-							<div>Category :</div>
+							<div style={{ whiteSpace: 'nowrap' }}>Category :</div>
 							<SSpan>{props.category ?? 'N/A'}</SSpan>
 						</FlexBox>
 						<FlexBox gap={5} align="start" justify="start" className="mt-15">
@@ -139,7 +145,7 @@ const JobCard = (props: PJobCard) => {
 							<SLoc>
 								{props.work_remotly ? `Remote. ` : ''}
 								{props.work_location?.city ? `${props.work_location?.city},` : ''} {props.work_location?.country}
-								{!props.work_remotly && props.work_location && 'N/A'}
+								{!props.work_remotly && !props.work_location && 'N/A'}
 							</SLoc>
 						</FlexBox>
 						<FlexBox gap={10} justify="end" className="mt-15">

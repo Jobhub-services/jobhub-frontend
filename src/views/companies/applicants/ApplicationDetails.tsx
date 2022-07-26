@@ -81,12 +81,15 @@ const SSpan = styled.span<any>`
 	opacity: ${(props) => props.opacity};
 `;
 const MainContainer = styled.div<any>`
-	position: fixed;
+	position: absolute;
 	cursor: pointer;
 	right: 0;
-	top: ${HEADER_HIEGHT}px;
-	width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
-	height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
+	top: 0;
+	height: 100%;
+	width: 100%;
+	//top: ${HEADER_HIEGHT}px;
+	//width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
+	//height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
 

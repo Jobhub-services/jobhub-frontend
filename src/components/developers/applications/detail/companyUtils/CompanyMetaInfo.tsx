@@ -7,7 +7,7 @@ import { Keywords } from '@/components/developers/companies/detail';
 import styled from 'styled-components';
 
 const LeftContainer = styled.div`
-	width: 35%;
+	width: 30%;
 	border: 1px solid ${colors.BLACK_12};
 	border-radius: 8px;
 	padding: 10px 15px;
@@ -16,7 +16,6 @@ const LeftContainer = styled.div`
 `;
 
 const CompanyMetaInfo = ({ headquarter, social_profile, generalinfo, keywords }: TCompanyDetail) => {
-	const { founded, company_size, industry } = generalinfo!;
 	return (
 		<LeftContainer>
 			<SocialProfile _id="" social_profile={social_profile} />
@@ -28,23 +27,24 @@ const CompanyMetaInfo = ({ headquarter, social_profile, generalinfo, keywords }:
 					{headquarter?.city ? `${headquarter?.city}, ` : ''}
 					{headquarter?.country ? `${headquarter?.country}.` : ''}
 				</SSpan>
+				{!headquarter?.street && !headquarter?.city && !headquarter?.country && 'N/A'}
 			</div>
-			{founded && (
+			{generalinfo?.founded && (
 				<div className="mt-10">
 					<SSubTitle>Founded</SSubTitle>
-					<SSpan>{dateWithMonthName(founded!)}</SSpan>
+					<SSpan>{dateWithMonthName(generalinfo?.founded!)}</SSpan>
 				</div>
 			)}
-			{company_size && (
+			{generalinfo?.company_size && (
 				<div className="mt-10">
 					<SSubTitle>Company size</SSubTitle>
-					<SSpan>{company_size}</SSpan>
+					<SSpan>{generalinfo?.company_size}</SSpan>
 				</div>
 			)}
-			{industry && (
+			{generalinfo?.industry && (
 				<div className="mt-10">
 					<SSubTitle>Industry</SSubTitle>
-					<SSpan>{industry}</SSpan>
+					<SSpan>{generalinfo?.industry}</SSpan>
 				</div>
 			)}
 			{keywords?.length! > 0 && <Keywords _id="" keywords={keywords} />}

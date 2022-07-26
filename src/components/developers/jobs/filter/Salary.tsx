@@ -32,7 +32,6 @@ const Salary = ({ onChange, jobSalary, clear }: PFJobSalary) => {
 		let tmp = { ...localSalary };
 		tmp.currencies = value;
 		setLocalSalary(tmp!);
-		console.log(tmp);
 		if (onChange) onChange(tmp, 'job_salary');
 	};
 	const handleBox = (event: React.ChangeEvent<HTMLInputElement>) => {

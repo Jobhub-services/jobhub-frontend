@@ -24,7 +24,7 @@ const LoadingIcon = ({ width, height, color }: IconProps) => {
 	);
 };
 LoadingIcon.defaultProps = {
-	color: 'balck',
+	color: 'black',
 	width: '30px',
 	height: '30px',
 };

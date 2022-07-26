@@ -33,11 +33,14 @@ const width = keyframes`
 `;
 const MainContainer = styled.div<any>`
 	cursor: pointer;
-	position: fixed;
+	position: absolute;
 	right: 0;
-	top: ${HEADER_HIEGHT}px;
-	width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
-	height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
+	top: 0;
+	width: 100%;
+	height: 100%;
+	//top: ${HEADER_HIEGHT}px;
+	//width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
+	//height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
 const DetailContainer = styled.div<any>`
@@ -103,7 +106,12 @@ const CompanyDetail = () => {
 					<LoadingScreen />
 				) : (
 					<SubContainer>
-						<Header avatar={companyDetail?.avatar} _id={companyDetail?._id} />
+						<Header
+							avatar={companyDetail?.avatar}
+							_id={companyDetail?._id}
+							companyName={companyDetail.companyName}
+							generalinfo={companyDetail.generalinfo}
+						/>
 						<MainBody>
 							<TabPane activeItem={state?.activeTab ?? 'overview'} paneWidth="30%" paneJustify="center">
 								<TabPane.Pane style={{ padding: '0' }} name="overview" title={overviewTitle}>

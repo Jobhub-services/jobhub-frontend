@@ -1,4 +1,3 @@
-import { TalentShortInfo } from '@/types/company/talent.type';
 import { TalentAllInfo } from '@/types/company/talent.type';
 import dispatchToStore from '@/utils/store';
 import { storeActions } from '@/modules/store/company/talents.store';
@@ -17,8 +16,8 @@ export const talentsDispatcher = {
 	setTalentDetails(data: TalentAllInfo) {
 		dispatchToStore(storeActions.setTalentDetails(data));
 	},
-	setTalents(data: { size?: number; pages?: number; count?: number; content?: TalentShortInfo[] }) {
-		dispatchToStore(storeActions.setTalents(data));
+	setTalents(data: any, reset: boolean = false) {
+		dispatchToStore(storeActions.setTalents({ data, reset }));
 	},
 	setFilters(data: any) {
 		dispatchToStore(storeActions.setFilters(data));
@@ -44,8 +43,9 @@ export const talentsActions = {
 		}
 	},
 
-	async getTalents(params: any = {}) {
-		talentsDispatcher.setIsLoading(true);
+	async getTalents(loading: boolean = true, params: any = {}, reset: boolean = false) {
+		talentsDispatcher.setIsLoading(loading);
+		if (reset) talentsDispatcher.setTalents({}, true);
 		try {
 			const config = {
 				params: params,

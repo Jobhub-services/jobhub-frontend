@@ -8,13 +8,15 @@ const initialState: IApplicationState = {
 		content: [],
 		count: 0,
 		size: 0,
+		pages: 0,
+		page: 0,
 	},
 	applicationDetails: {
 		_id: '',
 		responses: [],
 		notice_period: '',
 		start_date: null,
-		jobId: {
+		job: {
 			_id: '',
 		},
 		company: {
@@ -40,7 +42,29 @@ const reducerSlice = createSlice({
 			state.isDetailLoading = loading;
 		},
 		setApplications: (state, action) => {
-			state.applicationInfo = action.payload;
+			const { data, reset } = action.payload;
+			let tmp = {};
+			if (reset) {
+				tmp = {
+					content: [],
+					size: 0,
+					count: 0,
+					pages: 0,
+					page: 0,
+				};
+			} else {
+				tmp = {
+					content:
+						(state.applicationInfo?.page ?? 0) <= (state.applicationInfo?.pages ?? 0)
+							? [...(state.applicationInfo?.content ?? []), ...(data?.content ?? [])]
+							: state.applicationInfo?.content ?? [],
+					size: data?.size ?? 0,
+					count: data?.count ?? 0,
+					pages: data?.pages ?? 0,
+					page: state.applicationInfo?.page! < data?.pages ? (state.applicationInfo?.page ?? 0) + 1 : state.applicationInfo?.page,
+				};
+			}
+			state.applicationInfo = tmp;
 		},
 		setApplication: (state: any, action: any) => {
 			state.applicationDetails = action.payload;

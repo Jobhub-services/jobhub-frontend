@@ -9,7 +9,7 @@ export type TApplicationData = {
 		companyName?: string;
 		avatar?: string;
 	};
-	jobId: {
+	jobId?: {
 		_id?: string;
 		title?: string;
 	};

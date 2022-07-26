@@ -71,15 +71,15 @@ export const applicationsActions = {
 			applicationsDispatcher.setIsLoading(false);
 		}
 	},
-	async getApplicantDetails(status: ApplicationStatus, id?: string) {
-		applicationsDispatcher.setIsLoading(true, 'isDetailLoading');
+	async getApplicantDetails(status: ApplicationStatus, id?: string, loading: boolean = true) {
+		applicationsDispatcher.setIsLoading(loading, 'isDetailLoading');
 		try {
 			const param = {
 				params: {
 					status: status,
 				},
 			};
-			const response = await httpClient.get(`${JOBS_SERVICE}/application/show/${id}`, param);
+			const response = await httpClient.get(`${JOBS_SERVICE}/application/company/${id}`, param);
 			const responseData = response.data;
 			console.log(responseData);
 			if (responseData) applicationsDispatcher.setApplicantDetails(responseData.content);

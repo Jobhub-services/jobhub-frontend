@@ -65,11 +65,9 @@ const AvatarList = ({ img, totalAvatar, size, onClick }: any) => {
 	return (
 		<SFlexBox justify="start">
 			{img?.map((elem: string, index: number) => {
-				let tmp = <UserIcon />;
-				if (elem) tmp = <SImg src={elem} alt={'.'} width={size} height={size} />;
 				return (
 					<SAvatar size={size + 7} key={index}>
-						{tmp}
+						{elem ? <SImg src={elem} alt={'.'} width={size} height={size} /> : <UserIcon />}
 					</SAvatar>
 				);
 			})}

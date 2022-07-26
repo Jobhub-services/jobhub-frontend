@@ -21,7 +21,17 @@ export function dateWithMonthName(value: string | Date): string | null {
 
 export namespace pushNotification {
 	export const success = (content: any) => {
-		toast.success(content);
+		toast.success(content, {
+			position: 'top-right',
+			autoClose: 7000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			rtl: false,
+			pauseOnFocusLoss: true,
+			draggable: true,
+			pauseOnHover: true,
+			theme: 'colored',
+		});
 	};
 	export const error = (content: any) => {
 		toast.error(content, {

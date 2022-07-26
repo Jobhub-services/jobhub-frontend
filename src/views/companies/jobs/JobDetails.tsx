@@ -32,11 +32,14 @@ const kwidth = keyframes`
 `;
 const MainContainer = styled.div<any>`
 	cursor: pointer;
-	position: fixed;
+	position: absolute;
 	right: 0;
-	top: ${HEADER_HIEGHT}px;
-	width: calc(100% - ${EXPANDED_ASIDE_WIDTH}px);
-	height: calc(100% - ${HEADER_HIEGHT}px);
+	top: 0;
+	width: 100%;
+	height: 100%;
+	//top: ${HEADER_HIEGHT}px;
+	//width: calc(100% - ${EXPANDED_ASIDE_WIDTH}px);
+	//height: calc(100% - ${HEADER_HIEGHT}px);
 	background-color: #2c2c2c3b;
 `;
 const RedSpan = styled.span`

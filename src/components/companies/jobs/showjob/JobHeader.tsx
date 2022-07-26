@@ -13,7 +13,7 @@ const JobHeader = () => {
 		const sort = searchParams.get('sort') ?? '-1';
 		searchParams.set('sort', value);
 		setSearchParams(searchParams);
-		if (sort !== value) jobActions.getJobs({ sort: value });
+		if (sort !== value) jobActions.getJobs(true, searchParams, true);
 	};
 
 	return (

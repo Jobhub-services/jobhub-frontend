@@ -24,7 +24,7 @@ const StyledFlexBox = styled(FlexBox)`
 const MainContent = styled.div<any>`
 	width: calc(100% - ${(props) => (props.expanded ? EXPANDED_ASIDE_WIDTH : COLLAPSED_ASIDE_WIDTH)}px);
 	transition: width 0.2s ease-in-out;
-	overflow-y: auto;
+	//overflow-y: auto;
 	height: 100%;
 `;
 
