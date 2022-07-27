@@ -14,11 +14,11 @@ export const applicationsDispatcher = {
 	setClosedFilter(closed: boolean) {
 		dispatchToStore(storeActions.closeFilter({ closed }));
 	},
-	setApplicantsByJobs(data: AppByJobs) {
-		dispatchToStore(storeActions.setApplicantsByJobs(data));
+	setApplicantsByJobs(data: any, reset: boolean = false) {
+		dispatchToStore(storeActions.setApplicantsByJobs({ data, reset }));
 	},
-	setShowApplicants(data: AppData) {
-		dispatchToStore(storeActions.setShowApplicants(data));
+	setShowApplicants(data: any, reset: boolean = false) {
+		dispatchToStore(storeActions.setShowApplicants({ data, reset }));
 	},
 	setApplicantDetails(data: ApplicantAllInfo) {
 		dispatchToStore(storeActions.setApplicantDetails(data));
@@ -37,8 +37,9 @@ export const applicationsActions = {
 	async setClosedFilter(closed: boolean) {
 		applicationsDispatcher.setClosedFilter(closed);
 	},
-	async getApplicantsByJobs(status: ApplicationStatus = 'NEW', params: any = {}) {
-		applicationsDispatcher.setIsLoading(true);
+	async getApplicantsByJobs(status: ApplicationStatus = 'NEW', loading: boolean = true, params: any = {}, reset: boolean = false) {
+		applicationsDispatcher.setIsLoading(loading);
+		if (reset) applicationsDispatcher.setApplicantsByJobs({}, true);
 		try {
 			const param = {
 				params: {
@@ -55,8 +56,9 @@ export const applicationsActions = {
 			applicationsDispatcher.setIsLoading(false);
 		}
 	},
-	async getShowApplicants(params: any = {}, status: ApplicationStatus = 'NEW') {
-		applicationsDispatcher.setIsLoading(true);
+	async getShowApplicants(status: ApplicationStatus = 'NEW', loading: boolean = false, params: any = {}, reset: boolean = false) {
+		applicationsDispatcher.setIsLoading(loading);
+		if (reset) applicationsDispatcher.setShowApplicants({}, true);
 		try {
 			const param = {
 				params: {

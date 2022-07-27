@@ -11,7 +11,7 @@ export interface IJobsState {
 		job_categories?: TValueLabel[];
 		skills?: TValueLabel[];
 		work_location?: TFWorkLocation;
-		job_type?: TJobType;
+		job_type?: string[];
 		job_salary?: TJobSalary;
 		company_size?: string[];
 	};

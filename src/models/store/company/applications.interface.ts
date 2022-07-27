@@ -4,12 +4,13 @@ type PaginationType = {
 	size?: number;
 	pages?: number;
 	count?: number;
+	page?: number;
 };
 export type AppData = PaginationType & {
-	content: ApplicantsShortInfo[];
+	content?: ApplicantsShortInfo[];
 };
 export type AppByJobs = PaginationType & {
-	content: ApplicantsByJob[];
+	content?: ApplicantsByJob[];
 };
 export interface IApplicationsState {
 	isLoading?: boolean;

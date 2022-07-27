@@ -1,5 +1,10 @@
 export interface ISettingsState {
 	isLoading?: boolean;
+	isUpdated?: boolean;
+	errors?: {
+		status?: boolean;
+		messages?: any;
+	};
 	generaleInfo?: {
 		email?: string;
 		firstName?: string;

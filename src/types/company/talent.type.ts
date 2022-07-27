@@ -87,12 +87,7 @@ export type TalentAllInfo = TalentShortInfo & {
 export type TFilter = {
 	country?: TValueLabel[];
 	roles?: TValueLabel[];
-	jobType?: {
-		full_time?: boolean;
-		part_time?: boolean;
-		temporary?: boolean;
-		permanent?: boolean;
-	};
+	jobType?: string[];
 	experienceYear?: TValueLabel[];
 	status?: TalentStatus[];
 	skills?: TValueLabel[];

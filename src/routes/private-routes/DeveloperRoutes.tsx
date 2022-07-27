@@ -9,7 +9,7 @@ import {
 	CompanyDetail,
 	JobDetails,
 	ApplicationDetails,
-	CompanySettings,
+	TalentSettings,
 	AccountSettings,
 	SecuritySettings,
 	TalentOverview,
@@ -29,7 +29,7 @@ const DeveloperRoutes: FC = () => {
 			<Route path="companies" element={<ViewCompanies />}>
 				<Route path="detail/:id" element={<CompanyDetail />} />
 			</Route>
-			<Route path="settings" element={<CompanySettings />}>
+			<Route path="settings" element={<TalentSettings />}>
 				<Route path="account" element={<AccountSettings />} />
 				<Route path="security" element={<SecuritySettings />} />
 			</Route>

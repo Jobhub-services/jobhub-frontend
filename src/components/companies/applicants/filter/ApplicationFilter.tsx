@@ -8,7 +8,7 @@ import { createSearchParams, useLocation, useNavigate, useParams, useSearchParam
 import { useEffect, useState } from 'react';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import Skills from '@/components/companies/_common/filter/Skills';
-import OccupationType from '@/components/companies/applicants/filter/OccupationType';
+import OccupationType from '@/components/companies/_common/filter/OccupationType';
 import { ApplicationStatus } from '@/types/company/applications.type';
 
 const SH3 = styled.h3`
@@ -64,14 +64,14 @@ const ApplicationsFilter = () => {
 			tmpParams['applicationDate'] = tmpArr;
 		}
 		if (localFilters?.occupationType) tmpParams['jobType'] = localFilters.occupationType;
+		if (searchParams.get('sort')) tmpParams['sort'] = searchParams.get('sort');
 
 		applicationsDispatcher.setFilter(localFilters);
-		if (searchParams.get('sort')) tmpParams['sort'] = searchParams.get('sort');
 		const newParams = createSearchParams(tmpParams);
 
 		if (pathname.startsWith('/applicants/search/')) {
 			setSearchParams(newParams);
-			applicationsActions.getShowApplicants(tmpParams, status as ApplicationStatus);
+			applicationsActions.getShowApplicants(status as ApplicationStatus, true, tmpParams, true);
 		} else {
 			navigate(`/applicants/search/${status}?${newParams.toString()}`);
 		}
@@ -120,7 +120,7 @@ const ApplicationsFilter = () => {
 						/>
 					</div>
 					<Skills onChange={handleComponentChanges} skills={localFilters.skills} clear={clear} />
-					<OccupationType onChange={handleComponentChanges} jobType={localFilters.occupationType} clear={clear} />
+					<OccupationType onChange={handleComponentChanges} jobType={localFilters.occupationType} clear={clear} title="Occupation type" />
 				</div>
 			</FilterContianer.Body>
 		</FilterContianer>

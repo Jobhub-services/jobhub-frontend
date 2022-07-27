@@ -28,10 +28,10 @@ const JobHeader = () => {
 		const sort = searchParams.get('sort') ?? '-1';
 		searchParams.set('sort', value);
 		setSearchParams(searchParams);
-		let params: any = {};
-		for (const [k, v] of searchParams.entries()) params[k] = v;
+		//let params: any = {};
+		for (const [k, v] of searchParams.entries()) console.log(k, v);
 		if (sort !== value) {
-			jobActions.getJobs(true, params, true);
+			jobActions.getJobs(true, searchParams, true);
 		}
 	};
 

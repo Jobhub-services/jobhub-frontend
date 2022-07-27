@@ -21,6 +21,14 @@ const reducerSlices = createSlice({
 		setSecurity: (state, action) => {
 			state.securityInfo = action.payload;
 		},
+		setIsUpdated: (state, action) => {
+			const { updated } = action.payload;
+			state.isUpdated = updated;
+		},
+		setErrors: (state, action) => {
+			const { errors } = action.payload;
+			state.errors = errors;
+		},
 	},
 });
 

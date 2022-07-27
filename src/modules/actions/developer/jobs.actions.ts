@@ -50,6 +50,7 @@ export const jobActions = {
 			};
 			const response = await httpClient.get(`${JOBS_SERVICE}/talent`, param);
 			const responseData = response.data;
+			console.log('jobs data ', responseData);
 			if (responseData) jobDispatcher.setJobs(responseData);
 		} catch (e: any) {
 			const response: AxiosResponse = e?.response;

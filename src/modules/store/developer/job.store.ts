@@ -53,12 +53,7 @@ const initialState: IJobsState = {
 	},
 	filterInfo: {
 		job_categories: [],
-		job_type: {
-			full_time: false,
-			part_time: false,
-			permanent: false,
-			temporary: false,
-		},
+		job_type: [],
 		job_salary: {
 			hourly: {},
 			monthly: {},

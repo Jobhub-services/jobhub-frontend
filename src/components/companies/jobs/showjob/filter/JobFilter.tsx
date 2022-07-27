@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { colors } from '@/assets/theme';
 import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useState } from 'react';
-import OccupationType from '@/components/companies/jobs/showjob/filter/OccupationType';
+import OccupationType from '@/components/companies/_common/filter/OccupationType';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import { jobActions, jobDispatcher } from '@/modules/actions/company/job.actions';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
@@ -44,17 +44,18 @@ const JobFilter = () => {
 	const onApply = () => {
 		let tmpFilters: any = { ...localFilters };
 		if (localFilters?.category?.length! > 0) tmpFilters.category = localFilters.category?.map((elem) => elem.value);
+		if (searchParams.get('sort')) tmpFilters['sort'] = searchParams.get('sort');
 		setSearchParams(createSearchParams(tmpFilters));
+		jobDispatcher.setFilters(localFilters);
 		jobActions.getJobs(true, tmpFilters, true);
 		jobDispatcher.setClosedFilter(true);
-		//console.log(tmpFilters);
 	};
 	console.log(localFilters);
 	return (
 		<FilterContianer title="Job filters" type="job" onApply={onApply} onClear={onClear}>
 			<FilterContianer.Body>
 				<div className="mt-15">
-					<OccupationType onChange={handleComponentChanges} jobType={localFilters?.job_type} clear={clear} />
+					<OccupationType onChange={handleComponentChanges} jobType={localFilters?.job_type} clear={clear} title="Employement Type" />
 				</div>
 				<div className="mt-20">
 					<STitle>Job category</STitle>

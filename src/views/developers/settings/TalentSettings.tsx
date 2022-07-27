@@ -14,7 +14,7 @@ const SContainer = styled.div`
 const MainContainer = styled.div`
 	padding: 40px 10px;
 `;
-const CompanySettings = () => {
+const TalentSettings = () => {
 	return (
 		<MainContainer>
 			<FlexBox align="start" gap={30}>
@@ -27,4 +27,4 @@ const CompanySettings = () => {
 	);
 };
 
-export default CompanySettings;
+export default TalentSettings;

@@ -5,21 +5,21 @@ const SettingsColorIcon = ({ width, height }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<linearGradient x1="114.70967" y1="114.70967" x2="56.90692" y2="56.90692" gradientUnits="userSpaceOnUse" id="color-1">
-					<stop offset="0" stop-color="#ffffff"></stop>
-					<stop offset="0.242" stop-color="#f2f2f2"></stop>
-					<stop offset="1" stop-color="#cccccc"></stop>
+					<stop offset="0" stopColor="#ffffff"></stop>
+					<stop offset="0.242" stopColor="#f2f2f2"></stop>
+					<stop offset="1" stopColor="#cccccc"></stop>
 				</linearGradient>
 				<linearGradient x1="62.52917" y1="62.52917" x2="103.70167" y2="103.70167" gradientUnits="userSpaceOnUse" id="color-2">
-					<stop offset="0" stop-color="#0d61a9"></stop>
-					<stop offset="0.363" stop-color="#0e5fa4"></stop>
-					<stop offset="0.78" stop-color="#135796"></stop>
-					<stop offset="1" stop-color="#16528c"></stop>
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="0.363" stopColor="#0e5fa4"></stop>
+					<stop offset="0.78" stopColor="#135796"></stop>
+					<stop offset="1" stopColor="#16528c"></stop>
 				</linearGradient>
 				<linearGradient x1="19.08483" y1="19.14933" x2="136.4605" y2="136.52142" gradientUnits="userSpaceOnUse" id="color-3">
-					<stop offset="0" stop-color="#3498db"></stop>
-					<stop offset="0.331" stop-color="#3498db"></stop>
-					<stop offset="0.669" stop-color="#3498db"></stop>
-					<stop offset="1" stop-color="#3498db"></stop>
+					<stop offset="0" stopColor="#3498db"></stop>
+					<stop offset="0.331" stopColor="#3498db"></stop>
+					<stop offset="0.669" stopColor="#3498db"></stop>
+					<stop offset="1" stopColor="#3498db"></stop>
 				</linearGradient>
 			</defs>
 			<g fill="none">

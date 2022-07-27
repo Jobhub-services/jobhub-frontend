@@ -17,24 +17,25 @@ const JobsFilter = () => {
 	let localFilters: typeof filterInfo = { ...filterInfo };
 	const onApply = () => {
 		jobDispatcher.setFilters(localFilters);
-		//console.log('local filters ', localFilters);
 		let tmp: any = {};
 		if (localFilters?.job_categories?.length! > 0) tmp.job_categories = localFilters?.job_categories?.map((elem) => elem.value);
 		if (localFilters?.skills?.length! > 0) tmp.skills = localFilters?.skills?.map((elem) => elem.value);
 		if (localFilters?.company_size?.length! > 0) tmp.company_size = localFilters?.company_size;
-		if (localFilters?.job_type) tmp.job_type = localFilters?.job_type;
-		if (localFilters?.work_location)
-			tmp.work_location = {
-				remote: localFilters?.work_location?.remote,
-				countries: localFilters?.work_location?.countries?.map((elem) => elem.value),
-			};
-		if (localFilters?.job_salary)
-			tmp.job_salary = {
-				...localFilters.job_salary,
-				currencies: localFilters.job_salary?.currencies?.map((elem) => elem.value),
-			};
-		//console.log('tmp filters ', tmp);
-		setSearchParams(createSearchParams(tmp));
+
+		if (localFilters?.job_type?.length! > 0) tmp.job_type = localFilters?.job_type;
+		if (localFilters?.work_location?.remote) tmp.work_remotly = true;
+		if (localFilters?.work_location?.countries?.length! > 0) tmp.work_location = localFilters?.work_location?.countries?.map((elem) => elem.value);
+		if (localFilters.job_salary?.currencies?.length! > 0) tmp.currencies = localFilters.job_salary?.currencies?.map((elem) => elem.value);
+		if (localFilters?.job_salary?.hourly?.checked && localFilters.job_salary?.hourly?.from && localFilters.job_salary?.hourly?.to)
+			tmp.hourly = [localFilters.job_salary?.hourly?.from, localFilters.job_salary?.hourly?.to];
+		if (localFilters?.job_salary?.monthly?.checked && localFilters.job_salary?.monthly?.to && localFilters.job_salary?.monthly?.from)
+			tmp.monthly = [localFilters.job_salary?.monthly?.from, localFilters.job_salary?.monthly?.to];
+		if (localFilters?.job_salary?.annually?.checked && localFilters.job_salary?.annually?.from && localFilters.job_salary?.annually?.to)
+			tmp.annually = [localFilters.job_salary?.annually?.from, localFilters.job_salary?.annually?.to];
+
+		if (searchParams.get('sort')) tmp['sort'] = searchParams.get('sort');
+		const newParams = createSearchParams(tmp);
+		setSearchParams(newParams);
 		jobActions.getJobs(true, tmp, true);
 	};
 	const handleJobType = (value: any, name?: string) => {

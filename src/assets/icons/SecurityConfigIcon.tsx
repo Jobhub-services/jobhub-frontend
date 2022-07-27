@@ -5,12 +5,12 @@ const SecurityConfigIcon = ({ width, height }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<linearGradient x1="70.30858" y1="17.50817" x2="119.57942" y2="154.64233" gradientUnits="userSpaceOnUse" id="color-1">
-					<stop offset="0" stop-color="#2aa4f4"></stop>
-					<stop offset="1" stop-color="#007ad9"></stop>
+					<stop offset="0" stopColor="#2aa4f4"></stop>
+					<stop offset="1" stopColor="#007ad9"></stop>
 				</linearGradient>
 				<radialGradient cx="86.15408" cy="83.55258" r="14.33333" gradientUnits="userSpaceOnUse" id="color-2">
-					<stop offset="0" stop-color="#000000"></stop>
-					<stop offset="1" stop-color="#000000" stop-opacity="0"></stop>
+					<stop offset="0" stopColor="#000000"></stop>
+					<stop offset="1" stopColor="#000000" stop-opacity="0"></stop>
 				</radialGradient>
 			</defs>
 			<g fill="none">

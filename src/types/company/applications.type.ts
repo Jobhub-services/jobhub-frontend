@@ -72,11 +72,6 @@ export type FilterType = {
 	country?: TValueLabel[];
 	applicantRole?: TValueLabel[];
 	applicationDate?: [Date | null, Date | null];
-	occupationType?: {
-		full_time?: boolean;
-		part_time?: boolean;
-		temporary?: boolean;
-		permanent?: boolean;
-	};
+	occupationType?: string[];
 	skills?: TValueLabel[];
 };

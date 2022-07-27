@@ -2,7 +2,6 @@ import { CheckBox, FlexBox, TagInput, TagPicker } from 'staak-ui';
 import FilterContianer from '@/components/common/filter/FilterContainer';
 import styled from 'styled-components';
 import { colors } from '@/assets/theme';
-import JobType from '@/components/companies/talents/filter/JobType';
 import ApplicantStatus from '@/components/companies/talents/filter/ApplicantStatus';
 import Skills from '@/components/companies/_common/filter/Skills';
 import { useEffect, useState } from 'react';
@@ -11,6 +10,7 @@ import { metadataActions } from '@/modules/actions/metadata.actions';
 import { CExperience } from '@/constants/company/talent.contants';
 import { talentsActions, talentsDispatcher } from '@/modules/actions/company/talents.actions';
 import { createSearchParams, useSearchParams } from 'react-router-dom';
+import OccupationType from '@/components/companies/_common/filter/OccupationType';
 
 const SH3 = styled.h3`
 	font-size: 14px;
@@ -105,7 +105,7 @@ const TalentsFilter = () => {
 					</TagPicker>
 				</div>
 				<ApplicantStatus onChange={handleComponentChanges} status={localFilters?.status} clear={clear} />
-				<JobType onChange={handleComponentChanges} jobType={localFilters?.jobType} clear={clear} />
+				<OccupationType onChange={handleComponentChanges} jobType={localFilters?.jobType} clear={clear} title="Occupation type" />
 			</FilterContianer.Body>
 		</FilterContianer>
 	);

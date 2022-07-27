@@ -13,11 +13,11 @@ const SContainer = styled.div`
 	}
 `;
 const ApplicantsAll = () => {
-	const { content } = useAppSelector((state) => state.applications.showApplicants);
-	if (content.length === 0) return <DataEmpty title="No applicant Founds" />;
+	const { showApplicants } = useAppSelector((state) => state.applications);
+	if (showApplicants?.content?.length === 0) return <DataEmpty title="No applicant Founds" />;
 	return (
 		<SContainer>
-			{content?.map((elem, idx) => {
+			{showApplicants?.content?.map((elem, idx) => {
 				return (
 					<ApplicationCard
 						key={idx}

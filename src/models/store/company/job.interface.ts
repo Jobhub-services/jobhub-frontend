@@ -46,7 +46,7 @@ export interface IJobState {
 	jobDetails: JobDetails;
 
 	filters: {
-		job_type?: { full_time?: boolean; part_time?: boolean; permanent?: boolean; temporary?: boolean };
+		job_type?: string[];
 		createdAt?: [Date | null, Date | null];
 		visa_sponsorship?: boolean;
 		category?: TValueLabel[];
