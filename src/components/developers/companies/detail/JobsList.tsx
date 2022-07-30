@@ -17,7 +17,19 @@ const SWrapper = styled.div`
 		grid-template-columns: repeat(1, 1fr);
 	}
 `;
-const JobsList = ({ size, jobs }: { size: number; jobs: PJobCard[] }) => {
+const JobsList = ({
+	size,
+	jobs,
+	company_size,
+	avatar,
+	companyName,
+}: {
+	company_size: string;
+	avatar: string;
+	companyName: string;
+	size: number;
+	jobs: PJobCard[];
+}) => {
 	return (
 		<Container>
 			<FlexBox justify="start" gap={10}>
@@ -35,7 +47,11 @@ const JobsList = ({ size, jobs }: { size: number; jobs: PJobCard[] }) => {
 							job_type={job.job_type}
 							duration={job.duration}
 							createdAt={job.createdAt}
-							company={job.company}
+							company={{
+								company_size,
+								avatar,
+								companyName,
+							}}
 							work_location={job.work_location}
 							hire_location={job.hire_location}
 							start_salary={job.start_salary}

@@ -39,6 +39,9 @@ export const jobDispatcher = {
 	setFilters(data: any) {
 		dispatchToStore(storeActions.setFilters(data));
 	},
+	setDeleteJob(deleted: boolean, updateJobs: boolean, id: string = '') {
+		dispatchToStore(storeActions.setDeleteJob({ deleted, updateJobs, id }));
+	},
 };
 export const jobActions = {
 	async setClosedFilter(closed: boolean) {
@@ -144,7 +147,7 @@ export const jobActions = {
 			const response = await httpClient.delete(`${JOBS_SERVICE}/company/${id}`);
 			const responseData = response.data;
 			if (responseData) {
-				jobDispatcher.getJobDetails(responseData.content);
+				jobDispatcher.setDeleteJob(true, true, id);
 			}
 		} catch (e: any) {
 			const response: AxiosResponse = e?.response;

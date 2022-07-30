@@ -42,9 +42,13 @@ const JobFilter = () => {
 		jobDispatcher.setFilters({ category: [] });
 	};
 	const onApply = () => {
-		let tmpFilters: any = { ...localFilters };
+		let tmpFilters: any = {};
 		if (localFilters?.category?.length! > 0) tmpFilters.category = localFilters.category?.map((elem) => elem.value);
+		if (localFilters?.createdAt?.length! > 0) tmpFilters.createdAt = localFilters.createdAt;
+		if (localFilters?.job_type?.length! > 0) tmpFilters.job_type = localFilters.job_type;
+
 		if (searchParams.get('sort')) tmpFilters['sort'] = searchParams.get('sort');
+
 		setSearchParams(createSearchParams(tmpFilters));
 		jobDispatcher.setFilters(localFilters);
 		jobActions.getJobs(true, tmpFilters, true);
@@ -55,7 +59,7 @@ const JobFilter = () => {
 		<FilterContianer title="Job filters" type="job" onApply={onApply} onClear={onClear}>
 			<FilterContianer.Body>
 				<div className="mt-15">
-					<OccupationType onChange={handleComponentChanges} jobType={localFilters?.job_type} clear={clear} title="Employement Type" />
+					<OccupationType onChange={handleComponentChanges} jobType={localFilters?.job_type} clear={clear} title="Employement Type" name="job_type" />
 				</div>
 				<div className="mt-20">
 					<STitle>Job category</STitle>

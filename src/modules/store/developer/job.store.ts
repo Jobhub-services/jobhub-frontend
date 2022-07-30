@@ -7,6 +7,7 @@ const initialState: IJobsState = {
 	isLoading: false,
 	isDetailLoading: false,
 	showDetails: false,
+	isSaving: false,
 	jobInfo: {
 		content: [],
 		size: 0,
@@ -129,6 +130,18 @@ const reducerSlice = createSlice({
 				state.jobInfo.content = tmpArr;
 			}
 			state.succesApplication = action.payload;
+		},
+		setSaveJob: (state, action) => {
+			const { saved, jobSaved, id } = action.payload;
+			if (id) {
+				state.jobInfo.content = state.jobInfo?.content?.map((elem) => {
+					if (elem._id === id) {
+						return { ...elem, saved: jobSaved };
+					}
+					return elem;
+				});
+			}
+			state.jobSaved = saved;
 		},
 	},
 });

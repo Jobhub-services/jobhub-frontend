@@ -9,16 +9,18 @@ import StatusItem from '@/components/developers/profile/preferences/utils/Status
 
 const ProfileStatus = () => {
 	const { status } = useAppSelector((state) => state.developerProfile.profile);
+	const [localStatus, setLocalStatus] = useState(status);
 	const [show, setShow] = useState(false);
-	const handleInput = (event: any, value: string, label: string, name: string) => {
+	const handleInput = (event: any, value: any, label: string, name: string) => {
 		event.preventDefault();
-		if (status !== value) {
+		if (localStatus !== value) {
 			setShow(true);
-			profileDispatcher.setAttribute(value, 'status');
+			setLocalStatus(value);
+			//profileDispatcher.setAttribute(value, 'status');
 		}
 	};
 	const onSave = () => {
-		profileAction.setAttribute(status, 'status');
+		profileAction.setAttribute(localStatus, 'status');
 		setShow(false);
 	};
 	return (
@@ -34,7 +36,7 @@ const ProfileStatus = () => {
 				)}
 			</div>
 			<div style={{ width: '50%' }}>
-				<InputPickerField name="status" title="Status" placeholder="Your status" value={CProfileStatus[status!]?.value} onChange={handleInput}>
+				<InputPickerField name="status" title="Status" placeholder="Your status" value={CProfileStatus[localStatus!]?.value} onChange={handleInput}>
 					<InputPickerField.Option value="ready">
 						<StatusItem status="ready" />
 					</InputPickerField.Option>

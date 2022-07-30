@@ -66,7 +66,7 @@ const LastApplicants = () => {
 
 					{showApplicants?.content?.length! > 3 && (
 						<div className="mt-20">
-							<Link to="applications">
+							<Link to="/applicants/NEW">
 								<FlexBox gap={10} style={{ cursor: 'pointer' }}>
 									<SSpan>See all applications</SSpan>
 									<SIcon>

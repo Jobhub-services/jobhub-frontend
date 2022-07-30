@@ -16,11 +16,12 @@ import Role from '@/components/companies/jobs/showjob/details/utils/Role';
 import Avatar from '@/components/companies/jobs/showjob/details/AvatarList';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '@/utils/appHooks';
-import { dateWithMonthName } from '@/utils/helpers';
+import { dateWithMonthName, pushNotification } from '@/utils/helpers';
 import { StatusTitle } from '@/constants/company/job.contants';
 import { useEffect, useRef } from 'react';
-import { jobActions } from '@/modules/actions/company/job.actions';
+import { jobActions, jobDispatcher } from '@/modules/actions/company/job.actions';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { ToastContainer } from 'react-toastify';
 
 const kwidth = keyframes`
 	from {
@@ -92,12 +93,20 @@ const SubTitle = styled.span`
 const JobDetails = () => {
 	const parentRef = useRef();
 	const { id } = useParams();
-	const { jobDetails, isDetailLoading } = useAppSelector((state) => state.job);
+	const { jobDetails, isDetailLoading, isJobDeleted } = useAppSelector((state) => state.job);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (jobDetails._id !== id) jobActions.getJobDetails(id!);
 	}, []);
+
+	useEffect(() => {
+		if (isJobDeleted) {
+			pushNotification.success('Job deleted successfully');
+			jobDispatcher.setDeleteJob(false, false);
+			navigate(-1);
+		}
+	}, [isJobDeleted]);
 	const onClose = () => {
 		navigate(-1);
 	};
@@ -106,10 +115,11 @@ const JobDetails = () => {
 		if (e.target === parentRef.current) navigate(-1);
 	};
 	const handleDelete = () => {
-		console.log('delete');
+		jobActions.deleteJob(jobDetails._id);
 	};
 	return (
 		<MainContainer ref={parentRef} onClick={backUp}>
+			<ToastContainer />
 			<DetailContainer>
 				{isDetailLoading ? (
 					<LoadingScreen />
@@ -125,7 +135,7 @@ const JobDetails = () => {
 								</Headline>
 							</FlexBox>
 							<FlexBox gap={10}>
-								<Button>Edit</Button>
+								{/*<Button>Edit</Button>*/}
 								<Button color="red" variant="text" size="md" startIcon={<CloseIcon />} onClick={handleDelete}>
 									Delete
 								</Button>

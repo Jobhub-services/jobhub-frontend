@@ -99,6 +99,7 @@ const CompanyDetail = () => {
 	const onClose = (e: any) => {
 		if (e.target === parentRef.current) navigate(-1);
 	};
+
 	return (
 		<MainContainer ref={parentRef} showed={true} onClick={onClose}>
 			<DetailContainer showed={true}>
@@ -132,7 +133,13 @@ const CompanyDetail = () => {
 									</SBody>
 								</TabPane.Pane>
 								<TabPane.Pane style={{ background: '#f5f8fa' }} name="jobs" title={jobTitle}>
-									<JobsList size={companyDetail?.jobs?.length ?? 0} jobs={companyDetail?.jobs ?? []} />
+									<JobsList
+										size={companyDetail?.jobs?.length ?? 0}
+										companyName={companyDetail?.companyName!}
+										company_size={companyDetail?.generalinfo?.company_size!}
+										avatar={companyDetail?.avatar!}
+										jobs={companyDetail?.jobs ?? []}
+									/>
 								</TabPane.Pane>
 							</TabPane>
 						</MainBody>

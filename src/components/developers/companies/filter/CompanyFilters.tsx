@@ -27,12 +27,13 @@ const CompanyFilters = () => {
 	}, [clear]);
 
 	const onApply = () => {
-		const tmp: any = {
-			headquarters: localFilters?.headquarters?.map((elem) => elem.value),
-			company_size: localFilters?.company_size?.map((elem) => elem.value),
-			industry: localFilters?.industry,
-			keywords: localFilters?.keywords,
-		};
+		const tmp: any = {};
+
+		if (localFilters?.headquarters?.length! > 0) tmp.headquarters = localFilters?.headquarters?.map((elem) => elem.value);
+		if (localFilters?.company_size?.length! > 0) tmp.company_size = localFilters?.company_size?.map((elem) => elem.value);
+		if (localFilters?.industry?.length! > 0) tmp.industry = localFilters?.industry;
+		if (localFilters?.keywords?.length! > 0) tmp.keywords = localFilters?.keywords;
+
 		companiesDispatcher.setFilters(localFilters);
 		setSearchParams(createSearchParams(tmp));
 		companiesActions.getCompanies(true, tmp, true);
@@ -42,6 +43,7 @@ const CompanyFilters = () => {
 		setClear(!clear);
 		companiesDispatcher.setFilters({});
 		localFilters = {};
+		setSearchParams({});
 	};
 
 	const handleChange = (event: any, value: { value: string; label: string }[], name?: string) => {
@@ -103,7 +105,7 @@ const CompanyFilters = () => {
 					<div className="mb-10">
 						<TagInput
 							name="industry"
-							placeholder="Choose company industry"
+							placeholder="Choose company industry and press enter"
 							values={localFilters?.industry ?? []}
 							className="mt-15"
 							onChange={handleInputChange}
@@ -115,7 +117,7 @@ const CompanyFilters = () => {
 					<div className="mb-10">
 						<TagInput
 							name="keywords"
-							placeholder="Choose company specialities"
+							placeholder="Choose company specialities and press enter"
 							values={localFilters?.keywords ?? []}
 							className="mt-15"
 							onChange={handleInputChange}

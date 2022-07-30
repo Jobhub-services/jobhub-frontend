@@ -7,6 +7,7 @@ export const initialState: IJobState = {
 	isLoading: false,
 	jobCreated: false,
 	createJob: JobInstance,
+	isJobDeleted: false,
 	showJob: {
 		content: [],
 		count: 0,
@@ -67,6 +68,16 @@ const reducerSlices = createSlice({
 		setJobCreated: (state, action) => {
 			const { created } = action.payload;
 			state.jobCreated = created;
+		},
+		setDeleteJob: (state, action) => {
+			const { deleted, updateJobs, id } = action.payload;
+			if (updateJobs) {
+				console.log('hello world ', state.showJob);
+				const newJobs = state.showJob.content?.filter((elem) => elem._id !== id);
+				state.showJob.content = newJobs;
+				state.showJob.count = newJobs?.length;
+			}
+			state.isJobDeleted = deleted;
 		},
 		setShowJobs: (state, action) => {
 			const { data, reset } = action.payload;

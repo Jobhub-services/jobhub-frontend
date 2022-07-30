@@ -98,7 +98,7 @@ const ApplicationsFilter = () => {
 						</TagPicker>
 					</div>
 					<div className="mt-20">
-						<SH3>Country</SH3>
+						<SH3>Applicants Country</SH3>
 						<TagPicker placeholder="Choose applicants countries" name="country" values={localFilters.country ?? []} onChange={handleChange}>
 							{countries?.content?.map((elem, idx) => {
 								const tmp = elem.name + '(' + elem.code + ')';
@@ -110,7 +110,7 @@ const ApplicationsFilter = () => {
 							})}
 						</TagPicker>
 					</div>
-					<div className="mt-20">
+					{/*<div className="mt-20">
 						<SH3>Application date</SH3>
 						<DateRangePicker
 							placeholder="Start date - End date"
@@ -118,9 +118,15 @@ const ApplicationsFilter = () => {
 							endDate={filter.applicationDate && filter.applicationDate?.length > 0 ? filter.applicationDate![1] : null}
 							onChange={handleDate}
 						/>
-					</div>
+						</div>*/}
 					<Skills onChange={handleComponentChanges} skills={localFilters.skills} clear={clear} />
-					<OccupationType onChange={handleComponentChanges} jobType={localFilters.occupationType} clear={clear} title="Occupation type" />
+					<OccupationType
+						onChange={handleComponentChanges}
+						jobType={localFilters.occupationType}
+						clear={clear}
+						title="Occupation type"
+						name="occupationType"
+					/>
 				</div>
 			</FilterContianer.Body>
 		</FilterContianer>

@@ -49,7 +49,6 @@ export const applicationsActions = {
 				},
 			};
 			const response = await httpClient.get(`${JOBS_SERVICE}/application/company`, param);
-			console.log(response);
 			if (response.data) applicationsDispatcher.setApplicantsByJobs(response.data);
 		} catch (e: any) {
 		} finally {

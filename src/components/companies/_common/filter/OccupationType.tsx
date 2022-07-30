@@ -23,7 +23,7 @@ const OccupationType = (props: PFJobType) => {
 		if (checked) tmp.push(value);
 		else tmp = tmp.filter((elem) => elem !== value);
 		setJobType(tmp);
-		if (props.onChange) props.onChange(tmp, 'job_type');
+		if (props.onChange) props.onChange(tmp, props.name);
 	};
 
 	return (

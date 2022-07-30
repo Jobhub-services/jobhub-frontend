@@ -34,6 +34,7 @@ export interface IJobState {
 	filterClosed?: boolean;
 	isLoading?: boolean;
 	isDetailLoading?: boolean;
+	isJobDeleted?: boolean;
 	createJob: JobInfo;
 	jobCreated: boolean;
 	showJob: {

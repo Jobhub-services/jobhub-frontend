@@ -16,6 +16,7 @@ const DeveloperProfile = () => {
 			<div
 				className="staak_scrollbar"
 				style={{
+					height: '100%',
 					overflow: 'auto',
 					background: 'white',
 					boxShadow: `0px 0px 20px -15px ${colors.BLACK_7}`,

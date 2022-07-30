@@ -34,5 +34,6 @@ export interface PFJobType extends StandardProps {
 	title?: string;
 	jobType?: string[];
 	clear?: boolean;
+	name?: string;
 	onChange?: (value: string[], name?: string) => void;
 }

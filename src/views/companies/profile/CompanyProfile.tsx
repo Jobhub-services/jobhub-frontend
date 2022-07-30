@@ -12,10 +12,11 @@ const SContainer = styled.div`
 	position: relative;
 	height: 100%;
 	padding: 15px 0;
+	overflow: auto;
 `;
 const SubContainer = styled.div`
 	margin: 0 180px;
-	overflow: auto;
+	//height: 100%;
 	background: white;
 	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
 	border-radius: 7px;
@@ -26,21 +27,18 @@ const CompanyProfile = () => {
 		profileAction.getProfile();
 	}, []);
 	return (
-		<SContainer>
-			{isLoading ? (
-				<LoadingScreen />
-			) : (
-				<SubContainer className="staak_scrollbar">
-					<TabPane activeItem="overview" paneWidth="30%">
-						<TabPane.Pane style={{ padding: '0' }} name="overview" title="Overview">
-							<ProfileOverview />
-						</TabPane.Pane>
-						<TabPane.Pane style={{ padding: '0' }} name="profile" title="Profile">
-							<ProfileDetails />
-						</TabPane.Pane>
-					</TabPane>
-				</SubContainer>
-			)}
+		<SContainer className="staak_scrollbar">
+			<SubContainer className="staak_scrollbar">
+				<TabPane activeItem="overview" paneWidth="30%">
+					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Overview">
+						<ProfileOverview />
+					</TabPane.Pane>
+					<TabPane.Pane style={{ padding: '0' }} name="profile" title="Profile">
+						<ProfileDetails />
+					</TabPane.Pane>
+				</TabPane>
+			</SubContainer>
+			{isLoading && <LoadingScreen />}
 		</SContainer>
 	);
 };

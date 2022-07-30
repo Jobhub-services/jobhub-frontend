@@ -6,10 +6,10 @@ import DataEmpty from '@/components/common/DataEmpty';
 const SWrapper = styled.div`
 	display: grid;
 	padding: 10px 0;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	gap: 20px;
 	@media only screen and (max-width: 1600px) {
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 	} ;
 `;
 

@@ -6,6 +6,8 @@ export interface IJobsState {
 	isDataFetching?: boolean;
 	isDetailLoading?: boolean;
 	isApplicationSubmited?: boolean;
+	isSaving?: boolean;
+	jobSaved?: boolean;
 	showDetails?: boolean;
 	filterInfo: {
 		job_categories?: TValueLabel[];

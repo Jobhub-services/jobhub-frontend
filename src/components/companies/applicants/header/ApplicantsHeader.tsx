@@ -21,8 +21,8 @@ const ApplicantsHeader = ({ viewType, count, onChangeTab }: PApplicationHeader) 
 		let params: any = {};
 		for (const [k, v] of searchParams.entries()) params[k] = v;
 		if (sort !== value) {
-			if (viewType === 'byjob') applicationsActions.getApplicantsByJobs(status as any, params);
-			else applicationsActions.getShowApplicants(params, status as any);
+			if (viewType === 'byjob') applicationsActions.getApplicantsByJobs(status as any, true, params, true);
+			else applicationsActions.getShowApplicants(status as any, true, params, true);
 		}
 	};
 	return (

@@ -65,8 +65,8 @@ const JobHeader = () => {
 					value={SORT_MAP_APP[(searchParams.get('sort') as '-1' | '1' | '0') ?? '-1']}
 				>
 					<InputPicker.Option value="-1">Most recent</InputPicker.Option>
-					<InputPicker.Option value="1">Highest salary</InputPicker.Option>
-					<InputPicker.Option value="0">Lowest salary</InputPicker.Option>
+					{/*<InputPicker.Option value="1">Highest salary</InputPicker.Option>
+					<InputPicker.Option value="0">Lowest salary</InputPicker.Option>*/}
 				</InputPicker>
 			</FlexBox>
 		</FlexBox>

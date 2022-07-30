@@ -42,7 +42,18 @@ const SAvatar = styled.span<any>`
 		visibility: visible;
 	}
 `;
+
 const SImg = styled.img`
+	border-radius: 50%;
+	object-fit: cover;
+`;
+
+const ContainerIcon = styled.span`
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
 	border-radius: 50%;
 `;
 const STotal = styled.span<any>`
@@ -67,7 +78,13 @@ const AvatarList = ({ img, totalAvatar, size, onClick }: any) => {
 			{img?.map((elem: string, index: number) => {
 				return (
 					<SAvatar size={size + 7} key={index}>
-						{elem ? <SImg src={elem} alt={'.'} width={size} height={size} /> : <UserIcon />}
+						{elem ? (
+							<SImg src={elem} alt={'.'} width={size} height={size} />
+						) : (
+							<ContainerIcon>
+								<UserIcon width="30px" height="30px" />
+							</ContainerIcon>
+						)}
 					</SAvatar>
 				);
 			})}

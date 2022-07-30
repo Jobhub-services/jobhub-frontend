@@ -20,8 +20,8 @@ export function dateWithMonthName(value: string | Date): string | null {
 }
 
 export namespace pushNotification {
-	export const success = (content: any) => {
-		toast.success(content, {
+	export const success = (content: any, id?: string) => {
+		let options: any = {
 			position: 'top-right',
 			autoClose: 7000,
 			hideProgressBar: false,
@@ -31,7 +31,14 @@ export namespace pushNotification {
 			draggable: true,
 			pauseOnHover: true,
 			theme: 'colored',
-		});
+		};
+		if (id) {
+			options = {
+				toastId: id,
+				...options,
+			};
+		}
+		toast.success(content, options);
 	};
 	export const error = (content: any) => {
 		toast.error(content, {

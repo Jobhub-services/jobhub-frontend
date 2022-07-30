@@ -4,11 +4,12 @@ import { PJobCard } from '@/models/component/developer/jobs.interface';
 import { Button, DropDown, FlexBox, IconButton, Tag } from 'staak-ui';
 import styled from 'styled-components';
 import JobAvatar from '@/components/developers/jobs/JobAvatar';
-import { ClockIcon, DotIcon, HeartFilledIcon, HeartIcon, LocationIcon, MoneyIcon, StarIcon, SuccessIcon } from '@/assets/icons';
+import { ClockIcon, DotIcon, HeartFilledIcon, HeartIcon, LoadingIcon, LocationIcon, MoneyIcon, StarIcon, SuccessIcon } from '@/assets/icons';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
+import { useEffect, useState } from 'react';
 
 const NEW_JOB_PERIOD = 3;
 
@@ -77,11 +78,21 @@ const SButton = styled(FlexBox)`
 	color: ${colors.BLACK_4};
 `;
 const JobCard = (props: PJobCard) => {
-	const { jobDetails } = useAppSelector((state) => state.developerJobs);
+	const { jobDetails, isSaving } = useAppSelector((state) => state.developerJobs);
+	const [saving, setSaving] = useState(false);
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!isSaving) setSaving(false);
+	}, [isSaving]);
 	const onApply = () => {
 		if (jobDetails?._id !== props._id) jobActions.getJob(props._id);
 		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Application' } });
+	};
+
+	const onSave = (e: any) => {
+		setSaving(true);
+		jobActions.saveJob(props._id, !(props.saved ?? false));
 	};
 
 	const handleSelect = () => {};
@@ -176,8 +187,14 @@ const JobCard = (props: PJobCard) => {
 					<SSpan>Posted {posted_at}</SSpan>
 				</FlexBox>
 				<FlexBox gap={10}>
-					<Button variant="text" size="sm" color={props.saved ? 'red' : 'purple'} startIcon={props.saved ? <HeartFilledIcon /> : <HeartIcon />}>
-						Save
+					<Button
+						onClick={onSave}
+						variant="text"
+						size="sm"
+						color={props.saved ? 'red' : 'purple'}
+						startIcon={!saving ? props.saved ? <HeartFilledIcon /> : <HeartIcon /> : ''}
+					>
+						{saving ? <LoadingIcon color={colors.RED_BASE} /> : 'Save'}
 					</Button>
 					{props.applied ? (
 						<SButton>

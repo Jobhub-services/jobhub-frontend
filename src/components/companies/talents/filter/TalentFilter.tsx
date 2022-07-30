@@ -46,9 +46,10 @@ const TalentsFilter = () => {
 		if (Array.isArray(localFilters.roles) && localFilters.roles.length > 0) tmpParams['roles'] = localFilters.roles.map((elem) => elem.value);
 		if (Array.isArray(localFilters.experienceYear) && localFilters.experienceYear.length > 0)
 			tmpParams['experienceYear'] = localFilters.experienceYear.map((elem) => elem.value);
-		if (Array.isArray(localFilters.status) && localFilters.status.length > 0) tmpParams['status'] = localFilters.status;
-		if (localFilters.jobType) tmpParams['jobType'] = localFilters.jobType;
+		if (Array.isArray(localFilters?.status) && localFilters.status.length > 0) tmpParams['status'] = localFilters.status;
+		if (localFilters?.jobType?.length! > 0) tmpParams['jobType'] = localFilters.jobType;
 
+		console.log(tmpParams);
 		setSearchParams(createSearchParams(tmpParams));
 		talentsActions.getTalents(true, tmpParams, true);
 		talentsDispatcher.setFilters(localFilters);
@@ -105,7 +106,7 @@ const TalentsFilter = () => {
 					</TagPicker>
 				</div>
 				<ApplicantStatus onChange={handleComponentChanges} status={localFilters?.status} clear={clear} />
-				<OccupationType onChange={handleComponentChanges} jobType={localFilters?.jobType} clear={clear} title="Occupation type" />
+				<OccupationType onChange={handleComponentChanges} jobType={localFilters?.jobType} clear={clear} title="Occupation type" name="jobType" />
 			</FilterContianer.Body>
 		</FilterContianer>
 	);

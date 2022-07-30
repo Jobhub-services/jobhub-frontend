@@ -35,10 +35,10 @@ const Salary = ({ onChange, jobSalary, clear }: PFJobSalary) => {
 		if (onChange) onChange(tmp, 'job_salary');
 	};
 	const handleBox = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const { name, value } = event.target;
+		const { name, checked } = event.target;
 		const tmp = { ...localSalary };
 		const index = name as 'hourly' | 'monthly' | 'annually';
-		const v = { checked: value === name, from: tmp[index]?.from, to: tmp[index]?.to };
+		const v = { checked: checked, from: tmp[index]?.from, to: tmp[index]?.to };
 		tmp[index] = v;
 		setLocalSalary(tmp);
 		if (onChange) onChange(tmp, 'job_salary');

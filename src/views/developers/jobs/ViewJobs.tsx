@@ -4,10 +4,12 @@ import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { JobsList, JobHeader, JobsFilter } from '@/components/developers/jobs';
 import { jobActions, jobDispatcher } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { checkScrollToButtom } from '@/utils/helpers';
+import { checkScrollToButtom, pushNotification } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
+const SAVE_JOB_ID = 'saveJob';
 
 const SContainer = styled.div`
 	position: relative;
@@ -19,7 +21,7 @@ const SubContainer = styled.div`
 	height: inherit;
 `;
 const ViewJobs = () => {
-	const { isLoading, jobInfo } = useAppSelector((state) => state.developerJobs);
+	const { isLoading, jobInfo, jobSaved } = useAppSelector((state) => state.developerJobs);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [isFetching, setIsFetching] = useState(false);
 
@@ -34,6 +36,12 @@ const ViewJobs = () => {
 		};
 	}, []);
 
+	useEffect(() => {
+		if (jobSaved) {
+			pushNotification.success('The Operation was successfully processed', SAVE_JOB_ID);
+			jobDispatcher.setSaveJob(false);
+		}
+	}, [jobSaved]);
 	useEffect(() => {
 		setIsFetching(false);
 	}, [jobInfo]);
@@ -51,25 +59,28 @@ const ViewJobs = () => {
 		}
 	};
 	return (
-		<SContainer>
-			{isLoading ? (
-				<LoadingScreen />
-			) : (
-				<>
-					<SubContainer className="staak_scrollbar" onScroll={handleScroll}>
-						<JobHeader />
-						<JobsList />
-						{isFetching && (
-							<div>
-								<LoadingIcon width="60px" height="60px" color={colors.PURPLE_BASE} />
-							</div>
-						)}
-					</SubContainer>
-					<JobsFilter />
-					<Outlet />
-				</>
-			)}
-		</SContainer>
+		<>
+			<ToastContainer containerId={SAVE_JOB_ID} />
+			<SContainer>
+				{isLoading ? (
+					<LoadingScreen />
+				) : (
+					<>
+						<SubContainer className="staak_scrollbar" onScroll={handleScroll}>
+							<JobHeader />
+							<JobsList />
+							{isFetching && (
+								<div>
+									<LoadingIcon width="60px" height="60px" color={colors.PURPLE_BASE} />
+								</div>
+							)}
+						</SubContainer>
+						<JobsFilter />
+						<Outlet />
+					</>
+				)}
+			</SContainer>
+		</>
 	);
 };
 

@@ -36,6 +36,9 @@ export const jobDispatcher = {
 	setFilters(params: any) {
 		dispatchToStore(storeActions.setFilters(params));
 	},
+	setSaveJob(saved: boolean, jobSaved?: boolean, id?: string) {
+		dispatchToStore(storeActions.setSaveJob({ saved, jobSaved, id }));
+	},
 };
 export const jobActions = {
 	async setClosedFilter(closed: boolean) {
@@ -91,18 +94,15 @@ export const jobActions = {
 		jobDispatcher.setErrors({ status: false });
 		jobDispatcher.setSuccessApplication({ status: false, message: '' });
 		try {
-			console.log(application);
 			const response = await httpClient.post(`${JOBS_SERVICE}/application`, application);
 			const responseData = response.data;
 			if (responseData) {
 				const data = { ...responseData, status: true };
-				console.log(data);
 				jobDispatcher.setSuccessApplication(data);
 				jobDispatcher.setJobApplication({});
 			}
 		} catch (e: any) {
 			const response: AxiosResponse = e?.response;
-			console.log(response);
 			if (response) {
 				const data = response.data;
 				let errors = {};
@@ -112,6 +112,25 @@ export const jobActions = {
 			}
 		} finally {
 			jobDispatcher.setLoading(false, 'isApplicationSubmited');
+		}
+	},
+	async saveJob(id: string, save: boolean) {
+		jobDispatcher.setLoading(true, 'isSaving');
+		try {
+			const response = await httpClient.put(`${JOBS_SERVICE}/talent/save`, { jobId: id, saveJob: save });
+			const responseData = response.data;
+			if (responseData) {
+				jobDispatcher.setSaveJob(true, save, id);
+			}
+		} catch (e: any) {
+			const response: AxiosResponse = e?.response;
+			if (response) {
+				const data = response.data;
+				let errors = '';
+				if (data.message) errors = data.message;
+			}
+		} finally {
+			jobDispatcher.setLoading(false, 'isSaving');
 		}
 	},
 };

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { ClockIcon, CompanyIcon, EmpolyeesIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled(FlexBox)`
 	width: 100%;
@@ -29,12 +30,18 @@ const SIcon = styled.span`
 `;
 
 const JobHeader = () => {
+	const navigate = useNavigate();
 	const { jobDetails } = useAppSelector((state) => state.developerJobs);
 	const posted_at = moment(new Date(jobDetails?.createdAt!)).fromNow();
+
+	const handleClick = () => {
+		navigate(`/companies/detail/${jobDetails?.company?._id}`);
+	};
+
 	return (
 		<Container justify="start" gap={10}>
 			{jobDetails?.company?.avatar ? (
-				<SImg src={jobDetails?.company?.avatar} alt="company" />
+				<SImg src={jobDetails?.company?.avatar} alt="img" />
 			) : (
 				<SIcon>
 					<CompanyIcon width="28px" height="28px" color={colors.BLACK_7} />
@@ -49,7 +56,7 @@ const JobHeader = () => {
 							<EmpolyeesIcon width="18px" height="18px" color={colors.BLACK_9} />
 							<Span>{jobDetails?.company?.company_size}</Span>
 						</FlexBox>
-						<Button size="sm" variant="text" style={{ fontSize: '13px' }}>
+						<Button size="sm" variant="text" style={{ fontSize: '13px' }} onClick={handleClick}>
 							View company details
 						</Button>
 					</FlexBox>

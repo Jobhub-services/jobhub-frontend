@@ -4,6 +4,9 @@ import { useAppSelector } from '@/utils/appHooks';
 import styled from 'styled-components';
 import { HEADER_HIEGHT } from '@/constants/app.constants';
 import parse from 'html-react-parser';
+import { ToastContainer } from 'react-toastify';
+import { pushNotification } from '@/utils/helpers';
+
 const ErrorContainer = styled.div`
 	position: fixed;
 	display: flex;
@@ -15,40 +18,26 @@ const ErrorContainer = styled.div`
 `;
 const ErrorHandler = () => {
 	const { errors, succesApplication } = useAppSelector((state) => state.developerJobs);
-
+	if (errors?.status && errors?.content) {
+		if (Array.isArray(errors?.content)) {
+			errors.content.forEach((elem) => {
+				const Tmp = <span style={{ color: `${'white'}` }}>{parse(elem.value)}</span>;
+				pushNotification.error(Tmp);
+			});
+		} else {
+			Object.keys(errors?.content).forEach((elem) => {
+				pushNotification.error(elem);
+			});
+		}
+		jobDispatcher.setErrors({ content: {}, status: false });
+	}
+	if (succesApplication?.status) {
+		pushNotification.success(succesApplication.message);
+		jobDispatcher.setSuccessApplication({ status: false, message: '' });
+	}
 	return (
 		<ErrorContainer>
-			{errors?.status && (
-				<Alert
-					className="mt-15"
-					onCloseCallback={() => {
-						jobDispatcher.setErrors({ status: false });
-					}}
-				>
-					{Array.isArray(errors.content)
-						? errors?.content?.map((elem: any, idx: number) => {
-								return (
-									<div key={idx}>
-										{elem.key} : {parse(elem.value)}
-									</div>
-								);
-						  })
-						: Object.keys(errors?.content).map((key, idx) => {
-								return <div key={idx}>{errors?.content[key]}</div>;
-						  })}
-				</Alert>
-			)}
-			{succesApplication?.status && (
-				<Alert
-					className="mt-15"
-					color="green"
-					onCloseCallback={() => {
-						jobDispatcher.setSuccessApplication({ status: false, message: '' });
-					}}
-				>
-					{succesApplication.message}
-				</Alert>
-			)}
+			<ToastContainer />
 		</ErrorContainer>
 	);
 };
