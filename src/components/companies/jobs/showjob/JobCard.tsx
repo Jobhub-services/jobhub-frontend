@@ -83,8 +83,8 @@ const JobCard = (props: JobCardProps) => {
 							</IconButton>
 						</DropDown.Title>
 						<DropDown.Item>Show</DropDown.Item>
-						<DropDown.Item>Edit</DropDown.Item>
-						<DropDown.Item>Delete</DropDown.Item>
+						{/*<DropDown.Item>Edit</DropDown.Item>
+						<DropDown.Item>Delete</DropDown.Item>*/}
 					</DropDown>
 				</SHeader>
 				<SContent>

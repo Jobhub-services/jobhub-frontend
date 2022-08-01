@@ -8,7 +8,6 @@ import { checkScrollToButtom, pushNotification } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
-const SAVE_JOB_ID = 'saveJob';
 
 const SContainer = styled.div`
 	position: relative;

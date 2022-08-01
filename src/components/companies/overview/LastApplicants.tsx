@@ -33,7 +33,7 @@ const LastApplicants = () => {
 	const { showApplicants } = useAppSelector((state) => state.applications);
 	useEffect(() => {
 		if (!showApplicants?.content || showApplicants?.content?.length === 0) applicationsActions.getShowApplicants('NEW', false, {});
-	});
+	}, []);
 	return (
 		<SContainer className="mt-20">
 			<SH4>Recent applications</SH4>

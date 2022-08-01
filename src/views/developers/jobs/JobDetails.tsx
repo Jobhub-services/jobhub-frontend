@@ -111,7 +111,7 @@ const JobDetails = () => {
 									</Headline>
 								</FlexBox>
 								<FlexBox gap={0}>
-									<Button
+									{/*<Button
 										variant="text"
 										size="md"
 										color={jobDetails?.saved ? 'red' : 'purple'}
@@ -127,7 +127,7 @@ const JobDetails = () => {
 										startIcon={<UnavailableIcon />}
 									>
 										Not interested
-									</Button>
+					</Button>*/}
 								</FlexBox>
 							</FlexBox>
 							<HrDivider color={colors.BLACK_12} top={0} side={0} />

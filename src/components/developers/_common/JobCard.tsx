@@ -95,7 +95,10 @@ const JobCard = (props: PJobCard) => {
 		jobActions.saveJob(props._id, !(props.saved ?? false));
 	};
 
-	const handleSelect = () => {};
+	const handleSelect = (val: any, e: any) => {
+		if (jobDetails?._id !== props._id) jobActions.getJob(props._id);
+		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Overview' } });
+	};
 
 	const newPost = Math.abs(new Date(props.createdAt!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
 	const posted_at = moment(new Date(props.createdAt!)).fromNow();
@@ -119,8 +122,8 @@ const JobCard = (props: PJobCard) => {
 							</IconButton>
 						</DropDown.Title>
 						<DropDown.Item>Show</DropDown.Item>
-						<DropDown.Item>Edit</DropDown.Item>
-						<DropDown.Item>Delete</DropDown.Item>
+						{/*<DropDown.Item>Edit</DropDown.Item>
+						<DropDown.Item>Delete</DropDown.Item>*/}
 					</DropDown>
 				</SHeader>
 				<SubBody justify="space-between" align="start" gap={10} className="mt-5">
