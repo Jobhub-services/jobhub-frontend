@@ -93,11 +93,11 @@ const SubTitle = styled.span`
 const JobDetails = () => {
 	const parentRef = useRef();
 	const { id } = useParams();
-	const { jobDetails, isDetailLoading, isJobDeleted } = useAppSelector((state) => state.job);
+	const { jobDetails, isDetailLoading, isJobDeleted, isLoading } = useAppSelector((state) => state.job);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (jobDetails._id !== id) jobActions.getJobDetails(id!);
+		if (jobDetails._id !== id) jobActions.getJobDetails(id!, !isLoading);
 	}, []);
 
 	useEffect(() => {

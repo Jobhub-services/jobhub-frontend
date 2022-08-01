@@ -24,7 +24,7 @@ export interface IJobsState {
 		pages?: number | null;
 		page?: number;
 	};
-	jobDetails?: TJobDetails;
+	jobDetails: TJobDetails;
 	jobApplication?: TJobApplication;
 	succesApplication?: {
 		message?: string;

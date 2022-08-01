@@ -38,13 +38,22 @@ const AccountElem = () => {
 
 	useEffect(() => {
 		if (errors?.status) {
-			pushNotification.error(errors?.messages);
+			if (typeof errors?.messages === 'string') {
+				pushNotification.error(errors?.messages);
+			} else {
+				Object.values(errors?.messages).forEach((elem) => {
+					pushNotification.error(`${elem}`);
+				});
+			}
 			settingsDispatcher.setErrors({ status: false, messages: '' });
 		}
 	}, [errors]);
 
 	const handleClick = () => {
-		settingsAction.setAttribute(localData);
+		let tmp: any = { firstName: localData.firstName, lastName: localData.lastName };
+		if (localData.email !== userInfo.email) tmp.email = localData.email;
+		if (localData.username !== userInfo.username) tmp.username = localData.username;
+		settingsAction.setAttribute(tmp);
 	};
 	const handleData = (event: any, value?: string, name?: string) => {
 		let tmp = { ...localData };

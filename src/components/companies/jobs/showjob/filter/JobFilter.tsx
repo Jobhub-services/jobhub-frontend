@@ -54,7 +54,6 @@ const JobFilter = () => {
 		jobActions.getJobs(true, tmpFilters, true);
 		jobDispatcher.setClosedFilter(true);
 	};
-	console.log(localFilters);
 	return (
 		<FilterContianer title="Job filters" type="job" onApply={onApply} onClear={onClear}>
 			<FilterContianer.Body>

@@ -22,7 +22,7 @@ const SubContainer = styled.div`
 `;
 
 const ViewCompanies = () => {
-	const { isLoading, companies } = useAppSelector((state) => state.companies);
+	const { isLoading, companies, isDetailLoading } = useAppSelector((state) => state.companies);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [isFetching, setIsFetching] = useState(false);
 
@@ -31,7 +31,7 @@ const ViewCompanies = () => {
 			page: 0,
 			limit: 20,
 		};
-		companiesActions.getCompanies(true, params);
+		companiesActions.getCompanies(!isDetailLoading, params);
 		return function cleanup() {
 			companiesDispatcher.setCompanies({}, true);
 		};

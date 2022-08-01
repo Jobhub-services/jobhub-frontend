@@ -3,6 +3,7 @@ import { storeActions } from '@/modules/store/company/settings.store';
 import { httpClient } from '@/config/httpClient/HttpClient';
 import { API_PATHS } from '@/constants/api.constants';
 import { AxiosResponse } from 'axios';
+import { transformErrors } from '@/utils/validations';
 
 const { USERS_SERVICE } = API_PATHS;
 
@@ -33,8 +34,9 @@ export const settingsAction = {
 			const response: AxiosResponse = e?.response;
 			if (response) {
 				const data = response.data;
-				let errors = '';
+				let errors: any = {};
 				if (data.message) errors = data.message;
+				else errors = transformErrors(data);
 				settingsDispatcher.setErrors({ status: true, messages: errors });
 			}
 		} finally {

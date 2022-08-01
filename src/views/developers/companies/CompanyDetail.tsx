@@ -90,9 +90,9 @@ const CompanyDetail = () => {
 	const { id } = useParams();
 	const loc = useLocation();
 	const { state } = loc as { state: { activeTab: string } };
-	const { isDetailLoading, companyDetail } = useAppSelector((state) => state.companies);
+	const { isDetailLoading, companyDetail, isLoading } = useAppSelector((state) => state.companies);
 	useEffect(() => {
-		if (companyDetail?._id !== id) companiesActions.getCompanyDetail(id!);
+		if (companyDetail?._id !== id) companiesActions.getCompanyDetail(id!, !isLoading);
 	}, []);
 	const parentRef = useRef(null);
 	const navigate = useNavigate();

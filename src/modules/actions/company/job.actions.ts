@@ -117,8 +117,8 @@ export const jobActions = {
 			jobDispatcher.setIsLoading(false);
 		}
 	},
-	async getJobDetails(id: string) {
-		jobDispatcher.setIsLoading(true, 'isDetailLoading');
+	async getJobDetails(id: string, loading: boolean = true) {
+		jobDispatcher.setIsLoading(loading, 'isDetailLoading');
 		try {
 			const response = await httpClient.get(`${JOBS_SERVICE}/company/${id}`);
 			const responseData = response.data;

@@ -89,7 +89,6 @@ const JobDetails = () => {
 		if (e.target === parentRef.current) navigate('/jobs');
 	};
 	useEffect(() => {
-		console.log('job id ', id);
 		if (id && jobDetails?._id !== id) {
 			jobActions.getJob(id);
 		}
@@ -142,7 +141,7 @@ const JobDetails = () => {
 									skills={jobDetails?.skills}
 								/>
 								<RightContainer>
-									<TabPane activeItem={state.activeTab} paneWidth="60%">
+									<TabPane activeItem={state.activeTab} paneWidth="45%" paneJustify="center">
 										<TabPane.Pane name="Overview" title="Overview">
 											<ScrollContainer className="staak_scrollbar">
 												<JobGeneralInfo qualificationIsEmpty={qualificationIsEmpty!} storeData={jobDetails} />

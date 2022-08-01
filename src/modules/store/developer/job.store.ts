@@ -127,6 +127,7 @@ const reducerSlice = createSlice({
 					}
 					return elem;
 				});
+				state.jobDetails = { ...state?.jobDetails, applied: true };
 				state.jobInfo.content = tmpArr;
 			}
 			state.succesApplication = action.payload;

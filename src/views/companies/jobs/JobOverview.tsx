@@ -22,12 +22,12 @@ const SubContainer = styled.div`
 	height: inherit;
 `;
 const JobOverview = (props: StandardProps) => {
-	const { isLoading, showJob } = useAppSelector((state) => state.job);
+	const { isLoading, showJob, isDetailLoading } = useAppSelector((state) => state.job);
 	const [isFetching, setIsFetching] = useState(false);
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
-		jobActions.getJobs();
+		jobActions.getJobs(!isDetailLoading);
 		return function cleanup() {
 			jobDispatcher.setJobs({}, true);
 		};

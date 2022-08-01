@@ -10,7 +10,7 @@ const SocialProfile = ({ social_profile }: TCompanyDetail) => {
 	return (
 		<FlexBox justify="start" className="mt-10" gap={20}>
 			{social_profile?.website !== '' && (
-				<SLink href={social_profile?.website}>
+				<SLink href={social_profile?.website} target="_blank">
 					<WorldIcon width="25px" height="25px" color={colors.PURPLE_BASE} />
 				</SLink>
 			)}

@@ -43,8 +43,8 @@ export const companiesActions = {
 			companiesDispatcher.setIsLoading(false);
 		}
 	},
-	async getCompanyDetail(id: string) {
-		companiesDispatcher.setIsLoading(true, 'isDetailLoading');
+	async getCompanyDetail(id: string, loading: boolean = true) {
+		companiesDispatcher.setIsLoading(loading, 'isDetailLoading');
 		try {
 			const response = await httpClient.get(`${USERS_SERVICE}/developer/companies/${id}`);
 			const responseData = response.data;

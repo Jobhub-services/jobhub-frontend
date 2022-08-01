@@ -38,7 +38,6 @@ export const settingsAction = {
 				let errors: any = {};
 				if (data.message) errors = data.message;
 				else errors = transformErrors(data);
-				//console.log(errors);
 				settingsDispatcher.setErrors({ status: true, messages: errors });
 			}
 			//settingsDispatcher.setErrors({ status: true, messages: {} });
