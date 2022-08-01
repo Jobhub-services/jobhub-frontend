@@ -4,7 +4,6 @@ import { settingsAction, settingsDispatcher } from '@/modules/actions/company/se
 import { useAppSelector } from '@/utils/appHooks';
 import { pushNotification } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { Button } from 'staak-ui';
 import styled from 'styled-components';
 
@@ -40,7 +39,6 @@ const SecurityElem = () => {
 	};
 	return (
 		<>
-			<ToastContainer />
 			<Container>
 				<h3>Change password</h3>
 				<div style={{ padding: '0 15px' }}>

@@ -5,7 +5,6 @@ import { jobDispatcher } from '@/modules/actions/company/job.actions';
 import parse from 'html-react-parser';
 import { FlexBox, HrDivider } from 'staak-ui';
 import { colors } from '@/assets/theme';
-import { ToastContainer } from 'react-toastify';
 import { pushNotification } from '@/utils/helpers';
 
 /* component style */
@@ -33,11 +32,7 @@ const JobErrors = () => {
 		}
 		jobDispatcher.setJobErrors({ content: {}, status: false });
 	}
-	return (
-		<ErrorContainer>
-			<ToastContainer />
-		</ErrorContainer>
-	);
+	return <ErrorContainer></ErrorContainer>;
 };
 
 export default JobErrors;

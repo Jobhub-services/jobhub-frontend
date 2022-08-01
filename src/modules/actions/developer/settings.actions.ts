@@ -35,12 +35,13 @@ export const settingsAction = {
 			const response: AxiosResponse = e?.response;
 			if (response) {
 				const data = response.data;
-				let errors = '';
+				let errors: any = {};
 				if (data.message) errors = data.message;
-				//else errors = transformErrors(data);
+				else errors = transformErrors(data);
+				//console.log(errors);
 				settingsDispatcher.setErrors({ status: true, messages: errors });
 			}
-			settingsDispatcher.setErrors({ status: true, messages: {} });
+			//settingsDispatcher.setErrors({ status: true, messages: {} });
 		} finally {
 			settingsDispatcher.setIsLoading(false);
 		}

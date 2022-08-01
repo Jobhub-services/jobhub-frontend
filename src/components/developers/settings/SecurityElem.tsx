@@ -40,7 +40,6 @@ const SecurityElem = () => {
 	};
 	return (
 		<>
-			<ToastContainer />
 			<Container>
 				<h3>Change password</h3>
 				<div style={{ padding: '0 15px' }}>

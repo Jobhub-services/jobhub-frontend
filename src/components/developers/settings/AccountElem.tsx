@@ -5,7 +5,6 @@ import { userActions } from '@/modules/actions/user.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { pushNotification } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { Button } from 'staak-ui';
 import styled from 'styled-components';
 
@@ -54,7 +53,6 @@ const AccountElem = () => {
 	};
 	return (
 		<>
-			<ToastContainer />
 			<Container>
 				<h3>General information</h3>
 				<div style={{ padding: '0 15px' }}>

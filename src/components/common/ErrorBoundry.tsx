@@ -1,6 +1,5 @@
 import { pushNotification } from '@/utils/helpers';
 import React from 'react';
-import { ToastContainer } from 'react-toastify';
 
 class ErrorBoundary extends React.Component<any, any> {
 	constructor(props: any) {
@@ -18,15 +17,10 @@ class ErrorBoundary extends React.Component<any, any> {
 	render() {
 		if (this.state.hasError) {
 			pushNotification.error('Something went wrong.');
-			return <ToastContainer />;
+			return <h1>Erreur</h1>;
 			// You can render any custom fallback UI
 		}
-		return (
-			<>
-				<ToastContainer />
-				{this.props.children}
-			</>
-		);
+		return <>{this.props.children}</>;
 	}
 }
 

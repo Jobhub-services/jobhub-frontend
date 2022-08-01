@@ -37,10 +37,11 @@ const MainContainer = styled.div`
 const MasterLayout: FC = () => {
 	const { userInfoLoaded } = useAppSelector((state) => state.user);
 	const { appExpanded } = useAppSelector((state) => state.metadata);
+	const { accessToken } = useAppSelector(({ auth }) => auth);
 
 	useEffect(() => {
-		if (!userInfoLoaded) userActions.getUserInfo();
-	}, []);
+		if (accessToken) userActions.getUserInfo();
+	}, [accessToken]);
 	return (
 		<StyledPublicView>
 			<HeaderBar />

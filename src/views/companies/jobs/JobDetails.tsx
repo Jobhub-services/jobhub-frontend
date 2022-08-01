@@ -119,7 +119,6 @@ const JobDetails = () => {
 	};
 	return (
 		<MainContainer ref={parentRef} onClick={backUp}>
-			<ToastContainer />
 			<DetailContainer>
 				{isDetailLoading ? (
 					<LoadingScreen />

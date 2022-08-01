@@ -7,7 +7,6 @@ import { useAppSelector } from '@/utils/appHooks';
 import { checkScrollToButtom, pushNotification } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import styled from 'styled-components';
 const SAVE_JOB_ID = 'saveJob';
 
@@ -38,7 +37,7 @@ const ViewJobs = () => {
 
 	useEffect(() => {
 		if (jobSaved) {
-			pushNotification.success('The Operation was successfully processed', SAVE_JOB_ID);
+			pushNotification.success('The Operation was successfully processed');
 			jobDispatcher.setSaveJob(false);
 		}
 	}, [jobSaved]);
@@ -60,7 +59,6 @@ const ViewJobs = () => {
 	};
 	return (
 		<>
-			<ToastContainer containerId={SAVE_JOB_ID} />
 			<SContainer>
 				{isLoading ? (
 					<LoadingScreen />

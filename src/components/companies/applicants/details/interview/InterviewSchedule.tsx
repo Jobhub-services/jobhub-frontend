@@ -6,7 +6,6 @@ import { LoadingScreen } from '@/components/common/LoadingScreen';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { pushNotification } from '@/utils/helpers';
-import { ToastContainer } from 'react-toastify';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 
 const Container = styled.div`
@@ -47,7 +46,6 @@ const InterviewSchedule = () => {
 	};
 	return (
 		<>
-			<ToastContainer />
 			<Container>
 				{isLoading ? (
 					<LoadingScreen />

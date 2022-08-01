@@ -4,7 +4,6 @@ import { useAppSelector } from '@/utils/appHooks';
 import styled from 'styled-components';
 import { HEADER_HIEGHT } from '@/constants/app.constants';
 import parse from 'html-react-parser';
-import { ToastContainer } from 'react-toastify';
 import { pushNotification } from '@/utils/helpers';
 
 const ErrorContainer = styled.div`
@@ -37,7 +36,6 @@ const ErrorHandler = () => {
 	}
 	return (
 		<ErrorContainer>
-			<ToastContainer />
 		</ErrorContainer>
 	);
 };

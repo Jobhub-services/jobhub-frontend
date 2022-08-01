@@ -7,7 +7,6 @@ import { useEffect } from 'react';
 import { interviewDispatcher } from '@/modules/actions/company/interview.action';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 import { pushNotification } from '@/utils/helpers';
-import { ToastContainer } from 'react-toastify';
 
 const STh = styled.th`
 	text-align: left;
@@ -36,7 +35,6 @@ const InterviewsList = () => {
 	}, [isUpdated]);
 	return (
 		<>
-			<ToastContainer />
 			<div>
 				<h3>Interviews</h3>
 				{interviews?.length === 0 ? (
