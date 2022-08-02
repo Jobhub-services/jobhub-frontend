@@ -69,10 +69,11 @@ const TalentCard = (props: CardProps) => {
 				</FlexBox>
 				<StatusElem title={TitleStatus[props.status!]} status={props.status} />
 			</FlexBox>
-			<div>
+			<div style={{ height: '137px' }}>
 				<div className="mt-10">
 					<div>Summary</div>
 					<Sp>{props.summary}</Sp>
+					{!props.summary && <Sp>He hasn't added summary yet</Sp>}
 				</div>
 				<div className="mt-10">
 					<div>Skills</div>
