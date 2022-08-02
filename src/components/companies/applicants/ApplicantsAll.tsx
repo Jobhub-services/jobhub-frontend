@@ -6,10 +6,10 @@ import DataEmpty from '@/components/common/DataEmpty';
 const SContainer = styled.div`
 	display: grid;
 	padding: 20px 0px;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(3, 1fr);
 	gap: 10px;
 	@media only screen and (max-width: 1600px) {
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(2, 1fr);
 	}
 `;
 const ApplicantsAll = () => {
