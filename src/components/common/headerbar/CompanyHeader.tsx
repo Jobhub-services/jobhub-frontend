@@ -22,7 +22,7 @@ const CompanyHeader = () => {
 					}
 					size={150}
 				/>
-				<SearchInput placeholder="Search Talents" width="350px" />
+				{/*<SearchInput placeholder="Search Talents" width="350px" />*/}
 			</FlexBox>
 			<FlexBox justify="space-between" gap={35}>
 				<Button
@@ -34,7 +34,7 @@ const CompanyHeader = () => {
 					Create New Job
 				</Button>
 				<FlexBox justify="space-between" gap={20}>
-					<IconDropDown />
+					{/*<IconDropDown />*/}
 					<AvatarDropDown onClick={handleItem} avatar={avatar} />
 				</FlexBox>
 			</FlexBox>

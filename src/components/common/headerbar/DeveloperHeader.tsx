@@ -22,11 +22,11 @@ const DeveloperHeader = () => {
 					}
 					size={150}
 				/>
-				<SearchInput placeholder="Search jobs" width="350px" />
+				{/*<SearchInput placeholder="Search jobs" width="350px" />*/}
 			</FlexBox>
 			<FlexBox justify="space-between">
 				<FlexBox justify="space-between" gap={20}>
-					<IconDropDown />
+					{/*<IconDropDown />*/}
 					<AvatarDropDown onClick={handleItem} avatar={avatar} />
 				</FlexBox>
 			</FlexBox>
