@@ -2,7 +2,7 @@ import { colors } from '@/assets/theme';
 import { useState } from 'react';
 import { FlexBox } from 'staak-ui';
 import { PCompanyCard } from '@/models/component/developer/company.interface';
-import { STitle } from '@/components/developers/companies/detail/common.style';
+import { STitle, SSpan } from '@/components/developers/companies/detail/common.style';
 import styled from 'styled-components';
 
 const SAboutUs = styled.pre<any>`
@@ -27,14 +27,19 @@ const About = ({ description }: PCompanyCard) => {
 			<FlexBox justify="space-between" gap={20}>
 				<STitle>About</STitle>
 			</FlexBox>
-			<SAboutUs allText={allText}>{description}</SAboutUs>
-			<Small
-				onClick={() => {
-					setAllText(!allText);
-				}}
-			>
-				{allText ? 'Less' : 'More'}
-			</Small>
+			{description && (
+				<>
+					<SAboutUs allText={allText}>{description}</SAboutUs>
+					<Small
+						onClick={() => {
+							setAllText(!allText);
+						}}
+					>
+						{allText ? 'Less' : 'More'}
+					</Small>
+				</>
+			)}
+			{!description && <SSpan>There is no description yet</SSpan>}
 		</div>
 	);
 };

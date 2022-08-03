@@ -52,7 +52,7 @@ const CompanyAvatar = (props: PCompanyAvatar) => {
 	};
 	return (
 		<SContainer justify="space-between" width="100%" onClick={handleClick}>
-			<FlexBox gap={10} justify="start">
+			<FlexBox gap={10} justify="start" width="100%">
 				<ImgContainer>
 					<SImg src={props.avatar} alt="img" />
 				</ImgContainer>

@@ -5,6 +5,7 @@ import ProfileAvatar from '@/components/developers/_common/ProfileAvatar';
 import { useAppSelector } from '@/utils/appHooks';
 import { useEffect } from 'react';
 import { profileAction } from '@/modules/actions/developer/profile.actions';
+import { Link } from 'react-router-dom';
 
 const SContainer = styled.div`
 	background: white;
@@ -36,9 +37,11 @@ const Header = () => {
 					status={profile?.status}
 					avatar={profile?.avatar}
 				/>
-				<Button variant="text" size="sm">
-					Edit profile
-				</Button>
+				<Link to={`/profile/${userInfo.username}`}>
+					<Button variant="text" size="sm">
+						Edit profile
+					</Button>
+				</Link>
 			</FlexBox>
 		</SContainer>
 	);

@@ -33,7 +33,7 @@ const Salary = () => {
 				<div className="mt-15">
 					{displaySalary ? (
 						<FlexBox justify="start" gap={15}>
-							<span>{salary}</span>
+							<span>{parseInt(salary).toLocaleString('en-US')}</span>
 							<span>{currency.name}</span>
 						</FlexBox>
 					) : (
@@ -52,7 +52,7 @@ const Salary = () => {
 						}}
 						onDataChange={(e: any, value?: string, name?: string) => handlePicker(e, value!, '', name!)}
 					>
-						salary
+						Salary
 					</InputField>
 					<InputPickerField placeholder="Currency" name="currency" title="Currency" value={currency?.name} onChange={handlePicker}>
 						{currencies?.content?.map((elem, idx) => {

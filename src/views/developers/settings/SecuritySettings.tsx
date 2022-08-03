@@ -18,7 +18,7 @@ const SecuritySettings = () => {
 		<>
 			<HeaderContainer justify="space-between">
 				<StyledHeadline variant="h2" size="sm">
-					Security & connexion
+					Security & Connexion
 				</StyledHeadline>
 			</HeaderContainer>
 			<SecurityElem />

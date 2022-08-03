@@ -1,45 +1,49 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AssesmentsIcon, MessageIcon, NavItem, ScheduleIcon, JobIcon, HealthIcon, SettingIcon, InvitationIcon, ApplicantIcon } from 'staak-ui';
 import { ApplicationColorIcon, CompanyColorIcon, JobColorIcon, NewCompanyIcon, OverviewColorIcon, SettingsColorIcon } from '@/assets/icons';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const SLink = styled(Link)`
-	width: 100%;
+const SLink = styled(Link)<any>`
+	${(props) =>
+		props.expanded &&
+		css`
+			width: 100%;
+		`}
 `;
 const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 	const { pathname } = useLocation();
 	const widthItems = '96%';
 	return (
 		<>
-			<SLink to="/">
+			<SLink to="/" expanded={appExpanded}>
 				<NavItem className="mb-5" icon={<OverviewColorIcon width="25px" height="25px" />} width={widthItems} active={pathname === '/'}>
-					<NavItem.Content>{appExpanded ? 'Overview' : ''}</NavItem.Content>
+					{appExpanded ? <NavItem.Content>Overview</NavItem.Content> : <></>}
 				</NavItem>
 			</SLink>
-			<SLink to="jobs">
+			<SLink to="jobs" expanded={appExpanded}>
 				<NavItem className="mb-5" icon={<JobColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/jobs')}>
-					<NavItem.Content>{appExpanded ? 'Jobs' : ''}</NavItem.Content>
+					{appExpanded ? <NavItem.Content>Jobs</NavItem.Content> : <></>}
 				</NavItem>
 			</SLink>
 			{/*<HealthIcon width="20px" height="20px" /><NewCompanyIcon width="20px" height="20px" /><ApplicantIcon width="20px" height="20px" /> */}
-			<SLink to="companies">
+			<SLink to="companies" expanded={appExpanded}>
 				<NavItem
 					className="mb-5"
 					icon={<CompanyColorIcon width="25px" height="25px" />}
 					width={widthItems}
 					active={pathname.startsWith('/companies')}
 				>
-					<NavItem.Content>{appExpanded ? 'Companies' : ''}</NavItem.Content>
+					{appExpanded ? <NavItem.Content>Companies</NavItem.Content> : <></>}
 				</NavItem>
 			</SLink>
-			<SLink to="applications">
+			<SLink to="applications" expanded={appExpanded}>
 				<NavItem
 					className="mb-5"
 					icon={<ApplicationColorIcon width="25px" height="25px" />}
 					width={widthItems}
 					active={pathname.startsWith('/applications')}
 				>
-					<NavItem.Content>{appExpanded ? 'Applications' : ''}</NavItem.Content>
+					{appExpanded ? <NavItem.Content>Applications</NavItem.Content> : <></>}
 				</NavItem>
 			</SLink>
 			{/*<SLink to="messages">
@@ -66,7 +70,7 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 
 			<SLink to="/settings/account">
 				<NavItem icon={<SettingsColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/settings')}>
-					<NavItem.Content>{appExpanded ? 'Settings' : ''}</NavItem.Content>
+					{appExpanded ? <NavItem.Content>Settings</NavItem.Content> : <></>}
 				</NavItem>
 			</SLink>
 		</>

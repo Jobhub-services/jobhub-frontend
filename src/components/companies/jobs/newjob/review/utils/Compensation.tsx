@@ -19,9 +19,9 @@ const Compensation = (props: JobReviewProps) => {
 			<div>
 				<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
 				<div className="mt-10">
-					<SSpan>{data.start_salary !== '' ? data.start_salary : 'N/A'}</SSpan>-
+					<SSpan>{data?.start_salary !== '' ? parseInt(data?.start_salary!).toLocaleString('en-US') : 'N/A'}</SSpan>-
 					<SSpan>
-						{data.end_salary !== '' ? data.end_salary : 'N/A'} / {data.salary_type}
+						{data?.end_salary !== '' ? parseInt(data?.end_salary!).toLocaleString('en-US') : 'N/A'} / {data.salary_type}
 					</SSpan>
 					<SSpan style={{ marginLeft: '10px' }}>{data.currency?.name}</SSpan>
 				</div>

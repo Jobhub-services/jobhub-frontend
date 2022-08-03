@@ -27,7 +27,6 @@ export const profileAction = {
 			const response = await httpClient.get(`${USERS_SERVICE}/developer/profile`);
 			if (response.data) {
 				const content = response.data.content;
-				console.log(content);
 				profileDispatcher.setProfile(content);
 			}
 		} catch (e: any) {

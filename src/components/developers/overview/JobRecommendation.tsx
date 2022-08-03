@@ -18,6 +18,10 @@ const SH4 = styled.h4`
 const SSpan = styled.span`
 	color: ${colors.BLACK_8};
 `;
+
+const SDiv = styled.div`
+	margin: 20px 0 5px 0;
+`;
 const JobRecommendation = () => {
 	return (
 		<SContainer className="mt-20">
@@ -26,8 +30,10 @@ const JobRecommendation = () => {
 				<SSpan>Jobs where you're a top applicant based on your profile job search</SSpan>
 			</div>
 			<FlexBox flexDirection="column">
-				<img src={emptyData} alt="Empty" width={400} height={400} />
-				<SH4>We have no job recommendations yet.</SH4>
+				<SDiv>
+					<img src={emptyData} alt="Empty" width={250} height={250} />
+					<SH4>Job recommendation will appear here.</SH4>
+				</SDiv>
 				<Link to="jobs">
 					<Button className="mt-20">Browse jobs</Button>
 				</Link>

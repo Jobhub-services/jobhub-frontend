@@ -5,31 +5,31 @@ const JobColorIcon = ({ width, height }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<linearGradient x1="86" y1="32.17475" x2="86" y2="22.60367" gradientUnits="userSpaceOnUse" id="color-01">
-					<stop offset="0" stop-color="#1ea2e4"></stop>
-					<stop offset="0.129" stop-color="#1ea2e4"></stop>
-					<stop offset="0.295" stop-color="#1ea2e4"></stop>
-					<stop offset="0.469" stop-color="#1ea2e4"></stop>
-					<stop offset="0.659" stop-color="#1ea2e4"></stop>
+					<stop offset="0" stopColor="#1ea2e4"></stop>
+					<stop offset="0.129" stopColor="#1ea2e4"></stop>
+					<stop offset="0.295" stopColor="#1ea2e4"></stop>
+					<stop offset="0.469" stopColor="#1ea2e4"></stop>
+					<stop offset="0.659" stopColor="#1ea2e4"></stop>
 				</linearGradient>
 				<radialGradient cx="85.398" cy="21.47121" r="163.90167" gradientUnits="userSpaceOnUse" id="color-02">
-					<stop offset="0" stop-color="#0d61a9"></stop>
-					<stop offset="0.156" stop-color="#0d61a9"></stop>
-					<stop offset="0.417" stop-color="#0e70c4"></stop>
-					<stop offset="0.645" stop-color="#0f82bd"></stop>
-					<stop offset="0.828" stop-color="#1670c4"></stop>
-					<stop offset="0.944" stop-color="#0d61a9"></stop>
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="0.156" stopColor="#0d61a9"></stop>
+					<stop offset="0.417" stopColor="#0e70c4"></stop>
+					<stop offset="0.645" stopColor="#0f82bd"></stop>
+					<stop offset="0.828" stopColor="#1670c4"></stop>
+					<stop offset="0.944" stopColor="#0d61a9"></stop>
 				</radialGradient>
 				<linearGradient x1="86" y1="32.35033" x2="86" y2="96.48842" gradientUnits="userSpaceOnUse" id="color-03">
-					<stop offset="0" stop-color="#0d61a9"></stop>
-					<stop offset="0.06" stop-color="#0d61a9"></stop>
-					<stop offset="0.18" stop-color="#0d61a9"></stop>
-					<stop offset="0.326" stop-color="#0d61a9"></stop>
-					<stop offset="0.523" stop-color="#0d61a9"></stop>
-					<stop offset="1" stop-color="#0d61a9"></stop>
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="0.06" stopColor="#0d61a9"></stop>
+					<stop offset="0.18" stopColor="#0d61a9"></stop>
+					<stop offset="0.326" stopColor="#0d61a9"></stop>
+					<stop offset="0.523" stopColor="#0d61a9"></stop>
+					<stop offset="1" stopColor="#0d61a9"></stop>
 				</linearGradient>
 				<linearGradient x1="111.08333" y1="136.16667" x2="161.25" y2="136.16667" gradientUnits="userSpaceOnUse" id="color-04">
-					<stop offset="0" stop-color="#0d61a9"></stop>
-					<stop offset="1" stop-color="#0d61a9"></stop>
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="1" stopColor="#0d61a9"></stop>
 				</linearGradient>
 			</defs>
 			<g fill="none" stroke="none">

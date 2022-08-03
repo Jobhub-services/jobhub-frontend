@@ -5,10 +5,10 @@ const PendingIcon = ({ width, height }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<radialGradient cx="86" cy="86" r="68.08333" gradientUnits="userSpaceOnUse" id="color-1">
-					<stop offset="0.278" stop-color="#f1c40f"></stop>
-					<stop offset="0.468" stop-color="#f1c40f"></stop>
-					<stop offset="0.82" stop-color="#f1c40f"></stop>
-					<stop offset="1" stop-color="#f1c40f"></stop>
+					<stop offset="0.278" stopColor="#f1c40f"></stop>
+					<stop offset="0.468" stopColor="#f1c40f"></stop>
+					<stop offset="0.82" stopColor="#f1c40f"></stop>
+					<stop offset="1" stopColor="#f1c40f"></stop>
 				</radialGradient>
 			</defs>
 			<g fill="none">

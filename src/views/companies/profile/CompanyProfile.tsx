@@ -29,11 +29,11 @@ const CompanyProfile = () => {
 	return (
 		<SContainer className="staak_scrollbar">
 			<SubContainer className="staak_scrollbar">
-				<TabPane activeItem="overview" paneWidth="30%">
-					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Overview">
+				<TabPane activeItem="overview" paneWidth="30%" paneJustify="center">
+					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Profile Overview">
 						<ProfileOverview />
 					</TabPane.Pane>
-					<TabPane.Pane style={{ padding: '0' }} name="profile" title="Profile">
+					<TabPane.Pane style={{ padding: '0' }} name="profile" title="Edit Profile">
 						<ProfileDetails />
 					</TabPane.Pane>
 				</TabPane>

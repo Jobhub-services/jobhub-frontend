@@ -34,7 +34,7 @@ const TalentContact = (props: ContactProps) => {
 				<div>
 					<SSpan>Salary</SSpan>
 					<div>
-						{props.salary} {props.currency?.code}
+						{parseInt(props.salary!).toLocaleString('en-US')} {props.currency?.code}
 					</div>
 					{(!props.salary || props.salary === '') && 'N/A'}
 				</div>

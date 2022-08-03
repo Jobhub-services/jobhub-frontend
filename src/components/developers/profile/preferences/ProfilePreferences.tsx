@@ -1,7 +1,6 @@
-import { FlexBox, HrDivider } from 'staak-ui';
+import { HrDivider } from 'staak-ui';
 import { ProfileStatus, Resume, WorkLocation, Salary, DesiredJob, Wants } from '@/components/developers/profile/preferences/utils';
 import styled from 'styled-components';
-import { useEffect } from 'react';
 const Container = styled.div`
 	padding: 20px 20px;
 `;

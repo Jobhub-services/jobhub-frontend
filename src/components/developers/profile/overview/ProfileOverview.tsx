@@ -1,7 +1,6 @@
-import { TwitterLogo, WebsiteLogo } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { useAppSelector } from '@/utils/appHooks';
-import { Button, FlexBox, GithubIcon, HrDivider, LinkedinLogo } from 'staak-ui';
+import { FlexBox, HrDivider } from 'staak-ui';
 import {
 	Languages,
 	Skills,

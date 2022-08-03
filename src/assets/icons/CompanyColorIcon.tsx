@@ -5,36 +5,36 @@ const CompanyColorIcon = ({ width, height }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<linearGradient x1="117.92392" y1="129.42283" x2="127.69567" y2="163.03808" gradientUnits="userSpaceOnUse" id="color-1">
-					<stop offset="0" stop-color="#8795a1"></stop>
-					<stop offset="1" stop-color="#6d7882"></stop>
+					<stop offset="0" stopColor="#8795a1"></stop>
+					<stop offset="1" stopColor="#6d7882"></stop>
 				</linearGradient>
 				<linearGradient x1="142.459" y1="112.875" x2="146.21433" y2="112.875" gradientUnits="userSpaceOnUse" id="color-2">
-					<stop offset="0" stop-color="#c48f0c"></stop>
-					<stop offset="0.251" stop-color="#d19b16"></stop>
-					<stop offset="0.619" stop-color="#dca51f"></stop>
-					<stop offset="1" stop-color="#e0a922"></stop>
+					<stop offset="0" stopColor="#c48f0c"></stop>
+					<stop offset="0.251" stopColor="#d19b16"></stop>
+					<stop offset="0.619" stopColor="#dca51f"></stop>
+					<stop offset="1" stopColor="#e0a922"></stop>
 				</linearGradient>
 				<linearGradient x1="108.37075" y1="112.875" x2="104.61542" y2="112.875" gradientUnits="userSpaceOnUse" id="color-3">
-					<stop offset="0" stop-color="#c48f0c"></stop>
-					<stop offset="0.251" stop-color="#d19b16"></stop>
-					<stop offset="0.619" stop-color="#dca51f"></stop>
-					<stop offset="1" stop-color="#e0a922"></stop>
+					<stop offset="0" stopColor="#c48f0c"></stop>
+					<stop offset="0.251" stopColor="#d19b16"></stop>
+					<stop offset="0.619" stopColor="#dca51f"></stop>
+					<stop offset="1" stopColor="#e0a922"></stop>
 				</linearGradient>
 				<radialGradient cx="125.42244" cy="108.09967" r="21.45553" gradientUnits="userSpaceOnUse" id="color-4">
-					<stop offset="0" stop-color="#ffcf54"></stop>
-					<stop offset="0.261" stop-color="#fdcb4d"></stop>
-					<stop offset="0.639" stop-color="#f7c13a"></stop>
-					<stop offset="1" stop-color="#f0b421"></stop>
+					<stop offset="0" stopColor="#ffcf54"></stop>
+					<stop offset="0.261" stopColor="#fdcb4d"></stop>
+					<stop offset="0.639" stopColor="#f7c13a"></stop>
+					<stop offset="1" stopColor="#f0b421"></stop>
 				</radialGradient>
 				<radialGradient cx="107.03033" cy="81.60482" r="56.16284" gradientUnits="userSpaceOnUse" id="color-5">
-					<stop offset="0" stop-color="#c26715"></stop>
-					<stop offset="0.508" stop-color="#b85515"></stop>
-					<stop offset="1" stop-color="#ad3f16"></stop>
+					<stop offset="0" stopColor="#c26715"></stop>
+					<stop offset="0.508" stopColor="#b85515"></stop>
+					<stop offset="1" stopColor="#ad3f16"></stop>
 				</radialGradient>
 				<radialGradient cx="122.10852" cy="86.88645" r="59.6101" gradientUnits="userSpaceOnUse" id="color-6">
-					<stop offset="0" stop-color="#c26715"></stop>
-					<stop offset="0.508" stop-color="#b85515"></stop>
-					<stop offset="1" stop-color="#ad3f16"></stop>
+					<stop offset="0" stopColor="#c26715"></stop>
+					<stop offset="0.508" stopColor="#b85515"></stop>
+					<stop offset="1" stopColor="#ad3f16"></stop>
 				</radialGradient>
 			</defs>
 			<g fill="none">

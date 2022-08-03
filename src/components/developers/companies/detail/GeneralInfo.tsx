@@ -16,17 +16,19 @@ const GeneralInfo = ({ headquarter, social_profile, generalinfo }: TCompanyDetai
 	return (
 		<div>
 			<STitle>General Info</STitle>
-			<div className="mt-10">
-				<FlexBox justify="start" gap={5}>
-					<LocationFillIcon color={colors.BLACK_9} />
-					<SSubTitle>Headquarter</SSubTitle>
-				</FlexBox>
-				<SSpan className="mt-5">
-					{headquarter?.street ? `${headquarter?.street}, ` : ''}
-					{headquarter?.city ? `${headquarter?.city}, ` : ''}
-					{headquarter?.country ? `${headquarter?.country}.` : ''}
-				</SSpan>
-			</div>
+			{(headquarter?.street || headquarter?.city || headquarter?.country) && (
+				<div className="mt-10">
+					<FlexBox justify="start" gap={5}>
+						<LocationFillIcon color={colors.BLACK_9} />
+						<SSubTitle>Headquarter</SSubTitle>
+					</FlexBox>
+					<SSpan className="mt-5">
+						{headquarter?.street ? `${headquarter?.street}, ` : ''}
+						{headquarter?.city ? `${headquarter?.city}, ` : ''}
+						{headquarter?.country ? `${headquarter?.country}.` : ''}
+					</SSpan>
+				</div>
+			)}
 			{founded && (
 				<div className="mt-15">
 					<FlexBox justify="start" gap={5}>

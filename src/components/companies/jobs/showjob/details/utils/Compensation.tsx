@@ -12,7 +12,8 @@ const Compensation = (props: JobDetails) => {
 			<div>
 				<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
 				<span style={{ color: `${colors.BLACK_2}` }}>
-					{props.start_salary} - {props.end_salary} {props.currency?.code.toUpperCase()} / {props.salary_type}
+					{parseInt(props?.start_salary!).toLocaleString('en-US')} - {parseInt(props?.end_salary!).toLocaleString('en-US')}{' '}
+					{props.currency?.code.toUpperCase()} / {props.salary_type}
 				</span>
 			</div>
 			<div className="mt-10">

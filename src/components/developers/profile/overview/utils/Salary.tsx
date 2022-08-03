@@ -11,7 +11,7 @@ const Salary = () => {
 			<div className="mt-15">
 				{displaySalary ? (
 					<FlexBox justify="start" align="start" gap={10}>
-						<span>{salary}</span>
+						<span>{parseInt(salary).toLocaleString('en-US')}</span>
 						<SSpan>{currency.name}</SSpan>
 					</FlexBox>
 				) : (

@@ -5,32 +5,32 @@ const MessageColorIcon = ({ width, height }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<linearGradient x1="75.62267" y1="57.4265" x2="139.91842" y2="165.86533" gradientUnits="userSpaceOnUse" id="color-1">
-					<stop offset="0" stop-color="#0176d0"></stop>
-					<stop offset="1" stop-color="#16538c"></stop>
+					<stop offset="0" stopColor="#0176d0"></stop>
+					<stop offset="1" stopColor="#16538c"></stop>
 				</linearGradient>
 				<linearGradient x1="99.18308" y1="86.516" x2="112.84275" y2="115.44425" gradientUnits="userSpaceOnUse" id="color-2">
-					<stop offset="0" stop-color="#199ae0"></stop>
-					<stop offset="1" stop-color="#0782d8"></stop>
+					<stop offset="0" stopColor="#199ae0"></stop>
+					<stop offset="1" stopColor="#0782d8"></stop>
 				</linearGradient>
 				<linearGradient x1="94.76483" y1="102.87392" x2="106.42142" y2="127.56308" gradientUnits="userSpaceOnUse" id="color-3">
-					<stop offset="0" stop-color="#199ae0"></stop>
-					<stop offset="1" stop-color="#0782d8"></stop>
+					<stop offset="0" stopColor="#199ae0"></stop>
+					<stop offset="1" stopColor="#0782d8"></stop>
 				</linearGradient>
 				<radialGradient cx="66.9725" cy="59.98858" r="57.73825" gradientUnits="userSpaceOnUse" id="color-4">
-					<stop offset="0.627" stop-color="#000000"></stop>
-					<stop offset="1" stop-color="#000000" stop-opacity="0"></stop>
+					<stop offset="0.627" stopColor="#000000"></stop>
+					<stop offset="1" stopColor="#000000" stop-opacity="0"></stop>
 				</radialGradient>
 				<linearGradient x1="35.82258" y1="21.2635" x2="78.045" y2="110.7035" gradientUnits="userSpaceOnUse" id="color-5">
-					<stop offset="0" stop-color="#33bef0"></stop>
-					<stop offset="1" stop-color="#22a5e2"></stop>
+					<stop offset="0" stopColor="#33bef0"></stop>
+					<stop offset="1" stopColor="#22a5e2"></stop>
 				</linearGradient>
 				<linearGradient x1="59.76642" y1="36.34933" x2="73.42608" y2="65.27758" gradientUnits="userSpaceOnUse" id="color-6">
-					<stop offset="0" stop-color="#199ae0"></stop>
-					<stop offset="1" stop-color="#0782d8"></stop>
+					<stop offset="0" stopColor="#199ae0"></stop>
+					<stop offset="1" stopColor="#0782d8"></stop>
 				</linearGradient>
 				<linearGradient x1="55.34817" y1="52.70725" x2="67.00475" y2="77.39642" gradientUnits="userSpaceOnUse" id="color-7">
-					<stop offset="0" stop-color="#199ae0"></stop>
-					<stop offset="1" stop-color="#0782d8"></stop>
+					<stop offset="0" stopColor="#199ae0"></stop>
+					<stop offset="1" stopColor="#0782d8"></stop>
 				</linearGradient>
 			</defs>
 			<g fill="none">

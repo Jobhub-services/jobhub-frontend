@@ -18,17 +18,21 @@ const SH4 = styled.h4`
 const SSpan = styled.span`
 	color: ${colors.BLACK_8};
 `;
-
+const SDiv = styled.div`
+	margin: 20px 0 5px 0;
+`;
 const TalentRecommendation = () => {
 	return (
 		<SContainer className="mt-20">
 			<div>
 				<SH4>Recommended Talents</SH4>
-				<SSpan>Recommended talents based on your historic search</SSpan>
+				<SSpan>Recommended talents based on your search history</SSpan>
 			</div>
 			<FlexBox flexDirection="column">
-				<img src={emptyData} alt="Empty" width={400} height={400} />
-				<SH4>We have no talent recommendations yet.</SH4>
+				<SDiv>
+					<img src={emptyData} alt="Empty" width={250} height={250} />
+					<SH4>Talent recommendation will appear here.</SH4>
+				</SDiv>
 				<Link to="talents">
 					<Button className="mt-20">Browse talent</Button>
 				</Link>

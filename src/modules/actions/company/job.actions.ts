@@ -55,7 +55,10 @@ export const jobActions = {
 			let tmp: any = { ...payload };
 			tmp.category = payload.category?.id;
 			tmp.currency = payload.currency?.id;
-			tmp.company_division = payload.company_division?.id;
+
+			if (payload.company_division?.id && payload.company_division?.id !== '') tmp.company_division = payload.company_division?.id;
+			else delete tmp.company_division;
+
 			tmp.work_location = payload.work_location
 				?.filter((elem) => elem.country?.id !== '' || elem.city !== '')
 				.map((elem) => {

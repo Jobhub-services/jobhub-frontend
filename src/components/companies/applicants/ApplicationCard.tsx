@@ -12,6 +12,16 @@ import { useAppSelector } from '@/utils/appHooks';
 
 const Status: { [key in ApplicationStatus]?: ApplicationStatus } = { NEW: 'ACCEPTED', ACCEPTED: 'IN_PROGRESS', IN_PROGRESS: 'HIRED' };
 
+const SBody = styled.div`
+	height: 182px;
+	padding: 10px 10px 0 10px;
+`;
+
+const SHeader = styled(FlexBox)`
+	height: 86px;
+	padding: 8px 10px;
+	border-bottom: 1px solid ${colors.BLACK_12};
+`;
 const SStatus = styled.div<any>`
 	background-color: ${(props) => props.color};
 	padding: 5px 10px;
@@ -37,6 +47,7 @@ const SP = styled.p`
 const CustomizedButton = styled(Button)`
 	font-size: 12px !important;
 	font-weight: 500 !important;
+	white-space: nowrap;
 `;
 const SSpan = styled.span`
 	font-size: 12px;
@@ -91,7 +102,7 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 
 	return (
 		<SCard className={props.className}>
-			<FlexBox justify="space-between" style={{ padding: '8px 10px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
+			<SHeader justify="space-between" gap={10}>
 				<FlexBox align="flex-start">
 					<Avatar
 						size={50}
@@ -105,8 +116,8 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 				<CustomizedButton onClick={viewDetails} variant="text">
 					View details
 				</CustomizedButton>
-			</FlexBox>
-			<div style={{ padding: '10px 10px 0 10px' }}>
+			</SHeader>
+			<SBody>
 				<div>
 					<SP>{props?.motivation}</SP>
 				</div>
@@ -146,7 +157,7 @@ const ApplicationCard = (props: ApplicantCardProps) => {
 					)}
 					{!props.git && !props.cv && !props.linkedIn && <SEmpty>Candidate has not yet added any social profile</SEmpty>}
 				</FlexBox>
-			</div>
+			</SBody>
 			<div className="mt-10" style={{ borderTop: `1px solid ${colors.BLACK_12}`, padding: '10px 10px' }}>
 				{props.job && (
 					<FlexBox justify="space-between">

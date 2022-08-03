@@ -12,8 +12,9 @@ const Compensation = ({ data }: { data: TJobDetails }) => {
 			<div>
 				<TitleIcon title="Salary" icon={(props: IconProps) => <MoneyIcon {...props} />} />
 				<span style={{ marginLeft: '20px', color: `${colors.BLACK_2}` }}>
-					{data?.start_salary}
-					{data?.end_salary ? ` - ${data?.end_salary}` : ''} {data?.currency?.code?.toUpperCase()} {data?.salary_type ? `/ ${data?.salary_type}` : ''}
+					{parseInt(data?.start_salary!).toLocaleString('en-US')}
+					{data?.end_salary ? ` - ${parseInt(data?.end_salary).toLocaleString('en-US')}` : ''} {data?.currency?.code?.toUpperCase()}{' '}
+					{data?.salary_type ? `/ ${data?.salary_type}` : ''}
 				</span>
 			</div>
 			{data?.benefits && data?.benefits !== '' && (

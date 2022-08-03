@@ -5,28 +5,28 @@ const ApplicationColorIcon = ({ width, height }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<linearGradient x1="30.84533" y1="41.59533" x2="55.84267" y2="66.59267" gradientUnits="userSpaceOnUse" id="color-111">
-					<stop offset="0" stop-color="#0d61a9"></stop>
-					<stop offset="1" stop-color="#16528c"></stop>
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="1" stopColor="#16528c"></stop>
 				</linearGradient>
 				<linearGradient x1="15.87775" y1="94.89383" x2="71.6595" y2="150.672" gradientUnits="userSpaceOnUse" id="color-222">
-					<stop offset="0" stop-color="#0d61a9"></stop>
-					<stop offset="1" stop-color="#16528c"></stop>
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="1" stopColor="#16528c"></stop>
 				</linearGradient>
 				<linearGradient x1="116.84533" y1="41.59533" x2="141.84267" y2="66.59267" gradientUnits="userSpaceOnUse" id="color-333">
-					<stop offset="0" stop-color="#0d61a9"></stop>
-					<stop offset="1" stop-color="#16528c"></stop>
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="1" stopColor="#16528c"></stop>
 				</linearGradient>
 				<linearGradient x1="101.87775" y1="94.89383" x2="157.6595" y2="150.672" gradientUnits="userSpaceOnUse" id="color-444">
-					<stop offset="0" stop-color="#0d61a9"></stop>
-					<stop offset="1" stop-color="#16528c"></stop>
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="1" stopColor="#16528c"></stop>
 				</linearGradient>
 				<linearGradient x1="73.84533" y1="27.262" x2="98.84267" y2="52.25933" gradientUnits="userSpaceOnUse" id="color-555">
-					<stop offset="0" stop-color="#32bdef"></stop>
-					<stop offset="1" stop-color="#1ea2e4"></stop>
+					<stop offset="0" stopColor="#32bdef"></stop>
+					<stop offset="1" stopColor="#1ea2e4"></stop>
 				</linearGradient>
 				<linearGradient x1="75.89858" y1="68.28758" x2="93.8905" y2="158.24" gradientUnits="userSpaceOnUse" id="color-666">
-					<stop offset="0" stop-color="#32bdef"></stop>
-					<stop offset="1" stop-color="#1ea2e4"></stop>
+					<stop offset="0" stopColor="#32bdef"></stop>
+					<stop offset="1" stopColor="#1ea2e4"></stop>
 				</linearGradient>
 			</defs>
 			<g fill="none" stroke="none">

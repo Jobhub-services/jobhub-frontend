@@ -79,8 +79,8 @@ const LastApplicants = () => {
 				</>
 			) : (
 				<FlexBox flexDirection="column">
-					<img src={emptyData} alt="Empty" width={300} height={300} />
-					<SH4>We have no applications yet.</SH4>
+					<img src={emptyData} alt="Empty" width={250} height={250} />
+					<SH4>New applications will appear here.</SH4>
 				</FlexBox>
 			)}
 		</SContainer>

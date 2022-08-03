@@ -147,7 +147,8 @@ const JobCard = (props: PJobCard) => {
 						<FlexBox gap={5} justify="flex-start" className="mt-15">
 							<MoneyIcon width="18px" height="18px" color={colors.BLACK_9} />
 							<SSpan>
-								{props.start_salary ?? 'N/A'}-{props.end_salary ?? 'N/A'} {props.currency?.code} {props.salary_type ? `/${props.salary_type}` : ''}
+								{parseInt(props.start_salary!).toLocaleString('en-US') ?? 'N/A'}-{parseInt(props.end_salary!).toLocaleString('en-US') ?? 'N/A'}{' '}
+								{props.currency?.code} {props.salary_type ? `/${props.salary_type}` : ''}
 							</SSpan>
 						</FlexBox>
 					</div>

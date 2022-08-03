@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { FlexBox } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import { PJobAvatar } from '@/models/component/developer/jobs.interface';
@@ -7,6 +7,15 @@ import { useNavigate } from 'react-router-dom';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
 
+const ThreePoint = css`
+	display: -webkit-box;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: pre-line;
+`;
 const SContainer = styled(FlexBox)`
 	cursor: pointer;
 `;
@@ -26,23 +35,18 @@ const ImgContainer = styled.div`
 	border-radius: 50%;
 `;
 const SH3 = styled.h3`
-	display: -webkit-box;
+	${ThreePoint}
 	margin: 0;
-	font-family: inherit;
-	-webkit-line-clamp: 1;
-	-webkit-box-orient: vertical;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: pre-line;
 `;
 const SSpan = styled.span`
-	display: inline-block;
 	color: ${colors.BLACK_7};
 	font-weight: 500;
+	${ThreePoint}
 `;
 const Span = styled.span<any>`
 	font-size: 13px;
 	color: ${colors.BLACK_9};
+	${ThreePoint}
 `;
 const SIcon = styled.span`
 	display: flex;
