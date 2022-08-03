@@ -12,7 +12,7 @@ const SLink = styled(Link)<any>`
 `;
 const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 	const { pathname } = useLocation();
-	const widthItems = '96%';
+	const widthItems = appExpanded ? '96%' : '100%';
 	return (
 		<>
 			<SLink to="/" expanded={appExpanded}>
@@ -22,7 +22,7 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 			</SLink>
 			<SLink to="jobs" expanded={appExpanded}>
 				<NavItem className="mb-5" icon={<JobColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/jobs')}>
-					{appExpanded ? <NavItem.Content>Jobs</NavItem.Content> : <></>}
+					{appExpanded ? <NavItem.Content>Jobs</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
 			{/*<HealthIcon width="20px" height="20px" /><NewCompanyIcon width="20px" height="20px" /><ApplicantIcon width="20px" height="20px" /> */}
@@ -33,7 +33,7 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 					width={widthItems}
 					active={pathname.startsWith('/companies')}
 				>
-					{appExpanded ? <NavItem.Content>Companies</NavItem.Content> : <></>}
+					{appExpanded ? <NavItem.Content>Companies</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
 			<SLink to="applications" expanded={appExpanded}>
@@ -43,7 +43,7 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 					width={widthItems}
 					active={pathname.startsWith('/applications')}
 				>
-					{appExpanded ? <NavItem.Content>Applications</NavItem.Content> : <></>}
+					{appExpanded ? <NavItem.Content>Applications</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
 			{/*<SLink to="messages">
@@ -70,7 +70,7 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 
 			<SLink to="/settings/account">
 				<NavItem icon={<SettingsColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/settings')}>
-					{appExpanded ? <NavItem.Content>Settings</NavItem.Content> : <></>}
+					{appExpanded ? <NavItem.Content>Settings</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
 		</>
