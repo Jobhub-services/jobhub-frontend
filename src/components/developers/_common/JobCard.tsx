@@ -16,18 +16,19 @@ const NEW_JOB_PERIOD = 3;
 const SHeader = styled(FlexBox)`
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
-	padding: 15px 15px 10px 15px;
+	padding: 15px 15px 7px 15px;
 	cursor: pointer;
 	transition: all 0.2s;
 	&:hover {
 		background-color: ${colors.PURPLE_1};
 	}
+	border-bottom: 1px solid ${colors.PURPLE_1};
 `;
 const SBody = styled.div`
 	height: 195px;
 `;
 const SubBody = styled(FlexBox)`
-	padding: 0 15px 15px 15px;
+	padding: 5px 15px 15px 15px;
 `;
 
 const SFooter = styled(FlexBox)`
@@ -121,7 +122,7 @@ const JobCard = (props: PJobCard) => {
 								<DotIcon color={colors.BLACK_4} />
 							</IconButton>
 						</DropDown.Title>
-						<DropDown.Item>Show</DropDown.Item>
+						<DropDown.Item>Open</DropDown.Item>
 						{/*<DropDown.Item>Edit</DropDown.Item>
 						<DropDown.Item>Delete</DropDown.Item>*/}
 					</DropDown>
@@ -164,10 +165,10 @@ const JobCard = (props: PJobCard) => {
 							</SLoc>
 						</FlexBox>
 						<FlexBox gap={10} justify="end" className="mt-15">
-							<Tag color={colors.BLUE_CLEAR_5} size="12px">
+							<Tag color={colors.PINK_CLEAR_4} size="12px">
 								{props.job_type}
 							</Tag>
-							<Tag color={colors.GREEN_CLEAR_5} size="12px">
+							<Tag color={colors.GREEN_CLEAR_4} size="12px">
 								{props.duration}
 							</Tag>
 						</FlexBox>

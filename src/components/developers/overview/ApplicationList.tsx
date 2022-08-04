@@ -70,7 +70,7 @@ const ApplicationList = () => {
 			) : (
 				<FlexBox flexDirection="column">
 					<img src={emptyData} alt="Empty" width={250} height={250} />
-					<SH4>We have no job recommendations yet.</SH4>
+					<SH4>No recent applications.</SH4>
 				</FlexBox>
 			)}
 		</SContainer>

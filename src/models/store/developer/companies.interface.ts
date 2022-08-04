@@ -6,6 +6,7 @@ export interface ICompanyState {
 	isLoading?: boolean;
 	isDetailLoading?: boolean;
 	filterClosed?: boolean;
+	jobSaved?: boolean;
 	companies?: {
 		content?: TCompanyData[];
 		size?: number;

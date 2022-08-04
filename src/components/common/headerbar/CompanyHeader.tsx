@@ -1,6 +1,6 @@
 import { IconDropDown, AvatarDropDown } from '@/components/common/dropdown';
 import { FlexBox, Button, PlusIcon, SearchInput } from 'staak-ui';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import StaakLogo from '@/assets/theme/StaakLogo';
 import { useAppSelector } from '@/utils/appHooks';
 
@@ -14,14 +14,16 @@ const CompanyHeader = () => {
 	return (
 		<>
 			<FlexBox justify="start" gap={50}>
-				<StaakLogo
-					style={
-						{
-							/*paddingLeft: '15px' ,margin: '20px 0 15px 0' */
+				<Link to="/">
+					<StaakLogo
+						style={
+							{
+								/*paddingLeft: '15px' ,margin: '20px 0 15px 0' */
+							}
 						}
-					}
-					size={150}
-				/>
+						size={150}
+					/>
+				</Link>
 				{/*<SearchInput placeholder="Search Talents" width="350px" />*/}
 			</FlexBox>
 			<FlexBox justify="space-between" gap={35}>

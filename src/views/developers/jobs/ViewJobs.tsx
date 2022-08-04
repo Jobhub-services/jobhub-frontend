@@ -15,7 +15,7 @@ const SContainer = styled.div`
 `;
 const SubContainer = styled.div`
 	overflow-y: auto;
-	padding: 10px 20px;
+	padding: 10px 25px;
 	height: inherit;
 `;
 const ViewJobs = () => {

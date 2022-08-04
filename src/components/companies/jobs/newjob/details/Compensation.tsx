@@ -63,8 +63,8 @@ const Compensation = React.memo(() => {
 					})}
 				</InputPickerField>
 			</FlexBox>
-			<TextAreaField className="mt-10" placeholder="Benefts" name="benefits" height="250px" onDataChange={handleTxt} value={data.benefits}>
-				Benefts
+			<TextAreaField className="mt-10" placeholder="Benefit" name="benefits" height="250px" onDataChange={handleTxt} value={data.benefits}>
+				Benefit
 			</TextAreaField>
 		</div>
 	);

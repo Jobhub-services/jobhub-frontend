@@ -21,6 +21,9 @@ export const companiesDispatcher = {
 	setFilters(data: any) {
 		dispatchToStore(storeActions.setFilters(data));
 	},
+	setSaveJob(saved: boolean, jobSaved?: boolean, id?: string) {
+		dispatchToStore(storeActions.setSaveJob({ saved, jobSaved, id }));
+	},
 };
 export const companiesActions = {
 	async setClosedFilter(closed: boolean) {

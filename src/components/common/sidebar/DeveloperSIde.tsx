@@ -68,7 +68,7 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 				</NavItem>
 	</SLink>*/}
 
-			<SLink to="/settings/account">
+			<SLink to="/settings/account" expanded={appExpanded}>
 				<NavItem icon={<SettingsColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/settings')}>
 					{appExpanded ? <NavItem.Content>Settings</NavItem.Content> : null}
 				</NavItem>

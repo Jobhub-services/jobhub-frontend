@@ -60,6 +60,18 @@ const reducerSlice = createSlice({
 		setFilters: (state, action) => {
 			state.filters = action.payload;
 		},
+		setSaveJob: (state, action) => {
+			const { saved, jobSaved, id } = action.payload;
+			if (id) {
+				state.companyDetail.jobs = state.companyDetail.jobs?.map((elem) => {
+					if (elem._id === id) {
+						return { ...elem, saved: jobSaved };
+					}
+					return elem;
+				});
+			}
+			state.jobSaved = saved;
+		},
 	},
 });
 

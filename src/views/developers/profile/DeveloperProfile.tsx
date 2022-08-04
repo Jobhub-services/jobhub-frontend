@@ -24,13 +24,13 @@ const DeveloperProfile = () => {
 				}}
 			>
 				<TabPane activeItem="overview" paneWidth="30%">
-					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Overview">
+					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Profile Overview">
 						<ProfileOverview />
 					</TabPane.Pane>
-					<TabPane.Pane style={{ padding: '0' }} name="profile" title="Profile">
+					<TabPane.Pane style={{ padding: '0' }} name="profile" title="Edit Profile">
 						<ProfileDetails />
 					</TabPane.Pane>
-					<TabPane.Pane style={{ padding: '0' }} name="preferences" title="Preferences">
+					<TabPane.Pane style={{ padding: '0' }} name="preferences" title="Edit Preferences">
 						<ProfilePreferences />
 					</TabPane.Pane>
 				</TabPane>

@@ -82,7 +82,7 @@ const JobCard = (props: JobCardProps) => {
 								<DotIcon color={colors.BLACK_4} />
 							</IconButton>
 						</DropDown.Title>
-						<DropDown.Item>Show</DropDown.Item>
+						<DropDown.Item>Open</DropDown.Item>
 						{/*<DropDown.Item>Edit</DropDown.Item>
 						<DropDown.Item>Delete</DropDown.Item>*/}
 					</DropDown>
