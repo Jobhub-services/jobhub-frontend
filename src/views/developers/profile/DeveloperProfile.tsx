@@ -23,7 +23,7 @@ const DeveloperProfile = () => {
 					borderRadius: '7px',
 				}}
 			>
-				<TabPane activeItem="overview" paneWidth="30%">
+				<TabPane activeItem="overview" paneWidth="500px" paneJusitfy="center">
 					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Profile Overview">
 						<ProfileOverview />
 					</TabPane.Pane>

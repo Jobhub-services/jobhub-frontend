@@ -24,6 +24,10 @@ const SSpan = styled.span`
 	margin-top: 15px;
 	color: ${colors.BLACK_9};
 `;
+
+const FlexWrap = styled(FlexBox)`
+	flex-wrap: wrap;
+`;
 const Languages = () => {
 	const { langs } = useAppSelector((state) => state.metadata);
 	const { languages } = useAppSelector((state) => state.developerProfile.profile);
@@ -87,20 +91,20 @@ const Languages = () => {
 			</div>
 			{show && (
 				<div className="mt-20">
-					<FlexBox gap={10}>
-						<InputPicker name="language" placeholder="Language" onChange={handleInput} value={tmpLang.language?.name}>
+					<FlexWrap gap={10}>
+						<InputPicker width="100%" name="language" placeholder="Language" onChange={handleInput} value={tmpLang.language?.name}>
 							{langs?.content?.map((elem) => {
 								const str = elem.name + '(' + elem.code + ')';
 								return <InputPicker.Option value={elem._id}>{str}</InputPicker.Option>;
 							})}
 						</InputPicker>
-						<InputPicker name="level" placeholder="Level" onChange={handleInput} value={tmpLang.level}>
+						<InputPicker width="100%" name="level" placeholder="Level" onChange={handleInput} value={tmpLang.level}>
 							<InputPicker.Option value="Basic">Basic</InputPicker.Option>
 							<InputPicker.Option value="Conversional">Conversional</InputPicker.Option>
 							<InputPicker.Option value="Fluent">Fluent</InputPicker.Option>
 							<InputPicker.Option value="Native or Bilingual">Native or Bilingual</InputPicker.Option>
 						</InputPicker>
-					</FlexBox>
+					</FlexWrap>
 					<FlexBox className="mt-15" justify="end" gap={10}>
 						<Button
 							size="md"

@@ -104,12 +104,19 @@ const Roles = () => {
 					</PopModel.Header>
 					<PopModel.Body>
 						<FlexBox justify="start" gap={20}>
-							<InputPickerField name="primary_role" title="Primary Role" onChange={handleInput} value={inputData?.primary_role?.name}>
+							<InputPickerField name="primary_role" title="Primary Role" 
+								placeholder="Select primary role" onChange={handleInput} value={inputData?.primary_role?.name}>
 								{roles?.content?.map((elem, idx) => {
 									return <InputPickerField.Option value={elem._id!}>{elem.name}</InputPickerField.Option>;
 								})}
 							</InputPickerField>
-							<InputPickerField name="experience" title="Experience" onChange={handleInput} value={inputData?.experience}>
+							<InputPickerField
+								name="experience"
+								title="Experience"
+								onChange={handleInput}
+								value={inputData?.experience}
+								placeholder="Select years of experience"
+							>
 								{CExperience.map((elem, idx) => {
 									return (
 										<InputPickerField.Option key={idx} value={elem}>
