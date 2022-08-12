@@ -22,7 +22,7 @@ const Role = () => {
 				<SSubTitle>Job type & Duration</SSubTitle>
 				<FlexBox gap={10} align="start" justify="start">
 					<Tag color={colors.BLUE_CLEAR_5}>{data.job_type}</Tag>
-					<Tag color={colors.GREEN_CLEAR_5}>{data.duration}</Tag>
+					{data.duration && <Tag color={colors.GREEN_CLEAR_5}>{data.duration}</Tag>}
 				</FlexBox>
 				{data.duration_range![0] && data.duration_range![1] && (
 					<div className="mt-10">

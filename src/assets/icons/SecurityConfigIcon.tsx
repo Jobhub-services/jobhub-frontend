@@ -10,7 +10,7 @@ const SecurityConfigIcon = ({ width, height }: IconProps) => {
 				</linearGradient>
 				<radialGradient cx="86.15408" cy="83.55258" r="14.33333" gradientUnits="userSpaceOnUse" id="color-2">
 					<stop offset="0" stopColor="#000000"></stop>
-					<stop offset="1" stopColor="#000000" stop-opacity="0"></stop>
+					<stop offset="1" stopColor="#000000" stopOpacity="0"></stop>
 				</radialGradient>
 			</defs>
 			<g fill="none">

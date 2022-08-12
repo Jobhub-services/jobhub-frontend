@@ -1,7 +1,7 @@
 import { WizardProps } from '@/models/component';
 import { FlexBox } from 'staak-ui';
 import styled, { css } from 'styled-components';
-import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
+import { colors } from '@/assets/theme';
 
 const StyledUl = styled.ul<WizardProps>`
 	${(props) =>
@@ -56,7 +56,7 @@ const LineDiv = styled.li<WizardProps>`
 				content: '';
 				position: absolute;
 				box-shadow: 0px 0px 0px 0px black;
-				border-left: ${(props) => (props.valid ? '2px' : '1px')} solid ${(props) => (props.valid ? Colors.PURPLE_2 : Colors.BLACK_11)};
+				border-left: ${(props) => (props.valid ? '2px' : '1px')} solid ${(props) => (props.valid ? colors.PURPLE_2 : colors.BLACK_11)};
 				height: 145px;
 				margin-top: 3px;
 				left: 13px;
@@ -76,7 +76,7 @@ const StyledDiv = styled.div<WizardProps>`
 	position: relative;
 	width: 25px;
 	height: 25px;
-	background: ${Colors.PURPLE_2};
+	background: ${colors.PURPLE_2};
 	border-radius: 50%;
 	position: relative;
 	transition-duration: 0.3s;
@@ -84,11 +84,16 @@ const StyledDiv = styled.div<WizardProps>`
 		!props.active &&
 		!props.valid &&
 		css`
-			background: ${Colors.BLACK_9};
+			background: ${colors.BLACK_9};
 		`}
 	${LineDiv}:hover & {
-		box-shadow: 0px 0px 5px 5px ${Colors.PURPLE_3};
+		box-shadow: 0px 0px 5px 5px ${colors.PURPLE_3};
 	}
+	${(props) =>
+		props.error &&
+		css`
+			background-color: ${colors.RED_BASE} !important;
+		`}
 	${(props) =>
 		props.direction === 'horizontal' &&
 		css<WizardProps>`
@@ -96,7 +101,7 @@ const StyledDiv = styled.div<WizardProps>`
 				content: '';
 				position: absolute;
 				box-shadow: 0px 0px 0px 0px black;
-				border-top: ${(props) => (props.valid ? '2px' : '1px')} solid ${(props) => (props.valid ? Colors.PURPLE_2 : Colors.BLACK_11)};
+				border-top: ${(props) => (props.valid ? '2px' : '1px')} solid ${(props) => (props.valid ? colors.PURPLE_2 : colors.BLACK_11)};
 				width: 115px;
 				left: 33px;
 				top: 14px;
@@ -107,9 +112,9 @@ const StyledDiv = styled.div<WizardProps>`
 		`};
 `;
 const StepProgress = (props: WizardProps) => {
-	function selectStep(event: React.SyntheticEvent, step: number) {
+	const selectStep = (event: React.SyntheticEvent, step: number) => {
 		if (props.onSelectStep) props.onSelectStep(event, step);
-	}
+	};
 	return (
 		<StyledContainer style={props.style}>
 			<StyledUl direction={props.direction}>
@@ -117,8 +122,8 @@ const StepProgress = (props: WizardProps) => {
 					return (
 						<LineDiv key={index} valid={elem.valid} direction={props.direction} onClick={(event) => selectStep(event, index)}>
 							<FlexBox flexDirection={props.direction === 'horizontal' ? 'column' : 'row'} justify="flex-start">
-								<StyledDiv direction={props.direction} active={elem.active} valid={elem.valid}>
-									<StyledSpan valid={elem.valid} active={elem.active} />
+								<StyledDiv direction={props.direction} active={elem.active} valid={elem.valid} error={elem.error}>
+									{elem.error ? <span style={{ color: 'white' }}>!</span> : <StyledSpan valid={elem.valid} active={elem.active} />}
 								</StyledDiv>
 								<StyledContent>{elem.name}</StyledContent>
 							</FlexBox>

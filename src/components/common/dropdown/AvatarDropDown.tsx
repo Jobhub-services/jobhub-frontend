@@ -33,7 +33,7 @@ const AvatarDropDown = (props: AvatarDropDownProps) => {
 	};
 	// click item not working
 	return (
-		<DropDown trigger="hover" listPosition="right" onSelect={handleSelect}>
+		<DropDown trigger="click" listPosition="right" onSelect={handleSelect}>
 			<DropDown.Title>
 				<FlexBox gap={10}>
 					{props.avatar ? (

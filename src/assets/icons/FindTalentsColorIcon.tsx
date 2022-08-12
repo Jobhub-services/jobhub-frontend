@@ -38,7 +38,7 @@ const FindTalentsColorIcon = ({ width, height }: IconProps) => {
 				</radialGradient>
 				<radialGradient cx="132.64067" cy="132.83417" r="35.95517" gradientUnits="userSpaceOnUse" id="color-7">
 					<stop offset="0.627" stopColor="#000000"></stop>
-					<stop offset="1" stopColor="#000000" stop-opacity="0"></stop>
+					<stop offset="1" stopColor="#000000" stopOpacity="0"></stop>
 				</radialGradient>
 				<radialGradient cx="132.62633" cy="132.75533" r="35.12383" gradientUnits="userSpaceOnUse" id="color-8">
 					<stop offset="0.693" stopColor="#006185"></stop>

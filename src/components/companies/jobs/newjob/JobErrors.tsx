@@ -1,10 +1,7 @@
 import { useAppSelector } from '@/utils/appHooks';
 import styled from 'styled-components';
-import Alert from '@/components/common/Alert';
 import { jobDispatcher } from '@/modules/actions/company/job.actions';
 import parse from 'html-react-parser';
-import { FlexBox, HrDivider } from 'staak-ui';
-import { colors } from '@/assets/theme';
 import { pushNotification } from '@/utils/helpers';
 
 /* component style */

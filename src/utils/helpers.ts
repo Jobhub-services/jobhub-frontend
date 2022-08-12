@@ -58,3 +58,12 @@ export namespace pushNotification {
 export const checkScrollToButtom = (el: HTMLElement, offset = 20): boolean => {
 	return el.scrollHeight - offset <= el.offsetHeight + el.scrollTop;
 };
+
+export const arrayEquals = (arr1?: Array<any>, arr2?: Array<any>) => {
+	if (!arr1 || !arr2) return false;
+	if (arr1?.length !== arr2?.length) return false;
+	for (let i = 0; i < arr1?.length; i++) {
+		if (arr1[i] !== arr2[i]) return false;
+	}
+	return true;
+};

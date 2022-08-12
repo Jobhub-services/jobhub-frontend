@@ -18,7 +18,7 @@ const MessageColorIcon = ({ width, height }: IconProps) => {
 				</linearGradient>
 				<radialGradient cx="66.9725" cy="59.98858" r="57.73825" gradientUnits="userSpaceOnUse" id="color-4">
 					<stop offset="0.627" stopColor="#000000"></stop>
-					<stop offset="1" stopColor="#000000" stop-opacity="0"></stop>
+					<stop offset="1" stopColor="#000000" stopOpacity="0"></stop>
 				</radialGradient>
 				<linearGradient x1="35.82258" y1="21.2635" x2="78.045" y2="110.7035" gradientUnits="userSpaceOnUse" id="color-5">
 					<stop offset="0" stopColor="#33bef0"></stop>

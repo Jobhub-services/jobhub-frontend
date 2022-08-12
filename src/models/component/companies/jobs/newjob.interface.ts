@@ -3,7 +3,7 @@ import { StandardProps } from '@/models/component/app.interface';
 
 export interface AddNewJobProps extends StandardProps {
 	onPreviouse?: (event: React.SyntheticEvent) => void;
-	onNext?: (event: React.SyntheticEvent) => void;
+	onNext?: (event: React.SyntheticEvent, error: boolean) => void;
 }
 
 export interface IAddNewJobState {
@@ -16,4 +16,12 @@ export interface IconTitleProps extends StandardProps {
 	icon?: string;
 }
 
+export interface PCompensation extends StandardProps {
+	errors?: {
+		start_salary?: boolean;
+		end_salary?: boolean;
+		currency?: boolean;
+	};
+	onBenefitChange: (v: string, n: string) => void;
+}
 export interface JobReviewProps extends AddNewJobProps {}

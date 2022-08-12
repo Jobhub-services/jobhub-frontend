@@ -22,12 +22,10 @@ const SubTitle = styled.span`
 
 const TextAvatar = (props: TextAvatarProps) => {
 	return (
-		<FlexBox gap={10} align="flex-start">
-			<div>
-				<SH3>{props.title}</SH3>
-				<SubTitle>{props.subtitle}</SubTitle>
-			</div>
-		</FlexBox>
+		<div onClick={props.onClick}>
+			<SH3>{props.title}</SH3>
+			<SubTitle>{props.subtitle}</SubTitle>
+		</div>
 	);
 };
 

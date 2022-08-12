@@ -6,6 +6,7 @@ import { COLLAPSED_ASIDE_WIDTH, EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/co
 import { userActions } from '@/modules/actions/user.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import PrivateRoutes from '@/routes/PrivateRoutes';
+import { metadataDispatcher } from '@/modules/actions/metadata.actions';
 
 const StyledPublicView = styled.div`
 	position: fixed;
@@ -26,6 +27,9 @@ const MainContent = styled.div<any>`
 	transition: width 0.2s ease-in-out;
 	//overflow-y: auto;
 	height: 100%;
+	@media only screen and (max-width: 1270px) {
+		width: calc(100% - ${COLLAPSED_ASIDE_WIDTH}px);
+	}
 `;
 
 const MainContainer = styled.div`
@@ -40,8 +44,18 @@ const MasterLayout: FC = () => {
 	const { accessToken } = useAppSelector(({ auth }) => auth);
 
 	useEffect(() => {
+		window.addEventListener('resize', onResize);
+		return function cleanup() {
+			window.removeEventListener('resize', onResize);
+		};
+	}, []);
+	useEffect(() => {
 		if (accessToken) userActions.getUserInfo();
 	}, [accessToken]);
+	const onResize = (event: UIEvent) => {
+		if (window.screen.width <= 1270) metadataDispatcher.setAppExpanded(false);
+		else metadataDispatcher.setAppExpanded(true);
+	};
 	return (
 		<StyledPublicView>
 			<HeaderBar />

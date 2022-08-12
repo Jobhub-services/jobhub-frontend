@@ -18,7 +18,7 @@ const width = keyframes`
         width:0;
     }
     to{
-        width:80%;
+        width:70%;
     }
 `;
 const ScrollContainer = styled.div`
@@ -44,7 +44,7 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: 80%;
+	width: 70%;
 	animation: ${width} 0.15s ease-out;
 	//width: ${(props) => (props.showed ? '80%' : '0')};
 	background: white;

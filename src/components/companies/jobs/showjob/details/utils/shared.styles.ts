@@ -7,12 +7,16 @@ export const STitle = styled.h2`
 	color: ${colors.BLUE_DARK_4};
 `;
 
-export const SP = styled.pre`
+export const SP = styled.div`
 	font-family: inherit;
+	font-size: inherit;
 	//margin-left: 20px;
-	margin-top: 5px;
+	//margin-top: 5px;
 	color: ${colors.BLACK_2};
-	white-space: pre-line;
+	& h1 {
+		font-size: 1.5em;
+	}
+	//white-space: pre-line;
 `;
 
 export const SSubTitle = styled.h2`

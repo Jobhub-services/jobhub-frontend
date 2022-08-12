@@ -4,13 +4,17 @@ import { LocationIcon, MoneyIcon, CalendarFillIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { DotIcon } from '@/assets/icons';
 import { JobCardProps } from '@/models/component';
-import TextAvatar from './TextAvatar';
+import TextAvatar from '@/components/companies/jobs/showjob/TextAvatar';
 import StatusElem from '@/components/companies/_common/StatusElem';
 import { StatusTitle } from '@/constants/company/job.contants';
 import AvatarList from './details/AvatarList';
 import { useAppSelector } from '@/utils/appHooks';
-import { jobActions } from '@/modules/actions/company/job.actions';
+import { jobActions, jobDispatcher } from '@/modules/actions/company/job.actions';
 import { Link, useNavigate } from 'react-router-dom';
+import { dateWithMonthName } from '@/utils/helpers';
+import { useEffect, useState } from 'react';
+import DeleteDialogue from '@/components/companies/jobs/showjob/details/DeleteDialogue';
+import { LoadingScreen } from '@/components/common/LoadingScreen';
 
 const SContainer = styled.div`
 	background: white;
@@ -31,7 +35,7 @@ const SContent = styled.div`
 	padding: 5px 15px 15px 15px;
 `;
 const SBody = styled.div`
-	height: 225px;
+	height: 160px;
 `;
 
 const SFooter = styled(FlexBox)`
@@ -44,19 +48,6 @@ const SSpan = styled.span`
 	font-weight: 500;
 	color: ${colors.BLACK_9};
 `;
-const SPar = styled.pre`
-	display: -webkit-box;
-	margin: 0 0;
-	font-family: inherit;
-	font-size: 13px;
-	-webkit-line-clamp: 2;
-	-webkit-box-orient: vertical;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	color: ${colors.BLACK_8};
-	white-space: pre-line;
-`;
-
 const RedSpan = styled.span`
 	font-weight: 500;
 	color: ${colors.RED_CLEAR_1};
@@ -64,84 +55,134 @@ const RedSpan = styled.span`
 const JobCard = (props: JobCardProps) => {
 	const navigate = useNavigate();
 	const { jobDetails } = useAppSelector((state) => state.job);
+	const [show, setShow] = useState(false);
+	const [enableEdit, setEnableEdit] = useState(false);
 
+	useEffect(() => {
+		if (jobDetails._id === props._id && enableEdit) {
+			setEnableEdit(false);
+			dispatchData();
+		}
+	}, [jobDetails._id]);
 	const handleClick = (event: any, value: string) => {
-		if (jobDetails._id !== props._id) jobActions.getJobDetails(props._id);
-		navigate(`details/${props._id}`);
+		if (value === 'open') {
+			if (jobDetails._id !== props._id) jobActions.getJobDetails(props._id);
+			navigate(`details/${props._id}`);
+		} else {
+			if (value === 'delete') setShow(true);
+			else if (value === 'edit') {
+				if (jobDetails._id === props._id) {
+					dispatchData();
+				} else {
+					jobActions.getJobDetails(props._id);
+					setEnableEdit(true);
+				}
+			}
+		}
 	};
-	const onClick = () => {};
-
+	const dispatchData = () => {
+		let tmp: any = { ...jobDetails };
+		tmp.company_division = { id: jobDetails.company_division, name: jobDetails.company_division };
+		tmp.category = { id: jobDetails.category, name: jobDetails.category };
+		tmp.work_location = [
+			{
+				country: { id: jobDetails.work_location?.country._id, name: jobDetails.work_location?.country.name },
+				city: jobDetails.work_location?.city,
+			},
+		];
+		tmp.hire_location = jobDetails?.hire_location?.map((elem) => {
+			return {
+				country: { id: elem.country._id, name: elem?.country.name },
+				city: elem?.city,
+			};
+		});
+		tmp.currency = { id: jobDetails.currency?.name, name: jobDetails.currency?.name };
+		tmp.skills = jobDetails.skills?.map((elem) => {
+			return { value: elem._id, label: elem.name };
+		});
+		jobDispatcher.saveJobData(tmp);
+		navigate('/jobs/new', { state: { action: 'update' } });
+	};
 	return (
-		<SContainer>
-			<SBody>
-				<SHeader justify="space-between" align="flex-start">
-					<TextAvatar title={props.title} subtitle={props.category} />
-					<DropDown listPosition="left" onSelect={handleClick}>
-						<DropDown.Title>
-							<IconButton width="35px" height="20px">
-								<DotIcon color={colors.BLACK_4} />
-							</IconButton>
-						</DropDown.Title>
-						<DropDown.Item>Open</DropDown.Item>
-						{/*<DropDown.Item>Edit</DropDown.Item>
-						<DropDown.Item>Delete</DropDown.Item>*/}
-					</DropDown>
-				</SHeader>
-				<SContent>
-					<SPar>{props.description}</SPar>
-					<FlexBox justify="space-between" className="mt-10">
-						<FlexBox gap={10} justify="flex-start">
-							<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.BLUE_CLEAR_5} size="12px">
-								{props.job_type}
-							</Tag>
-							<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.GREEN_CLEAR_5} size="12px">
-								{props.duration}
-							</Tag>
-						</FlexBox>
-						<StatusElem title={StatusTitle[props.status!]} status={props.status} />
-					</FlexBox>
-					<FlexBox justify="space-between" className="mt-20">
-						<div>
-							<FlexBox gap={5} justify="flex-start">
-								<MoneyIcon width="18px" height="18px" color={colors.BLACK_9} />
-								<SSpan>
-									{parseInt(props?.start_salary!).toLocaleString('en-US') ?? 'N/A'}-{parseInt(props.end_salary!).toLocaleString('en-US') ?? 'N/A'}{' '}
-									{props.currency?.code}
-								</SSpan>
+		<>
+			{enableEdit && <LoadingScreen />}
+			<DeleteDialogue show={show} onClose={() => setShow(false)} jobId={props._id} />
+			<SContainer>
+				<SBody>
+					<SHeader justify="space-between" align="flex-start">
+						<TextAvatar title={props.title} subtitle={props.category} onClick={(e: any) => handleClick(e, 'open')} />
+						<DropDown listPosition="left" onSelect={handleClick} style={{ zIndex: '1' }}>
+							<DropDown.Title>
+								<IconButton width="35px" height="20px">
+									<DotIcon color={colors.BLACK_4} />
+								</IconButton>
+							</DropDown.Title>
+							<DropDown.Item value="open">Open</DropDown.Item>
+							<DropDown.Item value="edit">Edit</DropDown.Item>
+							<DropDown.Item value="delete">Delete</DropDown.Item>
+						</DropDown>
+					</SHeader>
+					<SContent>
+						<FlexBox justify="space-between" className="mt-10">
+							<FlexBox gap={10} justify="flex-start">
+								<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.BLUE_CLEAR_5} size="12px">
+									{props.job_type}
+								</Tag>
+								{props.duration && (
+									<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.GREEN_CLEAR_5} size="12px">
+										{props.duration}
+									</Tag>
+								)}
+								{props.work_remotly && (
+									<Tag style={{ paddingTop: '3px', paddingBottom: '3px' }} color={colors.PINK_CLEAR_4} size="12px">
+										Remote
+									</Tag>
+								)}
 							</FlexBox>
-							<FlexBox gap={5} justify="start" align="flex-start" className="mt-10">
-								<LocationIcon width="18px" height="18px" color={colors.BLACK_9} />
-								<FlexBox gap={10} justify="start">
-									{props.work_remotly && <SSpan>Remote</SSpan>}
+							<StatusElem title={StatusTitle[props.status!]} status={props.status} />
+						</FlexBox>
+						<FlexBox justify="space-between" className="mt-20">
+							<FlexBox justify="start" gap={15}>
+								<FlexBox gap={3} justify="flex-start">
+									<MoneyIcon width="18px" height="18px" color={colors.BLACK_9} />
 									<SSpan>
-										{props.work_location?.country ?? 'N/A'}
-										{`, ${props.work_location?.city ?? 'N/A'}`}
+										{parseInt(props?.start_salary!).toLocaleString('en-US') ?? 'N/A'}-{parseInt(props.end_salary!).toLocaleString('en-US') ?? 'N/A'}{' '}
+										{props.currency?.code}
 									</SSpan>
 								</FlexBox>
+								<FlexBox gap={3} justify="start" align="flex-start">
+									<LocationIcon width="18px" height="18px" color={colors.BLACK_9} />
+									<FlexBox gap={10} justify="start">
+										<SSpan>
+											{props.work_location?.country ?? 'N/A'}
+											{`, ${props.work_location?.city ?? 'N/A'}`}
+										</SSpan>
+									</FlexBox>
+								</FlexBox>
 							</FlexBox>
-						</div>
-						<FlexBox gap={5}>
-							<CalendarFillIcon color={colors.BLACK_9} />
-							<SSpan>{new Date(props.createdAt!).toDateString()}</SSpan>
+							<FlexBox gap={3} justify="start">
+								<CalendarFillIcon color={colors.BLACK_9} />
+								<SSpan>{dateWithMonthName(props.createdAt!)}</SSpan>
+							</FlexBox>
 						</FlexBox>
-					</FlexBox>
-				</SContent>
-			</SBody>
-			<SFooter justify="space-between">
-				<div>
-					<Button variant="light" size="sm" onClick={handleClick}>
-						Details
-					</Button>
-				</div>
-				{props.applications!.length > 0 ? (
-					<Link to={`/applicants/search/NEW/?jobId=${props._id}`}>
-						<AvatarList size={35} totalAvatar={props.applications?.length ?? 0} img={props.applications} onClick={onClick} />
-					</Link>
-				) : (
-					<RedSpan>No Applicants Yet</RedSpan>
-				)}
-			</SFooter>
-		</SContainer>
+					</SContent>
+				</SBody>
+				<SFooter justify="space-between">
+					<div>
+						<Button variant="light" size="sm" onClick={(e: any) => handleClick(e, 'open')}>
+							Details
+						</Button>
+					</div>
+					{props.applications!.length > 0 ? (
+						<Link to={`/applicants/search/NEW/?jobId=${props._id}`}>
+							<AvatarList size={35} totalAvatar={props.applications?.length ?? 0} img={props.applications} />
+						</Link>
+					) : (
+						<RedSpan>No Applicants Yet</RedSpan>
+					)}
+				</SFooter>
+			</SContainer>
+		</>
 	);
 };
 

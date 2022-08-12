@@ -30,6 +30,8 @@ const InputField = (props: InputProps) => {
 				{props.required && <SRequired>*</SRequired>}
 			</FlexBox>
 			<Input
+				errorMessage={props.errorMessage}
+				error={props.error}
 				onChange={props.onChange}
 				startIcon={props.startIcon}
 				width={props.width}
@@ -39,6 +41,8 @@ const InputField = (props: InputProps) => {
 				required={props.required}
 				value={props.value}
 				onDataChange={props.onDataChange}
+				onFocus={props.onFocus}
+				disabled={props.disabled}
 			/>
 			{wrapper && wrapper.error && <ErrorSpan>{wrapper.message}</ErrorSpan>}
 		</div>

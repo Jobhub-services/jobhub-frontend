@@ -1,5 +1,7 @@
 import { StatusType } from '@/types/common.type';
 
+export type TJobType = 'Full time' | 'Part time' | 'Contract' | 'Internship';
+
 export type JobStringIndex =
 	| 'title'
 	| 'salary_type'
@@ -34,7 +36,7 @@ export type ShowJobInfo = {
 	category?: string;
 	description?: string;
 	status?: StatusType;
-	job_type?: 'Full time' | 'Part time';
+	job_type?: TJobType;
 	duration?: 'Permanent' | 'Temporary';
 	start_salary?: string;
 	end_salary?: string;
@@ -43,7 +45,7 @@ export type ShowJobInfo = {
 		name: string;
 	};
 	createdAt?: string;
-	work_location?: { country: string; city: string };
+	work_location?: { country: { name?: string; _id?: string }; city: string };
 	work_remotly?: boolean;
 	applications?: string[]; // list of image ulr path
 	salary_type?: string;
@@ -53,12 +55,12 @@ export type JobDetails = ShowJobInfo & {
 	responsabilities?: string;
 	company_division?: string;
 	duration_range?: [string, string];
-	hire_location?: { country: { name?: string }; city: string }[];
+	hire_location?: { country: { name?: string; _id?: string }; city: string }[];
 	hire_remotly?: boolean;
 	visa_sponsorship?: boolean;
 	education?: string[];
 	certification?: string[];
-	skills?: string[];
+	skills?: { name?: string; _id?: string }[];
 	requirements?: string;
 	benefits?: string;
 	questions?: string[];

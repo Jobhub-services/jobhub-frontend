@@ -12,13 +12,16 @@ export const StyledGap = styled(FlexBox)`
 	gap: 15px;
 `;
 
-export const SPre = styled.pre`
-	white-space: pre-line;
+export const SPre = styled.div`
+	//white-space: pre-line;
 	font-size: inherit;
 	font-family: inherit;
-	color: ${colors.BLACK_2};
+	& h1 {
+		font-size: 1.5em;
+	}
+	//color: ${colors.BLACK_2};
 	line-height: 25px;
-	margin-top: 0;
+	//margin-top: 0;
 `;
 
 export const STitle = styled.h2`

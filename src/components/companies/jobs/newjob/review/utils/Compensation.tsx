@@ -6,6 +6,7 @@ import { BenefitIcon, MoneyIcon } from '@/assets/icons';
 import TitleIcon from '@/components/common/jobs/TitleIcon';
 import { colors } from '@/assets/theme';
 import styled from 'styled-components';
+import parse from 'html-react-parser';
 
 const SSpan = styled.span`
 	color: ${colors.BLACK_2};
@@ -28,7 +29,7 @@ const Compensation = (props: JobReviewProps) => {
 			</div>
 			<div className="mt-10">
 				<TitleIcon title="Benefits" icon={(props: IconProps) => <BenefitIcon {...props} />} />
-				<SPre>{data.benefits !== '' ? data.benefits : 'N/A'}</SPre>
+				<SPre>{data.benefits !== '' ? parse(data.benefits ?? '') : 'N/A'}</SPre>
 			</div>
 		</div>
 	);

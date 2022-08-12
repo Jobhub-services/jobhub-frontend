@@ -7,6 +7,7 @@ const HireLocation = () => {
 	const { createJob } = useAppSelector((state) => state.job);
 	const { countries } = useAppSelector((state) => state.metadata);
 	const data = createJob;
+
 	function removeHireLocation(event: React.SyntheticEvent, index: number) {
 		const tmp = { ...data };
 		tmp.hire_location = tmp.hire_location?.filter((elem, idx) => idx !== index);

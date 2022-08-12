@@ -8,20 +8,36 @@ interface StandardInputProps extends StandardProps {
 	placeholder?: string;
 	required?: boolean;
 	value?: string;
+	error?: boolean;
+	errorMessage?: string;
+	disabled?: boolean;
 }
 export interface InputProps extends StandardInputProps {
 	type?: 'text' | 'email' | 'password';
 	startIcon?: React.ReactNode;
 	onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 	onDataChange?: (event: React.FocusEvent<HTMLTextAreaElement>, value?: string, name?: string) => void;
+	onFocus?: (e: any) => void;
 }
 
+export interface PInputEditor extends StandardProps {
+	title: string;
+	name: string;
+	required?: boolean;
+	initialValue?: string;
+	initOptions: Object;
+	error?: boolean;
+	onEditorChange?: (val: string, name: string) => void;
+	onFocus?: (e: any) => void;
+	onBlur?: (e: any) => void;
+}
 export interface InputPickerProps extends StandardInputProps {
 	children?: JSX.Element | JSX.Element[];
 	title: string;
 	message?: string;
 	error?: boolean;
 	onChange?: (event: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) => void;
+	onFocus?: (e: any) => void;
 }
 export interface DateProps extends StandardInputProps {
 	timeIntervals?: number;

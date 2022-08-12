@@ -12,6 +12,7 @@ export default ({ mode }: any) => {
 				APP_ENV: process.env.VITE_APP_ENV,
 				BASE_URL: process.env.VITE_APP_BASE_URL,
 				STAAK_URL: process.env.VITE_STAAK_APP_URL,
+				TINY_TEXT_EDITOR_API_KEY: process.env.VITE_TINY_TEXT_EDITOR_API_KEY,
 			},
 		},
 		plugins: [react()],

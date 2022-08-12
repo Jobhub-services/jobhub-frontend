@@ -14,6 +14,9 @@ const SyledContainer = styled.div<CompaniesOverview.SideBarProps>`
 	transition: width 0.2s ease-in-out;
 	height: 100%;
 	padding: 0px 10px 0px 0px;
+	@media only screen and (max-width: 1270px) {
+		width: ${COLLAPSED_ASIDE_WIDTH}px;
+	}
 `;
 const SideBar = (props: CompaniesOverview.SideBarProps) => {
 	const { userType } = useAppSelector(({ user }) => user.userInfo);

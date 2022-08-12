@@ -1,58 +1,62 @@
 import { FlexBox, Button } from 'staak-ui';
-import { TextAreaField, TagPickerField, TagInputField } from '@/components/common';
+import { TagPickerField, TagInputField } from '@/components/common';
 import { useAppSelector } from '@/utils/appHooks';
 import Questions from './Questions';
-import { JobArrayStringIndex, JobStringIndex } from '@/types/company/jobs.type';
-import { jobActions } from '@/modules/actions/company/job.actions';
+import { JobArrayStringIndex } from '@/types/company/jobs.type';
+import { jobDispatcher } from '@/modules/actions/company/job.actions';
 import { useEffect, useState } from 'react';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import { HeaderContainer, StyledHeadline, StepContent } from '@/components/companies/jobs/newjob/newjob.styles';
+import InputEditor from '@/components/common/input/InputEditor';
 
 const QualificationsInfo = (props: any) => {
 	const { createJob } = useAppSelector((state) => state.job);
 	const { skills_list } = useAppSelector((state) => state.metadata);
 	const [localSkills, setLocalSkills] = useState<{ _id?: string | undefined; name?: string | undefined }[]>([]);
+	const [requirement, setRequirement] = useState('');
 	const data = createJob;
 
 	useEffect(() => {
-		metadataActions.getSkills();
+		if (skills_list?.size === 0) metadataActions.getSkills();
+		setRequirement(data.requirements ?? '');
 	}, []);
-	function handleChangeData(event: React.ChangeEvent<HTMLInputElement>) {
+
+	const handleEditor = (v: string, n: string) => {
+		setRequirement(v);
+	};
+
+	const handleChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { value } = event.target;
 		if (value === '') setLocalSkills([]);
 		else {
 			const tmp = skills_list?.content?.filter((elem) => elem.name?.toLocaleLowerCase().startsWith(value.toLocaleLowerCase()));
 			setLocalSkills(tmp!);
 		}
-	}
-	function handleNext(event: React.SyntheticEvent) {
+	};
+	const handleNext = (event: React.SyntheticEvent) => {
+		const tmp = { ...data, requirements: requirement };
+		jobDispatcher.saveJobData(tmp);
 		if (props.onNext) props.onNext(event);
-	}
-	function handlePrevious(event: React.SyntheticEvent) {
+	};
+
+	const handlePrevious = (event: React.SyntheticEvent) => {
 		if (props.onPreviouse) props.onPreviouse(event);
-	}
-	function handleInputTag(event: any, value: string[], name?: string) {
+	};
+	const handleInputTag = (event: any, value: string[], name?: string) => {
 		const idx = name as JobArrayStringIndex;
 		let tmp = { ...data };
 		tmp[idx] = value;
-		jobActions.saveJobData(tmp);
-	}
-	function handleTagPicker(event: any, value: { value: string; label: string }[], name?: string) {
+		jobDispatcher.saveJobData(tmp);
+	};
+	const handleTagPicker = (event: any, value: { value: string; label: string }[], name?: string) => {
 		let tmp = { ...data };
 		tmp.skills = value;
-		jobActions.saveJobData(tmp);
-	}
-	function handleTxt(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
-		const value = event.target.value;
-		const name: JobStringIndex = event.target.name as JobStringIndex;
-		let tmp = { ...data };
-		tmp[name] = value;
-		jobActions.saveJobData(tmp);
-	}
+		jobDispatcher.saveJobData(tmp);
+	};
 	return (
 		<>
 			<HeaderContainer justify="space-between">
-				<StyledHeadline variant="h2" size="md">
+				<StyledHeadline variant="h2" size="sm">
 					Qualifications
 				</StyledHeadline>
 				<FlexBox gap={10} align="flex-start" justify="flex-start">
@@ -100,16 +104,16 @@ const QualificationsInfo = (props: any) => {
 								})}
 							</TagPickerField>
 						</FlexBox>
-						<TextAreaField
+						<InputEditor
 							className="mt-10"
-							placeholder="Requirements"
+							title="Job Requirements"
 							name="requirements"
-							height="120px"
-							value={data.requirements}
-							onChange={handleTxt}
-						>
-							Job Requirements
-						</TextAreaField>
+							initialValue={data.requirements}
+							initOptions={{
+								height: 300,
+							}}
+							onEditorChange={handleEditor}
+						/>
 					</div>
 					<Questions />
 				</FlexBox>

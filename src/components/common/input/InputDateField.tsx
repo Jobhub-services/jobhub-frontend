@@ -12,6 +12,8 @@ const InputDateField = (props: InputDateProps) => {
 		<div className={`w-100 ${props.className}`}>
 			<SLabel>{props.title}</SLabel>
 			<InputDatePicker
+				errorMessage={props.errorMessage}
+				error={props.error}
 				onChange={props.onChange}
 				dateFormat={props.dateFormat}
 				timeIntervals={props.timeIntervals}
@@ -19,6 +21,7 @@ const InputDateField = (props: InputDateProps) => {
 				placeholder={props.placeholder}
 				showTime={props.showTime}
 				date={props.date}
+				disabled={props.disabled}
 			/>
 		</div>
 	);

@@ -1,11 +1,12 @@
 import { StandardProps } from '@/models/component/app.interface';
 
-type StepItem = { name: string; valid?: boolean; active?: boolean };
+type StepItem = { name: string; valid?: boolean; active?: boolean; error?: boolean };
 
 export interface WizardProps extends StandardProps {
 	items?: StepItem[];
 	active?: boolean;
 	valid?: boolean;
+	error?: boolean;
 	direction?: 'horizontal' | 'vertical';
 	onSelectStep?: (event: React.SyntheticEvent, step: number) => void;
 }

@@ -41,26 +41,24 @@ const LastApplicants = () => {
 				<>
 					{showApplicants?.content?.slice(0, 3).map((elem, idx) => {
 						return (
-							<>
-								<ApplicationCard
-									className="mt-15"
-									key={idx}
-									_id={elem._id}
-									avatar={elem.avatar}
-									firstName={elem.firstName}
-									lastName={elem.lastName}
-									role={elem.role}
-									motivation={elem.motivation}
-									skills={elem.skills}
-									createdAt={elem.createdAt}
-									linkedIn={elem.linkedIn}
-									git={elem.git}
-									cv={elem.cv}
-									status={elem.status}
-									job={elem.job}
-									userStatus={elem.userStatus}
-								/>
-							</>
+							<ApplicationCard
+								className="mt-15"
+								key={idx}
+								_id={elem._id}
+								avatar={elem.avatar}
+								firstName={elem.firstName}
+								lastName={elem.lastName}
+								role={elem.role}
+								motivation={elem.motivation}
+								skills={elem.skills}
+								createdAt={elem.createdAt}
+								linkedIn={elem.linkedIn}
+								git={elem.git}
+								cv={elem.cv}
+								status={elem.status}
+								job={elem.job}
+								userStatus={elem.userStatus}
+							/>
 						);
 					})}
 

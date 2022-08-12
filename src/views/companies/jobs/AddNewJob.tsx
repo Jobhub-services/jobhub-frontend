@@ -6,7 +6,6 @@ import BasicDetails from '@/components/companies/jobs/newjob/basics/BasicInfo';
 import DetailedInfo from '@/components/companies/jobs/newjob/details/DetailedInfo';
 import AddTests from '@/components/companies/jobs/newjob/qualifications/QualificationsInfo';
 import JobReview from '@/components/companies/jobs/newjob/review/JobReview';
-import Colors from 'staak-ui/lib/esm/styles/colors.module.scss';
 import { HEADER_HIEGHT } from '@/constants/app.constants';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';
@@ -17,6 +16,7 @@ import { SuccessIcon } from '@/assets/icons';
 import { JobInstance } from '@/constants/company/job.contants';
 import { jobActions } from '@/modules/actions/company/job.actions';
 import JobErrors from '@/components/companies/jobs/newjob/JobErrors';
+import { pushNotification } from '@/utils/helpers';
 
 const SLoading = styled.div`
 	position: fixed;
@@ -50,11 +50,12 @@ const SContainer = styled.div`
 /* component class */
 //IAddNewJobState
 const AddNewJob = () => {
-	const { isLoading, jobCreated, createJob } = useAppSelector((state) => state.job);
+	const { isLoading, jobCreated, createJob, jobUpdated } = useAppSelector((state) => state.job);
 	const navigate = useNavigate();
 	const [currentStep, setCurrentStep] = useState(0);
 	const [validSteps, setvalidSteps] = useState([false, false, false, false]);
 	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
 
 	useEffect(() => {
 		setLoading(isLoading!);
@@ -65,18 +66,29 @@ const AddNewJob = () => {
 			setvalidSteps([false, false, false, false]);
 		}
 	}, [jobCreated]);
+	useEffect(() => {
+		if (jobUpdated) {
+			pushNotification.success('Job updated successfully');
+			jobDispatcher.setJobAction(false, 'jobUpdated');
+			navigate(-1);
+		}
+	}, [jobUpdated]);
 
 	const selectStep = (event: React.SyntheticEvent, step: number) => {
 		let udpate = true;
 		for (var i = 0; i < step; i++) udpate = udpate && validSteps![i];
-		if (udpate) setCurrentStep(step);
+		if (!error && udpate) setCurrentStep(step);
 	};
 
-	const handleNext = () => {
-		const tmp = [...validSteps!];
-		tmp[currentStep!] = true;
-		setCurrentStep(currentStep! + 1);
-		setvalidSteps(tmp);
+	const handleNext = (e: any, error: boolean) => {
+		if (error) setError(error);
+		else {
+			setError(error);
+			const tmp = [...validSteps!];
+			tmp[currentStep!] = true;
+			setCurrentStep(currentStep! + 1);
+			setvalidSteps(tmp);
+		}
 	};
 
 	const handlePreviouse = () => {
@@ -84,13 +96,13 @@ const AddNewJob = () => {
 	};
 
 	const browseJobs = () => {
-		jobDispatcher.setJobCreated(false);
+		jobDispatcher.setJobAction(false, 'jobCreated');
 		jobDispatcher.createJob(JobInstance);
 		navigate('/jobs');
 	};
 
 	const addNewJob = () => {
-		jobDispatcher.setJobCreated(false);
+		jobDispatcher.setJobAction(false, 'jobCreated');
 		jobDispatcher.createJob(JobInstance);
 	};
 	let step;
@@ -123,11 +135,13 @@ const AddNewJob = () => {
 						</FlexBox>
 					</PopModel.Body>
 					<PopModel.Footer>
-						<FlexBox gap={30} width="100%">
-							<Button color="yellow" onClick={browseJobs}>
+						<FlexBox gap={15} width="100%" justify="end">
+							<Button color="yellow" size="md" onClick={browseJobs}>
 								Browse jobs
 							</Button>
-							<Button onClick={addNewJob}>New job</Button>
+							<Button onClick={addNewJob} size="md">
+								New job
+							</Button>
 						</FlexBox>
 					</PopModel.Footer>
 				</PopModel>
@@ -138,10 +152,10 @@ const AddNewJob = () => {
 						onSelectStep={selectStep}
 						direction="vertical"
 						items={[
-							{ name: 'Basics', valid: validSteps![0], active: currentStep === 0 },
-							{ name: 'Details', valid: validSteps![1], active: currentStep === 1 },
-							{ name: 'Qualifications', valid: validSteps![2], active: currentStep === 2 },
-							{ name: 'Review', valid: validSteps![3], active: currentStep === 3 },
+							{ name: 'Basics', valid: validSteps![0], active: currentStep === 0, error: error && currentStep === 0 },
+							{ name: 'Details', valid: validSteps![1], active: currentStep === 1, error: error && currentStep === 1 },
+							{ name: 'Qualifications', valid: validSteps![2], active: currentStep === 2, error: error && currentStep === 2 },
+							{ name: 'Review', valid: validSteps![3], active: currentStep === 3, error: error && currentStep === 3 },
 						]}
 					/>
 				</StepContainer>

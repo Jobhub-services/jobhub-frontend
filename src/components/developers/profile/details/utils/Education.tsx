@@ -58,7 +58,7 @@ const Education = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>Educations</SpanTitle>
+				<SpanTitle>Education</SpanTitle>
 				<SButton padding={0} onClick={addEducation}>
 					<PlusIcon color={colors.PURPLE_BASE} width="23px" height="23px" />
 				</SButton>

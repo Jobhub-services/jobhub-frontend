@@ -6,6 +6,7 @@ import { useAppSelector } from '@/utils/appHooks';
 import TitleIcon from '@/components/common/jobs/TitleIcon';
 import { GraduationCapIcon, CertificateIcon, SkillsIcon, RequirementIcon, QuestionIcon } from '@/assets/icons';
 import { IconProps } from '@/models/component';
+import parse from 'html-react-parser';
 
 const TagWrapper = styled(FlexBox)`
 	justify-content: flex-start !important;
@@ -56,7 +57,7 @@ const Qualifications = (props: JobReviewProps) => {
 			</div>
 			<div className="mt-10">
 				<TitleIcon title="Requirements" icon={(props: IconProps) => <RequirementIcon {...props} />} />
-				<SPre>{data.requirements !== '' ? data.requirements : 'N/A'}</SPre>
+				<SPre>{data.requirements !== '' ? parse(data.requirements ?? '') : 'N/A'}</SPre>
 			</div>
 			<div className="mt-10">
 				<TitleIcon title="Questions" icon={(props: IconProps) => <QuestionIcon {...props} />} />

@@ -5,6 +5,7 @@ import { STitle, SP } from '@/components/companies/jobs/showjob/details/utils/sh
 import TitleIcon from '@/components/common/jobs/TitleIcon';
 import styled from 'styled-components';
 import { JobDetails } from '@/types/company/jobs.type';
+import parse from 'html-react-parser';
 
 const SUl = styled.ul`
 	margin-top: 0;
@@ -48,7 +49,7 @@ const Qualifications = (props: JobDetails) => {
 				{props.skills!.length > 0 ? (
 					<SkillsWarrap justify="start" gap={10}>
 						{props.skills?.map((elem, idx) => {
-							return <Tag key={idx}>{elem}</Tag>;
+							return <Tag key={idx}>{elem.name}</Tag>;
 						})}
 					</SkillsWarrap>
 				) : (
@@ -57,7 +58,7 @@ const Qualifications = (props: JobDetails) => {
 			</div>
 			<div className="mt-15">
 				<TitleIcon title="Requirements" icon={(props: IconProps) => <RequirementIcon {...props} />} />
-				{<SP>{props.requirements ?? 'N/A'}</SP>}
+				{<SP>{parse(props.requirements ?? 'N/A')}</SP>}
 			</div>
 			<div className="mt-10">
 				<TitleIcon title="Questions" icon={(props: IconProps) => <QuestionIcon {...props} />} />

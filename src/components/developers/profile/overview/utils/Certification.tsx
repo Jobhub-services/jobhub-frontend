@@ -8,7 +8,7 @@ const Certification = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>Certifications</SpanTitle>
+				<SpanTitle>Certification</SpanTitle>
 			</FlexBox>
 			<div>
 				{certifications?.map((elem, idx) => {

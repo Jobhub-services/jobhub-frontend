@@ -2,6 +2,11 @@ import JobCard from './JobCard';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
 import DataEmpty from '@/components/common/DataEmpty';
+import { useEffect } from 'react';
+import { jobDispatcher } from '@/modules/actions/company/job.actions';
+import { pushNotification } from '@/utils/helpers';
+import SimpleLoading from '@/components/common/SimpleLoading';
+import { colors } from '@/assets/theme';
 
 const SWrapper = styled.div`
 	display: grid;
@@ -14,12 +19,19 @@ const SWrapper = styled.div`
 `;
 
 const ShowJobs = () => {
-	const { content } = useAppSelector((state) => state.job.showJob);
-	if (content?.length === 0)
+	const { showJob, jobDeleted, isDeleteLoading } = useAppSelector((state) => state.job);
+	useEffect(() => {
+		if (jobDeleted) {
+			pushNotification.success('Job deleted successfully');
+			jobDispatcher.setJobAction(false, 'jobDeleted');
+		}
+	}, [jobDeleted]);
+	if (showJob.content?.length === 0)
 		return <DataEmpty title="No data found" description="No content match your criteria. Try searching for something else" />;
 	return (
 		<SWrapper>
-			{content?.map((elem, idx) => {
+			{isDeleteLoading && <SimpleLoading color={colors.RED_BASE} />}
+			{showJob.content?.map((elem, idx) => {
 				return (
 					<JobCard
 						key={idx}

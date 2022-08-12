@@ -1,7 +1,6 @@
 import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
-import { IconButton, Headline, HrDivider, Button } from 'staak-ui';
+import { HrDivider } from 'staak-ui';
 import { colors } from '@/assets/theme';
-import { CloseIcon } from '@/assets/icons';
 import { FlexBox } from 'staak-ui';
 import { STitle, SP, SSpan } from '../../../components/companies/jobs/showjob/details/utils/shared.styles';
 import { DescriptionIcon, ResponsibleIcon } from '@/assets/icons';
@@ -16,12 +15,13 @@ import Role from '@/components/companies/jobs/showjob/details/utils/Role';
 import Avatar from '@/components/companies/jobs/showjob/details/AvatarList';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '@/utils/appHooks';
-import { dateWithMonthName, pushNotification } from '@/utils/helpers';
+import { dateWithMonthName } from '@/utils/helpers';
 import { StatusTitle } from '@/constants/company/job.contants';
 import { useEffect, useRef } from 'react';
-import { jobActions, jobDispatcher } from '@/modules/actions/company/job.actions';
+import { jobActions } from '@/modules/actions/company/job.actions';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
-import { ToastContainer } from 'react-toastify';
+import parse from 'html-react-parser';
+import JobDetailHeader from '@/components/companies/jobs/showjob/details/JobDetailHeader';
 
 const kwidth = keyframes`
 	from {
@@ -42,6 +42,7 @@ const MainContainer = styled.div<any>`
 	//width: calc(100% - ${EXPANDED_ASIDE_WIDTH}px);
 	//height: calc(100% - ${HEADER_HIEGHT}px);
 	background-color: #2c2c2c3b;
+	z-index: 2;
 `;
 const RedSpan = styled.span`
 	font-weight: 500;
@@ -92,30 +93,16 @@ const SubTitle = styled.span`
 `;
 const JobDetails = () => {
 	const parentRef = useRef();
-	const { id } = useParams();
-	const { jobDetails, isDetailLoading, isJobDeleted, isLoading } = useAppSelector((state) => state.job);
 	const navigate = useNavigate();
+	const { id } = useParams();
+	const { jobDetails, isDetailLoading, isLoading } = useAppSelector((state) => state.job);
 
 	useEffect(() => {
 		if (jobDetails._id !== id) jobActions.getJobDetails(id!, !isLoading);
 	}, []);
 
-	useEffect(() => {
-		if (isJobDeleted) {
-			pushNotification.success('Job deleted successfully');
-			jobDispatcher.setDeleteJob(false, false);
-			navigate(-1);
-		}
-	}, [isJobDeleted]);
-	const onClose = () => {
-		navigate(-1);
-	};
-
 	const backUp = (e: any) => {
 		if (e.target === parentRef.current) navigate(-1);
-	};
-	const handleDelete = () => {
-		jobActions.deleteJob(jobDetails._id);
 	};
 	return (
 		<MainContainer ref={parentRef} onClick={backUp}>
@@ -124,22 +111,7 @@ const JobDetails = () => {
 					<LoadingScreen />
 				) : (
 					<SubContainer>
-						<FlexBox justify="space-between" height="62px" style={{ padding: '5px 10px' }}>
-							<FlexBox gap={10}>
-								<IconButton width="30px" height="30px" circle onClick={() => onClose()}>
-									<CloseIcon color={colors.BLACK_8} />
-								</IconButton>
-								<Headline variant="h2" size="sm">
-									Job details
-								</Headline>
-							</FlexBox>
-							<FlexBox gap={10}>
-								{/*<Button>Edit</Button>*/}
-								<Button color="red" variant="text" size="md" startIcon={<CloseIcon />} onClick={handleDelete}>
-									Delete
-								</Button>
-							</FlexBox>
-						</FlexBox>
+						<JobDetailHeader />
 						<HrDivider color={colors.BLACK_12} />
 						<FlexBox height="100%" align="start" gap={10} style={{ padding: '10px' }}>
 							<LeftContainer className="staak_scrollbar">
@@ -191,11 +163,11 @@ const JobDetails = () => {
 								<div className="mt-10">
 									<div>
 										<TitleIcon title="Description" icon={(props: IconProps) => <DescriptionIcon {...props} />} />
-										<SP>{jobDetails.description}</SP>
+										<SP>{parse(jobDetails.description ?? 'N/A')}</SP>
 									</div>
 									<div>
 										<TitleIcon title="Responsabilities" icon={(props: IconProps) => <ResponsibleIcon {...props} />} />
-										<SP>{jobDetails.responsabilities}</SP>
+										<SP>{parse(jobDetails.responsabilities ?? 'N/A')}</SP>
 									</div>
 								</div>
 								<HrDivider color={colors.BLACK_12} top={20} />

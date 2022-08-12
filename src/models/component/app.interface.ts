@@ -28,5 +28,6 @@ export interface PopModelProps extends StandardProps {
 	children?: JSX.Element | JSX.Element[];
 	width?: string;
 	closed?: boolean;
+	top?: boolean;
 	onClose?: (close: boolean) => void;
 }

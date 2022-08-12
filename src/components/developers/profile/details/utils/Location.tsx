@@ -65,8 +65,8 @@ const Location = () => {
 			</div>
 			{show && (
 				<div className="mt-15">
-					<FlexBox justify="start" gap={15}>
-						<InputPicker name="country" placeholder="Country" width="45%" onChange={handleInputPicker} value={tmpAddr.country?.name}>
+					<div>
+						<InputPicker name="country" placeholder="Country" width="100%" onChange={handleInputPicker} value={tmpAddr.country?.name}>
 							{countries?.content?.map((elem, idx) => {
 								const str = elem.name + ' (' + elem.code?.toUpperCase() + ')';
 								return (
@@ -76,8 +76,8 @@ const Location = () => {
 								);
 							})}
 						</InputPicker>
-						<Input name="city" placeholder="City" width="55%" onChange={handleInput} value={tmpAddr.city} />
-					</FlexBox>
+						<Input className="mt-10" name="city" placeholder="City" width="100%" onChange={handleInput} value={tmpAddr.city} />
+					</div>
 					<FlexBox className="mt-15" justify="end" gap={10}>
 						<Button size="md" variant="text" onClick={() => setShow(false)}>
 							Cancel

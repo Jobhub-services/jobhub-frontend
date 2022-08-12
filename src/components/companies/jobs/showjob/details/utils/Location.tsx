@@ -21,7 +21,7 @@ const Location = (props: JobDetails) => {
 						<FlexBox justify="start" gap={2}>
 							{props.work_remotly && <SSpan>Remote</SSpan>}
 							<SSpan>
-								{props.work_location?.country}
+								{props.work_location?.country.name}
 								{props.work_location?.city ? `, ${props.work_location?.city}` : ''}
 							</SSpan>
 						</FlexBox>

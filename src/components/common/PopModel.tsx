@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { colors } from '@/assets/theme';
 import { FlexBox, IconButton, HrDivider } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
@@ -12,6 +12,7 @@ const opacity = keyframes`
         opacity:1;
     }
 `;
+
 const Container = styled.div<any>`
 	position: fixed;
 	top: 0;
@@ -20,17 +21,32 @@ const Container = styled.div<any>`
 	height: ${(props) => (props.closed ? '0' : '100%')};
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	background: #27272736;
+	${(props) =>
+		!props.top &&
+		css`
+			align-items: center;
+		`}
+	background: #70628736;
 	animation: ${opacity} 0.15s ease-out;
 	overflow: hidden;
 	z-index: 150;
+	transition: opacity 0.15s linear;
 `;
 const SPopUp = styled.div<any>`
+	position: relative;
 	width: ${(props) => props.width};
-	border-radius: 7px;
-	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
+	top: ${(props) => (props.closed ? '-50%' : '0')};
+	border-radius: 0.42rem;
+	box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 10%);
 	background-color: white;
+	border: 0 solid rgba(0, 0, 0, 0.2);
+	height: fit-content;
+	${(props) =>
+		!props.top &&
+		css`
+			margin: 20px 0;
+		`}
+	transition: all 0.3s ease-in-out;
 `;
 const PopModel = (props: PopModelProps) => {
 	const [closed, setClosed] = useState(true);
@@ -41,17 +57,17 @@ const PopModel = (props: PopModelProps) => {
 	useEffect(() => {
 		setClosed(props.closed!);
 	}, [props.closed]);
-	function onClose() {
+	const onClose = () => {
 		setClosed(true);
 		if (props.onClose) props.onClose(true);
-	}
+	};
 	const handleClose = (event: React.SyntheticEvent) => {
 		const target = event.target;
 		if (target === ref.current) onClose();
 	};
 	return (
-		<Container closed={closed} onClick={handleClose} ref={ref}>
-			<SPopUp width={props.width}>
+		<Container closed={closed} onClick={handleClose} ref={ref} top={props.top}>
+			<SPopUp width={props.width} closed={closed}>
 				<FlexBox justify="space-between" style={{ padding: '10px 15px' }}>
 					{header}
 					<IconButton width="30px" height="30px" circle onClick={onClose}>
@@ -61,7 +77,7 @@ const PopModel = (props: PopModelProps) => {
 				<HrDivider />
 				<div style={{ padding: '15px 15px' }}>{body}</div>
 				<HrDivider />
-				<FlexBox style={{ padding: '10px 15px' }}>{footer}</FlexBox>
+				<FlexBox style={{ padding: '15px 15px' }}>{footer}</FlexBox>
 			</SPopUp>
 		</Container>
 	);

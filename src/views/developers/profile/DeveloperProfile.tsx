@@ -5,6 +5,20 @@ import { useEffect } from 'react';
 import { profileAction } from '@/modules/actions/developer/profile.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
+import styled from 'styled-components';
+
+const SContainer = styled.div`
+	height: 100%;
+	margin: 0 11%;
+	padding: 15px 0;
+`;
+const SSubContainer = styled.div`
+	height: 100%;
+	overflow: auto;
+	background: white;
+	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
+	border-radius: 7px;
+`;
 
 const DeveloperProfile = () => {
 	const { isLoading } = useAppSelector((state) => state.developerProfile);
@@ -12,17 +26,8 @@ const DeveloperProfile = () => {
 		profileAction.getProfile();
 	}, []);
 	return (
-		<div style={{ height: '100%', margin: '0 180px', padding: '15px 0' }}>
-			<div
-				className="staak_scrollbar"
-				style={{
-					height: '100%',
-					overflow: 'auto',
-					background: 'white',
-					boxShadow: `0px 0px 20px -15px ${colors.BLACK_7}`,
-					borderRadius: '7px',
-				}}
-			>
+		<SContainer>
+			<SSubContainer className="staak_scrollbar">
 				<TabPane activeItem="overview" paneWidth="500px" paneJusitfy="center">
 					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Profile Overview">
 						<ProfileOverview />
@@ -34,9 +39,9 @@ const DeveloperProfile = () => {
 						<ProfilePreferences />
 					</TabPane.Pane>
 				</TabPane>
-			</div>
+			</SSubContainer>
 			{isLoading && <LoadingScreen />}
-		</div>
+		</SContainer>
 	);
 };
 

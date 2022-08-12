@@ -15,7 +15,7 @@ const SContainer = styled.div`
 	overflow: auto;
 `;
 const SubContainer = styled.div`
-	margin: 0 180px;
+	margin: 0 11%;
 	//height: 100%;
 	background: white;
 	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};

@@ -8,12 +8,6 @@ const SLabel = styled.label`
 	display: inline-block;
 	margin: 5px 0px;
 `;
-const ErrorSpan = styled.span`
-	display: inline-block;
-	color: ${colors.RED_BASE};
-	margin-top: 5px;
-	font-size: 13px;
-`;
 const SRequired = styled.span`
 	display: inline-block;
 	color: ${colors.RED_BASE};
@@ -29,16 +23,19 @@ const InputPickerField = (props: InputPickerProps) => {
 				{props.required && <SRequired>*</SRequired>}
 			</FlexBox>
 			<InputPicker
+				errorMessage={props.errorMessage}
+				error={props.error}
 				onChange={props.onChange}
 				width={props.width}
 				name={props.name}
 				value={props.value}
 				placeholder={props.placeholder}
 				required={props.required}
+				onFocus={props.onFocus}
+				disabled={props.disabled}
 			>
 				{options}
 			</InputPicker>
-			{props.error && <ErrorSpan>{props.message}</ErrorSpan>}
 		</div>
 	);
 };

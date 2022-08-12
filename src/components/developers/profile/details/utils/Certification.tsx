@@ -60,7 +60,7 @@ const Certification = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>Certifications</SpanTitle>
+				<SpanTitle>Certification</SpanTitle>
 				<SButton padding={0} onClick={addCertif}>
 					<PlusIcon color={colors.PURPLE_BASE} width="23px" height="23px" />
 				</SButton>

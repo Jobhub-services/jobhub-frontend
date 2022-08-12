@@ -29,7 +29,6 @@ const ViewJobs = () => {
 			limit: 20,
 			os: searchParams.get('os') ?? '0',
 		};
-		console.log('search params ', searchParams.get('os'));
 		jobActions.getJobs(!jobInfo.size, params);
 		return function cleanup() {
 			jobDispatcher.setJobs({}, true);

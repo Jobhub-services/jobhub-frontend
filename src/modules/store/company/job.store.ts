@@ -6,8 +6,9 @@ export const initialState: IJobState = {
 	filterClosed: true,
 	isLoading: false,
 	jobCreated: false,
+	jobUpdated: false,
+	jobDeleted: false,
 	createJob: JobInstance,
-	isJobDeleted: false,
 	showJob: {
 		content: [],
 		count: 0,
@@ -29,7 +30,7 @@ export const initialState: IJobState = {
 		applications: [],
 		responsabilities: '',
 		company_division: '',
-		work_location: { country: '', city: '' },
+		work_location: { country: { name: '', _id: '' }, city: '' },
 		work_remotly: false,
 		hire_remotly: false,
 		visa_sponsorship: false,
@@ -65,19 +66,17 @@ const reducerSlices = createSlice({
 			const { isLoading, attr } = action.payload;
 			state[attr as 'isLoading' | 'isDetailLoading'] = isLoading;
 		},
-		setJobCreated: (state, action) => {
-			const { created } = action.payload;
-			state.jobCreated = created;
+		setJobAction: (state, action) => {
+			const { value, type } = action.payload;
+			state[type as 'jobCreated' | 'jobUpdated' | 'jobDeleted'] = value;
 		},
 		setDeleteJob: (state, action) => {
-			const { deleted, updateJobs, id } = action.payload;
+			const { updateJobs, id } = action.payload;
 			if (updateJobs) {
-				console.log('hello world ', state.showJob);
 				const newJobs = state.showJob.content?.filter((elem) => elem._id !== id);
 				state.showJob.content = newJobs;
 				state.showJob.count = newJobs?.length;
 			}
-			state.isJobDeleted = deleted;
 		},
 		setShowJobs: (state, action) => {
 			const { data, reset } = action.payload;

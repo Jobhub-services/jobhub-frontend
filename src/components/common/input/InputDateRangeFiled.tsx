@@ -12,6 +12,8 @@ const InputDateRangeField = (props: RangeDateProps) => {
 		<div className={`w-100 ${props.className}`}>
 			<SLabel>{props.title}</SLabel>
 			<DateRangePicker
+				errorMessage={props.errorMessage}
+				error={props.error}
 				onChange={props.onChange}
 				dateFormat={props.dateFormat}
 				timeIntervals={props.timeIntervals}
@@ -20,6 +22,7 @@ const InputDateRangeField = (props: RangeDateProps) => {
 				showTime={props.showTime}
 				endDate={props.endDate}
 				startDate={props.startDate}
+				disabled={props.disabled}
 			/>
 		</div>
 	);

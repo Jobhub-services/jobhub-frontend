@@ -1,35 +1,54 @@
-import { InputField, InputPickerField, TextAreaField } from '@/components/common';
-import { jobActions } from '@/modules/actions/company/job.actions';
+import { InputField, InputPickerField } from '@/components/common';
+import InputEditor from '@/components/common/input/InputEditor';
+import { PCompensation } from '@/models/component/companies/jobs/newjob.interface';
+import { jobDispatcher } from '@/modules/actions/company/job.actions';
 import { metadataActions } from '@/modules/actions/metadata.actions';
 import { JobStringIndex } from '@/types/company/jobs.type';
 import { useAppSelector } from '@/utils/appHooks';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlexBox, Radio } from 'staak-ui';
-const Compensation = React.memo(() => {
+
+const Compensation = ({ onBenefitChange, errors }: PCompensation) => {
 	const { createJob } = useAppSelector((state) => state.job);
 	const { currencies } = useAppSelector((state) => state.metadata);
+	const [compensationErrors, setCompensationErrors] = useState<typeof errors>({
+		start_salary: false,
+		end_salary: false,
+		currency: false,
+	});
 	const data = createJob;
+	const enableInputs = data.salary_type === 'Monthly' || data.salary_type === 'Hourly' || data.salary_type === 'Yearly';
+
 	useEffect(() => {
-		metadataActions.getCurrency();
+		if (currencies?.size === 0) metadataActions.getCurrency();
 	}, []);
-	function handleInput(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
+	useEffect(() => {
+		setCompensationErrors(errors);
+	}, [errors]);
+
+	const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const value = event.target.value;
 		let tmp = { ...data };
 		tmp.salary_type = value;
-		jobActions.saveJobData(tmp);
-	}
-	function handleInputPicker(evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) {
+		jobDispatcher.saveJobData(tmp);
+	};
+	const handleInputPicker = (evet: React.MouseEvent<HTMLDivElement>, value: string, label: string, name: string) => {
 		let tmp = { ...data };
 		const obj = { id: value, name: label };
 		tmp.currency = obj;
-		jobActions.saveJobData(tmp);
-	}
-	function handleTxt(event: any, value?: string, name?: string) {
+		jobDispatcher.saveJobData(tmp);
+	};
+	const handleTxt = (event: any, value?: string, name?: string) => {
 		const idx: JobStringIndex = name as JobStringIndex;
 		let tmp = { ...data };
 		tmp[idx] = value;
-		jobActions.saveJobData(tmp);
-	}
+		jobDispatcher.saveJobData(tmp);
+	};
+	const handleFocus = (name: 'start_salary' | 'end_salary' | 'currency') => {
+		let tmpErr = { ...compensationErrors };
+		tmpErr[name] = false;
+		setCompensationErrors(tmpErr);
+	};
 	return (
 		<div style={{ width: '50%' }}>
 			<h3>Compensation</h3>
@@ -46,13 +65,38 @@ const Compensation = React.memo(() => {
 				</Radio>
 			</FlexBox>
 			<FlexBox gap={15} className="mt-10" justify="flex-start">
-				<InputField name="start_salary" placeholder="Low end" value={data.start_salary} onDataChange={handleTxt}>
+				<InputField
+					name="start_salary"
+					disabled={!enableInputs}
+					placeholder="Low end"
+					value={data.start_salary}
+					onDataChange={handleTxt}
+					error={compensationErrors?.start_salary}
+					onFocus={() => handleFocus('start_salary')}
+				>
 					From
 				</InputField>
-				<InputField name="end_salary" placeholder="High end" value={data.end_salary} onDataChange={handleTxt}>
+				<InputField
+					name="end_salary"
+					disabled={!enableInputs}
+					placeholder="High end"
+					value={data.end_salary}
+					onDataChange={handleTxt}
+					error={compensationErrors?.end_salary}
+					onFocus={() => handleFocus('end_salary')}
+				>
 					To
 				</InputField>
-				<InputPickerField placeholder="Currency" name="currency" title="Currency" onChange={handleInputPicker} value={data.currency?.name}>
+				<InputPickerField
+					placeholder="Currency"
+					disabled={!enableInputs}
+					name="currency"
+					title="Currency"
+					onChange={handleInputPicker}
+					value={data.currency?.name}
+					error={compensationErrors?.currency}
+					onFocus={() => handleFocus('currency')}
+				>
 					{currencies?.content?.map((elem, idx) => {
 						const str = elem.name + ' (' + elem.code?.toUpperCase() + ')';
 						return (
@@ -63,11 +107,18 @@ const Compensation = React.memo(() => {
 					})}
 				</InputPickerField>
 			</FlexBox>
-			<TextAreaField className="mt-10" placeholder="Benefit" name="benefits" height="250px" onDataChange={handleTxt} value={data.benefits}>
-				Benefit
-			</TextAreaField>
+			<InputEditor
+				className="mt-10"
+				title="Benefit"
+				name="benefits"
+				initialValue={data.benefits}
+				initOptions={{
+					height: 400,
+				}}
+				onEditorChange={onBenefitChange}
+			/>
 		</div>
 	);
-});
+};
 
 export default Compensation;
