@@ -64,23 +64,35 @@ const DesiredJob = () => {
 				<InputPickerField name="job_type" value={job_type} placeholder="Job type" title="Desired job type" onChange={handlePicker}>
 					<InputPickerField.Option value="Full time">Full time</InputPickerField.Option>
 					<InputPickerField.Option value="Part time">Part time</InputPickerField.Option>
-					<InputPickerField.Option value="Permanent">Permanent</InputPickerField.Option>
-					<InputPickerField.Option value="Temporary">Temporary</InputPickerField.Option>
+					<InputPickerField.Option value="Contract">Contract</InputPickerField.Option>
+					<InputPickerField.Option value="Internship">Internship</InputPickerField.Option>
 				</InputPickerField>
 				<div className="mt-15">
 					<div className="mb-10">Also open to the following job types</div>
-					<CheckBox checked={valExists('Full time')} value="Full time" className="mb-10" onChange={handleCheck}>
-						Full time
-					</CheckBox>
-					<CheckBox checked={valExists('Part time')} value="Part time" className="mb-10" onChange={handleCheck}>
-						Part time
-					</CheckBox>
-					<CheckBox checked={valExists('Permanent')} value="Permanent" className="mb-10" onChange={handleCheck}>
-						Permanent
-					</CheckBox>
-					<CheckBox checked={valExists('Temporary')} value="Temporary" onChange={handleCheck}>
-						Temporary
-					</CheckBox>
+					<FlexBox className="mb-10" justify="start" gap={40}>
+						<div>
+							<CheckBox checked={valExists('Full time')} value="Full time" className="mb-10" onChange={handleCheck}>
+								Full time
+							</CheckBox>
+							<CheckBox checked={valExists('Part time')} value="Part time" className="mb-10" onChange={handleCheck}>
+								Part time
+							</CheckBox>
+							<CheckBox checked={valExists('Permanent')} value="Permanent" className="mb-10" onChange={handleCheck}>
+								Permanent
+							</CheckBox>
+						</div>
+						<div>
+							<CheckBox checked={valExists('Contract')} value="Contract" className="mb-10" onChange={handleCheck}>
+								Contract
+							</CheckBox>
+							<CheckBox checked={valExists('Internship')} value="Internship" className="mb-10" onChange={handleCheck}>
+								Internship
+							</CheckBox>
+							<CheckBox checked={valExists('Temporary')} value="Temporary" className="mb-10" onChange={handleCheck}>
+								Temporary
+							</CheckBox>
+						</div>
+					</FlexBox>
 				</div>
 				{show && (
 					<FlexBox className="mt-15" justify="end" gap={10}>

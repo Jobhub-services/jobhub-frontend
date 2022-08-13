@@ -2,7 +2,12 @@ import { PNav } from '@/models/component/common/common.interface';
 import { StandardProps } from '@/models/component';
 import { JobInfoData, TFWorkLocation, TJobSalary, TValueLabel } from '@/types/developer/job.type';
 
-export interface PJobCard extends StandardProps, JobInfoData {}
+export interface PJobCard extends StandardProps, JobInfoData {
+	jobSaved?: boolean;
+	onShow?: (id: string) => void;
+	onSave?: (id: string, saved: boolean) => void;
+	onApply?: (id: string) => void;
+}
 
 export interface PJobAvatar extends StandardProps {
 	_id: string;

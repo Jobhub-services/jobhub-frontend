@@ -1,12 +1,12 @@
-import { FlexBox, Tag, HrDivider, Button } from 'staak-ui';
-import { LocationIcon, ProfileIcon } from '@/assets/icons';
+import { FlexBox, Tag, HrDivider, Button, LinkedinLogo, GithubIcon, LinkedinIcon } from 'staak-ui';
+import { LocationIcon, ProfileIcon, TwitterIcon, TwitterLogo, WebsiteLogo, WorldColorIcon, WorldIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { talentsActions } from '@/modules/actions/company/talents.actions';
 import StatusElem from '@/components/companies/_common/StatusElem';
 import { TitleStatus } from '@/constants/company/talent.contants';
 import { CardProps } from '@/models/component/companies/talents/talents.interface';
 import { Avatar } from '@/components/companies/_common';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
 
@@ -21,10 +21,21 @@ const SCard = styled.div`
 	border-radius: 8px;
 	padding: 10px 15px;
 `;
-const SButton = styled(Button)`
+const ViewButton = styled(Button)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+`;
+const SButton = styled.div<any>`
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	padding: 7px 10px;
+	background-color: ${(props) => props.background};
+	color: ${(props) => props.color};
+	border-radius: 8px;
+	font-size: 12px;
+	cursor: pointer;
 `;
 const SubTitle = styled.span`
 	color: ${colors.BLACK_8};
@@ -49,6 +60,7 @@ const Sp = styled.p`
 	overflow: hidden;
 	white-space: pre-line;
 `;
+const SLink = styled.a``;
 const TalentCard = (props: CardProps) => {
 	const navigate = useNavigate();
 	const { _id } = useAppSelector((state) => state.talent.talentDetails);
@@ -58,7 +70,13 @@ const TalentCard = (props: CardProps) => {
 	};
 	return (
 		<SCard>
-			<Avatar status={props.status} img={props.avatar} name={`${props?.firstName} ${props?.lastName}`} role={props.role?.primary_role} />
+			<Avatar
+				status={props.status}
+				img={props.avatar}
+				name={`${props?.firstName} ${props?.lastName}`}
+				experience={props.role?.experience}
+				role={props.role?.primary_role}
+			/>
 			<FlexBox justify="space-between" className="mt-10" gap={10}>
 				<FlexBox justify="start" gap={5} width="50%">
 					<LocationIcon width="18px" height="18px" color={colors.BLACK_8} />
@@ -76,19 +94,42 @@ const TalentCard = (props: CardProps) => {
 					{!props.summary && <Sp>He hasn't added summary yet</Sp>}
 				</div>
 				<div className="mt-10">
-					<div>Skills</div>
-					<SWarrap justify="start" className="mt-5" gap={10}>
-						{props.skills?.slice(0, 3).map((elem: string, idx: number) => (
-							<Tag key={idx}>{elem}</Tag>
-						))}
-						{props.skills?.length === 0 && <Sp>He hasn't added skills yet</Sp>}
+					<div>Social profiles</div>
+					<SWarrap justify="start" className="mt-10" gap={10}>
+						{props.social_profile?.linkedin && (
+							<SButton background={colors.BLACK_13} color={colors.BLUE_BASE}>
+								<LinkedinIcon width="20px" height="20px" color={colors.BLUE_BASE} />
+								<a href={props.social_profile?.linkedin} target="_blank" rel="noreferrer">
+									LinkedIn
+								</a>
+							</SButton>
+						)}
+						{props.social_profile?.git && (
+							<SButton background={colors.BLACK_13}>
+								<GithubIcon />
+								<a href={props.social_profile?.git} target="_blank" rel="noreferrer">
+									Git
+								</a>
+							</SButton>
+						)}
+
+						{props.social_profile?.website && (
+							<SButton background={colors.BLACK_13} color={colors.PINK_BASE}>
+								<WorldIcon width="20px" height="20px" color={colors.PINK_BASE} />
+								<a href={props.social_profile?.website} target="_blank" rel="noreferrer">
+									Website
+								</a>
+							</SButton>
+						)}
+
+						{Object.keys(props.social_profile ?? {}).length === 0 && <Sp>He hasn't added social profiles yet</Sp>}
 					</SWarrap>
 				</div>
 			</div>
 			<HrDivider top={15} side={0} />
-			<SButton width="100%" size="md" startIcon={<ProfileIcon />} variant="light" onClick={viewProfile}>
+			<ViewButton width="100%" size="md" startIcon={<ProfileIcon />} variant="light" onClick={viewProfile}>
 				View Profile
-			</SButton>
+			</ViewButton>
 		</SCard>
 	);
 };

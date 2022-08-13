@@ -5,6 +5,11 @@ import { SSubTitle } from '@/components/developers/companies/detail/common.style
 import { FlexBox } from 'staak-ui';
 import { JobHiringIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '@/utils/appHooks';
+import { useEffect } from 'react';
+import { jobActions } from '@/modules/actions/developer/jobs.actions';
+import { companiesActions, companiesDispatcher } from '@/modules/actions/developer/companies.actions';
 const Container = styled.div`
 	padding: 0 15px;
 `;
@@ -30,6 +35,25 @@ const JobsList = ({
 	size: number;
 	jobs: PJobCard[];
 }) => {
+	const navigate = useNavigate();
+	const { jobDetails } = useAppSelector((state) => state.developerJobs);
+	const { jobSaved } = useAppSelector((state) => state.companies);
+
+	useEffect(() => {
+		if (jobSaved) companiesDispatcher.setSaveJob(false, false, undefined);
+	}, [jobSaved]);
+
+	const onSave = (id: string, saved: boolean) => {
+		companiesActions.saveJob(id, !(saved ?? false));
+	};
+	const onApply = (id: string) => {
+		if (jobDetails?._id !== id) jobActions.getJob(id);
+		navigate(`/jobs/detail/${id}`, { state: { activeTab: 'Application' } });
+	};
+	const handleSelect = (id: string) => {
+		if (jobDetails?._id !== id) jobActions.getJob(id);
+		navigate(`/jobs/detail/${id}`, { state: { activeTab: 'Overview' } });
+	};
 	return (
 		<Container>
 			<FlexBox justify="start" gap={10}>
@@ -63,6 +87,10 @@ const JobsList = ({
 							applied={job.applied}
 							hire_remotly={job.hire_remotly}
 							work_remotly={job.work_remotly}
+							onShow={handleSelect}
+							onApply={onApply}
+							onSave={onSave}
+							jobSaved={jobSaved}
 						/>
 					);
 				})}

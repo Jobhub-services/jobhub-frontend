@@ -49,7 +49,7 @@ const Location = (props: JobReviewProps) => {
 				)}
 			</div>
 			<div className="mt-20">
-				<SSubTitle>Visa sponsorship</SSubTitle>
+				<SSubTitle>Visa Sponsorship</SSubTitle>
 				<SSpan style={{ color: `${colors.GREEN_BASE}` }}>{data.visa_sponsorship ? 'Available' : 'Unavailable'}</SSpan>
 			</div>
 		</div>

@@ -2,7 +2,10 @@ import { useAppSelector } from '@/utils/appHooks';
 import { STitle, SSubTitle, SSpan } from '../jobReview.styles';
 import { FlexBox, Tag } from 'staak-ui';
 import { colors } from '@/assets/theme';
-
+import styled from 'styled-components';
+const SJobType = styled(FlexBox)`
+	flex-wrap: wrap;
+`;
 const Role = () => {
 	const { createJob } = useAppSelector((state) => state.job);
 	const data = createJob;
@@ -20,10 +23,10 @@ const Role = () => {
 			</div>
 			<div className="mt-20">
 				<SSubTitle>Job type & Duration</SSubTitle>
-				<FlexBox gap={10} align="start" justify="start">
+				<SJobType gap={10} align="start" justify="start">
 					<Tag color={colors.BLUE_CLEAR_5}>{data.job_type}</Tag>
 					{data.duration && <Tag color={colors.GREEN_CLEAR_5}>{data.duration}</Tag>}
-				</FlexBox>
+				</SJobType>
 				{data.duration_range![0] && data.duration_range![1] && (
 					<div className="mt-10">
 						<SSpan>{data.duration_range![0].toDateString()}</SSpan>

@@ -53,7 +53,6 @@ const DetailContainer = styled.div<any>`
 	animation: ${width} 0.15s ease-out;
 	//width: ${(props) => (props.showed ? '80%' : '0')};
 	background: white;
-	//transition: width 0.2s;
 `;
 const MainBody = styled.div`
 	height: calc(100% - ${COMPANY_HEADER_HEIGHT}px);
@@ -67,7 +66,6 @@ const SubContainer = styled.div`
 `;
 const LeftContainer = styled.div`
 	width: 23%;
-	//border: 1px solid ${colors.BLACK_12};
 	border-radius: 8px;
 	padding: 10px 15px;
 	height: 100%;

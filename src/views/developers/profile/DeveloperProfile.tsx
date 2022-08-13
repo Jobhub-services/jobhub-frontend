@@ -28,7 +28,7 @@ const DeveloperProfile = () => {
 	return (
 		<SContainer>
 			<SSubContainer className="staak_scrollbar">
-				<TabPane activeItem="overview" paneWidth="500px" paneJusitfy="center">
+				<TabPane activeItem="overview" paneWidth="500px" paneJustify="center">
 					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Profile Overview">
 						<ProfileOverview />
 					</TabPane.Pane>

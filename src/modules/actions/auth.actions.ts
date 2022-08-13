@@ -62,4 +62,34 @@ export const authActions = {
 	async logout() {
 		authDispatchers.setAuthToken(null);
 	},
+	async resetPassword(email: string) {
+		authDispatchers.setIsLoading(true);
+		try {
+			//const response = await httpClient.post(`${USERS_SERVICE}/auth/reset`, { email });
+			const responseData = true;
+			authDispatchers.setAuthErrors({});
+			if (responseData) window.location.replace('/forgot-password/pending');
+		} catch (e: any) {
+			const response: AxiosResponse = e?.response;
+			const data = response.data;
+			let errors = {};
+			if (data.message) errors = { email: data.message };
+			else errors = transformErrors(data);
+			authDispatchers.setAuthErrors(errors);
+		} finally {
+			authDispatchers.setIsLoading(false);
+		}
+	},
+	async updatePassword(payload: any) {
+		authDispatchers.setIsLoading(true);
+		try {
+			const response = await httpClient.post(`${USERS_SERVICE}/auth/update`, payload);
+			const responseData = true;
+			authDispatchers.setAuthErrors({});
+			//if (responseData) window.location.replace('/login');
+		} catch (e: any) {
+		} finally {
+			authDispatchers.setIsLoading(false);
+		}
+	},
 };

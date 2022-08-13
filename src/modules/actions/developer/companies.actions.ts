@@ -2,8 +2,9 @@ import dispatchToStore from '@/utils/store';
 import { storeActions } from '@/modules/store/developer/company.store';
 import { httpClient } from '@/config/httpClient/HttpClient';
 import { API_PATHS } from '@/constants/api.constants';
+import { AxiosResponse } from 'axios';
 
-const { USERS_SERVICE } = API_PATHS;
+const { USERS_SERVICE, JOBS_SERVICE } = API_PATHS;
 
 export const companiesDispatcher = {
 	setIsLoading(loading: boolean, attr: 'isLoading' | 'isDetailLoading' = 'isLoading') {
@@ -57,6 +58,23 @@ export const companiesActions = {
 		} catch {
 		} finally {
 			companiesDispatcher.setIsLoading(false, 'isDetailLoading');
+		}
+	},
+	async saveJob(id: string, save: boolean) {
+		try {
+			const response = await httpClient.put(`${JOBS_SERVICE}/talent/save`, { jobId: id, saveJob: save });
+			const responseData = response.data;
+			if (responseData) {
+				companiesDispatcher.setSaveJob(true, save, id);
+			}
+		} catch (e: any) {
+			const response: AxiosResponse = e?.response;
+			if (response) {
+				const data = response.data;
+				let errors = '';
+				if (data.message) errors = data.message;
+			}
+		} finally {
 		}
 	},
 };

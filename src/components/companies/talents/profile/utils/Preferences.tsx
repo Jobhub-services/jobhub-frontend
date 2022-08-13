@@ -56,7 +56,7 @@ const Preferences = (props: TalentAllInfo) => {
 								</Tag>
 							);
 						})}
-						{props.role?.other_roles?.length === 0 && 'N/A'}
+						{(!props.role?.other_roles || props.role?.other_roles?.length === 0) && 'N/A'}
 					</FlexBox>
 				</FlexBox>
 
@@ -100,7 +100,7 @@ const Preferences = (props: TalentAllInfo) => {
 			<div>
 				<STitle>Wants</STitle>
 				<SPre>{props.wants}</SPre>
-				{!props.wants && props.wants === '' && 'N/A'}
+				{(!props.wants || props.wants === '') && 'N/A'}
 			</div>
 		</div>
 	);

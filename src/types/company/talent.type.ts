@@ -61,8 +61,8 @@ export type TalentShortInfo = {
 	};
 	status?: TalentStatus;
 	summary?: string;
-	skills?: string[];
 	fullName?: string;
+	social_profile?: TalentContact;
 };
 
 export type TalentAllInfo = TalentShortInfo & {
@@ -81,7 +81,7 @@ export type TalentAllInfo = TalentShortInfo & {
 		code?: string;
 	};
 	salary?: string;
-	social_profile?: TalentContact;
+	skills?: string[];
 };
 
 export type TFilter = {

@@ -29,7 +29,7 @@ const CompanyProfile = () => {
 	return (
 		<SContainer className="staak_scrollbar">
 			<SubContainer className="staak_scrollbar">
-				<TabPane activeItem="overview" paneWidth="30%" paneJustify="center">
+				<TabPane activeItem="overview" paneWidth="300px" paneJustify="center">
 					<TabPane.Pane style={{ padding: '0' }} name="overview" title="Profile Overview">
 						<ProfileOverview />
 					</TabPane.Pane>

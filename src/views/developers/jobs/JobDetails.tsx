@@ -141,7 +141,7 @@ const JobDetails = () => {
 									skills={jobDetails?.skills}
 								/>
 								<RightContainer>
-									<TabPane activeItem={state.activeTab} paneWidth="45%" paneJustify="center">
+									<TabPane activeItem={state?.activeTab ?? 'Overview'} paneWidth="45%" paneJustify="center">
 										<TabPane.Pane name="Overview" title="Overview">
 											<ScrollContainer className="staak_scrollbar">
 												<JobGeneralInfo qualificationIsEmpty={qualificationIsEmpty!} storeData={jobDetails} />

@@ -79,26 +79,22 @@ const SButton = styled(FlexBox)`
 	color: ${colors.BLACK_4};
 `;
 const JobCard = (props: PJobCard) => {
-	const { jobDetails, isSaving } = useAppSelector((state) => state.developerJobs);
 	const [saving, setSaving] = useState(false);
-	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!isSaving) setSaving(false);
-	}, [isSaving]);
-	const onApply = () => {
-		if (jobDetails?._id !== props._id) jobActions.getJob(props._id);
-		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Application' } });
-	};
+		if (props.jobSaved) setSaving(false);
+	}, [props.jobSaved]);
 
+	const onApply = () => {
+		if (props.onApply) props.onApply(props._id);
+	};
 	const onSave = (e: any) => {
 		setSaving(true);
-		jobActions.saveJob(props._id, !(props.saved ?? false));
+		if (props.onSave) props.onSave(props._id, props.saved!);
 	};
 
 	const handleSelect = (val: any, e: any) => {
-		if (jobDetails?._id !== props._id) jobActions.getJob(props._id);
-		navigate(`/jobs/detail/${props._id}`, { state: { activeTab: 'Overview' } });
+		if (props.onShow) props.onShow(props._id);
 	};
 
 	const newPost = Math.abs(new Date(props.createdAt!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
@@ -207,7 +203,7 @@ const JobCard = (props: PJobCard) => {
 							Applied
 						</SButton>
 					) : (
-						<Button size="sm" variant="text" onClick={onApply}>
+						<Button size="sm" variant="light" onClick={onApply}>
 							Apply
 						</Button>
 					)}

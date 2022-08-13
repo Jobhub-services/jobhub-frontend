@@ -5,6 +5,7 @@ const initialState: ICompanyState = {
 	isLoading: false,
 	isDetailLoading: false,
 	filterClosed: true,
+	jobSaved: false,
 	companies: {
 		count: 0,
 		size: 0,

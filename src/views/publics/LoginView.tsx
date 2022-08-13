@@ -4,10 +4,14 @@ import LoginForm from '@/components/publics/auth/LoginForm';
 import { AuthFooter } from '@/components';
 import { FlexBox } from 'staak-ui';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { colors } from '@/assets/theme';
 
-const FlexBoxPadding = styled(FlexBox)`
-	padding: 15px 20px 0px 20px !important;
+const FlexLink = styled(FlexBox)`
+	padding: 0 20px 10px 20px;
+`;
+const SLink = styled(Link)`
+	color: ${colors.PURPLE_BASE};
 `;
 const LoginFlexBox = styled.div`
 	width: 100%;
@@ -27,8 +31,10 @@ class LoginView extends Component<LoginProps, LoginState> {
 				<LoginFlexBox>
 					<TitleAuth>Sign in to Staak</TitleAuth>
 					<LoginForm />
-					<FlexBoxPadding>{/*<SimpleLink size="xs">Forgot your password?</SimpleLink>*/}</FlexBoxPadding>
 				</LoginFlexBox>
+				<FlexLink justify="end" width="100%">
+					<SLink to="/forgot-password">Forgot your password?</SLink>
+				</FlexLink>
 				<AuthFooter title="Don't have a Staak account?" link="Sign up Now" to="/register/company" />
 			</>
 		);

@@ -129,7 +129,7 @@ const AddNewJob = () => {
 					<PopModel.Body>
 						<FlexBox flexDirection="column">
 							<SuccessIcon width="50px" height="50px" />
-							<div className="mt-15 mb-15" style={{ fontSize: '16px' }}>
+							<div className="mt-15 mb-15" style={{ fontSize: '16px', textAlign: 'center' }}>
 								Your job has been created successfully
 							</div>
 						</FlexBox>

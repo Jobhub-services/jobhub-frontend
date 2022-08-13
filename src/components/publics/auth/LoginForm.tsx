@@ -8,16 +8,16 @@ import { useAppSelector } from '@/utils/appHooks';
 const LoginForm = (props: FormProps) => {
 	const { authErrors } = useAppSelector((state) => state.auth);
 	const [state, setState] = useState({ username: '', password: '' });
-	function onChange(event: React.ChangeEvent<HTMLInputElement>) {
+	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 		setState({
 			...state,
 			[name]: value,
 		});
-	}
-	function onSubmit() {
+	};
+	const onSubmit = () => {
 		authActions.login(state);
-	}
+	};
 	return (
 		<Form onSubmit={onSubmit}>
 			<Form.Input onChange={onChange} placeholder="Email or Username" startIcon={<AtSignIcon />} name="username" type="text">

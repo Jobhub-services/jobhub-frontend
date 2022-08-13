@@ -51,7 +51,7 @@ const WorkLocation = ({
 			<div>Work location</div>
 			<div style={{ marginTop: '12px' }}>
 				<CheckBox name="visa_sponsorship" value={data.visa_sponsorship} checked={data.visa_sponsorship} onChange={handleCheckBox}>
-					Visa sponsorship
+					Visa Sponsorship
 				</CheckBox>
 				<CheckBox className="mt-15" name="work_remotly" value={data.work_remotly} checked={data.work_remotly} onChange={handleCheckBox}>
 					Allow Remote Workers
