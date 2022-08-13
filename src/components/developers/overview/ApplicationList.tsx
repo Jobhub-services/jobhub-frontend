@@ -1,7 +1,6 @@
 import LeftArrowIcon from '@/assets/icons/LeftArrowIcon';
 import { colors } from '@/assets/theme';
 import ApplicationCard from '@/components/developers/applications/ApplicationCard';
-import Google from '@/assets/icons/google.jpg';
 import { useAppSelector } from '@/utils/appHooks';
 import { Link } from 'react-router-dom';
 import { FlexBox } from 'staak-ui';
@@ -9,6 +8,7 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 import { applicationActions } from '@/modules/actions/developer/application.actions';
 import emptyData from '@/assets/icons/emptyData.png';
+import { LoadingIcon } from '@/assets/icons';
 
 const SContainer = styled.div`
 	background: white;
@@ -30,14 +30,18 @@ const SIcon = styled.span`
 	transform: rotate(180deg);
 `;
 const ApplicationList = () => {
-	const { applicationInfo } = useAppSelector((state) => state.talentApplications);
+	const { applicationInfo, isLoading } = useAppSelector((state) => state.talentApplications);
 	useEffect(() => {
-		if (!applicationInfo?.content || applicationInfo?.content?.length === 0) applicationActions.getApplications(false);
-	}, []);
+		if (!applicationInfo?.content || applicationInfo?.content?.length === 0) applicationActions.getApplications(true);
+	}, [applicationInfo]);
 	return (
 		<SContainer className="mt-20">
 			<SH4>Recent Applications</SH4>
-			{applicationInfo?.content?.length! > 0 ? (
+			{isLoading ? (
+				<FlexBox height="200px">
+					<LoadingIcon color={colors.PURPLE_BASE} width="50px" height="50px" />
+				</FlexBox>
+			) : applicationInfo?.content?.length! > 0 ? (
 				<>
 					{applicationInfo?.content?.slice(0, 3).map((elem, idx) => {
 						return (

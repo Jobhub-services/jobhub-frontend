@@ -1,13 +1,21 @@
-import { CameraIcon } from '@/assets/icons';
-import Jerome from '@/assets/icons/jerome.jpg';
+import { CameraIcon, LoadingIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
-import { CProfileStatus } from '@/constants/developer/profile.constants';
 import { ProfileAvatarProps } from '@/models/component/developer';
 import { profileAction } from '@/modules/actions/developer/profile.actions';
-import { useAppSelector } from '@/utils/appHooks';
 import { getGMTOffset } from '@/utils/helpers';
+import { useEffect, useState } from 'react';
 import { FlexBox, UserIcon } from 'staak-ui';
 import styled from 'styled-components';
+import StatusDropDown from '@/components/developers/_common/StatusDropDown';
+import { CProfileStatus } from '@/constants/developer/profile.constants';
+
+const InfoContainer = styled(FlexBox)`
+	@media only screen and (max-width: 1600px) {
+		flex-direction: column !important;
+		gap: 10px !important;
+	}
+`;
+
 const SImg = styled.img`
 	border-radius: 50%;
 	object-fit: cover;
@@ -58,15 +66,27 @@ const SH2 = styled.h2`
 	margin: 5px 0;
 	color: ${colors.BLACK_3};
 `;
-const ProfileAvatar = ({ firstname, lastname, location, size, role, experience, status, overview, avatar }: ProfileAvatarProps) => {
+const ProfileAvatar = ({ firstname, lastname, location, size, role, experience, status, overview, avatar, statusEditable }: ProfileAvatarProps) => {
+	const [loading, setLoding] = useState(false);
+
+	useEffect(() => {
+		setLoding(false);
+	}, [status]);
+
 	const handleAvatar = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { files } = event.target;
 		let data = new FormData();
 		data.append('avatar', files![0]!);
 		profileAction.setAttribute(data, 'avatar');
 	};
+	const handleSelect = (event?: any, value?: string) => {
+		if (value !== status) {
+			profileAction.setAttribute(value, 'status');
+			setLoding(true);
+		}
+	};
 	return (
-		<FlexBox gap={20} justify="start">
+		<FlexBox gap={20} align="start" justify="start">
 			<SContainer>
 				<AvatarContainer size={size! + 10}>
 					{avatar && avatar !== '' ? (
@@ -84,36 +104,50 @@ const ProfileAvatar = ({ firstname, lastname, location, size, role, experience, 
 					</>
 				)}
 			</SContainer>
-			<div>
-				<FlexBox justify="start" gap={30}>
+			<InfoContainer gap={30} align="start">
+				<div>
 					<SH2>
 						{firstname} {lastname}
 					</SH2>
-					{status && (
-						<FlexBox justify="start" gap={10}>
-							{CProfileStatus[status!].icon}
-							<span>{CProfileStatus[status!].value}</span>
-						</FlexBox>
-					)}
-				</FlexBox>
 
-				<FlexBox justify="start" gap={5}>
-					{location?.country && location.country.name !== '' && (
-						<FlexBox gap={10}>
-							<SSapn>
-								{location?.country.name}, {location?.city}
-							</SSapn>
-							<SSapn>{getGMTOffset()}</SSapn>
-						</FlexBox>
+					<FlexBox justify="start" gap={5}>
+						{location?.country && location.country.name !== '' && (
+							<FlexBox gap={10}>
+								<SSapn>
+									{location?.country.name}, {location?.city}
+								</SSapn>
+								<SSapn>{getGMTOffset()}</SSapn>
+							</FlexBox>
+						)}
+					</FlexBox>
+					{role !== '' && (
+						<div>
+							<SSapn>{role}. </SSapn>
+							{experience !== '' && <SSapn>{experience} of experience</SSapn>}
+						</div>
 					)}
-				</FlexBox>
-				{role !== '' && (
-					<>
-						<SSapn>{role}. </SSapn>
-						{experience !== '' && <SSapn>{experience} of experience</SSapn>}
-					</>
+				</div>
+				{status && (
+					<div className="mt-10">
+						{statusEditable ? (
+							<>
+								{loading ? (
+									<FlexBox width="150px">
+										<LoadingIcon color={colors.PURPLE_BASE} width="40px" height="40px" />
+									</FlexBox>
+								) : (
+									<StatusDropDown onSelect={handleSelect} status={status} />
+								)}
+							</>
+						) : (
+							<FlexBox justify="start" gap={10}>
+								{CProfileStatus[status!].icon}
+								<span style={{ whiteSpace: 'nowrap' }}>{CProfileStatus[status!].value}</span>
+							</FlexBox>
+						)}
+					</div>
 				)}
-			</div>
+			</InfoContainer>
 		</FlexBox>
 	);
 };

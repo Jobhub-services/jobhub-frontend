@@ -60,10 +60,11 @@ export type SocialProfileType = {
 	twitter?: string;
 };
 export type ProfileInfo = {
+	_id?: string;
 	summary?: string;
 	avatar?: string;
-	firstname?: string;
-	lastname?: string;
+	firstName?: string;
+	lastName?: string;
 	languages?: LanguagesType[];
 	skills?: SkillType[];
 	role?: {
