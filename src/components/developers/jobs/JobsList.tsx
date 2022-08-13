@@ -5,6 +5,7 @@ import DataEmpty from '@/components/common/DataEmpty';
 import { jobActions, jobDispatcher } from '@/modules/actions/developer/jobs.actions';
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
+import { pushNotification } from '@/utils/helpers';
 
 const SWrapper = styled.div<any>`
 	display: grid;
@@ -21,7 +22,10 @@ const JobsList = () => {
 	const { content } = jobInfo;
 
 	useEffect(() => {
-		if (jobSaved) jobDispatcher.setSaveJob(false, false, undefined);
+		if (jobSaved) {
+			pushNotification.success('The Operation was successfully processed');
+			jobDispatcher.setSaveJob(false, false, undefined);
+		}
 	}, [jobSaved]);
 
 	const onSave = (id: string, saved: boolean) => {

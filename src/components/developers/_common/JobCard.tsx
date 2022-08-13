@@ -100,7 +100,7 @@ const JobCard = (props: PJobCard) => {
 	const newPost = Math.abs(new Date(props.createdAt!).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24);
 	const posted_at = moment(new Date(props.createdAt!)).fromNow();
 	return (
-		<SContainer>
+		<SContainer hover>
 			<SBody>
 				<SHeader justify="start" align="flex-start" gap={10}>
 					<JobAvatar

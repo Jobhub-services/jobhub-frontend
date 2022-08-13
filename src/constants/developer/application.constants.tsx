@@ -40,5 +40,5 @@ export const ContentStatus: { [key in ApplicationStatus]: string } = {
 	IN_PROGRESS: 'Your application is in progress, We’ll notify you when they make a final decision ',
 	DECLINED: 'The company reviewed your application, but did not accept it.',
 	NEW: 'Your application is awaiting review by the company. We’ll notify you when they make a decision.',
-	HIRED: 'You are hired by the company. you are now a memebre.',
+	HIRED: 'You are hired by the company. you are now a member.',
 };

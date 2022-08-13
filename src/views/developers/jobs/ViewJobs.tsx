@@ -4,7 +4,7 @@ import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { JobsList, JobHeader, JobsFilter } from '@/components/developers/jobs';
 import { jobActions, jobDispatcher } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { checkScrollToButtom, pushNotification } from '@/utils/helpers';
+import { checkScrollToButtom } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import { Outlet, useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
@@ -19,8 +19,8 @@ const SubContainer = styled.div`
 	height: inherit;
 `;
 const ViewJobs = () => {
-	const { isLoading, jobInfo, jobSaved } = useAppSelector((state) => state.developerJobs);
-	const [searchParams, setSearchParams] = useSearchParams();
+	const { isLoading, jobInfo } = useAppSelector((state) => state.developerJobs);
+	const [searchParams] = useSearchParams();
 	const [isFetching, setIsFetching] = useState(false);
 
 	useEffect(() => {
@@ -34,13 +34,6 @@ const ViewJobs = () => {
 			jobDispatcher.setJobs({}, true);
 		};
 	}, []);
-
-	useEffect(() => {
-		if (jobSaved) {
-			pushNotification.success('The Operation was successfully processed');
-			jobDispatcher.setSaveJob(false);
-		}
-	}, [jobSaved]);
 	useEffect(() => {
 		setIsFetching(false);
 	}, [jobInfo]);

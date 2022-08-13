@@ -35,7 +35,7 @@ const SJob = styled.span`
 `;
 const SBody = styled.div`
 	//padding: 15px 15px;
-	height: 160px;
+	height: 165px;
 `;
 const SFooter = styled(FlexBox)`
 	padding: 10px 15px !important;
@@ -53,9 +53,11 @@ const CompanyCard = (props: PCompanyCard) => {
 		<SContainer>
 			<SBody>
 				<CompanyAvatar _id={props._id} avatar={props.avatar} companyName={props.companyName} industry={props?.generalinfo?.industry} />
-				<div style={{ padding: '0 15px' }}>
+				<div style={{ padding: '5px 15px' }}>
 					<FlexBox justify="start" className="mt-5" gap={5}>
-						<LocationFillIcon color={colors.BLACK_10} width="18px" height="18px" />
+						<FlexBox>
+							<LocationFillIcon color={colors.BLACK_10} width="18px" height="18px" />
+						</FlexBox>
 						<SSpan>
 							{street ? `${street},` : ''} {city ? `${city},` : ''} {country ? `${country}.` : ''}
 						</SSpan>

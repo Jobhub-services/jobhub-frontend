@@ -8,7 +8,8 @@ const IMG_SIZE = 35;
 const SContainer = styled(FlexBox)`
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
-	padding: 15px 15px 10px 15px;
+	padding: 15px 15px 7px 15px;
+	border-bottom: 1px solid ${colors.PURPLE_1};
 	cursor: pointer;
 	transition: all 0.2s;
 	&:hover {

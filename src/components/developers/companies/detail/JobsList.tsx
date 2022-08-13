@@ -10,6 +10,7 @@ import { useAppSelector } from '@/utils/appHooks';
 import { useEffect } from 'react';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import { companiesActions, companiesDispatcher } from '@/modules/actions/developer/companies.actions';
+import { pushNotification } from '@/utils/helpers';
 const Container = styled.div`
 	padding: 0 15px;
 `;
@@ -40,7 +41,10 @@ const JobsList = ({
 	const { jobSaved } = useAppSelector((state) => state.companies);
 
 	useEffect(() => {
-		if (jobSaved) companiesDispatcher.setSaveJob(false, false, undefined);
+		if (jobSaved) {
+			pushNotification.success('The Operation was successfully processed');
+			companiesDispatcher.setSaveJob(false, false, undefined);
+		}
 	}, [jobSaved]);
 
 	const onSave = (id: string, saved: boolean) => {
