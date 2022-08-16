@@ -6,9 +6,6 @@ import styled from 'styled-components';
 import JobAvatar from '@/components/developers/jobs/JobAvatar';
 import { ClockIcon, DotIcon, HeartFilledIcon, HeartIcon, LoadingIcon, LocationIcon, MoneyIcon, StarIcon, SuccessIcon } from '@/assets/icons';
 import moment from 'moment';
-import { useNavigate } from 'react-router-dom';
-import { jobActions } from '@/modules/actions/developer/jobs.actions';
-import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useState } from 'react';
 
 const NEW_JOB_PERIOD = 3;

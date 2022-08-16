@@ -1,4 +1,4 @@
-import { FlexBox, Tag, HrDivider, Button, LinkedinLogo, GithubIcon, LinkedinIcon } from 'staak-ui';
+import { FlexBox, Tag, HrDivider, Button, LinkedinLogo, GithubIcon, LinkedinIcon, MessageIcon, IconButton } from 'staak-ui';
 import { LocationIcon, ProfileIcon, TwitterIcon, TwitterLogo, WebsiteLogo, WorldColorIcon, WorldIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { talentsActions } from '@/modules/actions/company/talents.actions';
@@ -60,10 +60,14 @@ const Sp = styled.p`
 	overflow: hidden;
 	white-space: pre-line;
 `;
-const SLink = styled.a``;
+const SIconButton = styled(IconButton)`
+	background-color: ${colors.BLUE_CLEAR_5};
+	padding: 7px;
+`;
 const TalentCard = (props: CardProps) => {
 	const navigate = useNavigate();
 	const { _id } = useAppSelector((state) => state.talent.talentDetails);
+
 	const viewProfile = () => {
 		navigate(`detail/${props._id}`);
 		if (props._id !== _id) talentsActions.getTalentDetails(props._id);
@@ -127,9 +131,16 @@ const TalentCard = (props: CardProps) => {
 				</div>
 			</div>
 			<HrDivider top={15} side={0} />
-			<ViewButton width="100%" size="md" startIcon={<ProfileIcon />} variant="light" onClick={viewProfile}>
-				View Profile
-			</ViewButton>
+			<FlexBox gap={10}>
+				<ViewButton width="100%" size="md" startIcon={<ProfileIcon />} variant="light" onClick={viewProfile}>
+					View Profile
+				</ViewButton>
+				<Link to={`/messages/${props._id}`}>
+					<SIconButton width="35px" height="35px">
+						<MessageIcon color={colors.BLUE_BASE} />
+					</SIconButton>
+				</Link>
+			</FlexBox>
 		</SCard>
 	);
 };

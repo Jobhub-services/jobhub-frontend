@@ -27,7 +27,7 @@ const ResetPasswordView = () => {
 	const handleClick = () => {
 		if (email === '' || !email) setError(true);
 		else {
-			authActions.resetPassword(email);
+			authActions.forgetPassword(email);
 		}
 	};
 	return (

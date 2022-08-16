@@ -62,11 +62,11 @@ export const authActions = {
 	async logout() {
 		authDispatchers.setAuthToken(null);
 	},
-	async resetPassword(email: string) {
+	async forgetPassword(email: string) {
 		authDispatchers.setIsLoading(true);
 		try {
-			//const response = await httpClient.post(`${USERS_SERVICE}/auth/reset`, { email });
-			const responseData = true;
+			const response = await httpClient.post(`${USERS_SERVICE}/auth/forget-password`, { email: email });
+			const responseData = response.data;
 			authDispatchers.setAuthErrors({});
 			if (responseData) window.location.replace('/forgot-password/pending');
 		} catch (e: any) {
@@ -83,8 +83,8 @@ export const authActions = {
 	async updatePassword(payload: any) {
 		authDispatchers.setIsLoading(true);
 		try {
-			const response = await httpClient.post(`${USERS_SERVICE}/auth/update`, payload);
-			const responseData = true;
+			const response = await httpClient.post(`${USERS_SERVICE}/auth/reset-password`, payload);
+			const responseData = response.data;
 			authDispatchers.setAuthErrors({});
 			//if (responseData) window.location.replace('/login');
 		} catch (e: any) {

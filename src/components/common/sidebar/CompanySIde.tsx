@@ -59,15 +59,12 @@ const CompanySide = ({ appExpanded }: { appExpanded: boolean }) => {
 					{appExpanded ? <NavItem.Content>Applicants</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
-			{/*<NavItem
-				className="mb-5"
-				icon={<MessageColorIcon width="20px" height="20px" />}
-				width={widthItems}
-				active={pathname === '/messages'}
-				onClick={(event: React.SyntheticEvent) => changeRoute(event, 'messages')}
-			>
-				<NavItem.Content>Messages</NavItem.Content>
-			</NavItem>
+			<SLink to="messages/str" expanded={appExpanded}>
+				<NavItem className="mb-5" icon={<MessageColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/messages')}>
+					<NavItem.Content>{appExpanded ? <NavItem.Content>Messages</NavItem.Content> : null}</NavItem.Content>
+				</NavItem>
+			</SLink>
+			{/*
 			<NavItem
 				className="mb-5"
 				icon={<InvitationIcon width="20px" height="20px" />}

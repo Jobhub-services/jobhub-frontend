@@ -13,6 +13,7 @@ import { reducer as reducerDeveloperJobs } from '@/modules/store/developer/job.s
 import { reducer as reducerDeveloperApplications } from '@/modules/store/developer/application.store';
 import { reducer as reducerCompanies } from '@/modules/store/developer/company.store';
 import { reducer as reducerTalentSettings } from '@/modules/store/developer/settings.store';
+import { reducer as reducerCompanyMessage } from '@/modules/store/company/messages.store';
 
 const rootReducer = combineReducers({
 	auth: authReducer,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
 	companies: reducerCompanies,
 	companySettings: reducerCompanySettings,
 	talentSettings: reducerTalentSettings,
+	companyMessage: reducerCompanyMessage,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

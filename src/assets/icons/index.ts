@@ -65,8 +65,12 @@ import ApplicationColorIcon from './ApplicationColorIcon';
 import OverviewColorIcon from './OverviewColorIcon';
 import FindTalentsColorIcon from './FindTalentsColorIcon';
 import SettingsColorIcon from './SettingsColorIcon';
+import SendMessageIcon from './SendMessageIcon';
+import ThreeDotIcon from './ThreeDotIcon';
 
 export {
+	ThreeDotIcon,
+	SendMessageIcon,
 	SettingsColorIcon,
 	FindTalentsColorIcon,
 	OverviewColorIcon,
