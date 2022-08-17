@@ -22,29 +22,29 @@ const SP = styled.p`
 `;
 const NewPasswordView = () => {
 	const { str } = useParams();
-	const [data, setData] = useState<{ code?: string; password?: string; confirm_password?: string }>({});
-	const [error, setError] = useState<{ code: boolean; password: boolean; confirm_password: boolean }>({
-		code: false,
-		password: false,
-		confirm_password: false,
+	const [data, setData] = useState<{ email?: string; newPassword?: string; confirmationPassword?: string }>({});
+	const [error, setError] = useState<{ email: boolean; newPassword: boolean; confirmationPassword: boolean }>({
+		email: false,
+		newPassword: false,
+		confirmationPassword: false,
 	});
 	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 		let tmp = { ...data };
-		tmp[name as 'code'] = value;
+		tmp[name as 'email'] = value;
 		setData(tmp);
 	};
 
 	const handleClick = () => {
 		const tmpErr = {
-			code: !data.code || data.code === '',
-			password: !data.password || data.password === '',
-			confirm_password: !data.confirm_password || data.confirm_password === '' || data.confirm_password !== data.password,
+			email: !data.email || data.email === '',
+			newPassword: !data.newPassword || data.newPassword === '',
+			confirmationPassword: !data.confirmationPassword || data.confirmationPassword === '' || data.confirmationPassword !== data.newPassword,
 		};
 		setError(tmpErr);
-		if (!tmpErr.code && !tmpErr.password && !tmpErr.confirm_password) {
+		if (!tmpErr.email && !tmpErr.newPassword && !tmpErr.confirmationPassword) {
 			const tmp = {
-				link: str,
+				token: str,
 				...data,
 			};
 			authActions.updatePassword(tmp);
@@ -52,7 +52,7 @@ const NewPasswordView = () => {
 	};
 	const handleFocus = (name: string) => {
 		let tmp = { ...error };
-		tmp[name as 'code'] = false;
+		tmp[name as 'email'] = false;
 		setError(tmp);
 	};
 	return (
@@ -60,14 +60,14 @@ const NewPasswordView = () => {
 			<TitleAuth>Reset password</TitleAuth>
 			<SP>Please enter your verification code and new password</SP>
 			<SInputs>
-				<Input placeholder="Verification code" type="text" name="code" onChange={onChange} error={error.code} onFocus={() => handleFocus('code')} />
+				<Input placeholder="Verification code" type="text" name="code" onChange={onChange} error={error.email} onFocus={() => handleFocus('code')} />
 				<Input
 					className="mt-15"
 					placeholder="Password"
 					type="password"
 					name="password"
 					onChange={onChange}
-					error={error.password}
+					error={error.newPassword}
 					onFocus={() => handleFocus('password')}
 				/>
 				<Input
@@ -76,7 +76,7 @@ const NewPasswordView = () => {
 					type="password"
 					name="confirm_password"
 					onChange={onChange}
-					error={error.confirm_password}
+					error={error.confirmationPassword}
 					onFocus={() => handleFocus('confirm_password')}
 				/>
 				<Button className="mt-20" width="100%" onClick={handleClick}>

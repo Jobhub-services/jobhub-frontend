@@ -85,8 +85,10 @@ export const authActions = {
 		try {
 			const response = await httpClient.post(`${USERS_SERVICE}/auth/reset-password`, payload);
 			const responseData = response.data;
-			authDispatchers.setAuthErrors({});
-			//if (responseData) window.location.replace('/login');
+			if (responseData) {
+				authDispatchers.setAuthErrors({});
+				window.location.replace('/login');
+			}
 		} catch (e: any) {
 		} finally {
 			authDispatchers.setIsLoading(false);
