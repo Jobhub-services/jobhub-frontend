@@ -60,7 +60,7 @@ const NewPasswordView = () => {
 			<TitleAuth>Reset password</TitleAuth>
 			<SP>Please enter your verification code and new password</SP>
 			<SInputs>
-				<Input placeholder="Verification code" type="text" name="code" onChange={onChange} error={error.email} onFocus={() => handleFocus('code')} />
+				<Input placeholder="Email" type="text" name="email" onChange={onChange} error={error.email} onFocus={() => handleFocus('email')} />
 				<Input
 					className="mt-15"
 					placeholder="Password"
