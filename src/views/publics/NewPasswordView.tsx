@@ -65,19 +65,19 @@ const NewPasswordView = () => {
 					className="mt-15"
 					placeholder="Password"
 					type="password"
-					name="password"
+					name="newPassword"
 					onChange={onChange}
 					error={error.newPassword}
-					onFocus={() => handleFocus('password')}
+					onFocus={() => handleFocus('newPassword')}
 				/>
 				<Input
 					className="mt-15"
 					placeholder="Confirm password"
 					type="password"
-					name="confirm_password"
+					name="confirmationPassword"
 					onChange={onChange}
 					error={error.confirmationPassword}
-					onFocus={() => handleFocus('confirm_password')}
+					onFocus={() => handleFocus('confirmationPassword')}
 				/>
 				<Button className="mt-20" width="100%" onClick={handleClick}>
 					Update password
