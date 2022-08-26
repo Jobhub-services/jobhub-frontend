@@ -1,39 +1,122 @@
 import { storeActions } from '@/modules/store/company/messages.store';
 import dispatchToStore from '@/utils/store';
 import { httpClient } from '@/config/httpClient/HttpClient';
-import { TMessage } from '@/types/company/messages.type';
+import { API_PATHS } from '@/constants/api.constants';
+import { AxiosResponse } from 'axios';
+import { TBooleanAttr } from '@/types/company/messages.type';
 
-type TLoading = 'isLoading';
+const { WEBSOCKET_SERVICE } = API_PATHS;
 
 export const messageDispatcher = {
-	setIsLoading(loading: boolean, attr: TLoading = 'isLoading') {
-		dispatchToStore(storeActions.setIsLoading({ loading, attr }));
+	setBooleanAttr(value: boolean, attr: TBooleanAttr = TBooleanAttr.IS_LOADING) {
+		dispatchToStore(storeActions.setBooleanAttr({ value, attr }));
 	},
-	setMessages(data: any) {
-		dispatchToStore(storeActions.setMessages(data));
+	setConversations(data: any) {
+		dispatchToStore(storeActions.setConversations(data));
 	},
-	addMessage(msg: string, type: TMessage) {
-		dispatchToStore(storeActions.setAddMessage({ msg, type }));
+	setMessages(data: any, userInfo: any) {
+		dispatchToStore(storeActions.setMessages({ data, userInfo }));
+	},
+	addMessage(data: any) {
+		dispatchToStore(storeActions.setAddMessage(data));
+	},
+	updateContacts(chatId: string, data: any) {
+		dispatchToStore(storeActions.updateContacts({ chatId, data }));
+	},
+	setDeleteConversation(chatId: string) {
+		dispatchToStore(storeActions.setDeleteConversation(chatId));
+	},
+	setErrors(data: any) {
+		dispatchToStore(storeActions.setErrors(data));
+	},
+	createChat(data: any) {
+		dispatchToStore(storeActions.createChat(data));
 	},
 };
 
 export const messageActions = {
-	async getMessages(user?: string) {
-		messageDispatcher.setIsLoading(true);
+	async createConversation(data: any) {
+		messageDispatcher.setBooleanAttr(true);
 		try {
-			const config = {
-				params: {
-					userId: user,
-				},
-			};
-			const response = await httpClient.get(`${'JOBS_SERVICE'}/company`, config);
+			const response = await httpClient.post(`${WEBSOCKET_SERVICE}/chat`, { members: data });
 			const responseData = response.data;
 			if (responseData) {
-				messageDispatcher.setMessages(responseData);
+				messageDispatcher.createChat({ created: true, _id: responseData.data });
 			}
 		} catch (e: any) {
 		} finally {
-			messageDispatcher.setIsLoading(false);
+			messageDispatcher.setBooleanAttr(false);
+		}
+	},
+	async getConversations(user?: string) {
+		messageDispatcher.setBooleanAttr(true);
+		try {
+			const response = await httpClient.get(`${WEBSOCKET_SERVICE}/chat`);
+			const responseData = response.data;
+			if (responseData) {
+				messageDispatcher.setConversations(responseData);
+				messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_CONVERSATION_FETCHED);
+			}
+		} catch (e: any) {
+		} finally {
+			messageDispatcher.setBooleanAttr(false);
+		}
+	},
+	async getMessages(chatId?: string, userInfo?: any) {
+		messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_CONVERSATION_LOADING);
+		try {
+			const response = await httpClient.get(`${WEBSOCKET_SERVICE}/chat/message/${chatId}`);
+			const responseData = response.data;
+			if (responseData) {
+				messageDispatcher.setMessages(responseData.content, userInfo);
+			}
+		} catch (e: any) {
+			const response: AxiosResponse = e?.response;
+			if (response) {
+				const data = response.data;
+				let errors = {};
+				if (data.message) errors = { fetchStatus: true, content: data.message };
+				messageDispatcher.setErrors(errors);
+			}
+		} finally {
+			messageDispatcher.setBooleanAttr(false, TBooleanAttr.IS_CONVERSATION_LOADING);
+		}
+	},
+	async addMessage(data: { chatId?: string; sender?: string; content?: string }) {
+		messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_MESSAGE_SENDING);
+		try {
+			const tmp = { ...data, createdAt: new Date().toUTCString(), status: 'loading' };
+			messageDispatcher.addMessage(tmp);
+			const response = await httpClient.put(`${WEBSOCKET_SERVICE}/chat/message/`, tmp);
+			const responseData = response.data;
+			if (responseData) {
+				messageDispatcher.updateContacts(tmp.chatId!, tmp);
+				//messageDispatcher.addMessage({ ...tmp, status: 'sended' });
+			}
+		} catch (e: any) {
+		} finally {
+			messageDispatcher.setBooleanAttr(false, TBooleanAttr.IS_MESSAGE_SENDING);
+		}
+	},
+	async deleteConversation(chatId: string) {
+		messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_CONVERSATION_DELETING);
+		try {
+			const response = await httpClient.put(`${WEBSOCKET_SERVICE}/chat/${chatId}`);
+			const responseData = response.data;
+			if (responseData) {
+				messageDispatcher.setDeleteConversation(chatId);
+			}
+		} catch (e: any) {
+			const response: AxiosResponse = e?.response;
+			if (response) {
+				const data = response.data;
+				let errors = {};
+				if (data.message) errors = { password: data.message };
+				//else errors = transformErrors(data);
+				//jobDispatcher.setJobErrors(errors);
+			}
+		} finally {
+			messageDispatcher.setBooleanAttr(false, TBooleanAttr.IS_CONVERSATION_DELETING);
 		}
 	},
 };

@@ -1,7 +1,7 @@
 import { colors } from '@/assets/theme';
 import { PApplicationAvatar } from '@/models/component/developer/application.interface';
 import { FlexBox } from 'staak-ui';
-import { ClockIcon, DetailIcon } from '@/assets/icons';
+import { DetailIcon } from '@/assets/icons';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { applicationActions } from '@/modules/actions/developer/application.actions';
@@ -47,7 +47,7 @@ const ApplicationAvatar = (props: PApplicationAvatar) => {
 	const navigate = useNavigate();
 	const handleClick = () => {
 		if (applicationDetails?._id !== props.applicationId) applicationActions.getApplication(props.applicationId);
-		navigate(`detail/${props.applicationId}`);
+		navigate(`/applications/detail/${props.applicationId}`);
 	};
 
 	return (

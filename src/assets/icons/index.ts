@@ -67,8 +67,10 @@ import FindTalentsColorIcon from './FindTalentsColorIcon';
 import SettingsColorIcon from './SettingsColorIcon';
 import SendMessageIcon from './SendMessageIcon';
 import ThreeDotIcon from './ThreeDotIcon';
+import EyeIcon from './EyeIcon';
 
 export {
+	EyeIcon,
 	ThreeDotIcon,
 	SendMessageIcon,
 	SettingsColorIcon,

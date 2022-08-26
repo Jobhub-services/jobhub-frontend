@@ -12,6 +12,7 @@ interface ICompanyInfo {
 }
 
 export interface IUser extends IDeveloperInfo, ICompanyInfo {
+	_id?: string;
 	email?: string;
 	username?: string;
 	password?: string;

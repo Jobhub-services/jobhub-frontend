@@ -1,6 +1,14 @@
 import { Link, useLocation } from 'react-router-dom';
 import { AssesmentsIcon, MessageIcon, NavItem, ScheduleIcon, JobIcon, HealthIcon, SettingIcon, InvitationIcon, ApplicantIcon } from 'staak-ui';
-import { ApplicationColorIcon, CompanyColorIcon, JobColorIcon, NewCompanyIcon, OverviewColorIcon, SettingsColorIcon } from '@/assets/icons';
+import {
+	ApplicationColorIcon,
+	CompanyColorIcon,
+	JobColorIcon,
+	MessageColorIcon,
+	NewCompanyIcon,
+	OverviewColorIcon,
+	SettingsColorIcon,
+} from '@/assets/icons';
 import styled, { css } from 'styled-components';
 
 const SLink = styled(Link)<any>`
@@ -46,12 +54,12 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 					{appExpanded ? <NavItem.Content>Applications</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
-			{/*<SLink to="messages">
-				<NavItem className="mb-5" icon={<MessageIcon width="20px" height="20px" />} width={widthItems} active={pathname === '/messages'}>
-					<NavItem.Content>Messages</NavItem.Content>
+			<SLink to="messages/id" expanded={appExpanded}>
+				<NavItem className="mb-5" icon={<MessageColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/messages')}>
+					{appExpanded ? <NavItem.Content>Messages</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
-			<SLink to="invitations">
+			{/*<SLink to="invitations">
 				<NavItem className="mb-5" icon={<InvitationIcon width="20px" height="20px" />} width={widthItems} active={pathname === '/invitation'}>
 					<NavItem.Content>Invitations</NavItem.Content>
 				</NavItem>

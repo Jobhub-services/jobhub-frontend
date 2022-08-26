@@ -1,0 +1,1 @@
+export const MESSAGE_HEADER_HEIGHT = 100;

@@ -12,6 +12,7 @@ import { arrayEquals } from '@/utils/helpers';
 import { StatusType } from '@/types';
 
 const { JOBS_SERVICE } = API_PATHS;
+
 type TAction = 'jobCreated' | 'jobUpdated' | 'jobDeleted';
 type TLoading = 'isLoading' | 'isDetailLoading' | 'isDeleteLoading';
 export const jobDispatcher = {

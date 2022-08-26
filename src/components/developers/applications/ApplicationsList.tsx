@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 import ApplicationCard from '@/components/developers/applications/ApplicationCard';
-import Google from '@/assets/icons/google.jpg';
 import { useAppSelector } from '@/utils/appHooks';
 import DataEmpty from '@/components/common/DataEmpty';
 
 const SWrapper = styled.div<any>`
 	display: grid;
 	padding: 15px 0;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(2, 1fr);
 	gap: 20px;
 	@media only screen and (max-width: 1400px) {
-		grid-template-columns: repeat(2, 1fr);
+		grid-template-columns: repeat(1, 1fr);
 	}
 `;
 const ApplicationsList = () => {

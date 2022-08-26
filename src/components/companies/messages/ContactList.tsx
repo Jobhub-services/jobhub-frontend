@@ -8,20 +8,21 @@ const SLink = styled(Link)`
 `;
 const ContactList = () => {
 	const { contacts } = useAppSelector((state) => state.companyMessage);
-	const { str } = useParams();
+	const { chatId } = useParams();
 	return (
 		<FlexBox flexDirection="column" gap={15}>
 			{contacts?.content?.map((elem, idx) => {
 				return (
-					<SLink to={`/messages/${elem._id}`}>
+					<SLink to={`/messages/${elem._id}`} key={idx}>
 						<TalentContact
 							_id={elem._id}
-							active={str === elem._id}
-							message={elem.message}
-							lastDate={elem.lastDate}
-							img={elem.avatar}
-							firstname={elem.firstName}
-							lastname={elem.lastName}
+							active={chatId === elem._id}
+							message={elem.message?.content}
+							lastDate={elem.message?.createdAt}
+							img={elem.userInfo?.avatar}
+							firstname={elem.userInfo?.firstName}
+							lastname={elem.userInfo?.lastName}
+							sender={elem.message?.sender !== elem._id}
 						/>
 					</SLink>
 				);

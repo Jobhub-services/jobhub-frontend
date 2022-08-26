@@ -1,12 +1,13 @@
-import styled, { css } from 'styled-components';
-import { DropDown, FlexBox } from 'staak-ui';
-import { colors } from '@/assets/theme';
-import moment from 'moment';
-import { PTalentContact } from '@/models/component/companies/messages/messages.interface';
-import Avatar from '@/components/common/Avatar';
 import { ThreeDotIcon } from '@/assets/icons';
+import { colors } from '@/assets/theme';
+import { PCompanyContact } from '@/models/component/developer/messages.interface';
+import Avatar from '@/components/common/Avatar';
+import moment from 'moment';
+import { DropDown, FlexBox } from 'staak-ui';
+import styled, { css } from 'styled-components';
 
-const IMG_SIZE = 60;
+const IMG_SIZE = 55;
+
 const SOptions = styled.div`
 	z-index: 3;
 	position: absolute;
@@ -56,12 +57,6 @@ const SH2 = styled.h2`
 	margin: 3px 0;
 	color: ${colors.BLACK_4};
 	font-weight: 500;
-	display: -webkit-box;
-	font-family: inherit;
-	-webkit-line-clamp: 1;
-	-webkit-box-orient: vertical;
-	text-overflow: ellipsis;
-	overflow: hidden;
 `;
 
 const SP = styled.p`
@@ -80,8 +75,7 @@ const SSpan = styled.span`
 	white-space: nowrap;
 	color: ${colors.BLACK_5};
 `;
-
-const TalentContact = (props: PTalentContact) => {
+const CompanyContact = (props: PCompanyContact) => {
 	const posted_at = moment(new Date(props.lastDate ?? '')).fromNow();
 	const handleClick = () => {
 		if (props.onClick) props.onClick(props._id);
@@ -93,13 +87,13 @@ const TalentContact = (props: PTalentContact) => {
 				<FlexBox justify="start" gap={10}>
 					<Avatar img={props.img} size={IMG_SIZE} />
 					<SInfo>
-						<SH2>
-							{props.firstname} {props.lastname}
-						</SH2>
-						<SP>{!props.message || props.message === '' ? 'Empty conversation' : `${props.sender ? 'You:' : ''} ${props.message}`}</SP>
+						<SH2>{props.companyName}</SH2>
+						<SP>
+							{props.sender ? 'Vous:' : ''} {props.message}
+						</SP>
 					</SInfo>
 				</FlexBox>
-				{props.lastDate && <SSpan>{posted_at}</SSpan>}
+				<SSpan>{posted_at}</SSpan>
 			</SubContainer>
 			<SOptions>
 				<DropDown trigger="click" listPosition="right" onSelet={handleSelect}>
@@ -122,4 +116,4 @@ const TalentContact = (props: PTalentContact) => {
 	);
 };
 
-export default TalentContact;
+export default CompanyContact;

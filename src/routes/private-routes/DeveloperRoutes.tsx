@@ -13,6 +13,7 @@ import {
 	AccountSettings,
 	SecuritySettings,
 	TalentOverview,
+	MessagesView,
 } from '@/views/developers';
 
 const DeveloperRoutes: FC = () => {
@@ -29,6 +30,7 @@ const DeveloperRoutes: FC = () => {
 			<Route path="companies" element={<ViewCompanies />}>
 				<Route path="detail/:id" element={<CompanyDetail />} />
 			</Route>
+			<Route path="messages/:id" element={<MessagesView />} />
 			<Route path="settings" element={<TalentSettings />}>
 				<Route path="account" element={<AccountSettings />} />
 				<Route path="security" element={<SecuritySettings />} />

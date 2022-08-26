@@ -13,6 +13,7 @@ import {
 	SecuritySettings,
 	AccountSettings,
 	MessagesView,
+	ConversationView,
 } from '@/views/companies';
 
 import ApplicationDetails from '@/views/companies/applicants/ApplicationDetails';
@@ -39,7 +40,10 @@ const CompanyRoutes: FC = () => {
 				<Route path="detail/:id" element={<ApplicationDetails />} />
 			</Route>
 			<Route path="company/profile/:username" element={<CompanyProfile />} />
-			<Route path="messages/:str" element={<MessagesView />} />
+			<Route path="messages" element={<MessagesView />}>
+				<Route path=":chatId" element={<ConversationView />} />
+			</Route>
+			<Route path="messages" element={<MessagesView />} />
 			<Route path="settings" element={<CompanySettings />}>
 				<Route path="account" element={<AccountSettings />} />
 				<Route path="security" element={<SecuritySettings />} />

@@ -59,7 +59,7 @@ const CompanySide = ({ appExpanded }: { appExpanded: boolean }) => {
 					{appExpanded ? <NavItem.Content>Applicants</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
-			<SLink to="messages/str" expanded={appExpanded}>
+			<SLink to="messages" expanded={appExpanded}>
 				<NavItem className="mb-5" icon={<MessageColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/messages')}>
 					{appExpanded ? <NavItem.Content>Messages</NavItem.Content> : null}
 				</NavItem>

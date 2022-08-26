@@ -5,4 +5,5 @@ export const API_PATHS = {
 	METADATA_SERVICE: `/metadata`,
 	INTERVIEW_SERVICE: `/interview`,
 	TALENT_SERVICE: '/talent',
+	WEBSOCKET_SERVICE: '/websocket',
 };

@@ -1,33 +1,55 @@
-import { TMessage } from '@/types/company/messages.type';
+import { TBooleanAttr, TMessageStatus } from '@/types/company/messages.type';
 
 export type TMessageData = {
-	date?: string;
+	createdAt?: string;
 	content?: string;
-	type?: TMessage;
+	sender?: string;
+	status?: TMessageStatus;
+};
+
+export type TUserInfo = {
+	_id: string;
+	avatar?: string;
+	firstName?: string;
+	lastName?: string;
+	role?: string;
+	experience?: string;
 };
 export interface IMessageState {
-	isLoading?: boolean;
-	isMessageSending?: boolean;
+	[TBooleanAttr.IS_LOADING]?: boolean;
+	[TBooleanAttr.IS_MESSAGE_SENDING]?: boolean;
+	[TBooleanAttr.IS_CONVERSATION_LOADING]?: boolean;
+	[TBooleanAttr.IS_CONVERSATION_FETCHED]?: boolean;
+	[TBooleanAttr.IS_CONVERSATION_DELETING]?: boolean;
+	[TBooleanAttr.IS_CONVERSATION_DELETED]?: boolean;
+	[TBooleanAttr.IS_CONVERSATION_DETAIL_FETCHED]?: boolean;
+	newChat?: {
+		created: boolean;
+		_id: string;
+	};
 	messages?: {
-		content: TMessageData[];
-		userInfo?: {
-			_id: string;
-			avatar?: string;
-			firstName?: string;
-			lastName?: string;
-			role?: string;
-			experience?: string;
-		};
+		_id: string;
+		messages: TMessageData[];
+		userInfo?: TUserInfo;
 	};
 	contacts?: {
-		content?: {
+		content: {
 			_id: string;
-			avatar?: string;
-			firstName?: string;
-			lastName?: string;
-			message?: string;
-			lastDate?: string;
-			sended?: boolean;
+			message: {
+				content?: string;
+				sender?: string;
+				_id?: string;
+				createdAt?: string;
+			};
+			userInfo?: TUserInfo;
 		}[];
+		count?: number;
+		pages?: number;
+		size?: number;
+		page?: number;
+	};
+	messageErrors?: {
+		fetchStatus: boolean;
+		content: any;
 	};
 }

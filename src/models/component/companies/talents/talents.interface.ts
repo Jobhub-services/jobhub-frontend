@@ -22,7 +22,9 @@ export interface ContactProps extends StandardProps, TalentContact {
 	};
 }
 
-export interface CardProps extends StandardProps, TalentShortInfo {}
+export interface CardProps extends StandardProps, TalentShortInfo {
+	onChat?: (receiver: string) => void;
+}
 
 export interface PFilterStatus extends StandardProps {
 	status?: TalentStatus[];

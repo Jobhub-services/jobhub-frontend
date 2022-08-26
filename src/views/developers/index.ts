@@ -11,7 +11,10 @@ import AccountSettings from '@/views/developers/settings/AccountSettings';
 import SecuritySettings from '@/views/developers/settings/SecuritySettings';
 import TalentOverview from '@/views/developers/TalentOverview';
 
+import MessagesView from '@/views/developers/messages/MessagesView';
+
 export {
+	MessagesView,
 	DeveloperProfile,
 	ViewJobs,
 	ViewApplications,

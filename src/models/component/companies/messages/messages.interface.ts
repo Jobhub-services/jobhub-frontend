@@ -1,4 +1,5 @@
 import { StandardProps } from '@/models/component';
+import { TMessageStatus } from '@/types/company/messages.type';
 
 export interface PTalentContact extends StandardProps {
 	_id: string;
@@ -22,6 +23,7 @@ export interface PMessageAvatar extends StandardProps {
 
 export interface PMessageInput extends StandardProps {
 	value?: string;
+	height?: number;
 	onHeightChange?: (height: number, value: string) => void;
 	onSend?: (e: any) => void;
 }
@@ -29,7 +31,7 @@ export interface PMessageInput extends StandardProps {
 export interface PMessageContentElem extends StandardProps {
 	img?: string;
 	messsage?: string;
-	date?: string;
+	createdAt?: string;
 	sender?: boolean;
-	loading?: boolean;
+	status?: TMessageStatus;
 }

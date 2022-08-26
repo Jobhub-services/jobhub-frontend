@@ -1,14 +1,15 @@
-import { FlexBox, Tag, HrDivider, Button, LinkedinLogo, GithubIcon, LinkedinIcon, MessageIcon, IconButton } from 'staak-ui';
-import { LocationIcon, ProfileIcon, TwitterIcon, TwitterLogo, WebsiteLogo, WorldColorIcon, WorldIcon } from '@/assets/icons';
+import { FlexBox, HrDivider, Button, GithubIcon, LinkedinIcon, MessageIcon, IconButton } from 'staak-ui';
+import { LoadingIcon, LocationIcon, ProfileIcon, WorldIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { talentsActions } from '@/modules/actions/company/talents.actions';
 import StatusElem from '@/components/companies/_common/StatusElem';
 import { TitleStatus } from '@/constants/company/talent.contants';
 import { CardProps } from '@/models/component/companies/talents/talents.interface';
 import { Avatar } from '@/components/companies/_common';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
+import { useState } from 'react';
 
 const SWarrap = styled(FlexBox)`
 	flex-wrap: wrap;
@@ -67,10 +68,16 @@ const SIconButton = styled(IconButton)`
 const TalentCard = (props: CardProps) => {
 	const navigate = useNavigate();
 	const { _id } = useAppSelector((state) => state.talent.talentDetails);
+	const [chatLoading, setChatLoading] = useState(false);
 
 	const viewProfile = () => {
 		navigate(`detail/${props._id}`);
 		if (props._id !== _id) talentsActions.getTalentDetails(props._id);
+	};
+
+	const onChatClick = () => {
+		setChatLoading(true);
+		if (props.onChat) props.onChat(props.userId!);
 	};
 	return (
 		<SCard>
@@ -135,11 +142,15 @@ const TalentCard = (props: CardProps) => {
 				<ViewButton width="100%" size="md" startIcon={<ProfileIcon />} variant="light" onClick={viewProfile}>
 					View Profile
 				</ViewButton>
-				<Link to={`/messages/${props._id}`}>
-					<SIconButton width="35px" height="35px">
+				<SIconButton width="35px" height="35px" onClick={onChatClick}>
+					{chatLoading ? (
+						<FlexBox>
+							<LoadingIcon color={colors.BLUE_BASE} width="25px" height="25px" />
+						</FlexBox>
+					) : (
 						<MessageIcon color={colors.BLUE_BASE} />
-					</SIconButton>
-				</Link>
+					)}
+				</SIconButton>
 			</FlexBox>
 		</SCard>
 	);

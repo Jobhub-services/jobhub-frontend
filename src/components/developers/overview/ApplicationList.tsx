@@ -32,7 +32,7 @@ const SIcon = styled.span`
 const ApplicationList = () => {
 	const { applicationInfo, isLoading } = useAppSelector((state) => state.talentApplications);
 	useEffect(() => {
-		if (!applicationInfo?.content || applicationInfo?.content?.length === 0) applicationActions.getApplications(true);
+		if (!isLoading && (!applicationInfo?.content || applicationInfo?.content?.length === 0)) applicationActions.getApplications(true);
 	}, [applicationInfo]);
 	return (
 		<SContainer className="mt-20">

@@ -1,18 +1,26 @@
 import { colors } from '@/assets/theme';
 import styled from 'styled-components';
 import MessageAvatar from '@/components/companies/messages/MessageAvatar';
-import { Button, FlexBox } from 'staak-ui';
+import { Button, FlexBox, TrashIcon } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
+import { MESSAGE_HEADER_HEIGHT } from '@/constants/company/conversation.constants';
+import { EyeIcon, LoadingIcon } from '@/assets/icons';
+import { Link } from 'react-router-dom';
+import { messageActions } from '@/modules/actions/company/message.actions';
 
 const MainContainer = styled(FlexBox)`
 	border-bottom: 1px solid ${colors.BLACK_12};
 	padding: 15px 25px;
-	//box-shadow: 0 0 4px 0 #d2d9e5;
-	//box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+	height: ${MESSAGE_HEADER_HEIGHT}px;
 `;
 
 const MessageHeader = () => {
-	const { messages } = useAppSelector((state) => state.companyMessage);
+	const { messages, isConversationDeleting } = useAppSelector((state) => state.companyMessage);
+	const onDelete = () => {
+		if (messages?._id) {
+			messageActions.deleteConversation(messages._id);
+		}
+	};
 	return (
 		<MainContainer justify="space-between">
 			<MessageAvatar
@@ -22,7 +30,22 @@ const MessageHeader = () => {
 				role={messages?.userInfo?.role}
 				experience={messages?.userInfo?.experience}
 			/>
-			<Button variant="light">Profile</Button>
+			<FlexBox gap={10}>
+				{isConversationDeleting ? (
+					<Button color="red" size="md" variant="text">
+						<LoadingIcon color="red" />
+					</Button>
+				) : (
+					<Button startIcon={<TrashIcon />} color="red" size="md" variant="text" onClick={onDelete}>
+						Delete
+					</Button>
+				)}
+				<Link to={`/talents/detail/${messages?.userInfo?._id}`}>
+					<Button startIcon={<EyeIcon />} color="green" size="md" variant="light">
+						Profile
+					</Button>
+				</Link>
+			</FlexBox>
 		</MainContainer>
 	);
 };

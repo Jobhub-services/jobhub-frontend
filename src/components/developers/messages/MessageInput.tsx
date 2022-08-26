@@ -1,17 +1,17 @@
 import { SendMessageIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
-import { PMessageInput } from '@/models/component/companies/messages/messages.interface';
+import { PMessageInput } from '@/models/component/developer/messages.interface';
 import { useRef } from 'react';
 import { Button, FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 
 const MAX_HEIGHT = 250;
 
-const MainContainer = styled.div<any>`
+const MainContainer = styled.div`
 	border-top: 1px solid ${colors.BLACK_12};
 	box-shadow: 0 -1px 4px 0 #d2d9e5;
 	padding: 15px 15px;
-	height: ${(props) => props.height}px;
+	height: 130px;
 `;
 const STextArea = styled.textarea`
 	background-color: inherit;
@@ -35,7 +35,7 @@ const MessageInput = (props: PMessageInput) => {
 		}
 	};
 	return (
-		<MainContainer height={props.height}>
+		<MainContainer>
 			<FlexBox gap={10} align="start">
 				<STextArea
 					style={{ height: '90px' }}

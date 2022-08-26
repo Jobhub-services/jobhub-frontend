@@ -43,6 +43,7 @@ export type TalentContact = {
 };
 export type TalentShortInfo = {
 	_id: string;
+	userId?: string;
 	firstName?: string;
 	lastName?: string;
 	user?: {

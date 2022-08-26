@@ -1,14 +1,13 @@
-import { colors } from '@/assets/theme';
 import { FlexBox } from 'staak-ui';
-import styled from 'styled-components';
-import ContactList from '@/components/companies/messages/ContactList';
-import MessageHeader from '@/components/companies/messages/MessageHeader';
-import MessageBody from '@/components/companies/messages/MessageBody';
-import { useParams } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import { messageActions } from '@/modules/actions/company/message.actions';
-
-const MESSAGE_HEADER_HEIGHT = 100;
+import { messageActions, messageDispatcher } from '@/modules/actions/company/message.actions';
+import { useAppSelector } from '@/utils/appHooks';
+import { LoadingScreen } from '@/components/common/LoadingScreen';
+import styled from 'styled-components';
+import { colors } from '@/assets/theme';
+import ContactList from '@/components/companies/messages/ContactList';
+import { pushNotification } from '@/utils/helpers';
 
 const LeftSide = styled.div`
 	width: 25%;
@@ -23,28 +22,54 @@ const RightSide = styled.div`
 	height: 100%;
 	background-color: white;
 `;
-
-const SBody = styled.div`
-	background-image: linear-gradient(to bottom right, white, #ededed);
-	height: calc(100% - ${MESSAGE_HEADER_HEIGHT}px);
-`;
-
 const MessagesView = () => {
-	const { str } = useParams();
+	const navigate = useNavigate();
+	const { contacts, isLoading, conversationFetched, messageErrors } = useAppSelector((state) => state.companyMessage);
+	const { chatId } = useParams();
+	const { pathname } = useLocation();
 	useEffect(() => {
-		if (str) messageActions.getMessages(str);
-	}, [str]);
+		if (contacts?.size === 0) {
+			messageActions.getConversations();
+		}
+		if (chatId) {
+			const chatExists = contacts?.content?.some((elem) => elem._id === chatId);
+			if (!chatExists) messageActions.getConversations();
+		}
+	}, []);
+	useEffect(() => {
+		if (conversationFetched && contacts?.size !== 0) {
+			if (pathname === '/messages/' || pathname === '/messages') {
+				const id = chatId ? chatId : contacts?.content![0]._id;
+				navigate(`/messages/${id}`, { replace: false });
+			}
+		}
+	}, [conversationFetched]);
+
+	useEffect(() => {
+		if (messageErrors?.fetchStatus) {
+			messageDispatcher.setErrors({ fetchStatus: false, content: null });
+			pushNotification.error(messageErrors.content);
+		}
+	}, [messageErrors]);
+
 	return (
 		<FlexBox align="start" height="100%">
-			<LeftSide>
-				<ContactList />
-			</LeftSide>
-			<RightSide>
-				<MessageHeader />
-				<SBody>
-					<MessageBody />
-				</SBody>
-			</RightSide>
+			{isLoading ? (
+				<div style={{ position: 'relative', height: '100%' }}>
+					<LoadingScreen />
+				</div>
+			) : chatId ? (
+				<>
+					<LeftSide>
+						<ContactList />
+					</LeftSide>
+					<RightSide>
+						<Outlet />
+					</RightSide>
+				</>
+			) : (
+				<div></div>
+			)}
 		</FlexBox>
 	);
 };
