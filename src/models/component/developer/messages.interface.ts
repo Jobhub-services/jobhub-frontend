@@ -2,6 +2,7 @@ import { StandardProps } from '@/models/component';
 
 export interface PMessageInput extends StandardProps {
 	value?: string;
+	height?: number;
 	onHeightChange?: (height: number, value: string) => void;
 	onSend?: (e: any) => void;
 }

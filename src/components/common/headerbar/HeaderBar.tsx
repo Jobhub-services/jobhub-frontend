@@ -10,13 +10,16 @@ import { metadataDispatcher } from '@/modules/actions/metadata.actions';
 
 const SyledContainer = styled.div`
 	position: sticky;
+	display: flex;
+	align-items: center;
 	top: 0;
 	border-bottom: 1px solid ${colors.BLACK_12};
 	width: 100%;
 	height: ${HEADER_HIEGHT}px;
-	padding: 10px 0px;
+	//padding: 10px 0px;
 	z-index: 10;
-	background: ${colors.WHITE};
+	background-color: #292961;
+	//background-color: rgb(23 20 76 / 92%);
 `;
 
 const SContainer = styled(FlexBox)`
@@ -45,7 +48,7 @@ const HeaderBar = () => {
 
 	return (
 		<SyledContainer>
-			<FlexBox gap={10}>
+			<FlexBox gap={10} width="100%">
 				<SIcon onClick={handleClick}>
 					<ListIcon color={colors.PURPLE_BASE} width="30px" height="30px" />
 				</SIcon>

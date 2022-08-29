@@ -10,21 +10,21 @@ const SLink = styled(Link)`
 
 const ContactList = () => {
 	const { contacts } = useAppSelector((state) => state.talentMessage);
-	const { id } = useParams();
+	const { userInfo } = useAppSelector((state) => state.user);
+	const { chatId } = useParams();
 	return (
 		<FlexBox flexDirection="column" gap={15}>
 			{contacts?.content?.map((elem, idx) => {
 				return (
-					<SLink to={`/messages/${elem._id}`}>
+					<SLink to={`/messages/${elem._id}`} key={idx}>
 						<CompanyContact
 							_id={elem._id}
-							key={idx}
-							active={id === elem._id}
-							message={elem.message}
-							lastDate={elem.lastDate}
-							img={elem.avatar}
-							companyName={elem.companyName}
-							sender={elem.sended}
+							active={chatId === elem._id}
+							message={elem.message.content}
+							lastDate={elem.message.createdAt}
+							img={elem.userInfo?.avatar}
+							companyName={elem.userInfo?.companyName}
+							sender={elem.message?.sender === userInfo._id}
 						/>
 					</SLink>
 				);

@@ -5,7 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState: IMessageState = {
 	isLoading: false,
 	isMessageSending: false,
-	isConversationLoading: false,
+	isMessagesLoading: false,
 	conversationFetched: false,
 	contacts: {
 		content: [],

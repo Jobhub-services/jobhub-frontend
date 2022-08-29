@@ -7,11 +7,11 @@ import styled from 'styled-components';
 
 const MAX_HEIGHT = 250;
 
-const MainContainer = styled.div`
+const MainContainer = styled.div<any>`
 	border-top: 1px solid ${colors.BLACK_12};
 	box-shadow: 0 -1px 4px 0 #d2d9e5;
 	padding: 15px 15px;
-	height: 130px;
+	height: ${(props) => props.height}px;
 `;
 const STextArea = styled.textarea`
 	background-color: inherit;
@@ -35,7 +35,7 @@ const MessageInput = (props: PMessageInput) => {
 		}
 	};
 	return (
-		<MainContainer>
+		<MainContainer height={props.height}>
 			<FlexBox gap={10} align="start">
 				<STextArea
 					style={{ height: '90px' }}

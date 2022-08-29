@@ -12,6 +12,7 @@ import SecuritySettings from '@/views/developers/settings/SecuritySettings';
 import TalentOverview from '@/views/developers/TalentOverview';
 
 import MessagesView from '@/views/developers/messages/MessagesView';
+import ConversationView from '@/views/developers/messages/ConversationView';
 
 export {
 	MessagesView,
@@ -26,4 +27,5 @@ export {
 	AccountSettings,
 	TalentOverview,
 	SecuritySettings,
+	ConversationView,
 };

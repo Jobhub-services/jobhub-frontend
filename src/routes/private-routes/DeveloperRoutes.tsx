@@ -14,6 +14,7 @@ import {
 	SecuritySettings,
 	TalentOverview,
 	MessagesView,
+	ConversationView,
 } from '@/views/developers';
 
 const DeveloperRoutes: FC = () => {
@@ -30,7 +31,9 @@ const DeveloperRoutes: FC = () => {
 			<Route path="companies" element={<ViewCompanies />}>
 				<Route path="detail/:id" element={<CompanyDetail />} />
 			</Route>
-			<Route path="messages/:id" element={<MessagesView />} />
+			<Route path="messages" element={<MessagesView />}>
+				<Route path=":chatId" element={<ConversationView />} />
+			</Route>
 			<Route path="settings" element={<TalentSettings />}>
 				<Route path="account" element={<AccountSettings />} />
 				<Route path="security" element={<SecuritySettings />} />

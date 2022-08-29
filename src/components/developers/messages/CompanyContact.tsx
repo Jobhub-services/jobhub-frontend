@@ -15,7 +15,7 @@ const SOptions = styled.div`
 	align-items: center;
 	justify-content: center;
 	padding: 8px;
-	top: 27px;
+	top: 20px;
 	right: 20px;
 	border: 1px solid ${colors.BLACK_11};
 	background-color: white;
@@ -57,6 +57,12 @@ const SH2 = styled.h2`
 	margin: 3px 0;
 	color: ${colors.BLACK_4};
 	font-weight: 500;
+	display: -webkit-box;
+	font-family: inherit;
+	-webkit-line-clamp: 1;
+	-webkit-box-orient: vertical;
+	text-overflow: ellipsis;
+	overflow: hidden;
 `;
 
 const SP = styled.p`
@@ -89,7 +95,7 @@ const CompanyContact = (props: PCompanyContact) => {
 					<SInfo>
 						<SH2>{props.companyName}</SH2>
 						<SP>
-							{props.sender ? 'Vous:' : ''} {props.message}
+							{props.sender ? 'You:' : ''} {props.message}
 						</SP>
 					</SInfo>
 				</FlexBox>

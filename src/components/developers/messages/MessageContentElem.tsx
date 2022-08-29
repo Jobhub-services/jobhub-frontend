@@ -38,7 +38,13 @@ const MessageContentELem = (props: PMessageContentElem) => {
 	return (
 		<FlexBox justify={props.sender ? 'end' : 'start'} style={{ padding: '10px 0' }}>
 			<SFlexBox gap={5} align="end" flexDirection={props.sender ? 'row-reverse' : 'row'}>
-				{props.sender && props.loading ? <LoadingIcon color={colors.PURPLE_2} /> : <Avatar img={props.img} size={30} />}
+				{props.sender && props.loading ? (
+					<div>
+						<LoadingIcon color={colors.PURPLE_2} />
+					</div>
+				) : (
+					<Avatar img={props.img} size={30} />
+				)}
 				<FlexBox style={{ width: `calc(100% - 32px)` }} flexDirection="column" align={props.sender ? 'end' : 'start'}>
 					<SMessage sender={props.sender}>{props.messsage}</SMessage>
 					{props.createdAt && <SSpan>{dateStr}</SSpan>}

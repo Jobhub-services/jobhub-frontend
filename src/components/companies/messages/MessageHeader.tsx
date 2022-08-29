@@ -7,6 +7,7 @@ import { MESSAGE_HEADER_HEIGHT } from '@/constants/company/conversation.constant
 import { EyeIcon, LoadingIcon } from '@/assets/icons';
 import { Link } from 'react-router-dom';
 import { messageActions } from '@/modules/actions/company/message.actions';
+import LoadingData from '@/components/common/LoadingData';
 
 const MainContainer = styled(FlexBox)`
 	border-bottom: 1px solid ${colors.BLACK_12};
@@ -15,7 +16,7 @@ const MainContainer = styled(FlexBox)`
 `;
 
 const MessageHeader = () => {
-	const { messages, isConversationDeleting } = useAppSelector((state) => state.companyMessage);
+	const { messages, isConversationDeleting, isMessagesLoading } = useAppSelector((state) => state.companyMessage);
 	const onDelete = () => {
 		if (messages?._id) {
 			messageActions.deleteConversation(messages._id);
@@ -23,13 +24,17 @@ const MessageHeader = () => {
 	};
 	return (
 		<MainContainer justify="space-between">
-			<MessageAvatar
-				img={messages?.userInfo?.avatar}
-				firstname={messages?.userInfo?.firstName}
-				lastname={messages?.userInfo?.lastName}
-				role={messages?.userInfo?.role}
-				experience={messages?.userInfo?.experience}
-			/>
+			{isMessagesLoading ? (
+				<LoadingData />
+			) : (
+				<MessageAvatar
+					img={messages?.userInfo?.avatar}
+					firstname={messages?.userInfo?.firstName}
+					lastname={messages?.userInfo?.lastName}
+					role={messages?.userInfo?.role}
+					experience={messages?.userInfo?.experience}
+				/>
+			)}
 			<FlexBox gap={10}>
 				{isConversationDeleting ? (
 					<Button color="red" size="md" variant="text">

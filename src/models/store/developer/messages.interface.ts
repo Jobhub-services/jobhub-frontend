@@ -1,30 +1,49 @@
-import { TMessage } from '@/types/developer/messages.type';
+import { TBooleanAttr } from '@/types/developer/messages.type';
 
 export type TMessageData = {
 	createdAt?: string;
 	content?: string;
-	type?: TMessage;
+	sender?: string;
 };
+export type TUserInfo = {
+	_id: string;
+	avatar?: string;
+	companyName?: string;
+	industry?: string;
+};
+
 export interface IMessageState {
-	isLoading?: boolean;
-	isMessageSending?: boolean;
+	[TBooleanAttr.IS_LOADING]?: boolean;
+	[TBooleanAttr.IS_MESSAGE_SENDING]?: boolean;
+	[TBooleanAttr.IS_MESSAGES_LOADING]?: boolean;
+	[TBooleanAttr.IS_CONVERSATION_FETCHED]?: boolean;
+
+	[TBooleanAttr.IS_CONVERSATION_DELETING]?: boolean;
+	[TBooleanAttr.IS_CONVERSATION_DELETED]?: boolean;
+	[TBooleanAttr.IS_MESSAGES_FETCHED]?: boolean;
 	messages?: {
-		content: TMessageData[];
-		userInfo?: {
-			_id: string;
-			avatar?: string;
-			companyName?: string;
-			industry?: string;
-		};
+		_id: string;
+		messages: TMessageData[];
+		userInfo?: TUserInfo;
 	};
 	contacts?: {
 		content?: {
 			_id: string;
-			avatar?: string;
-			companyName?: string;
-			message?: string;
-			lastDate?: string;
-			sended?: boolean;
+			message: {
+				content?: string;
+				sender?: string;
+				_id?: string;
+				createdAt?: string;
+			};
+			userInfo?: TUserInfo;
 		}[];
+		count?: number;
+		pages?: number;
+		size?: number;
+		page?: number;
+	};
+	messageErrors?: {
+		fetchStatus: boolean;
+		content: any;
 	};
 }

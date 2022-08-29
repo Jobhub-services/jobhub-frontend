@@ -63,7 +63,7 @@ export const messageActions = {
 		}
 	},
 	async getMessages(chatId?: string, userInfo?: any) {
-		messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_CONVERSATION_LOADING);
+		messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_MESSAGES_LOADING);
 		try {
 			const response = await httpClient.get(`${WEBSOCKET_SERVICE}/chat/message/${chatId}`);
 			const responseData = response.data;
@@ -79,7 +79,7 @@ export const messageActions = {
 				messageDispatcher.setErrors(errors);
 			}
 		} finally {
-			messageDispatcher.setBooleanAttr(false, TBooleanAttr.IS_CONVERSATION_LOADING);
+			messageDispatcher.setBooleanAttr(false, TBooleanAttr.IS_MESSAGES_LOADING);
 		}
 	},
 	async addMessage(data: { chatId?: string; sender?: string; content?: string }) {

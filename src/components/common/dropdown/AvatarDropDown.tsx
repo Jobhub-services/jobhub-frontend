@@ -23,6 +23,9 @@ const SIcon = styled.span`
 	border-radius: 50%;
 	border: 1px solid ${colors.BLACK_11};
 `;
+const SSpan = styled.span`
+	color: white;
+`;
 const AvatarDropDown = (props: AvatarDropDownProps) => {
 	const { userInfo } = useAppSelector((state) => state.user);
 	const handleSelect = (event?: any, value?: string) => {
@@ -40,10 +43,10 @@ const AvatarDropDown = (props: AvatarDropDownProps) => {
 						<StyledIcon width={40} height={40} src={props.avatar} />
 					) : (
 						<SIcon>
-							<UserIcon width="40px" height="30px" />
+							<UserIcon width="40px" height="30px" color="white" />
 						</SIcon>
 					)}
-					<span>{userInfo.username}</span>
+					<SSpan>{userInfo.username}</SSpan>
 				</FlexBox>
 			</DropDown.Title>
 			<DropDown.Item value="profile">

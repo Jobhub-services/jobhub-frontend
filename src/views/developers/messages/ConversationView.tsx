@@ -1,32 +1,30 @@
-import MessageHeader from '@/components/companies/messages/MessageHeader';
-import MessageBody from '@/components/companies/messages/MessageBody';
-import styled from 'styled-components';
-import { MESSAGE_HEADER_HEIGHT } from '@/constants/company/conversation.constants';
-import { useEffect } from 'react';
+import MessageBody from '@/components/developers/messages/MessageBody';
+import MessageHeader from '@/components/developers/messages/MessageHeader';
+import { MESSAGE_HEADER_HEIGHT } from '@/constants/developer/conversation.constants';
+import { messageActions, messageDispatcher } from '@/modules/actions/developer/messages.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { useParams } from 'react-router-dom';
-import { messageActions, messageDispatcher } from '@/modules/actions/company/message.actions';
 import { pushNotification } from '@/utils/helpers';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 
 const SBody = styled.div`
 	background-image: linear-gradient(to bottom right, white, #ededed);
 	height: calc(100% - ${MESSAGE_HEADER_HEIGHT}px);
 `;
 const ConversationView = () => {
-	const { contacts, messages, messageErrors } = useAppSelector((state) => state.companyMessage);
+	const { contacts, messages, messageErrors } = useAppSelector((state) => state.talentMessage);
 	const { chatId } = useParams();
+
 	useEffect(() => {
 		if (chatId) {
 			if (messages?._id !== chatId) {
-				if (messageErrors?.fetchStatus) {
-					messageDispatcher.setErrors({ fetchStatus: false, content: null });
-				} else {
-					const userInfo = contacts?.content?.find((elem) => elem._id === chatId)?.userInfo;
-					messageActions.getMessages(chatId, userInfo);
-				}
+				const userInfo = contacts?.content?.find((elem) => elem._id === chatId)?.userInfo;
+				messageActions.getMessages(chatId, userInfo);
 			}
 		}
 	}, [chatId]);
+
 	useEffect(() => {
 		if (!messages?.userInfo) {
 			const userInfo = contacts?.content?.find((elem) => elem._id === chatId)?.userInfo;
@@ -36,10 +34,10 @@ const ConversationView = () => {
 
 	useEffect(() => {
 		if (messageErrors?.fetchStatus) {
+			messageDispatcher.setErrors({ fetchStatus: false, content: null });
 			pushNotification.error(messageErrors.content);
 		}
 	}, [messageErrors]);
-
 	return (
 		<>
 			<MessageHeader />

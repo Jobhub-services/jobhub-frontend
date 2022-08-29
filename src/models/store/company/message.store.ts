@@ -18,11 +18,11 @@ export type TUserInfo = {
 export interface IMessageState {
 	[TBooleanAttr.IS_LOADING]?: boolean;
 	[TBooleanAttr.IS_MESSAGE_SENDING]?: boolean;
-	[TBooleanAttr.IS_CONVERSATION_LOADING]?: boolean;
+	[TBooleanAttr.IS_MESSAGES_LOADING]?: boolean;
 	[TBooleanAttr.IS_CONVERSATION_FETCHED]?: boolean;
 	[TBooleanAttr.IS_CONVERSATION_DELETING]?: boolean;
 	[TBooleanAttr.IS_CONVERSATION_DELETED]?: boolean;
-	[TBooleanAttr.IS_CONVERSATION_DETAIL_FETCHED]?: boolean;
+	[TBooleanAttr.IS_MESSAGES_FETCHED]?: boolean;
 	newChat?: {
 		created: boolean;
 		_id: string;

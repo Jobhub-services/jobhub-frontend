@@ -1,7 +1,7 @@
 import { EyeIcon, TrashIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import MessageAvatar from '@/components/developers/messages/MessageAvatar';
-import { MESSAGE_HEADER_HEIGHT } from '@/constants/developer/messages.constants';
+import { MESSAGE_HEADER_HEIGHT } from '@/constants/developer/conversation.constants';
 import { useAppSelector } from '@/utils/appHooks';
 import { Button, FlexBox } from 'staak-ui';
 import styled from 'styled-components';
@@ -23,7 +23,7 @@ const MessageHeader = () => {
 					Delete
 				</Button>
 				<Button startIcon={<EyeIcon />} color="green" size="md" variant="text">
-					View Profile
+					Profile
 				</Button>
 			</FlexBox>
 		</MainContainer>
