@@ -23,6 +23,7 @@ export interface IMessageState {
 	[TBooleanAttr.IS_CONVERSATION_DELETING]?: boolean;
 	[TBooleanAttr.IS_CONVERSATION_DELETED]?: boolean;
 	[TBooleanAttr.IS_MESSAGES_FETCHED]?: boolean;
+	[TBooleanAttr.IS_DELETE_POP_MODAL_OPENED]?: boolean;
 	newChat?: {
 		created: boolean;
 		_id: string;
@@ -34,8 +35,8 @@ export interface IMessageState {
 	};
 	contacts?: {
 		content: {
-			_id: string;
-			message: {
+			_id?: string;
+			message?: {
 				content?: string;
 				sender?: string;
 				_id?: string;

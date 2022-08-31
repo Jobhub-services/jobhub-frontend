@@ -5,6 +5,7 @@ import Avatar from '@/components/common/Avatar';
 import moment from 'moment';
 import { DropDown, FlexBox } from 'staak-ui';
 import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const IMG_SIZE = 55;
 
@@ -14,7 +15,7 @@ const SOptions = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 8px;
+	//padding: 8px;
 	top: 20px;
 	right: 20px;
 	border: 1px solid ${colors.BLACK_11};
@@ -81,37 +82,46 @@ const SSpan = styled.span`
 	white-space: nowrap;
 	color: ${colors.BLACK_5};
 `;
+const SLink = styled(Link)`
+	width: 100%;
+`;
+const TitleIcon = styled(FlexBox)`
+	padding: 8px;
+`;
 const CompanyContact = (props: PCompanyContact) => {
 	const posted_at = moment(new Date(props.lastDate ?? '')).fromNow();
-	const handleClick = () => {
-		if (props.onClick) props.onClick(props._id);
+	const handleSelect = (e: any, value: string) => {
+		if (props.onClick) props.onClick(value, props.userId ?? '');
 	};
-	const handleSelect = () => {};
 	return (
 		<MainContainer>
-			<SubContainer align="start" justify="space-between" gap={10} active={props.active} width="100%" onClick={handleClick}>
-				<FlexBox justify="start" gap={10}>
-					<Avatar img={props.img} size={IMG_SIZE} />
-					<SInfo>
-						<SH2>{props.companyName}</SH2>
-						<SP>
-							{props.sender ? 'You:' : ''} {props.message}
-						</SP>
-					</SInfo>
-				</FlexBox>
-				<SSpan>{posted_at}</SSpan>
-			</SubContainer>
+			<SLink to={`/messages/${props._id}`}>
+				<SubContainer align="start" justify="space-between" gap={10} active={props.active} width="100%">
+					<FlexBox justify="start" gap={10}>
+						<Avatar img={props.img} size={IMG_SIZE} />
+						<SInfo>
+							<SH2>{props.companyName}</SH2>
+							<SP>
+								{props.sender ? 'You:' : ''} {props.message}
+							</SP>
+						</SInfo>
+					</FlexBox>
+					<SSpan>{posted_at}</SSpan>
+				</SubContainer>
+			</SLink>
 			<SOptions>
-				<DropDown trigger="click" listPosition="right" onSelet={handleSelect}>
+				<DropDown trigger="click" listPosition="right" onSelect={handleSelect}>
 					<DropDown.Title>
-						<ThreeDotIcon width="18px" height="18px" color={colors.BLACK_5} />
+						<TitleIcon>
+							<ThreeDotIcon width="18px" height="18px" color={colors.BLACK_5} />
+						</TitleIcon>
 					</DropDown.Title>
-					<DropDown.Item value="profile">
+					<DropDown.Item value="view">
 						<FlexBox justify="start" style={{ padding: '0px' }} gap={15}>
 							Go To Profile
 						</FlexBox>
 					</DropDown.Item>
-					<DropDown.Item value="settings">
+					<DropDown.Item value="delete">
 						<FlexBox justify="start" style={{ padding: '0px' }} gap={15}>
 							Delete Discussion
 						</FlexBox>

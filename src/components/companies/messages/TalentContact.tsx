@@ -5,6 +5,7 @@ import moment from 'moment';
 import { PTalentContact } from '@/models/component/companies/messages/messages.interface';
 import Avatar from '@/components/common/Avatar';
 import { ThreeDotIcon } from '@/assets/icons';
+import { Link } from 'react-router-dom';
 
 const IMG_SIZE = 60;
 const SOptions = styled.div`
@@ -23,10 +24,19 @@ const SOptions = styled.div`
 	transition: all 0.15s ease-in-out;
 	box-shadow: 0 0 15px -7px ${colors.PURPLE_2};
 `;
-const MainContainer = styled.div`
+const MainContainer = styled.div<any>`
 	position: relative;
+	width: 100%;
+	border-radius: 8px;
 	&:hover ${SOptions} {
 		visibility: visible;
+	}
+	&:hover {
+		${(props) =>
+			!props.active &&
+			css`
+				background-color: ${colors.BLACK_13};
+			`}
 	}
 `;
 const SubContainer = styled(FlexBox)`
@@ -37,15 +47,8 @@ const SubContainer = styled(FlexBox)`
 			background-color: ${colors.PURPLE_1};
 		`}
 	padding: 10px 10px;
-	border-radius: 8px;
+	border-radius: inherit;
 	transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-	&:hover {
-		${(props) =>
-			!props.active &&
-			css`
-				background-color: ${colors.BLACK_13};
-			`}
-	}
 `;
 const SInfo = styled.div`
 	width: calc(100% - ${IMG_SIZE}px);
@@ -80,38 +83,42 @@ const SSpan = styled.span`
 	white-space: nowrap;
 	color: ${colors.BLACK_5};
 `;
-
+const SLink = styled(Link)`
+	width: 100%;
+	border-radius: inherit;
+`;
 const TalentContact = (props: PTalentContact) => {
 	const posted_at = moment(new Date(props.lastDate ?? '')).fromNow();
-	const handleClick = () => {
-		if (props.onClick) props.onClick(props._id);
+	const handleSelect = (e: any, value: string) => {
+		if (props.onClick) props.onClick(value, props.userId ?? '');
 	};
-	const handleSelect = () => {};
 	return (
 		<MainContainer>
-			<SubContainer align="start" justify="space-between" gap={10} active={props.active} width="100%" onClick={handleClick}>
-				<FlexBox justify="start" gap={10}>
-					<Avatar img={props.img} size={IMG_SIZE} />
-					<SInfo>
-						<SH2>
-							{props.firstname} {props.lastname}
-						</SH2>
-						<SP>{!props.message || props.message === '' ? 'Empty conversation' : `${props.sender ? 'You:' : ''} ${props.message}`}</SP>
-					</SInfo>
-				</FlexBox>
-				{props.lastDate && <SSpan>{posted_at}</SSpan>}
-			</SubContainer>
+			<SLink to={`/messages/${props._id}`}>
+				<SubContainer align="start" justify="space-between" gap={10} active={props.active} width="100%">
+					<FlexBox justify="start" gap={10}>
+						<Avatar img={props.img} size={IMG_SIZE} />
+						<SInfo>
+							<SH2>
+								{props.firstname} {props.lastname}
+							</SH2>
+							<SP>{!props.message || props.message === '' ? 'Empty conversation' : `${props.sender ? 'You:' : ''} ${props.message}`}</SP>
+						</SInfo>
+					</FlexBox>
+					{props.lastDate && <SSpan>{posted_at}</SSpan>}
+				</SubContainer>
+			</SLink>
 			<SOptions>
-				<DropDown trigger="click" listPosition="right" onSelet={handleSelect}>
+				<DropDown trigger="click" listPosition="right" onSelect={handleSelect}>
 					<DropDown.Title>
 						<ThreeDotIcon width="18px" height="18px" color={colors.BLACK_5} />
 					</DropDown.Title>
-					<DropDown.Item value="profile">
+					<DropDown.Item value="view">
 						<FlexBox justify="start" style={{ padding: '0px' }} gap={15}>
 							Go To Profile
 						</FlexBox>
 					</DropDown.Item>
-					<DropDown.Item value="settings">
+					<DropDown.Item value="delete">
 						<FlexBox justify="start" style={{ padding: '0px' }} gap={15}>
 							Delete Discussion
 						</FlexBox>

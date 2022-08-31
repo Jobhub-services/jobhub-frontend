@@ -28,12 +28,17 @@ const ConversationView = () => {
 		}
 	}, [chatId]);
 	useEffect(() => {
-		if (!messages?.userInfo) {
+		if (!messages?.userInfo || messages?.userInfo?._id === '') {
 			const userInfo = contacts?.content?.find((elem) => elem._id === chatId)?.userInfo;
 			messageDispatcher.setMessages(messages, userInfo);
 		}
 	}, [contacts]);
-
+	useEffect(() => {
+		if (!messages?.userInfo || messages?.userInfo?._id === '') {
+			const userInfo = contacts?.content?.find((elem) => elem._id === chatId)?.userInfo;
+			if (userInfo) messageDispatcher.setMessages(messages, userInfo);
+		}
+	}, [messages]);
 	useEffect(() => {
 		if (messageErrors?.fetchStatus) {
 			pushNotification.error(messageErrors.content);

@@ -3,8 +3,9 @@ import { TBooleanAttr } from '@/types/developer/messages.type';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IMessageState = {
-	isLoading: false,
-	isMessageSending: false,
+	[TBooleanAttr.IS_LOADING]: false,
+	[TBooleanAttr.IS_MESSAGE_SENDING]: false,
+	[TBooleanAttr.IS_DELETE_POP_MODAL_OPENED]: false,
 	contacts: {
 		content: [],
 		size: 0,
@@ -28,7 +29,30 @@ const reducerSlices = createSlice({
 			state[attr as TBooleanAttr] = value;
 		},
 		setConversations: (state, action) => {
-			state.contacts = action.payload;
+			const { data, reset } = action.payload;
+			let tmp: any = {};
+			if (reset) {
+				tmp = {
+					content: [],
+					size: 0,
+					count: 0,
+					pages: 0,
+					page: 0,
+				};
+			} else {
+				tmp = {
+					content:
+						(state.contacts?.page ?? 0) <= (state.contacts?.pages ?? 0)
+							? [...(state.contacts?.content ?? []), ...(data?.content ?? [])]
+							: state.contacts?.content ?? [],
+					size: data?.size ?? 0,
+					count: data?.count ?? 0,
+					pages: data?.pages ?? 0,
+					page: state.contacts?.page! < data?.pages ? (state.contacts?.page ?? 0) + 1 : state.contacts?.page,
+				};
+			}
+
+			state.contacts = tmp;
 		},
 		setMessages: (state, action) => {
 			const { data, userInfo } = action.payload;

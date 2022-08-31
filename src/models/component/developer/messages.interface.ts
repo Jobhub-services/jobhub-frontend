@@ -15,7 +15,8 @@ export interface PCompanyContact extends StandardProps {
 	sender?: boolean;
 	message?: string;
 	lastDate?: string;
-	onClick?: (id: string) => void;
+	userId?: string;
+	onClick?: (id: string, userId: string) => void;
 }
 
 export interface PMessageAvatar extends StandardProps {

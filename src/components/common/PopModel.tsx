@@ -30,7 +30,7 @@ const Container = styled.div<any>`
 	animation: ${opacity} 0.15s ease-out;
 	overflow: hidden;
 	z-index: 150;
-	transition: opacity 0.15s linear;
+	transition: opacity 0.2s linear;
 `;
 const SPopUp = styled.div<any>`
 	position: relative;
@@ -46,7 +46,7 @@ const SPopUp = styled.div<any>`
 		css`
 			margin: 20px 0;
 		`}
-	transition: all 0.3s ease-in-out;
+	transition: all 0.2s ease-in-out;
 `;
 const PopModel = (props: PopModelProps) => {
 	const [closed, setClosed] = useState(true);

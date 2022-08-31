@@ -1,12 +1,13 @@
 import { FlexBox } from 'staak-ui';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { messageActions } from '@/modules/actions/company/message.actions';
+import { useEffect, useState } from 'react';
+import { messageActions, messageDispatcher } from '@/modules/actions/company/message.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import styled from 'styled-components';
 import { colors } from '@/assets/theme';
 import ContactList from '@/components/companies/messages/ContactList';
+import { checkScrollToButtom } from '@/utils/helpers';
 
 const LeftSide = styled.div`
 	width: 25%;
@@ -25,12 +26,20 @@ const RightSide = styled.div`
 const MessagesView = () => {
 	const navigate = useNavigate();
 	const { contacts, isLoading, conversationFetched } = useAppSelector((state) => state.companyMessage);
+	const [isFetching, setIsFetching] = useState(false);
 	const { chatId } = useParams();
 	const { pathname } = useLocation();
 	useEffect(() => {
 		if (contacts?.size === 0) {
-			messageActions.getConversations();
+			const params = {
+				page: 0,
+				limit: 10,
+			};
+			messageActions.getConversations(params);
 		}
+		return function cleanup() {
+			messageDispatcher.setConversations({}, true);
+		};
 	}, []);
 	useEffect(() => {
 		if (conversationFetched && contacts?.size !== 0) {
@@ -40,11 +49,29 @@ const MessagesView = () => {
 			}
 		}
 	}, [conversationFetched]);
+	useEffect(() => {
+		setIsFetching(false);
+	}, [contacts]);
+
+	const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+		if (!isFetching) {
+			if (contacts?.page! < contacts?.pages!) {
+				if (checkScrollToButtom(event.target as any, 10)) {
+					setIsFetching(true);
+					const params = {
+						page: contacts?.page ?? 0,
+						limit: 10,
+					};
+					messageActions.getConversations(params);
+				}
+			}
+		}
+	};
 	return (
 		<FlexBox align="start" height="100%">
 			{chatId ? (
 				<>
-					<LeftSide>
+					<LeftSide onScroll={handleScroll}>
 						<ContactList />
 					</LeftSide>
 					<RightSide>

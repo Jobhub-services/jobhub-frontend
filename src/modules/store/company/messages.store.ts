@@ -7,6 +7,7 @@ const initialState: IMessageState = {
 	isMessageSending: false,
 	isMessagesLoading: false,
 	conversationFetched: false,
+	[TBooleanAttr.IS_DELETE_POP_MODAL_OPENED]: false,
 	contacts: {
 		content: [],
 		size: 0,
@@ -33,8 +34,30 @@ const reducerSlices = createSlice({
 			state.newChat = action.payload;
 		},
 		setConversations: (state, action) => {
-			state.contacts = action.payload;
-			//state.messages.userInfo = action.payload.
+			const { data, reset } = action.payload;
+			let tmp: any = {};
+			if (reset) {
+				tmp = {
+					content: [],
+					size: 0,
+					count: 0,
+					pages: 0,
+					page: 0,
+				};
+			} else {
+				tmp = {
+					content:
+						(state.contacts?.page ?? 0) <= (state.contacts?.pages ?? 0)
+							? [...(state.contacts?.content ?? []), ...(data?.content ?? [])]
+							: state.contacts?.content ?? [],
+					size: data?.size ?? 0,
+					count: data?.count ?? 0,
+					pages: data?.pages ?? 0,
+					page: state.contacts?.page! < data?.pages ? (state.contacts?.page ?? 0) + 1 : state.contacts?.page,
+				};
+			}
+
+			state.contacts = tmp;
 		},
 		setMessages: (state, action) => {
 			const { data, userInfo } = action.payload;

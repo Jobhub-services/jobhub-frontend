@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button, FlexBox, Headline } from 'staak-ui';
+import { Button, FlexBox } from 'staak-ui';
 import { StepProgress } from '@/components/companies/_common/wizard';
 import BasicDetails from '@/components/companies/jobs/newjob/basics/BasicInfo';
 import DetailedInfo from '@/components/companies/jobs/newjob/details/DetailedInfo';
@@ -14,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 import { PopModel } from '@/components';
 import { SuccessIcon } from '@/assets/icons';
 import { JobInstance } from '@/constants/company/job.contants';
-import { jobActions } from '@/modules/actions/company/job.actions';
 import JobErrors from '@/components/companies/jobs/newjob/JobErrors';
 import { pushNotification } from '@/utils/helpers';
 

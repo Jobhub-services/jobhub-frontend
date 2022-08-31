@@ -6,8 +6,9 @@ import { useAppSelector } from '@/utils/appHooks';
 import { MESSAGE_HEADER_HEIGHT } from '@/constants/company/conversation.constants';
 import { EyeIcon, LoadingIcon } from '@/assets/icons';
 import { Link } from 'react-router-dom';
-import { messageActions } from '@/modules/actions/company/message.actions';
+import { messageDispatcher } from '@/modules/actions/company/message.actions';
 import LoadingData from '@/components/common/LoadingData';
+import { TBooleanAttr } from '@/types/company/messages.type';
 
 const MainContainer = styled(FlexBox)`
 	border-bottom: 1px solid ${colors.BLACK_12};
@@ -18,9 +19,7 @@ const MainContainer = styled(FlexBox)`
 const MessageHeader = () => {
 	const { messages, isConversationDeleting, isMessagesLoading } = useAppSelector((state) => state.companyMessage);
 	const onDelete = () => {
-		if (messages?._id) {
-			messageActions.deleteConversation(messages._id);
-		}
+		messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_DELETE_POP_MODAL_OPENED);
 	};
 	return (
 		<MainContainer justify="space-between">
@@ -46,7 +45,7 @@ const MessageHeader = () => {
 					</Button>
 				)}
 				<Link to={`/talents/detail/${messages?.userInfo?._id}`}>
-					<Button startIcon={<EyeIcon />} color="green" size="md" variant="light">
+					<Button startIcon={<EyeIcon />} color="blue" size="md" variant="light">
 						Profile
 					</Button>
 				</Link>

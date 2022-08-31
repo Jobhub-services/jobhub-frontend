@@ -11,8 +11,8 @@ export const messageDispatcher = {
 	setBooleanAttr(value: boolean, attr: TBooleanAttr = TBooleanAttr.IS_LOADING) {
 		dispatchToStore(storeActions.setBooleanAttr({ value, attr }));
 	},
-	setConversations(data: any) {
-		dispatchToStore(storeActions.setConversations(data));
+	setConversations(data: any, reset: boolean) {
+		dispatchToStore(storeActions.setConversations({ data, reset }));
 	},
 	setMessages(data: any, userInfo: any) {
 		dispatchToStore(storeActions.setMessages({ data, userInfo }));
@@ -29,13 +29,16 @@ export const messageDispatcher = {
 };
 
 export const messageActions = {
-	async getConversations(user?: string) {
+	async getConversations(params?: Object, reset: boolean = false) {
 		messageDispatcher.setBooleanAttr(true);
 		try {
-			const response = await httpClient.get(`${WEBSOCKET_SERVICE}/talent/chat`);
+			const config = {
+				params: params,
+			};
+			const response = await httpClient.get(`${WEBSOCKET_SERVICE}/talent/chat`, config);
 			const responseData = response.data;
 			if (responseData) {
-				messageDispatcher.setConversations(responseData);
+				messageDispatcher.setConversations(responseData, reset);
 				messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_CONVERSATION_FETCHED);
 			}
 		} catch (e: any) {

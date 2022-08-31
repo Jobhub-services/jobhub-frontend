@@ -7,13 +7,12 @@ import styled, { css } from 'styled-components';
 const { TINY_TEXT_EDITOR_API_KEY } = STAAK_ENV;
 
 const PLUGINS = [
-	'a11ychecker',
 	'advlist',
-	'advcode',
-	'advtable',
+	//'advcode',
+	//'advtable',
 	'autolink',
-	'checklist',
-	'export',
+	//'checklist',
+	//'export',
 	'lists',
 	'link',
 	'image',
@@ -22,9 +21,9 @@ const PLUGINS = [
 	'anchor',
 	'searchreplace',
 	'visualblocks',
-	'powerpaste',
+	//'powerpaste',
 	'fullscreen',
-	'formatpainter',
+	//'formatpainter',
 	'insertdatetime',
 	'media',
 	//'table',
@@ -34,7 +33,7 @@ const PLUGINS = [
 const TOOLBAR =
 	'undo redo | bold italic backcolor | ' +
 	'alignleft aligncenter alignright alignjustify | ' +
-	'bullist numlist checklist outdent indent | removeformat | a11ycheck table help';
+	'bullist numlist checklist outdent indent | removeformat | table help';
 
 const SLabel = styled.label`
 	display: inline-block;

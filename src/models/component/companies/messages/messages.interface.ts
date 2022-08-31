@@ -3,6 +3,7 @@ import { TMessageStatus } from '@/types/company/messages.type';
 
 export interface PTalentContact extends StandardProps {
 	_id: string;
+	userId?: string;
 	active?: boolean;
 	img?: string;
 	firstname?: string;
@@ -10,7 +11,7 @@ export interface PTalentContact extends StandardProps {
 	sender?: boolean;
 	message?: string;
 	lastDate?: string;
-	onClick?: (id: string) => void;
+	onClick?: (id: string, userId: string) => void;
 }
 
 export interface PMessageAvatar extends StandardProps {

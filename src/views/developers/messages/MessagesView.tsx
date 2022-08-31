@@ -1,8 +1,9 @@
 import { colors } from '@/assets/theme';
 import ContactList from '@/components/developers/messages/ContactList';
-import { messageActions } from '@/modules/actions/developer/messages.actions';
+import { messageActions, messageDispatcher } from '@/modules/actions/developer/messages.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { useEffect } from 'react';
+import { checkScrollToButtom } from '@/utils/helpers';
+import { useEffect, useState } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { FlexBox } from 'staak-ui';
 import styled from 'styled-components';
@@ -27,11 +28,19 @@ const MessagesView = () => {
 	const { chatId } = useParams();
 	const { pathname } = useLocation();
 	const { contacts, conversationFetched } = useAppSelector((state) => state.talentMessage);
+	const [isFetching, setIsFetching] = useState(false);
 
 	useEffect(() => {
 		if (contacts?.size === 0) {
-			messageActions.getConversations();
+			const params = {
+				page: 0,
+				limit: 10,
+			};
+			messageActions.getConversations(params);
 		}
+		return function cleanup() {
+			messageDispatcher.setConversations({}, true);
+		};
 	}, []);
 
 	useEffect(() => {
@@ -42,9 +51,29 @@ const MessagesView = () => {
 			}
 		}
 	}, [conversationFetched]);
+
+	useEffect(() => {
+		setIsFetching(false);
+	}, [contacts]);
+
+	const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
+		if (!isFetching) {
+			if (contacts?.page! < contacts?.pages!) {
+				if (checkScrollToButtom(event.target as any, 10)) {
+					setIsFetching(true);
+					const params = {
+						page: contacts?.page ?? 0,
+						limit: 10,
+					};
+					messageActions.getConversations(params);
+				}
+			}
+		}
+	};
+
 	return (
 		<FlexBox align="start" height="100%">
-			<LeftSide>
+			<LeftSide onScroll={handleScroll}>
 				<ContactList />
 			</LeftSide>
 			<RightSide>

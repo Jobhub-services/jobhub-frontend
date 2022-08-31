@@ -1,8 +1,12 @@
 import { EyeIcon, TrashIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
+import LoadingData from '@/components/common/LoadingData';
 import MessageAvatar from '@/components/developers/messages/MessageAvatar';
 import { MESSAGE_HEADER_HEIGHT } from '@/constants/developer/conversation.constants';
+import { messageDispatcher } from '@/modules/actions/developer/messages.actions';
+import { TBooleanAttr } from '@/types/developer/messages.type';
 import { useAppSelector } from '@/utils/appHooks';
+import { Link } from 'react-router-dom';
 import { Button, FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 
@@ -14,17 +18,27 @@ const MainContainer = styled(FlexBox)`
 	//box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
 `;
 const MessageHeader = () => {
-	const { messages } = useAppSelector((state) => state.talentMessage);
+	const { messages, isMessagesLoading } = useAppSelector((state) => state.talentMessage);
+	const onDelete = () => {
+		messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_DELETE_POP_MODAL_OPENED);
+	};
 	return (
 		<MainContainer justify="space-between">
-			<MessageAvatar img={messages?.userInfo?.avatar} companyName={messages?.userInfo?.companyName} industry={messages?.userInfo?.industry} />
+			{isMessagesLoading ? (
+				<LoadingData />
+			) : (
+				<MessageAvatar img={messages?.userInfo?.avatar} companyName={messages?.userInfo?.companyName} industry={messages?.userInfo?.industry} />
+			)}
 			<FlexBox>
-				<Button startIcon={<TrashIcon />} color="red" size="md" variant="text">
+				<Button startIcon={<TrashIcon />} color="red" size="md" variant="text" onClick={onDelete}>
 					Delete
 				</Button>
-				<Button startIcon={<EyeIcon />} color="green" size="md" variant="text">
-					Profile
-				</Button>
+
+				<Link to={`/companies/detail/${messages?.userInfo?._id}`}>
+					<Button startIcon={<EyeIcon />} color="blue" size="md" variant="light">
+						Profile
+					</Button>
+				</Link>
 			</FlexBox>
 		</MainContainer>
 	);

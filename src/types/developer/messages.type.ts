@@ -6,4 +6,5 @@ export enum TBooleanAttr {
 	IS_MESSAGE_SENDING = 'isMessageSending',
 	IS_CONVERSATION_DELETING = 'isConversationDeleting',
 	IS_CONVERSATION_DELETED = 'conversationDeleted',
+	IS_DELETE_POP_MODAL_OPENED = 'isDeletePopModalOpened',
 }

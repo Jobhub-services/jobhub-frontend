@@ -17,6 +17,7 @@ export interface IMessageState {
 	[TBooleanAttr.IS_MESSAGE_SENDING]?: boolean;
 	[TBooleanAttr.IS_MESSAGES_LOADING]?: boolean;
 	[TBooleanAttr.IS_CONVERSATION_FETCHED]?: boolean;
+	[TBooleanAttr.IS_DELETE_POP_MODAL_OPENED]?: boolean;
 
 	[TBooleanAttr.IS_CONVERSATION_DELETING]?: boolean;
 	[TBooleanAttr.IS_CONVERSATION_DELETED]?: boolean;
