@@ -1,4 +1,4 @@
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import ApplicantsHeader from '@/components/companies/applicants/header/ApplicantsHeader';
 import ApplicationsFilter from '@/components/companies/applicants/filter/ApplicationFilter';
 import { Outlet, useLocation, Route, useNavigate, useParams, useSearchParams } from 'react-router-dom';

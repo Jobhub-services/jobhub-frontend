@@ -6,7 +6,7 @@ import { useAppSelector } from '@/utils/appHooks';
 import { jobActions, jobDispatcher } from '@/modules/actions/developer/jobs.actions';
 import { useSearchParams } from 'react-router-dom';
 import Applied from '@/assets/icons/applied.png';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import styled from 'styled-components';
 import { SuccessIcon } from '@/assets/icons';
 

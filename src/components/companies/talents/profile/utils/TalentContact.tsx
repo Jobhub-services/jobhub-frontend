@@ -24,7 +24,6 @@ const SIcon = styled.span`
 	justify-content: center;
 `;
 const TalentContact = (props: ContactProps) => {
-	console.log(!props.salary || props.salary === '');
 	return (
 		<div style={{ flexGrow: '1' }}>
 			<FlexBox justify="start" align="start" gap={10} className="mb-15">

@@ -5,7 +5,7 @@ import { colors } from '@/assets/theme';
 import StaakLogo from '@/assets/theme/StaakLogo';
 import { VariantType } from '@/models/theme/staakLogo.interface';
 import { FlexBox } from 'staak-ui';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';
 const StyledPublicView = styled.div`
 	position: fixed;

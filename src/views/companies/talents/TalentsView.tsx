@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import { TalentsHeader, TalentsFilter, CardContainer } from '@/components/companies/talents';
 import { useAppSelector } from '@/utils/appHooks';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { useEffect, useState } from 'react';
 import { talentsActions, talentsDispatcher } from '@/modules/actions/company/talents.actions';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { colors } from '@/assets/theme';
 import { LoadingIcon } from '@/assets/icons';
 import { checkScrollToButtom } from '@/utils/helpers';
@@ -23,9 +23,11 @@ const TalentsView = () => {
 	const { isLoading, showTalents } = useAppSelector((state) => state.talent);
 	const [isFetching, setIsFetching] = useState(false);
 	const [searchParams, setSearchParams] = useSearchParams();
+	const { state } = useLocation();
+	const onlyDetail = (state as any)?.onlyDetail ?? false;
 
 	useEffect(() => {
-		talentsActions.getTalents();
+		if (!onlyDetail) talentsActions.getTalents();
 		return function cleanup() {
 			talentsDispatcher.setTalents({}, true);
 		};
@@ -50,19 +52,20 @@ const TalentsView = () => {
 
 	return (
 		<MainContainer>
-			{isLoading ? (
-				<LoadingScreen />
-			) : (
-				<SubContainer className="staak_scrollbar" onScroll={handleScroll}>
-					<TalentsHeader />
-					<CardContainer />
-					{isFetching && (
-						<div>
-							<LoadingIcon width="60px" height="60px" color={colors.PURPLE_BASE} />
-						</div>
-					)}
-				</SubContainer>
-			)}
+			{!onlyDetail &&
+				(isLoading ? (
+					<LoadingScreen />
+				) : (
+					<SubContainer className="staak_scrollbar" onScroll={handleScroll}>
+						<TalentsHeader />
+						<CardContainer />
+						{isFetching && (
+							<div>
+								<LoadingIcon width="60px" height="60px" color={colors.PURPLE_BASE} />
+							</div>
+						)}
+					</SubContainer>
+				))}
 			<Outlet />
 			<TalentsFilter />
 		</MainContainer>

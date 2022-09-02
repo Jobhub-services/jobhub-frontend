@@ -3,7 +3,6 @@ import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { FlexBox, IconButton, Headline, Button, TabPane } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
 import { colors } from '@/assets/theme';
-import InterviewForm from '@/components/companies/applicants/details/interview/InterviewForm';
 import ApplicationStage from '@/components/companies/applicants/details/ApplicationStage';
 import InterviewsList from '@/components/companies/applicants/details/interview/InterviewsList';
 import ApplicationContact from '@/components/companies/applicants/details/ApplicationContact';
@@ -14,7 +13,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Avatar } from '@/components/companies/_common';
 import InterviewSchedule from '@/components/companies/applicants/details/interview/InterviewSchedule';
 import { useEffect, useRef } from 'react';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
 
 const kwidth = keyframes`

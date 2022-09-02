@@ -14,7 +14,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { dateWithMonthName } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
 import DeleteDialogue from '@/components/companies/jobs/showjob/details/DeleteDialogue';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 
 const SContainer = styled.div`
 	background: white;

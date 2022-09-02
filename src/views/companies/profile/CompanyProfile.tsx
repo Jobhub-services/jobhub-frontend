@@ -1,5 +1,5 @@
 import { colors } from '@/assets/theme';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import ProfileOverview from '@/components/companies/profile/ProfileOverview';
 import ProfileDetails from '@/components/companies/profile/ProfileDetails';
 import { useAppSelector } from '@/utils/appHooks';

@@ -1,9 +1,8 @@
 import { colors } from '@/assets/theme';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
-import { HeartFilledIcon, HeartIcon, UnavailableIcon } from '@/assets/icons';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Button, CloseIcon, FlexBox, Headline, HrDivider, IconButton, TabPane } from 'staak-ui';
+import { CloseIcon, FlexBox, Headline, HrDivider, IconButton, TabPane } from 'staak-ui';
 import JobApplication from '@/components/developers/jobs/details/application/JobApplication';
 import styled, { keyframes } from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';

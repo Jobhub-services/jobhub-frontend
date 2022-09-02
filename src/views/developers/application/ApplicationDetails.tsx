@@ -3,7 +3,7 @@ import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import styled, { keyframes } from 'styled-components';
 import { ApplicantIcon, FlexBox, JobIcon, TabPane } from 'staak-ui';
 import ApplicationInfo from '@/components/developers/applications/detail/ApplicationInfo';

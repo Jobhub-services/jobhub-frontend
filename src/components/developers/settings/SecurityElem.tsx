@@ -1,10 +1,9 @@
 import { InputField } from '@/components/common';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { settingsAction, settingsDispatcher } from '@/modules/actions/developer/settings.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { pushNotification } from '@/utils/helpers';
 import { useEffect, useState } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { Button } from 'staak-ui';
 import styled from 'styled-components';
 

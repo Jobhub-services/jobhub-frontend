@@ -1,5 +1,5 @@
-import { IconDropDown, AvatarDropDown } from '@/components/common/dropdown';
-import { FlexBox, Button, PlusIcon, SearchInput } from 'staak-ui';
+import { AvatarDropDown } from '@/components/common/dropdown';
+import { FlexBox, Button, PlusIcon } from 'staak-ui';
 import { Link, useNavigate } from 'react-router-dom';
 import StaakLogo from '@/assets/theme/StaakLogo';
 import { useAppSelector } from '@/utils/appHooks';

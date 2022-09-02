@@ -12,8 +12,8 @@ import TalentContact from '@/components/companies/talents/profile/utils/TalentCo
 import GeneralInfo from '@/components/companies/talents/profile/utils/GeneralInfo';
 import { Avatar } from '@/components/companies/_common';
 import { useEffect, useRef } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { talentsActions } from '@/modules/actions/company/talents.actions';
 
 const kwidth = keyframes`
@@ -22,6 +22,14 @@ const kwidth = keyframes`
 	} 
 	to{
 		width: 83%;
+	}
+`;
+const kFullWidth = keyframes`
+	from {
+		width: 0;
+	} 
+	to{
+		width: 100%;
 	}
 `;
 const LeftSide = styled.div`
@@ -56,9 +64,8 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	//width: ${(props) => (props.showed ? '83%' : '0')};
-	width: 83%;
-	animation: ${kwidth} 0.2s ease-in-out;
+	width: ${(props) => (props.onlyDetail ? '100%' : '83%')};
+	animation: ${(props) => (props.onlyDetail ? kFullWidth : kwidth)} 0.2s ease-in-out;
 	background: white;
 	box-shadow: -5px 0px 20px -15px ${colors.BLACK_7};
 	//transition: width 0.2s;
@@ -87,6 +94,8 @@ const TalentProfile = () => {
 	const { id } = useParams();
 	const { talentDetails, isDetailLoading } = useAppSelector((state) => state.talent);
 	const parentRef = useRef(null);
+	const { state } = useLocation();
+	const onlyDetail = (state as any)?.onlyDetail ?? false;
 
 	useEffect(() => {
 		if (id && talentDetails._id !== id) talentsActions.getTalentDetails(id);
@@ -99,7 +108,7 @@ const TalentProfile = () => {
 	};
 	return (
 		<MainContainer showed={true} ref={parentRef} onClick={backUp}>
-			<DetailContainer showed={true}>
+			<DetailContainer showed={true} onlyDetail={onlyDetail}>
 				{isDetailLoading ? (
 					<LoadingScreen />
 				) : (

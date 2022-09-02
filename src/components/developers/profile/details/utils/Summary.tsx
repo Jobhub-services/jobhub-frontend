@@ -6,7 +6,7 @@ import { Button, FlexBox, PlusIcon, TextArea } from 'staak-ui';
 import { SpanTitle, SButton } from '@/components/developers/profile/common/shared.style';
 import styled from 'styled-components';
 import { profileAction } from '@/modules/actions/developer/profile.actions';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 
 const SSummary = styled.pre<any>`
 	display: -webkit-box;

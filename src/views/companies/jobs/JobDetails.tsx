@@ -19,7 +19,7 @@ import { dateWithMonthName } from '@/utils/helpers';
 import { StatusTitle } from '@/constants/company/job.contants';
 import { useEffect, useRef } from 'react';
 import { jobActions } from '@/modules/actions/company/job.actions';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import parse from 'html-react-parser';
 import JobDetailHeader from '@/components/companies/jobs/showjob/details/JobDetailHeader';
 

@@ -4,18 +4,13 @@ import MessageInput from '@/components/companies/messages/MessageInput';
 import MessageContentElem from '@/components/companies/messages/MessageContentElem';
 import { useAppSelector } from '@/utils/appHooks';
 import { messageActions } from '@/modules/actions/company/message.actions';
-import { LoadingIcon } from '@/assets/icons';
 import { FlexBox } from 'staak-ui';
-import { colors } from '@/assets/theme';
 import EmptyMsg from '@/assets/icons/empty_msg.png';
-import { useParams } from 'react-router-dom';
 
-const LoadingScreen = styled(FlexBox)`
-	height: calc(100% - ${(props) => props.height}px) !important;
-`;
 const MainContainer = styled.div<any>`
 	height: 100%;
 `;
+
 const SubContainer = styled.div<any>`
 	padding: 15px 10px;
 	height: calc(100% - ${(props) => props.height}px);
@@ -49,36 +44,30 @@ const MessageBody = () => {
 	const msgLength = messages?.messages?.length ?? 0;
 	return (
 		<MainContainer>
-			{isMessagesLoading ? (
-				<LoadingScreen height={inputHeight + 50}>
-					<LoadingIcon color={colors.PURPLE_2} width="65px" height="65px" />
-				</LoadingScreen>
-			) : (
-				<SubContainer ref={chatRef} height={inputHeight + 50} className="staak_scrollbar">
-					{messages?.messages.length === 0 ? (
-						<FlexBox height="100%" flexDirection="column">
-							<img src={EmptyMsg} alt="Empty" width={200} />
-							<div style={{ textAlign: 'center' }}>
-								<span>Send message and start conversation</span>
-							</div>
+			<SubContainer ref={chatRef} height={inputHeight + 50} className="staak_scrollbar">
+				{messages?.messages.length === 0 ? (
+					<FlexBox height="100%" flexDirection="column">
+						<img src={EmptyMsg} alt="Empty" width={200} />
+						<FlexBox flexDirection="column">
+							<h2 style={{ margin: '5px' }}>Your Conversation is Empty</h2>
+							<span>Send Message and Start Conversation</span>
 						</FlexBox>
-					) : (
-						messages?.messages?.map((elem, idx) => {
-							return (
-								<MessageContentElem
-									key={idx}
-									messsage={elem.content}
-									createdAt={elem.createdAt}
-									sender={elem.sender === userInfo._id}
-									img={elem.sender === userInfo._id ? userInfo.avatar : messages.userInfo?.avatar}
-									status={idx === msgLength - 1 && isMessageSending ? 'loading' : 'sended'}
-								/>
-							);
-						})
-					)}
-				</SubContainer>
-			)}
-
+					</FlexBox>
+				) : (
+					messages?.messages?.map((elem, idx) => {
+						return (
+							<MessageContentElem
+								key={idx}
+								messsage={elem.content}
+								createdAt={elem.createdAt}
+								sender={elem.sender === userInfo._id}
+								img={elem.sender === userInfo._id ? userInfo.avatar : messages.userInfo?.avatar}
+								status={idx === msgLength - 1 && isMessageSending ? 'loading' : 'sended'}
+							/>
+						);
+					})
+				)}
+			</SubContainer>
 			<MessageInput onHeightChange={handleChange} onSend={sendMessage} value={content} height={inputHeight + 50} />
 		</MainContainer>
 	);

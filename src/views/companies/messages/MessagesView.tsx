@@ -1,14 +1,22 @@
-import { FlexBox } from 'staak-ui';
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Button, FlexBox } from 'staak-ui';
+import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { messageActions, messageDispatcher } from '@/modules/actions/company/message.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
 import styled from 'styled-components';
 import { colors } from '@/assets/theme';
 import ContactList from '@/components/companies/messages/ContactList';
 import { checkScrollToButtom } from '@/utils/helpers';
+import { TBooleanAttr } from '@/types/company/messages.type';
+import EmptyConv from '@/assets/icons/empty_conv.png';
+import LoadingData from '@/components/common/loadings/LoadingData';
+import LoadingSimpleData from '@/components/common/loadings/LoadingSimpleData';
 
+const SContainer = styled.div`
+	padding: 15px 25px;
+	height: 100%;
+	overflow: auto;
+`;
 const LeftSide = styled.div`
 	width: 25%;
 	height: 100%;
@@ -25,32 +33,31 @@ const RightSide = styled.div`
 `;
 const MessagesView = () => {
 	const navigate = useNavigate();
-	const { contacts, isLoading, conversationFetched } = useAppSelector((state) => state.companyMessage);
+	const { contacts, isLoading, isMessagesLoading } = useAppSelector((state) => state.companyMessage);
 	const [isFetching, setIsFetching] = useState(false);
 	const { chatId } = useParams();
 	const { pathname } = useLocation();
 	useEffect(() => {
-		if (contacts?.size === 0) {
-			const params = {
-				page: 0,
-				limit: 10,
-			};
-			messageActions.getConversations(params);
-		}
+		const params = {
+			page: 0,
+			limit: 10,
+		};
+		if (!isLoading) messageActions.getConversations(params);
+
 		return function cleanup() {
 			messageDispatcher.setConversations({}, true);
 		};
 	}, []);
+
 	useEffect(() => {
-		if (conversationFetched && contacts?.size !== 0) {
+		setIsFetching(false);
+		if (contacts?.size !== 0) {
 			if (pathname === '/messages/' || pathname === '/messages') {
+				messageDispatcher.setBooleanAttr(false, TBooleanAttr.IS_CONVERSATION_FETCHED);
 				const id = chatId ? chatId : contacts?.content![0]._id;
 				navigate(`/messages/${id}`, { replace: false });
 			}
 		}
-	}, [conversationFetched]);
-	useEffect(() => {
-		setIsFetching(false);
 	}, [contacts]);
 
 	const handleScroll = (event: React.UIEvent<HTMLDivElement>) => {
@@ -69,17 +76,37 @@ const MessagesView = () => {
 	};
 	return (
 		<FlexBox align="start" height="100%">
-			{chatId ? (
+			{!isLoading && contacts?.size === 0 ? (
+				<FlexBox height="100%" flexDirection="column">
+					<img src={EmptyConv} alt="Empty" width={200} />
+					<FlexBox className="mt-20" flexDirection="column">
+						<h2 style={{ margin: '5px' }}>Your Conversation is Empty</h2>
+						<span>Browse and Select a Talent to Start New Conversation</span>
+						<Link to="/talents" className="mt-20">
+							<Button>Browse Talents</Button>
+						</Link>
+					</FlexBox>
+				</FlexBox>
+			) : (
 				<>
 					<LeftSide onScroll={handleScroll}>
 						<ContactList />
 					</LeftSide>
 					<RightSide>
-						<Outlet />
+						{isLoading || isMessagesLoading ? (
+							<SContainer>
+								<LoadingData />
+								<FlexBox width="100%" gap={120} align="start" flexDirection="column" style={{ marginTop: '70px' }}>
+									<LoadingSimpleData style={{ width: '60%' }} />
+									<LoadingSimpleData style={{ width: '60%', transform: 'rotate(180deg)', alignSelf: 'end' }} />
+									<LoadingSimpleData style={{ width: '60%' }} />
+								</FlexBox>
+							</SContainer>
+						) : (
+							<Outlet />
+						)}
 					</RightSide>
 				</>
-			) : (
-				<div></div>
 			)}
 		</FlexBox>
 	);

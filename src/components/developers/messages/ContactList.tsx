@@ -2,7 +2,7 @@ import { Button, FlexBox } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
 import CompanyContact from '@/components/developers/messages/CompanyContact';
 import { useNavigate, useParams } from 'react-router-dom';
-import LoadingData from '@/components/common/LoadingData';
+import LoadingData from '@/components/common/loadings/LoadingData';
 import { PopModel } from '@/components/common';
 import { messageDispatcher } from '@/modules/actions/developer/messages.actions';
 import { TBooleanAttr } from '@/types/developer/messages.type';

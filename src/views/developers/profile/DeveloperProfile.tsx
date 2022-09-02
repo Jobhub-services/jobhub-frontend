@@ -4,7 +4,7 @@ import { ProfileOverview, ProfileDetails, ProfilePreferences } from '@/component
 import { useEffect } from 'react';
 import { profileAction } from '@/modules/actions/developer/profile.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import styled from 'styled-components';
 
 const SContainer = styled.div`

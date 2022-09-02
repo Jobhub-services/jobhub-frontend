@@ -2,7 +2,7 @@ import { interviewActions, interviewDispatcher } from '@/modules/actions/company
 import { useAppSelector } from '@/utils/appHooks';
 import InterviewForm from './InterviewForm';
 import { Button } from 'staak-ui';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import styled from 'styled-components';
 import { useEffect } from 'react';
 import { pushNotification } from '@/utils/helpers';

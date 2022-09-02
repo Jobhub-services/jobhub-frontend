@@ -7,7 +7,7 @@ import { useEffect, useRef } from 'react';
 import { useAppSelector } from '@/utils/appHooks';
 import { colors } from '@/assets/theme';
 import { companiesActions } from '@/modules/actions/developer/companies.actions';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 
 const jobTitle = (
 	<FlexBox gap={10}>

@@ -34,9 +34,8 @@ const GeneralInfo = (props: TalentAllInfo) => {
 				<div>
 					{props.work_experience?.map((elem, idx) => {
 						return (
-							<>
+							<div key={idx}>
 								<WorkExperience
-									key={idx}
 									title={elem.title}
 									jobType={elem.job_type}
 									company={elem.company_name}
@@ -46,8 +45,8 @@ const GeneralInfo = (props: TalentAllInfo) => {
 									}`}
 									description={elem.description}
 								/>
-								<HrDivider key={idx} top={15} side={0} />
-							</>
+								<HrDivider top={15} side={0} />
+							</div>
 						);
 					})}
 					{props.work_experience?.length === 0 && 'N/A'}
@@ -58,17 +57,16 @@ const GeneralInfo = (props: TalentAllInfo) => {
 				<div>
 					{props.educations?.map((elem, idx) => {
 						return (
-							<>
+							<div key={idx}>
 								<EducationCard
-									key={idx}
 									title={elem.title!}
 									university={elem.school!}
 									date={`${elem.startDate ? new Date(elem.startDate).toDateString() : 'N/A'} - ${
 										elem.endDate ? new Date(elem.endDate)?.toDateString() : 'N/A'
 									}`}
 								/>
-								<HrDivider key={idx} top={15} side={0} />
-							</>
+								<HrDivider top={15} side={0} />
+							</div>
 						);
 					})}
 					{props.educations?.length === 0 && 'N/A'}
@@ -80,9 +78,8 @@ const GeneralInfo = (props: TalentAllInfo) => {
 				<div>
 					{props.certifications?.map((elem, idx) => {
 						return (
-							<>
+							<div key={idx}>
 								<CertificationCard
-									key={idx}
 									title={elem.title!}
 									issuedDate={elem.issuedDate ? new Date(elem.issuedDate)?.toDateString() : 'N/A'}
 									expirationDate={elem.expirationDate ? new Date(elem.expirationDate)?.toDateString() : 'N/A'}
@@ -91,8 +88,8 @@ const GeneralInfo = (props: TalentAllInfo) => {
 									certificationId={elem.certificationId}
 									link={elem.link}
 								/>
-								<HrDivider key={idx} top={15} side={0} />
-							</>
+								<HrDivider top={15} side={0} />
+							</div>
 						);
 					})}
 					{props.certifications?.length === 0 && 'N/A'}

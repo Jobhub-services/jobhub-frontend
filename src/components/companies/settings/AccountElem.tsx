@@ -1,5 +1,5 @@
 import { InputField } from '@/components/common';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { settingsAction, settingsDispatcher } from '@/modules/actions/company/settings.actions';
 import { userActions } from '@/modules/actions/user.actions';
 import { useAppSelector } from '@/utils/appHooks';

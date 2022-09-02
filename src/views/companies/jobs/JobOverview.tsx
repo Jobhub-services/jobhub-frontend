@@ -6,7 +6,7 @@ import { jobActions, jobDispatcher } from '@/modules/actions/company/job.actions
 import JobHeader from '@/components/companies/jobs/showjob/JobHeader';
 import JobFilter from '@/components/companies/jobs/showjob/filter/JobFilter';
 import { Outlet, useSearchParams } from 'react-router-dom';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';
 import { LoadingIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';

@@ -8,7 +8,7 @@ import { InterviewFormProps } from '@/models/component/companies/interview/inter
 import { InterviewStatus } from '@/types/company/interview.type';
 import { interviewActions } from '@/modules/actions/company/interview.action';
 import { useAppSelector } from '@/utils/appHooks';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 
 const StatusColor: { [key in InterviewStatus]: string } = {
 	IN_PROGRESS: colors.YELLOW_CLEAR_4,

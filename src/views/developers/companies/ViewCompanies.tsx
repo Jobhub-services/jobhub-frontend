@@ -4,7 +4,7 @@ import { Outlet, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { companiesActions, companiesDispatcher } from '@/modules/actions/developer/companies.actions';
 import { useAppSelector } from '@/utils/appHooks';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import CompanyFilters from '@/components/developers/companies/filter/CompanyFilters';
 import Header from '@/components/developers/companies/Header';
 import { LoadingIcon } from '@/assets/icons';

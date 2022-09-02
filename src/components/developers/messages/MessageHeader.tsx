@@ -1,6 +1,5 @@
 import { EyeIcon, TrashIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
-import LoadingData from '@/components/common/LoadingData';
 import MessageAvatar from '@/components/developers/messages/MessageAvatar';
 import { MESSAGE_HEADER_HEIGHT } from '@/constants/developer/conversation.constants';
 import { messageDispatcher } from '@/modules/actions/developer/messages.actions';
@@ -14,30 +13,22 @@ const MainContainer = styled(FlexBox)`
 	border-bottom: 1px solid ${colors.BLACK_12};
 	padding: 15px 15px;
 	height: ${MESSAGE_HEADER_HEIGHT}px;
-	//box-shadow: 0 0 4px 0 #d2d9e5;
-	//box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+`;
+const BRadius = styled(Button)`
+	border-radius: 50%;
 `;
 const MessageHeader = () => {
-	const { messages, isMessagesLoading } = useAppSelector((state) => state.talentMessage);
+	const { messages } = useAppSelector((state) => state.talentMessage);
 	const onDelete = () => {
 		messageDispatcher.setBooleanAttr(true, TBooleanAttr.IS_DELETE_POP_MODAL_OPENED);
 	};
 	return (
 		<MainContainer justify="space-between">
-			{isMessagesLoading ? (
-				<LoadingData />
-			) : (
-				<MessageAvatar img={messages?.userInfo?.avatar} companyName={messages?.userInfo?.companyName} industry={messages?.userInfo?.industry} />
-			)}
-			<FlexBox>
-				<Button startIcon={<TrashIcon />} color="red" size="md" variant="text" onClick={onDelete}>
-					Delete
-				</Button>
-
+			<MessageAvatar img={messages?.userInfo?.avatar} companyName={messages?.userInfo?.companyName} industry={messages?.userInfo?.industry} />
+			<FlexBox gap={15}>
+				<BRadius icon={<TrashIcon />} iconColor="white" circle color="red" onClick={onDelete}></BRadius>
 				<Link to={`/companies/detail/${messages?.userInfo?._id}`}>
-					<Button startIcon={<EyeIcon />} color="blue" size="md" variant="light">
-						Profile
-					</Button>
+					<BRadius icon={<EyeIcon />} iconColor="white" circle color="blue"></BRadius>
 				</Link>
 			</FlexBox>
 		</MainContainer>

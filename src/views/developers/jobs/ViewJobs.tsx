@@ -1,6 +1,6 @@
 import { LoadingIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { JobsList, JobHeader, JobsFilter } from '@/components/developers/jobs';
 import { jobActions, jobDispatcher } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';

@@ -1,6 +1,6 @@
 import { LoadingIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { ApplicationsList } from '@/components/developers/applications';
 import { applicationActions, applicationDispatcher } from '@/modules/actions/developer/application.actions';
 import { useAppSelector } from '@/utils/appHooks';

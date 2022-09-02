@@ -7,7 +7,7 @@ import DetailedInfo from '@/components/companies/jobs/newjob/details/DetailedInf
 import AddTests from '@/components/companies/jobs/newjob/qualifications/QualificationsInfo';
 import JobReview from '@/components/companies/jobs/newjob/review/JobReview';
 import { HEADER_HIEGHT } from '@/constants/app.constants';
-import { LoadingScreen } from '@/components/common/LoadingScreen';
+import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';
 import { jobDispatcher } from '@/modules/actions/company/job.actions';
 import { useNavigate } from 'react-router-dom';

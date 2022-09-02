@@ -2,7 +2,7 @@ import TalentContact from '@/components/companies/messages/TalentContact';
 import { Button, FlexBox } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
 import { useNavigate, useParams } from 'react-router-dom';
-import LoadingData from '@/components/common/LoadingData';
+import LoadingData from '@/components/common/loadings/LoadingData';
 import { PopModel } from '@/components/common';
 import { messageDispatcher } from '@/modules/actions/company/message.actions';
 import { TBooleanAttr } from '@/types/company/messages.type';
@@ -14,7 +14,7 @@ const ContactList = () => {
 	const navigate = useNavigate();
 	const handleClick = (value: string, userId: string) => {
 		if (value === 'view') {
-			navigate(`/talents/detail/${userId}`);
+			navigate(`/talents/detail/${userId}`, { state: { onlyDetail: true } });
 		} else if (value === 'delete') {
 			console.log(value);
 		}

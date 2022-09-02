@@ -1,5 +1,4 @@
 import { AvatarDropDownProps } from '@/models/component';
-import Jerom from '@/assets/icons/jerome.jpg';
 import styled from 'styled-components';
 import { DropDown, FlexBox, SettingIcon } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
