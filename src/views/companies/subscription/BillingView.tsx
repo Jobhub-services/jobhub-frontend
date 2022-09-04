@@ -5,6 +5,11 @@ import { Button, FlexBox, Headline } from 'staak-ui';
 import styled from 'styled-components';
 
 const HEADER_STEP_HEIGHT = 45;
+
+const SH3 = styled.h3`
+	color: ${colors.BLACK_4};
+	margin: 10px 0;
+`;
 const StyledHeadline = styled(Headline)`
 	margin: 0px;
 `;
@@ -18,6 +23,10 @@ const SCard = styled(FlexBox)`
 	height: 300px;
 	border-radius: 8px;
 `;
+const SFooter = styled.div`
+	padding: 15px 20px;
+	border-top: 1px solid ${colors.BLACK_12};
+`;
 const BillingView = () => {
 	return (
 		<div>
@@ -28,7 +37,7 @@ const BillingView = () => {
 			</HeaderContainer>
 			<div style={{ padding: '10px 20px' }}>
 				<div>
-					<h3>Company information</h3>
+					<SH3>Company information</SH3>
 					<InputField name="address" required>
 						Address
 					</InputField>
@@ -49,8 +58,8 @@ const BillingView = () => {
 						</InputField>
 					</FlexBox>
 				</div>
-				<div>
-					<h3>Billing contact</h3>
+				<div className="mt-20">
+					<SH3>Billing contact</SH3>
 					<FlexBox gap={15}>
 						<InputField name="firstName" required>
 							First name
@@ -74,6 +83,9 @@ const BillingView = () => {
 					</SCard>
 				</div>
 			</div>
+			<SFooter>
+				<Button>Save changes</Button>
+			</SFooter>
 		</div>
 	);
 };
