@@ -14,6 +14,8 @@ import {
 	AccountSettings,
 	MessagesView,
 	ConversationView,
+	SubscriptionView,
+	BillingView,
 } from '@/views/companies';
 
 import ApplicationDetails from '@/views/companies/applicants/ApplicationDetails';
@@ -43,10 +45,11 @@ const CompanyRoutes: FC = () => {
 			<Route path="messages" element={<MessagesView />}>
 				<Route path=":chatId" element={<ConversationView />} />
 			</Route>
-			<Route path="messages" element={<MessagesView />} />
 			<Route path="settings" element={<CompanySettings />}>
 				<Route path="account" element={<AccountSettings />} />
 				<Route path="security" element={<SecuritySettings />} />
+				<Route path="subscription" element={<SubscriptionView />} />
+				<Route path="billing" element={<BillingView />} />
 			</Route>
 			<Route path="*" element={<Navigate to="/" />} />
 		</Routes>

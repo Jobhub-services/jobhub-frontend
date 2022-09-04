@@ -7,8 +7,21 @@ import CompanySettings from '@/views/companies/settings/CompanySettings';
 import AccountSettings from '@/views/companies/settings/AccountSettings';
 import SecuritySettings from '@/views/companies/settings/SecuritySettings';
 
+import SubscriptionView from '@/views/companies/subscription/SubscriptionView';
+import BillingView from '@/views/companies/subscription/BillingView';
+
 export * from '@/views/companies/applicants';
 export * from '@/views/companies/jobs';
 export * from '@/views/companies/talents';
 
-export { CompanyOverview, CompanyProfile, CompanySettings, SecuritySettings, AccountSettings, MessagesView, ConversationView };
+export {
+	CompanyOverview,
+	CompanyProfile,
+	CompanySettings,
+	SecuritySettings,
+	AccountSettings,
+	MessagesView,
+	ConversationView,
+	SubscriptionView,
+	BillingView,
+};

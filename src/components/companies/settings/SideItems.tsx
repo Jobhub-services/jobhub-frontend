@@ -1,4 +1,4 @@
-import { GeneralSettingsIcon, ProtectIcon } from '@/assets/icons';
+import { BillingIcon, GeneralSettingsIcon, PaymentIcon, ProtectIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { FlexBox, Headline } from 'staak-ui';
@@ -47,15 +47,6 @@ const SideItems = () => {
 				</StyledHeadline>
 			</HeaderContainer>
 			<FlexBox flexDirection="column" align="start" className="mt-20" style={{ padding: '0 10px 10px 10px' }}>
-				{/*<NavItem
-					className="mb-5"
-					icon={<GeneralSettingsIcon width="30px" height="30px" style={{ width: '30px !important', height: '30px !important' }} />}
-					width={'93%'}
-					active={pathname === `/settings/account`}
-					onClick={(event: any) => handleClick('account')}
-				>
-					<NavItem.Content>General</NavItem.Content>
-    </NavItem>*/}
 				<SElem justify="start" gap={10} onClick={(e: any) => handleClick('account')} active={pathname === `/settings/account`}>
 					<GeneralSettingsIcon width="30px" height="30px" />
 					<span>General</span>
@@ -63,6 +54,20 @@ const SideItems = () => {
 				<SElem justify="start" gap={10} onClick={(e: any) => handleClick('security')} active={pathname === `/settings/security`} className="mt-15">
 					<ProtectIcon width="30px" height="30px" />
 					<span>Security</span>
+				</SElem>
+				<SElem
+					justify="start"
+					gap={10}
+					onClick={(e: any) => handleClick('subscription')}
+					active={pathname === `/settings/subscription`}
+					className="mt-15"
+				>
+					<PaymentIcon width="30px" height="30px" />
+					<span>Subscription</span>
+				</SElem>
+				<SElem justify="start" gap={10} onClick={(e: any) => handleClick('billing')} active={pathname === `/settings/billing`} className="mt-15">
+					<BillingIcon width="30px" height="30px" />
+					<span>Billing</span>
 				</SElem>
 			</FlexBox>
 		</MainContainer>

@@ -68,8 +68,20 @@ import SettingsColorIcon from './SettingsColorIcon';
 import SendMessageIcon from './SendMessageIcon';
 import ThreeDotIcon from './ThreeDotIcon';
 import EyeIcon from './EyeIcon';
+import PaymentIcon from './PaymentIcon';
+import RocketIcon from './RocketIcon';
+import ForOneIcon from './ForOneIcon';
+import BowlingIcon from './BowlingIcon';
+import BillingIcon from './BillingIcon';
+import CreditCardIcon from './CreditCardIcon';
 
 export {
+	CreditCardIcon,
+	BillingIcon,
+	BowlingIcon,
+	ForOneIcon,
+	RocketIcon,
+	PaymentIcon,
 	EyeIcon,
 	ThreeDotIcon,
 	SendMessageIcon,
