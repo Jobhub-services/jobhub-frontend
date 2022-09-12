@@ -26,6 +26,7 @@ export const profileAction = {
 				dataToSend = {
 					[attr]: data,
 				};
+
 			const response = await httpClient.put(`${USERS_SERVICE}/company/profile`, dataToSend);
 			if (response.data) {
 				const content = response.data?.content![attr];

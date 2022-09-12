@@ -12,6 +12,11 @@ interface StandardInputProps extends StandardProps {
 	errorMessage?: string;
 	disabled?: boolean;
 }
+
+export interface PPhoneInput extends Omit<StandardInputProps, 'value'> {
+	value?: { country_code: string; number: string };
+	onDataChange?: (value: { country_code: String; number: String }, name: string) => void;
+}
 export interface InputProps extends StandardInputProps {
 	type?: 'text' | 'email' | 'password';
 	startIcon?: React.ReactNode;

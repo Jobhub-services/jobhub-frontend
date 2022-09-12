@@ -18,4 +18,10 @@ export type TProfileInfo = {
 		company_size?: string;
 	};
 	avatar?: string;
+	timezone?: {
+		_id: string;
+		code?: String;
+		name?: String;
+		utc?: String;
+	};
 };

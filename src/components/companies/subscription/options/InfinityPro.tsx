@@ -1,40 +1,64 @@
 import { RocketIcon } from '@/assets/icons';
 import { Button, FlexBox } from 'staak-ui';
 import { SMainContainer, SH2, SSpan, SMonth, STag, SDollar, SFeatures, FeatureTitle } from '@/components/companies/subscription/options/option.style';
+import { useAppSelector } from '@/utils/appHooks';
+import { PayOptions, POption } from '@/models/component/companies/subscription/subscription.interface';
+import LoadingSimpleData from '@/components/common/loadings/LoadingSimpleData';
 
-const InfinityPro = () => {
+const InfinityPro = (props: POption) => {
+	const { subscription, isLoading } = useAppSelector((state) => state.companySettings);
+	const infinity = subscription.content.find((elem) => elem.title === 'Infinity');
+	const totalCost = props.status === PayOptions.YEARLY ? (infinity?.yearly_amount ?? 0) * 12 : (infinity?.monthly_amount ?? 0) * 12;
+	const costSaved = ((infinity?.monthly_amount ?? 0) - (infinity?.yearly_amount ?? 0)) * 12;
+
+	const handleClick = () => {
+		if (infinity?._id) {
+			if (props.onSubscribe) props.onSubscribe(infinity?._id);
+		}
+	};
 	return (
 		<SMainContainer>
-			<FlexBox flexDirection="column">
-				<FlexBox flexDirection="column">
-					<span>
-						<RocketIcon width="70px" height="70px" />
-					</span>
-					<SH2>Infinity</SH2>
+			{isLoading ? (
+				<FlexBox flexDirection="column" gap={30}>
+					<LoadingSimpleData />
+					<LoadingSimpleData />
+					<LoadingSimpleData />
 				</FlexBox>
-				<FlexBox className="mt-15">
-					<SDollar>$</SDollar>
-					<SSpan>599</SSpan>
-					<SMonth>/Month</SMonth>
-				</FlexBox>
-				<FlexBox gap={15} className="mt-20 mb-15">
-					<FlexBox gap={5}>
-						Total cost per year <strong>{` $${599 * 12}`}</strong>
+			) : (
+				<>
+					<FlexBox flexDirection="column">
+						<FlexBox flexDirection="column">
+							<span>
+								<RocketIcon width="60px" height="60px" />
+							</span>
+							<SH2>{infinity?.title}</SH2>
+						</FlexBox>
+						<FlexBox className="mt-15">
+							<SDollar>$</SDollar>
+							<SSpan>{props.status === PayOptions.YEARLY ? infinity?.yearly_amount : infinity?.monthly_amount}</SSpan>
+							<SMonth>/Month</SMonth>
+						</FlexBox>
+						<FlexBox gap={15} className="mt-20 mb-15" flexDirection="column">
+							<FlexBox gap={5}>
+								Total cost per year <strong>{` $${totalCost}`}</strong>
+							</FlexBox>
+							{props.status === PayOptions.YEARLY && <STag>{`Save $${costSaved} / Year`}</STag>}
+						</FlexBox>
+						<Button className="mt-10 mb-15" onClick={handleClick}>
+							Upgrade to Infinity
+						</Button>
 					</FlexBox>
-					<STag>Save $1400 / Year</STag>
-				</FlexBox>
-				<Button className="mt-20 mb-15">Upgrade to Infinity</Button>
-			</FlexBox>
-			<div className="mt-20">
-				<FeatureTitle>Features :</FeatureTitle>
-				<SFeatures>
-					<li>Unlimited job postings</li>
-					<li>AI-powered sourcing</li>
-					<li>Select and invite unlimited interesting candidate to apply to your job opening</li>
-					<li>90 days job opening duration</li>
-					<li>Renewal of post for free</li>
-				</SFeatures>
-			</div>
+					<div className="mt-20">
+						<FeatureTitle>Features :</FeatureTitle>
+						<SFeatures>
+							<li>AI-powered sourcing</li>
+							{infinity?.features.map((elem, idx) => {
+								return <li key={idx}>{elem.description}</li>;
+							})}
+						</SFeatures>
+					</div>
+				</>
+			)}
 		</SMainContainer>
 	);
 };

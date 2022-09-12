@@ -6,4 +6,5 @@ export const API_PATHS = {
 	INTERVIEW_SERVICE: `/interview`,
 	TALENT_SERVICE: '/talent',
 	WEBSOCKET_SERVICE: '/websocket',
+	PAYMENT_SERVICE: '/payments',
 };

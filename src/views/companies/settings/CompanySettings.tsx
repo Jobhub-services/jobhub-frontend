@@ -8,7 +8,7 @@ const SContainer = styled.div<any>`
 	background: ${(props) => (props.plan ? '#f5f8fa' : 'white')};
 	box-shadow: 0 0 20px 0 rgb(76 87 125 / 2%);
 	border-radius: 8px;
-	width: ${(props) => (props.plan ? '70%' : '50%')};
+	width: 60%;
 `;
 
 const MainContainer = styled.div`

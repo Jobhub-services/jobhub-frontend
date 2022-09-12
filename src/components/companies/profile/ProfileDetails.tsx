@@ -1,9 +1,10 @@
 import { colors } from '@/assets/theme';
-import { AboutUs, KeyWords, SocialProfile, Headquarters, CompanyDivision, GeneralInfo } from '@/components/companies/profile/details';
+import { AboutUs, KeyWords, SocialProfile, Headquarters, CompanyDivision, GeneralInfo, TimeZone } from '@/components/companies/profile/details';
 import ProfileAvatar from '@/components/companies/profile/common/ProfileAvatar';
 import { Button, FlexBox, HrDivider } from 'staak-ui';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+
 const LefSide = styled.div`
 	width: 28%;
 	background-color: white;
@@ -19,7 +20,6 @@ const RightSide = styled.div`
 
 const ProfileDetails = () => {
 	const navigate = useNavigate();
-
 	return (
 		<div>
 			<FlexBox style={{ padding: '20px 20px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
@@ -30,6 +30,8 @@ const ProfileDetails = () => {
 			</FlexBox>
 			<FlexBox align="start">
 				<LefSide>
+					<TimeZone />
+					<HrDivider top={15} />
 					<Headquarters />
 					<HrDivider top={15} />
 					<GeneralInfo />

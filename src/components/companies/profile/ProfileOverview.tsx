@@ -5,6 +5,7 @@ import Keywords from '@/components/companies/profile/overview/Keywords';
 import Division from '@/components/companies/profile/overview/Division';
 import SocialProfile from '@/components/companies/profile/overview/SocialProfile';
 import GeneralInfo from '@/components/companies/profile/overview/GeneralInfo';
+import TimeZone from '@/components/companies/profile/overview/TimeZone';
 import { FlexBox, HrDivider } from 'staak-ui';
 import styled from 'styled-components';
 
@@ -33,6 +34,8 @@ const ProfileOverview = () => {
 
 			<FlexBox align="start" gap={15} style={{ padding: '10px 15px' }}>
 				<LefSide>
+					<TimeZone />
+					<HrDivider top={15} />
 					<GeneralInfo />
 					<HrDivider top={15} />
 					<Keywords />

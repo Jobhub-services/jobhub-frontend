@@ -38,6 +38,11 @@ const initialState: IAppState = {
 		size: 0,
 		content: [],
 	},
+	timezones: {
+		count: 0,
+		size: 0,
+		content: [],
+	},
 };
 
 const reducerSlice = createSlice({
@@ -72,6 +77,9 @@ const reducerSlice = createSlice({
 		},
 		setLanguages: (state, action) => {
 			state.langs = action.payload;
+		},
+		setTimeZone: (state, action) => {
+			state.timezones = action.payload;
 		},
 	},
 });

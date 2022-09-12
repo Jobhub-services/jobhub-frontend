@@ -5,12 +5,12 @@ const BillingIcon = ({ width, height }: IconProps) => {
 		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
 			<defs>
 				<radialGradient cx="135.05942" cy="135.82267" r="42.91758" gradientUnits="userSpaceOnUse" id="color-bi1">
-					<stop offset="0" stop-color="#000000"></stop>
-					<stop offset="0.979" stop-color="#000000" stop-opacity="0"></stop>
+					<stop offset="0" stopColor="#000000"></stop>
+					<stop offset="0.979" stopColor="#000000" stopOpacity="0"></stop>
 				</radialGradient>
 				<linearGradient x1="100.33333" y1="136.16667" x2="172" y2="136.16667" gradientUnits="userSpaceOnUse" id="color-bi2">
-					<stop offset="0" stop-color="#666666"></stop>
-					<stop offset="1" stop-color="#cccccc"></stop>
+					<stop offset="0" stopColor="#666666"></stop>
+					<stop offset="1" stopColor="#cccccc"></stop>
 				</linearGradient>
 			</defs>
 			<g fill="none">

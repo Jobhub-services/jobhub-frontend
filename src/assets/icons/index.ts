@@ -74,8 +74,12 @@ import ForOneIcon from './ForOneIcon';
 import BowlingIcon from './BowlingIcon';
 import BillingIcon from './BillingIcon';
 import CreditCardIcon from './CreditCardIcon';
+import SubscriptionIcon from './SubscriptionIcon';
+import PayGoIcon from './PayGoIcon';
 
 export {
+	PayGoIcon,
+	SubscriptionIcon,
 	CreditCardIcon,
 	BillingIcon,
 	BowlingIcon,

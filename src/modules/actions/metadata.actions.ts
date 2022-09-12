@@ -34,6 +34,9 @@ export const metadataDispatcher = {
 	setLanguages(data: { count: number; size: number; content: TLanguages[] }) {
 		dispatchToStore(storeActions.setLanguages(data));
 	},
+	setTimeZone: (data: any) => {
+		dispatchToStore(storeActions.setTimeZone(data));
+	},
 };
 
 export const metadataActions = {
@@ -116,6 +119,17 @@ export const metadataActions = {
 			const response = await httpClient.get(`${METADATA_SERVICE}/languages`);
 			const responseData = response.data;
 			if (responseData) metadataDispatcher.setLanguages(responseData);
+		} catch {
+		} finally {
+			metadataDispatcher.setIsLoading(false);
+		}
+	},
+	getTimeZone: async () => {
+		metadataDispatcher.setIsLoading(true);
+		try {
+			const response = await httpClient.get(`${METADATA_SERVICE}/timezones`);
+			const responseData = response.data;
+			if (responseData) metadataDispatcher.setTimeZone(responseData);
 		} catch {
 		} finally {
 			metadataDispatcher.setIsLoading(false);

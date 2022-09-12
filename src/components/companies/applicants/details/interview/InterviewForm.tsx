@@ -1,9 +1,13 @@
-import { Form, InputDateField, InputField, InputPickerField, TextAreaField } from '@/components/common';
+import { InputDateField, InputField, InputPickerField, TextAreaField } from '@/components/common';
 import { InterviewFormProps } from '@/models/component/companies/interview/interview.interface';
 import { InterviewStatus } from '@/types/company/interview.type';
 import React from 'react';
 import { FlexBox } from 'staak-ui';
+import styled from 'styled-components';
 
+const FormStyled = styled.form`
+	width: 100%;
+`;
 const InterviewForm = (props: InterviewFormProps) => {
 	const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = event.target;
@@ -16,7 +20,7 @@ const InterviewForm = (props: InterviewFormProps) => {
 		if (props.onPickerChange) props.onPickerChange(name, label);
 	};
 	return (
-		<Form>
+		<FormStyled>
 			<InputField name="title" placeholder="title" value={props.title ?? ''} onChange={handleInput}>
 				Interview Title
 			</InputField>
@@ -54,7 +58,7 @@ const InterviewForm = (props: InterviewFormProps) => {
 			<TextAreaField className="mt-10" name="note" placeholder="Description" value={props.note ?? ''} onChange={handleInput}>
 				Interview Note
 			</TextAreaField>
-		</Form>
+		</FormStyled>
 	);
 };
 

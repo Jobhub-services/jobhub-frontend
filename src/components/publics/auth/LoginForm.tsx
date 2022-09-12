@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
-import { Form, ErrorWrapper } from '@/components/common';
+import { InputField } from '@/components/common';
 import { FormProps } from '@/models/component';
-import { LockIcon, AtSignIcon } from 'staak-ui';
+import { LockIcon, AtSignIcon, Button } from 'staak-ui';
 import { authActions } from '@/modules/actions/auth.actions';
 import { useAppSelector } from '@/utils/appHooks';
+import styled from 'styled-components';
+
+const FormStyled = styled.form`
+	width: 100%;
+`;
 
 const LoginForm = (props: FormProps) => {
 	const { authErrors } = useAppSelector((state) => state.auth);
@@ -15,23 +20,39 @@ const LoginForm = (props: FormProps) => {
 			[name]: value,
 		});
 	};
-	const onSubmit = () => {
+	const onSubmit = (e: any) => {
+		e.preventDefault();
 		authActions.login(state);
 	};
 	return (
-		<Form onSubmit={onSubmit}>
-			<Form.Input onChange={onChange} placeholder="Email or Username" startIcon={<AtSignIcon />} name="username" type="text">
-				<ErrorWrapper error={authErrors.username} message={authErrors.username}>
-					Email or Username
-				</ErrorWrapper>
-			</Form.Input>
-			<Form.Input onChange={onChange} placeholder="Password" startIcon={<LockIcon />} name="password" type="password">
-				<ErrorWrapper error={authErrors.password} message={authErrors.password}>
-					Password
-				</ErrorWrapper>
-			</Form.Input>
-			<Form.Submit width="100%">Log In</Form.Submit>
-		</Form>
+		<FormStyled onSubmit={onSubmit}>
+			<InputField
+				onChange={onChange}
+				placeholder="Email or Username"
+				startIcon={<AtSignIcon />}
+				name="username"
+				type="text"
+				error={authErrors.username as any}
+				errorMessage={authErrors.username}
+			>
+				Email or Username
+			</InputField>
+			<InputField
+				className="mt-10"
+				onChange={onChange}
+				placeholder="Password"
+				startIcon={<LockIcon />}
+				name="password"
+				type="password"
+				error={authErrors.password as any}
+				errorMessage={authErrors.password}
+			>
+				Password
+			</InputField>
+			<Button width="100%" type="submit" className="mt-20">
+				Log In
+			</Button>
+		</FormStyled>
 	);
 };
 
