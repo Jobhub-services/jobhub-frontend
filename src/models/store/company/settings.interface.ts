@@ -1,5 +1,5 @@
 import { PayOptions } from '@/models/component/companies/subscription/subscription.interface';
-import { ChargesStatus, SubscriptionStatus, TBooleanAttr } from '@/types/company/settings.type';
+import { SubscriptionStatus, TBooleanAttr } from '@/types/company/settings.type';
 
 type TPaymentMethod = {
 	brand?: string;
@@ -40,6 +40,9 @@ export interface ISettingsState {
 	[TBooleanAttr.PAYMENT_METHOD_ADDED]?: boolean;
 	[TBooleanAttr.IS_CREATING_SUBSCRIPTION]?: boolean;
 	[TBooleanAttr.SUBSCRIPTION_CREATED]: boolean;
+	[TBooleanAttr.IS_CREATING_CHARGE]: boolean;
+	[TBooleanAttr.IS_CANCELING_SUBSCRIPTION]: boolean;
+	[TBooleanAttr.SUBSCRIPTION_CANCELED]: boolean;
 
 	isUpdated?: boolean;
 	errors?: {
@@ -81,30 +84,31 @@ export interface ISettingsState {
 	currentSubscription: {
 		_id: string | null;
 		userId?: string;
-		subscription?: { _id: string; title: string };
-		//payment_method?: TPaymentMethod;
-		//promotion_id: { type: Types.ObjectId; ref: Promotion };
-		subscription_id?: String;
-		interval?: PayOptions;
+		title?: string;
+		subscriptionId?: String;
+		subscriptionType?: PayOptions;
 		amount?: Number;
-		auto_renew?: Boolean;
-		creation_status?: ChargesStatus;
 		status?: SubscriptionStatus;
 		description?: String;
 		features?: {
 			_id: string;
-			title: string;
-			total_value: Number;
-			current_value: Number;
+			displayText?: string;
+			featureKey?: string;
 		}[];
-		//billingInfo?: TBillingInfo;
-		timezone?: { _id: string; code: String; name: String; utc: String };
-		currency?: { _id: string; code: String; name: String };
+		timezone?: string;
+		currency?: string;
 		createdAt?: string;
+		isSubscribed?: boolean;
+		renewJob?: number;
+		expireAt?: string;
 	};
 	createSubscription?: {
 		subscriptionId: string;
 		paymentMethodId: string;
 		subscriptionType: PayOptions;
+	};
+	chargeData?: {
+		paymentUrl: string;
+		message: string;
 	};
 }

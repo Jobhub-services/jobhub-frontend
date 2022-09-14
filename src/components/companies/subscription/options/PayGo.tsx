@@ -2,6 +2,7 @@ import { PayGoIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { InputField } from '@/components/common';
 import { SPayGo, SH2, SDollar, SMonth, SSpan } from '@/components/companies/subscription/options/option.style';
+import { POption } from '@/models/component/companies/subscription/subscription.interface';
 import { useState } from 'react';
 import { Button, FlexBox, Input } from 'staak-ui';
 import styled from 'styled-components';
@@ -20,13 +21,16 @@ const SRightSide = styled(FlexBox)`
 	border-left: 1px solid ${colors.BLACK_12};
 	padding: 15px 15px;
 `;
-const PayGo = () => {
-	const [quantity, setQuantity] = useState();
-
+const PayGo = ({ renewJob, onSubscribe }: POption) => {
+	const [quantity, setQuantity] = useState('');
+	const totalCharge = (renewJob ?? 0) * (isNaN(parseInt(quantity)) ? 1 : parseInt(quantity));
 	const handleData = (e: any, value?: string, name?: string) => {
-		if (Number.isInteger(value)) {
-			//setQuantity(parseInt(value ?? '0'));
+		if (Number.isInteger(parseInt(value ?? ''))) {
+			setQuantity(value ?? '');
 		}
+	};
+	const handleClick = () => {
+		if (onSubscribe) onSubscribe(`${quantity}`);
 	};
 	return (
 		<SPayGo justify="start">
@@ -47,13 +51,15 @@ const PayGo = () => {
 			<SRightSide flexDirection="column">
 				<FlexBox>
 					<SDollar>$</SDollar>
-					<SSpan>{149}</SSpan>
+					<SSpan>{renewJob ?? 0}</SSpan>
 					<SMonth>/Job</SMonth>
 				</FlexBox>
 				<FlexBox className="mt-10" gap={5}>
-					Total cost <strong>{` $${149}`}</strong>
+					Total cost <strong>{` $${totalCharge}`}</strong>
 				</FlexBox>
-				<Button className="mt-10">Upgrade to PayGo</Button>
+				<Button className="mt-10" onClick={handleClick}>
+					Pay Now
+				</Button>
 			</SRightSide>
 		</SPayGo>
 	);

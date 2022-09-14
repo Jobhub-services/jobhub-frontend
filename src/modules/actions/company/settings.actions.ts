@@ -33,6 +33,12 @@ export const settingsDispatcher = {
 	setPaymentMethod(data: any) {
 		dispatchToStore(storeActions.setPaymentMethod(data));
 	},
+	setCurrentSubscription: (data: any) => {
+		dispatchToStore(storeActions.setCurrentSubscription(data));
+	},
+	setChargeData: (data: any) => {
+		dispatchToStore(storeActions.setChargeData(data));
+	},
 };
 export const settingsAction = {
 	async setAttribute(data: any) {
@@ -156,9 +162,67 @@ export const settingsAction = {
 			if (responseData) {
 				settingsDispatcher.setBooleanAttr(true, TBooleanAttr.SUBSCRIPTION_CREATED);
 			}
-		} catch {
+		} catch (e: any) {
+			const response: AxiosResponse = e?.response;
+			if (response) {
+				const data = response.data;
+				let errors = '';
+				if (data.message) errors = data.message;
+				//else errors = transformErrors(data);
+				settingsDispatcher.setErrors({ status: true, messages: errors });
+			}
+			settingsDispatcher.setErrors({ status: true, messages: {} });
 		} finally {
 			settingsDispatcher.setBooleanAttr(false, TBooleanAttr.IS_CREATING_SUBSCRIPTION);
+		}
+	},
+	cancelSubscription: async () => {
+		settingsDispatcher.setBooleanAttr(true, TBooleanAttr.IS_CANCELING_SUBSCRIPTION);
+		try {
+			const response = await httpClient.delete(`${PAYMENT_SERVICE}/subscriptions/cancel`);
+			if (response) {
+				settingsDispatcher.setBooleanAttr(true, TBooleanAttr.SUBSCRIPTION_CANCELED);
+			}
+		} catch (e: any) {
+		} finally {
+			settingsDispatcher.setBooleanAttr(false, TBooleanAttr.IS_CANCELING_SUBSCRIPTION);
+		}
+	},
+	createJobCharge: async (data: any) => {
+		settingsDispatcher.setBooleanAttr(true, TBooleanAttr.IS_CREATING_CHARGE);
+		try {
+			const response = await httpClient.post(`${PAYMENT_SERVICE}/charges/charge-post`, data);
+			const responseData = response.data;
+			if (responseData) {
+				//console.log(responseData);
+				settingsDispatcher.setChargeData(responseData);
+			}
+		} catch (e: any) {
+			const response: AxiosResponse = e?.response;
+			if (response) {
+				const data = response.data;
+				let errors = '';
+				if (data.message) errors = data.message;
+				//else errors = transformErrors(data);
+				settingsDispatcher.setErrors({ status: true, messages: errors });
+			}
+			settingsDispatcher.setErrors({ status: true, messages: {} });
+		} finally {
+			settingsDispatcher.setBooleanAttr(false, TBooleanAttr.IS_CREATING_CHARGE);
+		}
+	},
+	getCurrentSubscription: async () => {
+		settingsDispatcher.setBooleanAttr(true);
+		try {
+			const response = await httpClient.get(`${PAYMENT_SERVICE}/subscriptions/me`);
+			const responseData = response.data;
+			if (responseData) {
+				console.log(responseData);
+				settingsDispatcher.setCurrentSubscription({ ...responseData.content, isSubscribed: responseData.isSubscribed });
+			}
+		} catch {
+		} finally {
+			settingsDispatcher.setBooleanAttr(false);
 		}
 	},
 };

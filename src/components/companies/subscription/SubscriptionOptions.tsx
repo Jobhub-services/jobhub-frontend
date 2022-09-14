@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import Standard from '@/components/companies/subscription/options/Standard';
 import InfinityPro from '@/components/companies/subscription/options/InfinityPro';
 import ForOne from '@/components/companies/subscription/options/ForOne';
-import PayGo from '@/components/companies/subscription/options/PayGo';
 import HeaderTab from '@/components/companies/subscription/HeaderTab';
 import { useEffect, useState } from 'react';
 import { PayOptions } from '@/models/component/companies/subscription/subscription.interface';
 import { useAppSelector } from '@/utils/appHooks';
 import { settingsAction, settingsDispatcher } from '@/modules/actions/company/settings.actions';
-import PaymentPopModal from '@/components/companies/subscription/PaymentPopModal';
+import PaymentPopModal from '@/components/companies/subscription/Modal/PaymentPopModal';
 import { TBooleanAttr } from '@/types/company/settings.type';
 import { pushNotification } from '@/utils/helpers';
 
@@ -28,7 +27,12 @@ const SOptions = styled(FlexBox)`
 const SubscriptionOptions = () => {
 	const [openPopPayment, setOpenPopPayment] = useState(false);
 	const [status, setStatus] = useState(PayOptions.YEARLY);
-	const { subscription, createSubscription, paymentMethod, billingInfo, subscriptionCreated } = useAppSelector((state) => state.companySettings);
+	const { subscription, createSubscription, paymentMethod, billingInfo, subscriptionCreated, isCreatingSubscription } = useAppSelector(
+		(state) => state.companySettings
+	);
+	const selectedSubs = subscription?.content?.find((elem) => elem._id === createSubscription?.subscriptionId);
+	const amount = createSubscription?.subscriptionType === PayOptions.YEARLY ? (selectedSubs?.yearly_amount ?? 0) * 12 : selectedSubs?.monthly_amount;
+
 	useEffect(() => {
 		if (subscription.content.length === 0) settingsAction.getSubscription();
 	}, []);
@@ -36,8 +40,11 @@ const SubscriptionOptions = () => {
 		if (subscriptionCreated) {
 			settingsDispatcher.setBooleanAttr(false, TBooleanAttr.SUBSCRIPTION_CREATED);
 			pushNotification.success('Your subscription is created successfully');
+			setOpenPopPayment(false);
+			settingsAction.getCurrentSubscription();
 		}
 	}, [subscriptionCreated]);
+
 	const handleChange = (status: string) => {
 		setStatus(status as any);
 	};
@@ -50,10 +57,39 @@ const SubscriptionOptions = () => {
 		setOpenPopPayment(true);
 	};
 
-	//console.log(subscription);
+	const handleOrder = () => {
+		const isValid =
+			paymentMethod?._id &&
+			paymentMethod?._id !== '' &&
+			billingInfo?.address &&
+			billingInfo?.address !== '' &&
+			billingInfo?.email &&
+			billingInfo?.email !== '' &&
+			billingInfo?.city &&
+			billingInfo?.city !== '' &&
+			billingInfo?.country?._id &&
+			billingInfo?.country._id !== '';
+		if (isValid) {
+			const tmp = { paymentMethodId: paymentMethod._id, ...createSubscription };
+			settingsAction.createSubscription(tmp);
+			//console.log(tmp);
+		} else {
+			pushNotification.error('There is missing informations, please check your credit card and billing informations');
+		}
+	};
 	return (
 		<>
-			{openPopPayment && <PaymentPopModal open={openPopPayment} onClose={() => setOpenPopPayment(false)} />}
+			{openPopPayment && (
+				<PaymentPopModal
+					isLoading={isCreatingSubscription}
+					onPlaceOrder={handleOrder}
+					open={openPopPayment}
+					onClose={() => setOpenPopPayment(false)}
+					amount={amount ?? 0}
+					orderTitle={selectedSubs?.title ?? ''}
+					description={`Upgrade to ${createSubscription?.subscriptionType} plan`}
+				/>
+			)}
 			<div className="mt-20">
 				<HeaderContainer justify="start">
 					<StyledHeadline variant="h2" size="sm">
@@ -69,14 +105,6 @@ const SubscriptionOptions = () => {
 					<Standard onSubscribe={handleSubscribe} status={status} />
 					<InfinityPro onSubscribe={handleSubscribe} status={status} />
 				</SOptions>
-			</div>
-			<div className="mt-20">
-				<HeaderContainer justify="start">
-					<StyledHeadline variant="h2" size="sm">
-						As you pay you go
-					</StyledHeadline>
-				</HeaderContainer>
-				<PayGo />
 			</div>
 		</>
 	);

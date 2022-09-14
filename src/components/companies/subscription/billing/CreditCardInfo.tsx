@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { colors } from '@/assets/theme';
 import { FlexBox } from 'staak-ui';
 import { PCreditCardInfo } from '@/models/component/companies/subscription/subscription.interface';
+import { pushNotification } from '@/utils/helpers';
 declare function Tapjsli(token: string): any;
 // input labels/placeholders
 const labels = {
@@ -76,9 +77,7 @@ const CreditCardInfo = (props: PCreditCardInfo) => {
 				var displayError = document.getElementById(props.errorHandler);
 				if (displayError) {
 					if (event.error) {
-						displayError.textContent = event.error.message;
-					} else {
-						displayError.textContent = '';
+						pushNotification.error(event.error.message);
 					}
 				}
 			});

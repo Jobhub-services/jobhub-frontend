@@ -77,9 +77,7 @@ const BillingView = () => {
 		if (cardLoaded) {
 			tap.createToken(card).then(function (result: any) {
 				if (result.error) {
-					// Inform the user if there was an error
-					var errorElement = document.getElementById('error-handler');
-					if (errorElement) errorElement.textContent = result.error.message;
+					pushNotification.error(result.error.message);
 				} else {
 					tapTokenHandler(result);
 				}

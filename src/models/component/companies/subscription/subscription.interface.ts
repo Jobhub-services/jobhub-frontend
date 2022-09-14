@@ -20,5 +20,16 @@ export interface PCreditCardInfo extends StandardProps {
 
 export interface POption extends StandardProps {
 	status?: PayOptions;
+	renewJob?: number;
 	onSubscribe?: (subscriptionId: string) => void;
+}
+
+export interface PPaymentModal extends StandardProps {
+	open?: boolean;
+	orderTitle: string;
+	description: string;
+	amount: number;
+	isLoading?: boolean;
+	onClose: () => void;
+	onPlaceOrder: () => void;
 }

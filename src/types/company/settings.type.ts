@@ -6,6 +6,9 @@ export enum TBooleanAttr {
 	PAYMENT_METHOD_ADDED = 'paymentMethodAdded',
 	IS_CREATING_SUBSCRIPTION = 'isCreatingSubscription',
 	SUBSCRIPTION_CREATED = 'subscriptionCreated',
+	IS_CREATING_CHARGE = 'isCreatingCharge',
+	IS_CANCELING_SUBSCRIPTION = 'isCancelingSubscription',
+	SUBSCRIPTION_CANCELED = 'subscriptionCanceled',
 }
 
 export enum ChargesStatus {

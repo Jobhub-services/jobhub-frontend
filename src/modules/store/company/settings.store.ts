@@ -1,6 +1,5 @@
-import { PayOptions } from '@/models/component/companies/subscription/subscription.interface';
 import { ISettingsState } from '@/models/store/company/settings.interface';
-import { ChargesStatus, SubscriptionStatus, TBooleanAttr } from '@/types/company/settings.type';
+import { TBooleanAttr } from '@/types/company/settings.type';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: ISettingsState = {
@@ -11,6 +10,9 @@ const initialState: ISettingsState = {
 	[TBooleanAttr.PAYMENT_METHOD_ADDED]: false,
 	[TBooleanAttr.IS_CREATING_SUBSCRIPTION]: false,
 	[TBooleanAttr.SUBSCRIPTION_CREATED]: false,
+	[TBooleanAttr.IS_CREATING_CHARGE]: false,
+	[TBooleanAttr.IS_CANCELING_SUBSCRIPTION]: false,
+	[TBooleanAttr.SUBSCRIPTION_CANCELED]: false,
 
 	generaleInfo: {},
 	securityInfo: {},
@@ -23,32 +25,6 @@ const initialState: ISettingsState = {
 	},
 	currentSubscription: {
 		_id: null,
-		userId: 'string',
-		subscription: { _id: 'string', title: 'For One ' },
-		//promotion_id: { type: Types.ObjectId; ref: Promotion };
-		subscription_id: 'String',
-		interval: PayOptions.YEARLY,
-		amount: 1788,
-		auto_renew: true,
-		creation_status: ChargesStatus.TIMEDOUT,
-		status: SubscriptionStatus.ACTIVE,
-		features: [
-			{
-				_id: 'string',
-				title: '1 Posting',
-				total_value: 1,
-				current_value: 0,
-			},
-			{
-				_id: 'string',
-				title: '10 Contacts',
-				total_value: 10,
-				current_value: 5,
-			},
-		],
-		timezone: { _id: 'string', code: 'String', name: 'String', utc: '+10' },
-		currency: { _id: 'string', code: 'USD', name: 'String' },
-		createdAt: '2022-09-01T12:12:12',
 	},
 };
 
@@ -95,6 +71,13 @@ const reducerSlices = createSlice({
 		setCreateSubscription: (state, action) => {
 			const data = action.payload;
 			state.createSubscription = data;
+		},
+		setCurrentSubscription: (state, action) => {
+			const data = action.payload;
+			state.currentSubscription = data;
+		},
+		setChargeData: (state, action) => {
+			state.chargeData = action.payload;
 		},
 	},
 });
