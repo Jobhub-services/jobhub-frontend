@@ -29,5 +29,7 @@ export interface PopModelProps extends StandardProps {
 	width?: string;
 	closed?: boolean;
 	top?: boolean;
+	closable?: boolean;
+	positionAbsolute?: boolean;
 	onClose?: (close: boolean) => void;
 }

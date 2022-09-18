@@ -10,7 +10,7 @@ const SContainer = styled.div<any>`
 		css`
 			transition: box-shadow 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 			&:hover {
-				box-shadow: 0 0 12px #6d3bfd;
+				box-shadow: 0 0 13px -10px #6d3bfd;
 			}
 		`}
 `;

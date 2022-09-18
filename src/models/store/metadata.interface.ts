@@ -6,7 +6,7 @@ export interface IAppState {
 	countries?: {
 		count?: number;
 		size?: number;
-		content?: { _id?: string; code?: string; name?: string }[];
+		content?: { _id?: string; code?: string; name?: string; dialCode?: string; flag?: string }[];
 	};
 	job_categories?: {
 		content: { _id?: string; name?: string }[];

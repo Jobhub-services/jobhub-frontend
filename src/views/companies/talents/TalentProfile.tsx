@@ -2,19 +2,21 @@ import styled, { keyframes } from 'styled-components';
 import { colors } from '@/assets/theme';
 import { HEADER_HIEGHT, EXPANDED_ASIDE_WIDTH } from '@/constants/app.constants';
 import { useAppSelector } from '@/utils/appHooks';
-import { FlexBox, IconButton, Headline, HrDivider, Button, TabPane } from 'staak-ui';
+import { FlexBox, IconButton, Headline, HrDivider, Button, TabPane, MessageIcon } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
-import { CVIcon } from '@/assets/icons';
+import { CVIcon, LoadingIcon } from '@/assets/icons';
 import StatusElem from '@/components/companies/_common/StatusElem';
 import { TitleStatus } from '@/constants/company/talent.contants';
 import Preferences from '@/components/companies/talents/profile/utils/Preferences';
 import TalentContact from '@/components/companies/talents/profile/utils/TalentContact';
 import GeneralInfo from '@/components/companies/talents/profile/utils/GeneralInfo';
 import { Avatar } from '@/components/companies/_common';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { talentsActions } from '@/modules/actions/company/talents.actions';
+import { messageActions, messageDispatcher } from '@/modules/actions/company/message.actions';
+import { pushNotification } from '@/utils/helpers';
 
 const kwidth = keyframes`
 	from {
@@ -54,9 +56,6 @@ const MainContainer = styled.div<any>`
 	top: 0;
 	width: 100%;
 	height: 100%;
-	//top: ${HEADER_HIEGHT}px;
-	//width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
-	//height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
 const DetailContainer = styled.div<any>`
@@ -68,7 +67,6 @@ const DetailContainer = styled.div<any>`
 	animation: ${(props) => (props.onlyDetail ? kFullWidth : kwidth)} 0.2s ease-in-out;
 	background: white;
 	box-shadow: -5px 0px 20px -15px ${colors.BLACK_7};
-	//transition: width 0.2s;
 `;
 const SubContainer = styled.div`
 	cursor: default;
@@ -93,6 +91,9 @@ const TalentProfile = () => {
 	const navigate = useNavigate();
 	const { id } = useParams();
 	const { talentDetails, isDetailLoading } = useAppSelector((state) => state.talent);
+	const { newChat } = useAppSelector((state) => state.companyMessage);
+	const { userInfo } = useAppSelector((state) => state.user);
+	const [chatLoading, setChatLoading] = useState(false);
 	const parentRef = useRef(null);
 	const { state } = useLocation();
 	const onlyDetail = (state as any)?.onlyDetail ?? false;
@@ -100,11 +101,28 @@ const TalentProfile = () => {
 	useEffect(() => {
 		if (id && talentDetails._id !== id) talentsActions.getTalentDetails(id);
 	}, []);
+
+	useEffect(() => {
+		if (newChat?.created) {
+			messageDispatcher.createChat({ created: false, _id: null });
+			navigate(`/messages/${newChat._id}`);
+		}
+	}, [newChat]);
+
 	const onClose = () => {
 		navigate(-1);
 	};
 	const backUp = (e: any) => {
 		if (e.target === parentRef.current) navigate(-1);
+	};
+	const onChatClick = () => {
+		if (talentDetails?.enableContact) {
+			setChatLoading(true);
+			const data = [talentDetails.userId, userInfo._id];
+			messageActions.createConversation(data);
+		} else {
+			pushNotification.error('You cannot contact talent, please subscribe or renew your current subscription');
+		}
 	};
 	return (
 		<MainContainer showed={true} ref={parentRef} onClick={backUp}>
@@ -113,13 +131,24 @@ const TalentProfile = () => {
 					<LoadingScreen />
 				) : (
 					<SubContainer>
-						<FlexBox justify="start" gap={10} height="62px" style={{ padding: '5px 10px' }}>
-							<IconButton width="30px" height="30px" circle onClick={onClose}>
-								<CloseIcon color={colors.BLACK_8} />
-							</IconButton>
-							<Headline variant="h2" size="sm">
-								Talent details
-							</Headline>
+						<FlexBox justify="space-between" gap={10} height="62px" style={{ padding: '5px 20px 5px 10px' }}>
+							<FlexBox justify="start" gap={10}>
+								<IconButton width="30px" height="30px" circle onClick={onClose}>
+									<CloseIcon color={colors.BLACK_8} />
+								</IconButton>
+								<Headline variant="h2" size="sm">
+									Talent details
+								</Headline>
+							</FlexBox>
+							<Button
+								onClick={onChatClick}
+								color="blue"
+								size="md"
+								variant="light"
+								startIcon={chatLoading ? <></> : <MessageIcon color={colors.BLUE_BASE} />}
+							>
+								{chatLoading ? <LoadingIcon color={colors.BLUE_BASE} width="25px" height="25px" /> : 'Message'}
+							</Button>
 						</FlexBox>
 						<HrDivider color={colors.BLACK_12} top={0} side={0} />
 						<SContent justify="start" align="start" gap={10}>
@@ -145,11 +174,13 @@ const TalentProfile = () => {
 									salary={talentDetails?.salary}
 									currency={talentDetails?.currency}
 								/>
-								<a target="_blank" href={talentDetails.resume} rel="noreferrer">
-									<SButton size="md" startIcon={<CVIcon />}>
-										Download Resume
-									</SButton>
-								</a>
+								{talentDetails?.resume && talentDetails.resume !== '' && (
+									<a target="_blank" href={talentDetails.resume} rel="noreferrer">
+										<SButton size="md" startIcon={<CVIcon />}>
+											Download Resume
+										</SButton>
+									</a>
+								)}
 							</LeftSide>
 							<RightSide>
 								<TabPane activeItem="genrale" paneWidth="40%" paneJustify="center">

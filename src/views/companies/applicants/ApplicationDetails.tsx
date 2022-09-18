@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
-import { FlexBox, IconButton, Headline, Button, TabPane } from 'staak-ui';
+import { FlexBox, IconButton, Headline, TabPane } from 'staak-ui';
 import { CloseIcon } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import ApplicationStage from '@/components/companies/applicants/details/ApplicationStage';
@@ -15,6 +14,7 @@ import InterviewSchedule from '@/components/companies/applicants/details/intervi
 import { useEffect, useRef } from 'react';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { applicationsActions } from '@/modules/actions/company/applications.actions';
+import Interview from '@/assets/icons/interview.png';
 
 const kwidth = keyframes`
 	from {
@@ -71,7 +71,7 @@ const AppDetails = styled.div`
 	border: 1px solid ${colors.BLACK_12};
 	border-radius: 8px;
 	height: 100%;
-	width: 70%;
+	width: 80%;
 `;
 const SSpan = styled.span<any>`
 	font-size: 13px;
@@ -86,9 +86,6 @@ const MainContainer = styled.div<any>`
 	top: 0;
 	height: 100%;
 	width: 100%;
-	//top: ${HEADER_HIEGHT}px;
-	//width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
-	//height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
 
@@ -174,12 +171,32 @@ const ApplicationDetails = () => {
 										</ScrollContainer>
 									</TabPane.Pane>
 									<TabPane.Pane name="hiring" title="Interviews List">
-										<ScrollContainer className="staak_scrollbar">
-											<InterviewsList />
+										<ScrollContainer className="staak_scrollbar" style={{ height: 'inherit' }}>
+											{applicantDetails.status === 'IN_PROGRESS' ? (
+												<InterviewsList />
+											) : (
+												<FlexBox height="100%" flexDirection="column">
+													<img src={Interview} alt="Interview" width={200} height={200} />
+													<div className="mt-20">You cannot schedule interview at this stage</div>
+													<div className="mt-10">
+														You must be in <strong>Interview Stage</strong> to enable interview functionalities
+													</div>
+												</FlexBox>
+											)}
 										</ScrollContainer>
 									</TabPane.Pane>
 									<TabPane.Pane name="interviewSchedule" title="Interview Schedule">
-										<InterviewSchedule />
+										{applicantDetails.status === 'IN_PROGRESS' ? (
+											<InterviewSchedule />
+										) : (
+											<FlexBox height="100%" flexDirection="column">
+												<img src={Interview} alt="Interview" width={200} height={200} />
+												<div className="mt-20">You cannot schedule interview at this stage</div>
+												<div className="mt-10">
+													You must be in <strong>Interview Stage</strong> to enable interview functionalities
+												</div>
+											</FlexBox>
+										)}
 									</TabPane.Pane>
 								</TabPane>
 							</AppDetails>

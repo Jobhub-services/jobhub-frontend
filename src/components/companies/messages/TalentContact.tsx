@@ -15,7 +15,7 @@ const SOptions = styled.div`
 	align-items: center;
 	justify-content: center;
 	padding: 8px;
-	top: 27px;
+	top: 23px;
 	right: 20px;
 	border: 1px solid ${colors.BLACK_11};
 	background-color: white;

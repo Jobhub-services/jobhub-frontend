@@ -1,5 +1,5 @@
-import { FlexBox, HrDivider, Button, GithubIcon, LinkedinIcon, MessageIcon, IconButton } from 'staak-ui';
-import { LoadingIcon, LocationIcon, ProfileIcon, WorldIcon } from '@/assets/icons';
+import { FlexBox, HrDivider, Button, Tag } from 'staak-ui';
+import { LocationIcon, ProfileIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { talentsActions } from '@/modules/actions/company/talents.actions';
 import StatusElem from '@/components/companies/_common/StatusElem';
@@ -9,12 +9,11 @@ import { Avatar } from '@/components/companies/_common';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
-import { useState } from 'react';
 
 const SWarrap = styled(FlexBox)`
 	flex-wrap: wrap;
-	height: 35px;
 	overflow: hidden;
+	height: 35px;
 `;
 const SCard = styled.div`
 	background: white;
@@ -26,17 +25,6 @@ const ViewButton = styled(Button)`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-`;
-const SButton = styled.div<any>`
-	display: flex;
-	align-items: center;
-	gap: 5px;
-	padding: 7px 10px;
-	background-color: ${(props) => props.background};
-	color: ${(props) => props.color};
-	border-radius: 8px;
-	font-size: 12px;
-	cursor: pointer;
 `;
 const SubTitle = styled.span`
 	color: ${colors.BLACK_8};
@@ -61,24 +49,16 @@ const Sp = styled.p`
 	overflow: hidden;
 	white-space: pre-line;
 `;
-const SIconButton = styled(IconButton)`
-	background-color: ${colors.BLUE_CLEAR_5};
-	padding: 7px;
-`;
+
 const TalentCard = (props: CardProps) => {
 	const navigate = useNavigate();
 	const { _id } = useAppSelector((state) => state.talent.talentDetails);
-	const [chatLoading, setChatLoading] = useState(false);
 
 	const viewProfile = () => {
 		navigate(`detail/${props._id}`);
 		if (props._id !== _id) talentsActions.getTalentDetails(props._id);
 	};
 
-	const onChatClick = () => {
-		setChatLoading(true);
-		if (props.onChat) props.onChat(props.userId!);
-	};
 	return (
 		<SCard>
 			<Avatar
@@ -105,35 +85,12 @@ const TalentCard = (props: CardProps) => {
 					{!props.summary && <Sp>He hasn't added summary yet</Sp>}
 				</div>
 				<div className="mt-10">
-					<div>Social profiles</div>
+					<div>Skills</div>
 					<SWarrap justify="start" className="mt-10" gap={10}>
-						{props.social_profile?.linkedin && (
-							<SButton background={colors.BLACK_13} color={colors.BLUE_BASE}>
-								<LinkedinIcon width="20px" height="20px" color={colors.BLUE_BASE} />
-								<a href={props.social_profile?.linkedin} target="_blank" rel="noreferrer">
-									LinkedIn
-								</a>
-							</SButton>
-						)}
-						{props.social_profile?.git && (
-							<SButton background={colors.BLACK_13}>
-								<GithubIcon />
-								<a href={props.social_profile?.git} target="_blank" rel="noreferrer">
-									Git
-								</a>
-							</SButton>
-						)}
-
-						{props.social_profile?.website && (
-							<SButton background={colors.BLACK_13} color={colors.PINK_BASE}>
-								<WorldIcon width="20px" height="20px" color={colors.PINK_BASE} />
-								<a href={props.social_profile?.website} target="_blank" rel="noreferrer">
-									Website
-								</a>
-							</SButton>
-						)}
-
-						{Object.keys(props.social_profile ?? {}).length === 0 && <Sp>He hasn't added social profiles yet</Sp>}
+						{props?.skills?.slice(0, 3).map((elem) => {
+							return <Tag style={{ fontSize: '12px' }}>{elem}</Tag>;
+						})}
+						{(!props?.skills || props?.skills?.length === 0) && <Sp>He hasn't added any skills yet</Sp>}
 					</SWarrap>
 				</div>
 			</div>
@@ -142,15 +99,6 @@ const TalentCard = (props: CardProps) => {
 				<ViewButton width="100%" size="md" startIcon={<ProfileIcon />} variant="light" onClick={viewProfile}>
 					View Profile
 				</ViewButton>
-				<SIconButton width="35px" height="35px" onClick={onChatClick}>
-					{chatLoading ? (
-						<FlexBox>
-							<LoadingIcon color={colors.BLUE_BASE} width="25px" height="25px" />
-						</FlexBox>
-					) : (
-						<MessageIcon color={colors.BLUE_BASE} />
-					)}
-				</SIconButton>
 			</FlexBox>
 		</SCard>
 	);

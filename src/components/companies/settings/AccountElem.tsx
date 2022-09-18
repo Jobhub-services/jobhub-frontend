@@ -1,4 +1,5 @@
 import { InputField } from '@/components/common';
+import PhoneInput from '@/components/common/input/PhoneInput';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { settingsAction, settingsDispatcher } from '@/modules/actions/company/settings.actions';
 import { userActions } from '@/modules/actions/user.actions';
@@ -16,13 +17,19 @@ const Container = styled.div`
 const AccountElem = () => {
 	const { isLoading, isUpdated, errors } = useAppSelector((state) => state.companySettings);
 	const { userInfo } = useAppSelector((state) => state.user);
-	const [localData, setLocalData] = useState<{ username?: string; companyName?: string; email?: string }>({});
+	const [localData, setLocalData] = useState<{
+		username?: string;
+		companyName?: string;
+		email?: string;
+		phone?: { country_code: string; number: string };
+	}>({});
 
 	useEffect(() => {
 		const tmp = {
 			username: userInfo?.username,
 			companyName: userInfo?.companyName,
 			email: userInfo?.email,
+			phone: userInfo.phone,
 		};
 		setLocalData(tmp);
 	}, []);
@@ -52,11 +59,18 @@ const AccountElem = () => {
 		let tmp: any = { companyName: localData.companyName };
 		if (localData.email !== userInfo.email) tmp.email = localData.email;
 		if (localData.username !== userInfo.username) tmp.username = localData.username;
+		if (localData?.phone?.country_code !== userInfo?.phone?.country_code || localData?.phone?.number !== userInfo?.phone?.number)
+			tmp.phone = localData.phone;
 		settingsAction.setAttribute(tmp);
 	};
 	const handleData = (event: any, value?: string, name?: string) => {
 		let tmp = { ...localData };
 		tmp[name as 'companyName' | 'username' | 'email'] = value;
+		setLocalData(tmp);
+	};
+	const handleDataChange = (value: any, name: string) => {
+		let tmp = { ...localData };
+		tmp.phone = value;
 		setLocalData(tmp);
 	};
 	return (
@@ -73,6 +87,7 @@ const AccountElem = () => {
 					<InputField name="email" placeholder="Business email" className="mt-10" value={localData?.email} onDataChange={handleData}>
 						Business email
 					</InputField>
+					<PhoneInput name="phone" placeholder="Phone" className="mt-10" onDataChange={handleDataChange} value={localData?.phone} />
 					<Button className="mt-20" onClick={handleClick}>
 						Save changes
 					</Button>

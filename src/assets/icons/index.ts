@@ -76,8 +76,37 @@ import BillingIcon from './BillingIcon';
 import CreditCardIcon from './CreditCardIcon';
 import SubscriptionIcon from './SubscriptionIcon';
 import PayGoIcon from './PayGoIcon';
-
+import MessageIcon from './MessageIcon';
+import MessageFilledIcon from './MessageFilledIcon';
+import SettingsFilledIcon from './SettingsFilledIcon';
+import SettingsIcon from './SettingsIcon';
+import JobIcon from './JobIcon';
+import JobFilledIcon from './JobFilledIcon';
+import OverviewIcon from './OverviewIcon';
+import OverviewFilledIcon from './OverviewFilledIcon';
+import FindTalentIcon from './FindTalentIcon';
+import FindTalentFilledIcon from './FIndTalentFilledIcon';
+import CompanyFilledIcon from './CompanyFilledIcon';
+import ApplicationIcon from './ApplicationIcon';
+import ApplicationFilledIcon from './ApplicationFilledIcon';
+import AppliedJobIcon from './AppliedJobIcon';
+import AppliedJobFilledIcon from './AppliedJobFilledIcon';
 export {
+	AppliedJobFilledIcon,
+	AppliedJobIcon,
+	ApplicationFilledIcon,
+	ApplicationIcon,
+	CompanyFilledIcon,
+	FindTalentIcon,
+	FindTalentFilledIcon,
+	OverviewFilledIcon,
+	OverviewIcon,
+	JobIcon,
+	JobFilledIcon,
+	SettingsIcon,
+	SettingsFilledIcon,
+	MessageFilledIcon,
+	MessageIcon,
 	PayGoIcon,
 	SubscriptionIcon,
 	CreditCardIcon,

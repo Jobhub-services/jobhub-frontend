@@ -22,7 +22,7 @@ const SubContainer = styled.div`
 const TalentsView = () => {
 	const { isLoading, showTalents } = useAppSelector((state) => state.talent);
 	const [isFetching, setIsFetching] = useState(false);
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const { state } = useLocation();
 	const onlyDetail = (state as any)?.onlyDetail ?? false;
 

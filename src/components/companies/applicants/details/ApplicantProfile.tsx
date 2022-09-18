@@ -23,7 +23,6 @@ const SWrappe = styled(FlexBox)`
 `;
 const ApplicantProfile = () => {
 	const { applicantDetails } = useAppSelector((state) => state.applications);
-	console.log(applicantDetails);
 	return (
 		<div>
 			<div>
@@ -84,7 +83,7 @@ const ApplicantProfile = () => {
 					<span>Notice period</span>
 					<SDiv>{applicantDetails.notice_period ?? 'N/A'}</SDiv>
 				</FlexBox>
-				<FlexBox justify="start" gap={5}>
+				<FlexBox justify="start" gap={5} className="mt-10">
 					<span>Start working</span>
 					<SDiv>{applicantDetails?.start_date ? new Date(applicantDetails?.start_date).toDateString() : 'N/A'}</SDiv>
 				</FlexBox>

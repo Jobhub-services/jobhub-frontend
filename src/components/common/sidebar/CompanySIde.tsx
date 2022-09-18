@@ -1,17 +1,19 @@
-import { ApplicationColorIcon, JobColorIcon, MessageColorIcon, OverviewColorIcon, SettingsColorIcon, FindTalentsColorIcon } from '@/assets/icons';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
-	AssesmentsIcon,
 	MessageIcon,
-	NavItem,
-	ScheduleIcon,
-	TalentIcon,
+	MessageFilledIcon,
+	SettingsFilledIcon,
+	SettingsIcon,
 	JobIcon,
-	HealthIcon,
-	SettingIcon,
-	InvitationIcon,
-	ApplicantIcon,
-} from 'staak-ui';
+	JobFilledIcon,
+	OverviewFilledIcon,
+	OverviewIcon,
+	FindTalentIcon,
+	FindTalentFilledIcon,
+	ApplicationIcon,
+	ApplicationFilledIcon,
+} from '@/assets/icons';
+import { Link, useLocation } from 'react-router-dom';
+import { NavItem } from 'staak-ui';
 import styled, { css } from 'styled-components';
 
 const SLink = styled(Link)<any>`
@@ -28,12 +30,22 @@ const CompanySide = ({ appExpanded }: { appExpanded: boolean }) => {
 	return (
 		<>
 			<SLink to="/" expanded={appExpanded}>
-				<NavItem className="mb-5" icon={<OverviewColorIcon width="25px" height="25px" />} width={widthItems} active={pathname === '/'}>
+				<NavItem
+					className="mb-5"
+					icon={pathname === '/' ? <OverviewFilledIcon /> : <OverviewIcon width="25px" height="25px" />}
+					width={widthItems}
+					active={pathname === '/'}
+				>
 					{appExpanded ? <NavItem.Content>Overview</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
 			<SLink to="jobs" expanded={appExpanded}>
-				<NavItem className="mb-5" icon={<JobColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/jobs')}>
+				<NavItem
+					className="mb-5"
+					icon={pathname.startsWith('/jobs') ? <JobFilledIcon /> : <JobIcon width="25px" height="25px" />}
+					width={widthItems}
+					active={pathname.startsWith('/jobs')}
+				>
 					{appExpanded ? <NavItem.Content>Jobs</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
@@ -41,7 +53,7 @@ const CompanySide = ({ appExpanded }: { appExpanded: boolean }) => {
 			<SLink to="talents" expanded={appExpanded}>
 				<NavItem
 					className="mb-5"
-					icon={<FindTalentsColorIcon width="25px" height="25px" />}
+					icon={pathname.startsWith('/talents') ? <FindTalentFilledIcon width="25px" height="25px" /> : <FindTalentIcon />}
 					width={widthItems}
 					active={pathname.startsWith('/talents')}
 				>
@@ -52,7 +64,7 @@ const CompanySide = ({ appExpanded }: { appExpanded: boolean }) => {
 			<SLink to="applicants/NEW" expanded={appExpanded}>
 				<NavItem
 					className="mb-5"
-					icon={<ApplicationColorIcon width="25px" height="25px" />}
+					icon={pathname.startsWith('/applicants') ? <ApplicationFilledIcon width="25px" height="25px" /> : <ApplicationIcon />}
 					width={widthItems}
 					active={pathname.startsWith('/applicants')}
 				>
@@ -60,7 +72,12 @@ const CompanySide = ({ appExpanded }: { appExpanded: boolean }) => {
 				</NavItem>
 			</SLink>
 			<SLink to="messages" expanded={appExpanded}>
-				<NavItem className="mb-5" icon={<MessageColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/messages')}>
+				<NavItem
+					className="mb-5"
+					icon={pathname.startsWith('/messages') ? <MessageFilledIcon width="25px" height="25px" /> : <MessageIcon width="25px" height="25px" />}
+					width={widthItems}
+					active={pathname.startsWith('/messages')}
+				>
 					{appExpanded ? <NavItem.Content>Messages</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
@@ -94,7 +111,11 @@ const CompanySide = ({ appExpanded }: { appExpanded: boolean }) => {
 			</NavItem>*/}
 
 			<SLink to="settings/account" expanded={appExpanded}>
-				<NavItem icon={<SettingsColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/settings')}>
+				<NavItem
+					icon={pathname.startsWith('/settings') ? <SettingsFilledIcon width="25px" height="25px" /> : <SettingsIcon width="25px" height="25px" />}
+					width={widthItems}
+					active={pathname.startsWith('/settings')}
+				>
 					{appExpanded ? <NavItem.Content>Settings</NavItem.Content> : null}
 				</NavItem>
 			</SLink>

@@ -18,6 +18,8 @@ export interface IUser extends IDeveloperInfo, ICompanyInfo {
 	password?: string;
 	userType?: UserType;
 	avatar?: string;
+	phone?: { number: string; country_code: string };
+	enableCreateJob?: number;
 }
 
 export interface IUserState {

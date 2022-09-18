@@ -11,6 +11,7 @@ import ChargePopModal from '@/components/companies/subscription/Modal/ChargePopM
 import { pushNotification } from '@/utils/helpers';
 import CancelSubscriptionModal from '@/components/companies/subscription/Modal/CancelSubscriptionModal';
 import { TBooleanAttr } from '@/types/company/settings.type';
+import { userActions } from '@/modules/actions/user.actions';
 
 const CCurrency: any = {
 	'United States Dollar': '$',
@@ -85,6 +86,7 @@ const CurrentSubscription = () => {
 		} else if (chargeData?.message && chargeData?.message !== '') {
 			setOpenPopPayment(false);
 			pushNotification.success('Your subscription is created successfully');
+			userActions.getUserInfo();
 		}
 	}, [chargeData]);
 	useEffect(() => {
@@ -120,7 +122,7 @@ const CurrentSubscription = () => {
 	const handleCancel = () => {
 		setOpenCancelModal(true);
 	};
-	console.log(currentSubscription);
+
 	return (
 		<>
 			{openCancelModal && <CancelSubscriptionModal open={openCancelModal} onClose={() => setOpenCancelModal(false)} />}
@@ -182,7 +184,7 @@ const CurrentSubscription = () => {
 								<HrDivider top={10} />
 								{currentSubscription.isSubscribed ? (
 									<div>
-										<div style={{ padding: '0 0 15px 0', lineHeight: '1.8rem' }}>
+										<div style={{ padding: '0 0 10px 0', lineHeight: '1.8rem' }}>
 											{currentSubscription.features?.map((elem, idx) => {
 												return (
 													<FlexBox key={idx} gap={5} justify="start">
@@ -190,12 +192,12 @@ const CurrentSubscription = () => {
 													</FlexBox>
 												);
 											})}
-											<FlexBox gap={10} justify="end">
+											<FlexBox gap={10} justify="end" className="mt-10">
 												<CSpan>Experation Date</CSpan>
 												<PSpan></PSpan>
 												<RSpan>
 													{currentSubscription?.expireAt && currentSubscription?.expireAt !== ''
-														? new Date(currentSubscription?.expireAt)
+														? new Date(currentSubscription?.expireAt).toUTCString()
 														: 'unknown'}
 												</RSpan>
 											</FlexBox>

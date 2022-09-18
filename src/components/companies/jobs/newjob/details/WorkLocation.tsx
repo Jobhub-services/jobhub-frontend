@@ -88,16 +88,16 @@ const WorkLocation = ({
 								onDataChange={(event: any, value: string, name: string) => handleInput(event, value, name, idx)}
 								error={elem.city === '' && errors.city}
 							/>
-							<SIcon onClick={(event: React.SyntheticEvent) => removeWorkLocation(event, idx)} width="25px" height="25px">
+							{/*<SIcon onClick={(event: React.SyntheticEvent) => removeWorkLocation(event, idx)} width="25px" height="25px">
 								<TrashIcon color="inherit" />
-							</SIcon>
+							</SIcon>*/}
 						</FlexBox>
 					);
 				})}
 			</div>
-			<SButton onClick={addWorkLocation} variant="text" startIcon={<PlusIcon />}>
+			{/*<SButton onClick={addWorkLocation} variant="text" startIcon={<PlusIcon />}>
 				Add location
-			</SButton>
+			</SButton>*/}
 		</div>
 	);
 };

@@ -16,6 +16,8 @@ import { SuccessIcon } from '@/assets/icons';
 import { JobInstance } from '@/constants/company/job.contants';
 import JobErrors from '@/components/companies/jobs/newjob/JobErrors';
 import { pushNotification } from '@/utils/helpers';
+import EnableJobModal from '@/components/companies/jobs/_common/EnableJobModal';
+import { userDispatchers } from '@/modules/actions/user.actions';
 
 const SLoading = styled.div`
 	position: fixed;
@@ -49,6 +51,7 @@ const SContainer = styled.div`
 /* component class */
 //IAddNewJobState
 const AddNewJob = () => {
+	const { userInfo } = useAppSelector((state) => state.user);
 	const { isLoading, jobCreated, createJob, jobUpdated } = useAppSelector((state) => state.job);
 	const navigate = useNavigate();
 	const [currentStep, setCurrentStep] = useState(0);
@@ -63,6 +66,8 @@ const AddNewJob = () => {
 		if (jobCreated) {
 			setCurrentStep(0);
 			setvalidSteps([false, false, false, false]);
+			const tmp = { ...userInfo, enableCreateJob: (userInfo.enableCreateJob ?? 1) - 1 };
+			userDispatchers.setUserInfo(tmp);
 		}
 	}, [jobCreated]);
 	useEffect(() => {
@@ -118,8 +123,10 @@ const AddNewJob = () => {
 		case 3:
 			step = <JobReview onPreviouse={handlePreviouse} />;
 	}
+	console.log(userInfo);
 	return (
-		<>
+		<div style={{ position: 'relative', height: 'inherit' }}>
+			{userInfo?.enableCreateJob === 0 && <EnableJobModal />}
 			{jobCreated && (
 				<PopModel closed={false} width="20%">
 					<PopModel.Header>
@@ -166,7 +173,7 @@ const AddNewJob = () => {
 				)}
 				<JobErrors />
 			</AddJobContainer>
-		</>
+		</div>
 	);
 };
 

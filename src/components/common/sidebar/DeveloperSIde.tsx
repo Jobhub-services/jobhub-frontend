@@ -1,13 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
-import { AssesmentsIcon, MessageIcon, NavItem, ScheduleIcon, JobIcon, HealthIcon, SettingIcon, InvitationIcon, ApplicantIcon } from 'staak-ui';
+import { NavItem } from 'staak-ui';
 import {
-	ApplicationColorIcon,
-	CompanyColorIcon,
-	JobColorIcon,
-	MessageColorIcon,
-	NewCompanyIcon,
-	OverviewColorIcon,
-	SettingsColorIcon,
+	AppliedJobFilledIcon,
+	AppliedJobIcon,
+	CompanyFilledIcon,
+	CompanyIcon,
+	JobFilledIcon,
+	JobIcon,
+	MessageFilledIcon,
+	MessageIcon,
+	OverviewFilledIcon,
+	OverviewIcon,
+	SettingsFilledIcon,
+	SettingsIcon,
 } from '@/assets/icons';
 import styled, { css } from 'styled-components';
 
@@ -24,12 +29,22 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 	return (
 		<>
 			<SLink to="/" expanded={appExpanded}>
-				<NavItem className="mb-5" icon={<OverviewColorIcon width="25px" height="25px" />} width={widthItems} active={pathname === '/'}>
+				<NavItem
+					className="mb-5"
+					icon={pathname === '/' ? <OverviewFilledIcon /> : <OverviewIcon width="25px" height="25px" />}
+					width={widthItems}
+					active={pathname === '/'}
+				>
 					{appExpanded ? <NavItem.Content>Overview</NavItem.Content> : <></>}
 				</NavItem>
 			</SLink>
 			<SLink to="jobs" expanded={appExpanded}>
-				<NavItem className="mb-5" icon={<JobColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/jobs')}>
+				<NavItem
+					className="mb-5"
+					icon={pathname.startsWith('/jobs') ? <JobFilledIcon /> : <JobIcon width="25px" height="25px" />}
+					width={widthItems}
+					active={pathname.startsWith('/jobs')}
+				>
 					{appExpanded ? <NavItem.Content>Jobs</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
@@ -37,7 +52,7 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 			<SLink to="companies" expanded={appExpanded}>
 				<NavItem
 					className="mb-5"
-					icon={<CompanyColorIcon width="25px" height="25px" />}
+					icon={pathname.startsWith('/companies') ? <CompanyFilledIcon /> : <CompanyIcon width="25px" height="25px" />}
 					width={widthItems}
 					active={pathname.startsWith('/companies')}
 				>
@@ -47,7 +62,9 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 			<SLink to="applications" expanded={appExpanded}>
 				<NavItem
 					className="mb-5"
-					icon={<ApplicationColorIcon width="25px" height="25px" />}
+					icon={
+						pathname.startsWith('/applications') ? <AppliedJobFilledIcon width="25px" height="25px" /> : <AppliedJobIcon width="25px" height="25px" />
+					}
 					width={widthItems}
 					active={pathname.startsWith('/applications')}
 				>
@@ -55,7 +72,12 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 				</NavItem>
 			</SLink>
 			<SLink to="messages" expanded={appExpanded}>
-				<NavItem className="mb-5" icon={<MessageColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/messages')}>
+				<NavItem
+					className="mb-5"
+					icon={pathname.startsWith('/messages') ? <MessageFilledIcon width="25px" height="25px" /> : <MessageIcon width="25px" height="25px" />}
+					width={widthItems}
+					active={pathname.startsWith('/messages')}
+				>
 					{appExpanded ? <NavItem.Content>Messages</NavItem.Content> : null}
 				</NavItem>
 			</SLink>
@@ -77,7 +99,11 @@ const DeveloperSide = ({ appExpanded }: { appExpanded: boolean }) => {
 	</SLink>*/}
 
 			<SLink to="/settings/account" expanded={appExpanded}>
-				<NavItem icon={<SettingsColorIcon width="25px" height="25px" />} width={widthItems} active={pathname.startsWith('/settings')}>
+				<NavItem
+					icon={pathname.startsWith('/settings') ? <SettingsFilledIcon width="25px" height="25px" /> : <SettingsIcon width="25px" height="25px" />}
+					width={widthItems}
+					active={pathname.startsWith('/settings')}
+				>
 					{appExpanded ? <NavItem.Content>Settings</NavItem.Content> : null}
 				</NavItem>
 			</SLink>

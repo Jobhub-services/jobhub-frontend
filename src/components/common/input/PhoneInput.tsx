@@ -1,29 +1,11 @@
 import { colors } from '@/assets/theme';
 import { PPhoneInput } from '@/models/component';
+import { metadataActions } from '@/modules/actions/metadata.actions';
+import { useAppSelector } from '@/utils/appHooks';
 import { useEffect, useState } from 'react';
 import { ArrowDownIcon, DropDown, FlexBox, Input } from 'staak-ui';
 import styled from 'styled-components';
 
-const countries = [
-	{
-		name: 'Afghanistan',
-		dialCode: '+93',
-		isoCode: 'AF',
-		flag: 'https://cdn.kcak11.com/CountryFlags/countries/af.svg',
-	},
-	{
-		name: 'Aland Islands',
-		dialCode: '+358',
-		isoCode: 'AX',
-		flag: 'https://cdn.kcak11.com/CountryFlags/countries/ax.svg',
-	},
-	{
-		name: 'Albania',
-		dialCode: '+355',
-		isoCode: 'AL',
-		flag: 'https://cdn.kcak11.com/CountryFlags/countries/al.svg',
-	},
-];
 const STitle = styled(FlexBox)`
 	border: 1px solid ${colors.BLACK_12};
 	border-radius: 8px;
@@ -34,22 +16,36 @@ const SLabel = styled.label`
 	margin: 5px 0px;
 `;
 const PhoneInput = (props: PPhoneInput) => {
+	const { countries } = useAppSelector((state) => state.metadata);
 	const [country, setCountry] = useState<{
-		name: string;
-		dialCode: string;
-		isoCode: string;
-		flag: string;
-	}>(countries[0]);
+		name?: string;
+		dialCode?: string;
+		isoCode?: string;
+		flag?: string;
+	}>();
 	const [phone, setPhone] = useState('');
 
 	useEffect(() => {
-		setPhone(props.value?.number ?? '');
-		if (props.value?.country_code && props.value.country_code !== '') {
-			const country = countries.find((elem) => elem.dialCode === props.value?.country_code);
-			if (country) setCountry(country);
+		if (countries?.size === 0) metadataActions.getCountries();
+	}, []);
+	useEffect(() => {
+		if (countries?.content?.length! > 0) {
+			if (props.value) changeValue();
+			else setCountry(countries?.content?.at(0));
 		}
+	}, [countries]);
+
+	useEffect(() => {
+		changeValue();
 	}, [props.value]);
 
+	const changeValue = () => {
+		setPhone(props.value?.number ?? '');
+		if (props.value?.country_code && props.value.country_code !== '') {
+			const country = countries?.content?.find((elem) => elem.dialCode === props.value?.country_code);
+			if (country) setCountry(country);
+		}
+	};
 	const handleSelect = (e: any, val: any) => {
 		setCountry(val);
 		if (props.onDataChange) props.onDataChange({ country_code: val?.dialCode, number: phone }, props.name);
@@ -59,13 +55,13 @@ const PhoneInput = (props: PPhoneInput) => {
 		setPhone(val);
 	};
 	const handleDataChange = () => {
-		if (props.onDataChange) props.onDataChange({ country_code: country?.dialCode, number: phone }, props.name);
+		if (props.onDataChange) props.onDataChange({ country_code: country?.dialCode ?? '', number: phone }, props.name);
 	};
 	return (
 		<div className={props.className} style={{ width: '100%' }}>
 			<SLabel>Phone</SLabel>
 			<FlexBox justify="start" gap={5} width="100%">
-				<DropDown listPosition="left" onSelect={handleSelect}>
+				<DropDown listPosition="left" onSelect={handleSelect} style={{ zIndex: '1' }}>
 					<DropDown.Title>
 						<STitle gap={5} width="90px">
 							<FlexBox justify="start" gap={5}>
@@ -79,7 +75,7 @@ const PhoneInput = (props: PPhoneInput) => {
 							</span>
 						</STitle>
 					</DropDown.Title>
-					{countries.map((elem, idx) => {
+					{countries?.content?.map((elem, idx) => {
 						return (
 							<DropDown.Item key={idx} value={elem}>
 								<FlexBox gap={10} justify="start">

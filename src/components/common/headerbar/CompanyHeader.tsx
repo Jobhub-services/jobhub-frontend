@@ -19,6 +19,8 @@ const CompanyHeader = () => {
 		if (value === 'profile') navigate(`company/profile/${username}`);
 		if (value === 'settings') navigate('/settings/account');
 	};
+	const handleJob = () => navigate('jobs/new', { replace: true });
+
 	return (
 		<>
 			<FlexBox justify="start" gap={50}>
@@ -36,15 +38,7 @@ const CompanyHeader = () => {
 				{/*<SearchInput placeholder="Search Talents" width="350px" />*/}
 			</FlexBox>
 			<FlexBox justify="space-between" gap={35}>
-				<Button
-					style={{}}
-					color="white"
-					iconColor={colors.PURPLE_BASE}
-					startIcon={<PlusIcon />}
-					onClick={(event: React.SyntheticEvent) => {
-						navigate('jobs/new', { replace: true });
-					}}
-				>
+				<Button style={{}} color="white" iconColor={colors.PURPLE_BASE} startIcon={<PlusIcon />} onClick={handleJob}>
 					Create New Job
 				</Button>
 				<FlexBox justify="space-between" gap={20}>

@@ -14,7 +14,7 @@ const opacity = keyframes`
 `;
 
 const Container = styled.div<any>`
-	position: fixed;
+	position: ${(props) => (props.positionAbsolute ? 'absolute' : 'fixed')};
 	top: 0;
 	left: 0;
 	width: ${(props) => (props.closed ? '0' : '100%')};
@@ -62,17 +62,21 @@ const PopModel = (props: PopModelProps) => {
 		if (props.onClose) props.onClose(true);
 	};
 	const handleClose = (event: React.SyntheticEvent) => {
-		const target = event.target;
-		if (target === ref.current) onClose();
+		if (props.closable) {
+			const target = event.target;
+			if (target === ref.current) onClose();
+		}
 	};
 	return (
-		<Container closed={closed} onClick={handleClose} ref={ref} top={props.top}>
+		<Container closed={closed} onClick={handleClose} ref={ref} top={props.top} positionAbsolute={props.positionAbsolute}>
 			<SPopUp width={props.width} closed={closed}>
 				<FlexBox justify="space-between" style={{ padding: '10px 15px' }}>
 					{header}
-					<IconButton width="30px" height="30px" circle onClick={onClose}>
-						<CloseIcon color={colors.BLACK_8} />
-					</IconButton>
+					{props.closable && (
+						<IconButton width="30px" height="30px" circle onClick={onClose}>
+							<CloseIcon color={colors.BLACK_8} />
+						</IconButton>
+					)}
 				</FlexBox>
 				<HrDivider />
 				<div style={{ padding: '15px 15px' }}>{body}</div>
@@ -97,5 +101,6 @@ PopModel.Footer = ModelFooter;
 
 PopModel.defaultProps = {
 	width: '50%',
+	closable: true,
 };
 export default PopModel;

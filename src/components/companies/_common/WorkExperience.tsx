@@ -44,11 +44,15 @@ const WorkExperience = ({ title, jobType, company, location, dateRange, descript
 			<FlexBox justify="space-between" className="mt-15">
 				<FlexBox gap={50}>
 					<FlexBox gap={5}>
-						<CompanyIcon width="17px" height="17px" color={colors.BLACK_9} />
+						<FlexBox>
+							<CompanyIcon width="17px" height="17px" color={colors.BLACK_9} />
+						</FlexBox>
 						<SSpan>{company}</SSpan>
 					</FlexBox>
 					<FlexBox gap={5}>
-						<LocationIcon width="17px" height="17px" color={colors.BLACK_9} />
+						<FlexBox>
+							<LocationIcon width="17px" height="17px" color={colors.BLACK_9} />
+						</FlexBox>
 						<SSpan>{location}</SSpan>
 					</FlexBox>
 				</FlexBox>

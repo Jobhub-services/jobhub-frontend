@@ -11,6 +11,7 @@ import { settingsAction, settingsDispatcher } from '@/modules/actions/company/se
 import PaymentPopModal from '@/components/companies/subscription/Modal/PaymentPopModal';
 import { TBooleanAttr } from '@/types/company/settings.type';
 import { pushNotification } from '@/utils/helpers';
+import { userActions } from '@/modules/actions/user.actions';
 
 const HEADER_STEP_HEIGHT = 45;
 const StyledHeadline = styled(Headline)`
@@ -42,6 +43,7 @@ const SubscriptionOptions = () => {
 			pushNotification.success('Your subscription is created successfully');
 			setOpenPopPayment(false);
 			settingsAction.getCurrentSubscription();
+			userActions.getUserInfo();
 		}
 	}, [subscriptionCreated]);
 

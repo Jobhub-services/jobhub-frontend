@@ -23,7 +23,7 @@ const ChargePopModal = ({ open, message, paymentUrl, onClose }: PCharge) => {
 			<PopModel.Body>
 				<FlexBox justify="start" gap={10}>
 					<div>{message}</div>
-					<SA href={paymentUrl} target="_blanc">
+					<SA href={paymentUrl} target="_blank">
 						Click Here
 					</SA>
 				</FlexBox>
