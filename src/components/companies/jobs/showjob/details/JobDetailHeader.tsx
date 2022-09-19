@@ -1,4 +1,4 @@
-import { FlexBox, IconButton, Button, InputPicker, Headline } from 'staak-ui';
+import { FlexBox, IconButton, Button, Headline, DropDown, ArrowDownIcon } from 'staak-ui';
 import { CloseIcon, EditIcon, LoadingIcon, TrashIcon } from '@/assets/icons';
 import { useEffect, useState } from 'react';
 import StatusElem from '@/components/companies/_common/StatusElem';
@@ -9,6 +9,13 @@ import { useAppSelector } from '@/utils/appHooks';
 import { jobActions, jobDispatcher } from '@/modules/actions/company/job.actions';
 import DeleteDialogue from '@/components/companies/jobs/showjob/details/DeleteDialogue';
 import { pushNotification } from '@/utils/helpers';
+import styled from 'styled-components';
+
+const STitle = styled(FlexBox)`
+	border: 1px solid ${colors.BLACK_12};
+	border-radius: 8px;
+	padding: 7px 15px;
+`;
 
 const JobDetailHeader = () => {
 	const navigate = useNavigate();
@@ -59,7 +66,7 @@ const JobDetailHeader = () => {
 		jobDispatcher.saveJobData(tmp);
 		navigate('/jobs/new', { state: { action: 'update' } });
 	};
-	const handleStatus = (event: any, value: string, label: string, name: string) => {
+	const handleStatus = (e: any, value: string) => {
 		if (value !== status) {
 			setLoading(true);
 			setStatus(value as any);
@@ -84,17 +91,25 @@ const JobDetailHeader = () => {
 							<LoadingIcon color={colors.PURPLE_BASE} />
 						</FlexBox>
 					) : (
-						<InputPicker value={StatusTitle[status ?? 'ready']} onChange={handleStatus}>
-							<InputPicker.Option value="ready">
+						<DropDown onSelect={handleStatus} listPosition="left">
+							<DropDown.Title>
+								<STitle gap={5}>
+									<StatusElem style={{ marginTop: '0' }} title={StatusTitle[status ?? 'ready']} status={status ?? 'ready'} />
+									<span>
+										<ArrowDownIcon color={colors.BLACK_8} />
+									</span>
+								</STitle>
+							</DropDown.Title>
+							<DropDown.Item value={'ready'}>
 								<StatusElem style={{ marginTop: '0' }} title={StatusTitle['ready']} status={'ready'} />
-							</InputPicker.Option>
-							<InputPicker.Option value="open">
+							</DropDown.Item>
+							<DropDown.Item value={'open'}>
 								<StatusElem style={{ marginTop: '0' }} title={StatusTitle['open']} status={'open'} />
-							</InputPicker.Option>
-							<InputPicker.Option value="closed">
+							</DropDown.Item>
+							<DropDown.Item value={'closed'}>
 								<StatusElem style={{ marginTop: '0' }} title={StatusTitle['closed']} status={'closed'} />
-							</InputPicker.Option>
-						</InputPicker>
+							</DropDown.Item>
+						</DropDown>
 					)}
 					<FlexBox gap={10}>
 						<Button variant="light" size="md" startIcon={<EditIcon />} onClick={handleEdit}>

@@ -27,7 +27,7 @@ const JobOverview = (props: StandardProps) => {
 	const [searchParams, setSearchParams] = useSearchParams();
 
 	useEffect(() => {
-		jobActions.getJobs(!isDetailLoading && showJob.size === 0);
+		if (!isLoading) jobActions.getJobs(!isDetailLoading && showJob.size === 0);
 		return function cleanup() {
 			jobDispatcher.setJobs({}, true);
 		};

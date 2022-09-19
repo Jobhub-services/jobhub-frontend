@@ -1,6 +1,5 @@
 import { colors } from '@/assets/theme';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
-import { EXPANDED_ASIDE_WIDTH, HEADER_HIEGHT } from '@/constants/app.constants';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { CloseIcon, FlexBox, Headline, HrDivider, IconButton, TabPane } from 'staak-ui';
 import JobApplication from '@/components/developers/jobs/details/application/JobApplication';
@@ -30,11 +29,8 @@ const MainContainer = styled.div<any>`
 	position: absolute;
 	right: 0;
 	top: 0;
-	//top: ${HEADER_HIEGHT}px;
 	width: 100%;
 	height: 100%;
-	//width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
-	//height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
 const DetailContainer = styled.div<any>`
@@ -43,11 +39,9 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: 70%;
+	width: 80%;
 	animation: ${width} 0.15s ease-out;
-	//width: ${(props) => (props.showed ? '80%' : '0')};
 	background: white;
-	//box-shadow: -5px 0px 20px -15px ${colors.BLACK_7};
 	transition: width 0.2s;
 `;
 const SubContainer = styled.div`
@@ -85,7 +79,7 @@ const JobDetails = () => {
 	const roleIsEmpty: any =
 		jobDetails?.job_type || jobDetails?.duration || jobDetails?.duration_range || jobDetails?.category || jobDetails?.company_division;
 	const backUp = (e: any) => {
-		if (e.target === parentRef.current) navigate('/jobs');
+		if (e.target === parentRef.current) navigate(-1);
 	};
 	useEffect(() => {
 		if (id && jobDetails?._id !== id) {
