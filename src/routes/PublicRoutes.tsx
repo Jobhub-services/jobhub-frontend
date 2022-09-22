@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import GuestLayout from '@/views/GuestLayout';
-import { LoginView, RegisterView, ResetPasswordView, CheckInboxView, NewPasswordView } from '@/views/publics';
+import { LoginView, RegisterView, ResetPasswordView, CheckInboxView, NewPasswordView, JobsView } from '@/views/publics';
 
 const PublicRoutes: FC = () => {
 	return (
@@ -21,6 +21,7 @@ const PublicRoutes: FC = () => {
 				</Route>
 				<Route path="*" element={<Navigate to="login" />} />
 			</Route>
+			<Route path="public/jobs" element={<JobsView />} />
 		</Routes>
 	);
 };

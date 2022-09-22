@@ -7,6 +7,8 @@ import { VariantType } from '@/models/theme/staakLogo.interface';
 import { FlexBox } from 'staak-ui';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';
+//import IconLogin from '@/assets/icons/login_icon.png';
+
 const StyledPublicView = styled.div`
 	position: fixed;
 	top: 0;
