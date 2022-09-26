@@ -13,7 +13,7 @@ const STitle = styled(FlexBox)`
 `;
 const StatusDropDown = ({ onSelect, status }: { status: StatusType; onSelect: (e: any, value: string) => void }) => {
 	return (
-		<DropDown listPosition="left" onSelect={onSelect}>
+		<DropDown listStyle={{ width: '500px' }} listPosition="left" onSelect={onSelect}>
 			<DropDown.Title>
 				<STitle>
 					<FlexBox justify="start" gap={10}>

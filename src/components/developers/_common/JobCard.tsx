@@ -90,7 +90,7 @@ const JobCard = (props: PJobCard) => {
 		if (props.onSave) props.onSave(props._id, props.saved!);
 	};
 
-	const handleSelect = (val: any, e: any) => {
+	const handleSelect = (val?: any, e?: any) => {
 		if (props.onShow) props.onShow(props._id);
 	};
 
@@ -108,6 +108,7 @@ const JobCard = (props: PJobCard) => {
 						img={props.company?.avatar}
 						featured={props.featured}
 						company_size={props?.company?.company_size}
+						onShowDetail={handleSelect}
 					/>
 					<DropDown listPosition="left" onSelect={handleSelect}>
 						<DropDown.Title>

@@ -27,6 +27,8 @@ const SOptions = styled.div`
 `;
 const MainContainer = styled.div`
 	position: relative;
+	border-radius: 8px;
+	width: 100%;
 	&:hover ${SOptions} {
 		visibility: visible;
 	}

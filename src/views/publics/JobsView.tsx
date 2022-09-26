@@ -19,8 +19,7 @@ const JobsView = () => {
 	return (
 		<Container className="staak_scrollbar">
 			<HeaderNav />
-			<JobsList />
-			{isJobFetching && <LoadingScreen style={{ top: `${HEADER_HIEGHT}px` }} />}
+			{isJobFetching ? <LoadingScreen style={{ top: `${HEADER_HIEGHT}px` }} /> : <JobsList />}
 		</Container>
 	);
 };

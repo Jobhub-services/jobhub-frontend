@@ -3,20 +3,18 @@ import { colors } from '@/assets/theme';
 import { Button, FlexBox, Headline, HrDivider } from 'staak-ui';
 import styled from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
-import PayGo from '@/components/companies/subscription/options/PayGo';
 import { useEffect, useState } from 'react';
 import { settingsAction, settingsDispatcher } from '@/modules/actions/company/settings.actions';
-import PaymentPopModal from '@/components/companies/subscription/Modal/PaymentPopModal';
-import ChargePopModal from '@/components/companies/subscription/Modal/ChargePopModal';
 import { pushNotification } from '@/utils/helpers';
 import CancelSubscriptionModal from '@/components/companies/subscription/Modal/CancelSubscriptionModal';
 import { TBooleanAttr } from '@/types/company/settings.type';
-import { userActions } from '@/modules/actions/user.actions';
+import PayAsYouGo from '@/components/companies/subscription/currentSubscription/PayAsYouGo';
+import ContactUS from '@/components/companies/subscription/currentSubscription/ContactUS';
 
+const HEADER_STEP_HEIGHT = 45;
 const CCurrency: any = {
 	'United States Dollar': '$',
 };
-const HEADER_STEP_HEIGHT = 45;
 
 const SH2 = styled.h2`
 	font-size: 1.2rem;
@@ -64,31 +62,15 @@ const PSpan = styled.span`
 	width: 3px;
 	height: 3px;
 `;
-const SDiv = styled.div`
-	color: ${colors.BLACK_5};
-`;
+
 const CurrentSubscription = () => {
-	const [openPopPayment, setOpenPopPayment] = useState(false);
-	const [openChargeModal, setOpenChargeModal] = useState(false);
 	const [openCancelModal, setOpenCancelModal] = useState(false);
-	const [quantity, setQuantity] = useState(0);
-	const { currentSubscription, paymentMethod, billingInfo, isCreatingCharge, chargeData, isCancelingSubscription, subscriptionCanceled, isLoading } =
-		useAppSelector((state) => state.companySettings);
+	const { currentSubscription, isCancelingSubscription, subscriptionCanceled, isLoading } = useAppSelector((state) => state.companySettings);
 
 	useEffect(() => {
 		if (!currentSubscription?.subscriptionId || currentSubscription.subscriptionId === '') settingsAction.getCurrentSubscription();
 	}, []);
 
-	useEffect(() => {
-		if (chargeData?.paymentUrl && chargeData?.paymentUrl !== '' && chargeData?.message && chargeData?.message !== '') {
-			setOpenPopPayment(false);
-			setOpenChargeModal(true);
-		} else if (chargeData?.message && chargeData?.message !== '') {
-			setOpenPopPayment(false);
-			pushNotification.success('Your subscription is created successfully');
-			userActions.getUserInfo();
-		}
-	}, [chargeData]);
 	useEffect(() => {
 		if (subscriptionCanceled) {
 			settingsDispatcher.setBooleanAttr(false, TBooleanAttr.SUBSCRIPTION_CANCELED);
@@ -101,24 +83,6 @@ const CurrentSubscription = () => {
 		if (isCancelingSubscription) setOpenCancelModal(false);
 	}, [isCancelingSubscription]);
 
-	const handleCharge = (quantity: string) => {
-		if (!paymentMethod?._id || paymentMethod._id === '') settingsAction.getPaymentMethod();
-		if (Object.keys(billingInfo).length === 0) settingsAction.getBillingInfo();
-		setQuantity(parseInt(quantity));
-		setOpenPopPayment(true);
-	};
-	const handleOrder = () => {
-		if (paymentMethod?._id && paymentMethod?._id !== '') {
-			const tmp = {
-				paymentMethodId: paymentMethod._id,
-				quantity: quantity,
-			};
-			settingsAction.createJobCharge(tmp);
-		} else {
-			pushNotification.error('There is missing informations, please check your credit card and billing informations');
-		}
-	};
-
 	const handleCancel = () => {
 		setOpenCancelModal(true);
 	};
@@ -126,25 +90,6 @@ const CurrentSubscription = () => {
 	return (
 		<>
 			{openCancelModal && <CancelSubscriptionModal open={openCancelModal} onClose={() => setOpenCancelModal(false)} />}
-			{openChargeModal && (
-				<ChargePopModal
-					message={chargeData?.message}
-					paymentUrl={chargeData?.paymentUrl}
-					open={openChargeModal}
-					onClose={() => setOpenChargeModal(false)}
-				/>
-			)}
-			{openPopPayment && (
-				<PaymentPopModal
-					isLoading={isCreatingCharge}
-					onPlaceOrder={handleOrder}
-					open={openPopPayment}
-					onClose={() => setOpenPopPayment(false)}
-					amount={isNaN(quantity * (currentSubscription?.renewJob ?? 0)) ? 0 : quantity * (currentSubscription?.renewJob ?? 0)}
-					orderTitle={'PayGo'}
-					description={`Pay now and enjoy posting ${quantity} jobs`}
-				/>
-			)}
 			<div>
 				<HeaderContainer justify="space-between">
 					<StyledHeadline variant="h2" size="sm">
@@ -223,25 +168,10 @@ const CurrentSubscription = () => {
 							</>
 						)}
 					</SContainer>
-					<SContainer width="30%">
-						<CSpan>Questions about subscription options or you need assistance?</CSpan>
-						<SDiv className="mt-10">Get in contact with our sales team</SDiv>
-						<Button width="100%" variant="light" size="md" className="mt-20">
-							Contact US
-						</Button>
-					</SContainer>
+					<ContactUS />
 				</FlexBox>
+				<PayAsYouGo />
 			</div>
-			{currentSubscription.isSubscribed && currentSubscription?.title !== 'Infinity' && (
-				<div className="mt-20">
-					<HeaderContainer justify="start">
-						<StyledHeadline variant="h2" size="sm">
-							Pay as you go
-						</StyledHeadline>
-					</HeaderContainer>
-					<PayGo renewJob={currentSubscription?.renewJob} onSubscribe={handleCharge} />
-				</div>
-			)}
 		</>
 	);
 };

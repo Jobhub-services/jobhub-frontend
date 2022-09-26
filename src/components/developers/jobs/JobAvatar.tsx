@@ -3,9 +3,6 @@ import { FlexBox } from 'staak-ui';
 import { colors } from '@/assets/theme';
 import { PJobAvatar } from '@/models/component/developer/jobs.interface';
 import { CompanyIcon, EmpolyeesIcon } from '@/assets/icons';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { jobActions } from '@/modules/actions/developer/jobs.actions';
-import { useAppSelector } from '@/utils/appHooks';
 
 const ThreePoint = css`
 	display: -webkit-box;
@@ -57,12 +54,10 @@ const SIcon = styled.span`
 	padding: 8px;
 `;
 const JobAvatar = (props: PJobAvatar) => {
-	const { jobDetails } = useAppSelector((state) => state.developerJobs);
-	const [params] = useSearchParams();
-	const navigate = useNavigate();
 	const viewDetail = () => {
-		if (jobDetails?._id !== props._id) jobActions.getJob(props._id);
-		navigate({ pathname: `/jobs/detail/${props._id}`, search: params.toString() }, { state: { activeTab: 'Overview' } });
+		if (props.onShowDetail) {
+			props.onShowDetail();
+		}
 	};
 	return (
 		<SContainer gap={10} justify="start" width="100%" onClick={viewDetail}>

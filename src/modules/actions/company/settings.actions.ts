@@ -6,7 +6,7 @@ import { AxiosResponse } from 'axios';
 import { transformErrors } from '@/utils/validations';
 import { TBooleanAttr } from '@/types/company/settings.type';
 
-const { USERS_SERVICE, PAYMENT_SERVICE } = API_PATHS;
+const { USERS_SERVICE, PAYMENT_SERVICE, NOTIFICATION_SERVICE } = API_PATHS;
 
 export const settingsDispatcher = {
 	setBooleanAttr(value: boolean, attr: TBooleanAttr = TBooleanAttr.IS_LOADING) {
@@ -223,6 +223,17 @@ export const settingsAction = {
 		} catch {
 		} finally {
 			settingsDispatcher.setBooleanAttr(false);
+		}
+	},
+	contactUs: async (data: any) => {
+		try {
+			const response = await httpClient.post(`${NOTIFICATION_SERVICE}/contact-us`, data);
+			if (response.data) {
+				settingsDispatcher.setBooleanAttr(true, TBooleanAttr.CONTACT_SENDED);
+			}
+		} catch (e: any) {
+			settingsDispatcher.setBooleanAttr(true, TBooleanAttr.CONTACT_FAILED);
+		} finally {
 		}
 	},
 };

@@ -62,7 +62,7 @@ const PhoneInput = (props: PPhoneInput) => {
 			<SLabel>Phone</SLabel>
 			<FlexBox justify="start" gap={5} width="100%">
 				<DropDown
-					listStyle={{ overflow: 'auto', height: '250px' }}
+					listStyle={{ overflow: 'auto', height: '250px', width: '350px' }}
 					listPosition="left"
 					onSelect={handleSelect}
 					listClasses="staak_scrollbar"

@@ -60,7 +60,7 @@ const GuestLayout: FC = () => {
 		<StyledPublicView>
 			<LeftContainer>
 				<StaakLogo variant={VariantType.LIGHT} size={140} />
-				<LeftHeadLine>Discover the world's top Companies & Developers.</LeftHeadLine>
+				<LeftHeadLine>Discover the world's top Companies & Talents.</LeftHeadLine>
 				<LoginIcon src="/assets/login-screen.svg" />
 			</LeftContainer>
 			<Container>
