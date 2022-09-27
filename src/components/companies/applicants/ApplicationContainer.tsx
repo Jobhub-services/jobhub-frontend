@@ -48,7 +48,7 @@ const ApplicationContainer = (props: ApplicationContainerProps) => {
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 	function handleClick() {
-		navigate(`/jobs/details/${props.job_id}`);
+		navigate(`/jobs/details/${props.job_id}`, { state: { onlyDetail: true } });
 	}
 	function allApplicants() {
 		searchParams.set('jobId', props.job_id);

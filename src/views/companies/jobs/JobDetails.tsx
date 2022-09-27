@@ -13,7 +13,7 @@ import { IconProps } from '@/models/component';
 import Location from '@/components/companies/jobs/showjob/details/utils/Location';
 import Role from '@/components/companies/jobs/showjob/details/utils/Role';
 import Avatar from '@/components/companies/jobs/showjob/details/AvatarList';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useAppSelector } from '@/utils/appHooks';
 import { dateWithMonthName } from '@/utils/helpers';
 import { StatusTitle } from '@/constants/company/job.contants';
@@ -25,10 +25,18 @@ import JobDetailHeader from '@/components/companies/jobs/showjob/details/JobDeta
 
 const kwidth = keyframes`
 	from {
-		width:0;
+		width: 0;
+	} 
+	to{
+		width: 83%;
 	}
-	to {
-		width:83%;
+`;
+const kFullWidth = keyframes`
+	from {
+		width: 0;
+	} 
+	to{
+		width: 100%;
 	}
 `;
 const MainContainer = styled.div<any>`
@@ -58,8 +66,8 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: 83%;
-	animation: ${kwidth} 0.2s ease-in-out;
+	width: ${(props) => (props.onlyDetail ? '100%' : '83%')};
+	animation: ${(props) => (props.onlyDetail ? kFullWidth : kwidth)} 0.2s ease-in-out;
 	background: white;
 	box-shadow: 2px -5px 20px -15px ${colors.BLACK_7};
 `;
@@ -94,8 +102,10 @@ const SubTitle = styled.span`
 const JobDetails = () => {
 	const parentRef = useRef();
 	const navigate = useNavigate();
+	const { state } = useLocation();
 	const { id } = useParams();
 	const { jobDetails, isDetailLoading, isLoading } = useAppSelector((state) => state.job);
+	const onlyDetail = (state as any)?.onlyDetail ?? false;
 
 	useEffect(() => {
 		if (jobDetails._id !== id) jobActions.getJobDetails(id!, !isLoading);
@@ -106,7 +116,7 @@ const JobDetails = () => {
 	};
 	return (
 		<MainContainer ref={parentRef} onClick={backUp}>
-			<DetailContainer>
+			<DetailContainer onlyDetail={onlyDetail}>
 				{isDetailLoading ? (
 					<LoadingScreen />
 				) : (

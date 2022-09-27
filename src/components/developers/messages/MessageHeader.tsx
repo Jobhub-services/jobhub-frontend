@@ -27,7 +27,7 @@ const MessageHeader = () => {
 			<MessageAvatar img={messages?.userInfo?.avatar} companyName={messages?.userInfo?.companyName} industry={messages?.userInfo?.industry} />
 			<FlexBox gap={15}>
 				<BRadius icon={<TrashIcon />} iconColor="white" circle color="red" onClick={onDelete}></BRadius>
-				<Link to={`/companies/detail/${messages?.userInfo?._id}`}>
+				<Link to={`/companies/detail/${messages?.userInfo?._id}`} state={{ onlyDetail: true }}>
 					<BRadius icon={<EyeIcon />} iconColor="white" circle color="blue"></BRadius>
 				</Link>
 			</FlexBox>

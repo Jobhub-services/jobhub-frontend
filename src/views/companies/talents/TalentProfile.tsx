@@ -125,8 +125,8 @@ const TalentProfile = () => {
 		}
 	};
 	return (
-		<MainContainer showed={true} ref={parentRef} onClick={backUp}>
-			<DetailContainer showed={true} onlyDetail={onlyDetail}>
+		<MainContainer ref={parentRef} onClick={backUp}>
+			<DetailContainer onlyDetail={onlyDetail}>
 				{isDetailLoading ? (
 					<LoadingScreen />
 				) : (
