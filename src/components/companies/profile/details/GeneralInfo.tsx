@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { InputDateField, InputField, InputPickerField } from '@/components/common';
 import { SpanTitle, SButton } from '@/components/companies/profile/common/common.style';
 import GeneralInfoElem from '@/components/companies/profile/common/GeneralInfoElem';
@@ -8,31 +8,34 @@ import { Button, FlexBox } from 'staak-ui';
 import { useAppSelector } from '@/utils/appHooks';
 import { profileAction } from '@/modules/actions/company/profile.actions';
 import { CCompanySizes, CCompanySizesArray } from '@/constants/company/profile.constants';
+import { metadataActions } from '@/modules/actions/metadata.actions';
 
 const GeneralInfo = () => {
 	const { generalinfo } = useAppSelector((state) => state.companyProfile.profile);
-	const [genInfo, setGenInfo] = useState<{ company_size?: string; founded?: string; industry?: string }>(generalinfo!);
+	const { industries } = useAppSelector((state) => state.metadata);
+	const [genInfo, setGenInfo] = useState<{ company_size?: string; founded?: string; industry?: { _id: string; name: string } }>(generalinfo!);
 	const [show, setShow] = useState(false);
 	const empty =
 		(!generalinfo?.company_size || generalinfo?.company_size === '') &&
 		(!generalinfo?.founded || generalinfo.founded === '') &&
-		(!generalinfo?.industry || generalinfo.industry === '');
+		(!generalinfo?.industry?.name || generalinfo.industry.name === '');
 
+	useEffect(() => {
+		if (industries?.size === 0) metadataActions.getIndustries();
+	}, []);
 	const onSave = () => {
 		setShow(false);
-		profileAction.setAttribute(genInfo, 'generalinfo');
+		const data = { ...genInfo, industry: genInfo?.industry?._id };
+		profileAction.setAttribute(data, 'generalinfo');
 	};
 	const onShow = () => {
 		setShow(true);
 	};
-	const handleInput = (event: any, value?: string, name?: string) => {
-		let tmp = { ...genInfo };
-		tmp.industry = value;
-		setGenInfo(tmp);
-	};
 	const handlePicker = (event: any, value: string, label: string, name: string) => {
 		let tmp = { ...genInfo };
-		tmp[name as 'company_size'] = value;
+		if (name === 'industry') {
+			tmp.industry = { _id: value, name: label };
+		} else tmp[name as 'company_size'] = value;
 		setGenInfo(tmp);
 	};
 	const handleDate = (date: Date | null) => {
@@ -78,9 +81,22 @@ const GeneralInfo = () => {
 						onChange={handleDate}
 						date={genInfo?.founded && genInfo?.founded !== '' ? new Date(genInfo?.founded!) : null}
 					/>
-					<InputField name="industry" className="mt-10" placeholder="Industry" onDataChange={handleInput} value={generalinfo?.industry}>
-						Industry
-					</InputField>
+					<InputPickerField
+						title="Industry"
+						name="industry"
+						className="mt-10"
+						placeholder="Industry"
+						onChange={handlePicker}
+						value={generalinfo?.industry?.name}
+					>
+						{industries?.content?.map((elem, idx) => {
+							return (
+								<InputPickerField.Option key={idx} value={elem._id ?? ''}>
+									{elem.name}
+								</InputPickerField.Option>
+							);
+						})}
+					</InputPickerField>
 
 					<FlexBox className="mt-15" justify="end" gap={10}>
 						<Button

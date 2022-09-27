@@ -37,6 +37,9 @@ export const metadataDispatcher = {
 	setTimeZone: (data: any) => {
 		dispatchToStore(storeActions.setTimeZone(data));
 	},
+	setIndustries: (data: any) => {
+		dispatchToStore(storeActions.setIndustry(data));
+	},
 };
 
 export const metadataActions = {
@@ -133,6 +136,17 @@ export const metadataActions = {
 		} catch {
 		} finally {
 			metadataDispatcher.setIsLoading(false);
+		}
+	},
+	getIndustries: async () => {
+		try {
+			const response = await httpClient.get(`${METADATA_SERVICE}/industries`);
+			const responseData = response.data;
+			if (responseData) {
+				if (responseData) metadataDispatcher.setIndustries(responseData);
+			}
+		} catch (e: any) {
+		} finally {
 		}
 	},
 };

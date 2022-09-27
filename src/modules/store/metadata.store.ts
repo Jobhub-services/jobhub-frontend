@@ -43,6 +43,11 @@ const initialState: IAppState = {
 		size: 0,
 		content: [],
 	},
+	industries: {
+		count: 0,
+		size: 0,
+		content: [],
+	},
 };
 
 const reducerSlice = createSlice({
@@ -74,6 +79,9 @@ const reducerSlice = createSlice({
 		},
 		setRoles: (state, action) => {
 			state.roles = action.payload;
+		},
+		setIndustry: (state, action) => {
+			state.industries = action.payload;
 		},
 		setLanguages: (state, action) => {
 			state.langs = action.payload;

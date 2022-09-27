@@ -37,6 +37,11 @@ export interface IAppState {
 		count?: number;
 		content?: { _id?: string; name?: string }[];
 	};
+	industries?: {
+		count?: number;
+		size?: number;
+		content?: { _id?: string; name?: string }[];
+	};
 	timezones?: {
 		size?: number;
 		count?: number;
