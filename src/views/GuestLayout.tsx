@@ -7,7 +7,7 @@ import { VariantType } from '@/models/theme/staakLogo.interface';
 import { FlexBox } from 'staak-ui';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';
-//import IconLogin from '@/assets/icons/login_icon.png';
+//import IconLogin from '@/assets/icons/login_icon.jpg';
 
 const StyledPublicView = styled.div`
 	position: fixed;
@@ -32,6 +32,7 @@ const LeftHeadLine = styled.h1`
 const LoginIcon = styled.img`
 	margin: 50px auto 0 auto;
 	height: 550px;
+	transform: translate(-45px, 0);
 `;
 
 const Container = styled.div`
@@ -61,7 +62,7 @@ const GuestLayout: FC = () => {
 			<LeftContainer>
 				<StaakLogo variant={VariantType.LIGHT} size={140} />
 				<LeftHeadLine>Discover the world's top Companies & Talents.</LeftHeadLine>
-				<LoginIcon src="/assets/login-screen.svg" />
+				<LoginIcon src={`/assets/login.svg`} />
 			</LeftContainer>
 			<Container>
 				<RightContainer>
