@@ -35,14 +35,14 @@ const ForOne = (props: POption) => {
 						</FlexBox>
 						<FlexBox className="mt-15">
 							<SDollar>$</SDollar>
-							<SSpan>{props.status === PayOptions.YEARLY ? forone?.yearly_amount : forone?.monthly_amount}</SSpan>
+							<SSpan>{(props.status === PayOptions.YEARLY ? forone?.yearly_amount : forone?.monthly_amount)?.toLocaleString('en-US')}</SSpan>
 							<SMonth>/Month</SMonth>
 						</FlexBox>
 						<FlexBox gap={15} className="mt-20 mb-15" flexDirection="column">
 							<FlexBox gap={5}>
-								Total cost per year <strong>{` $${totalCost}`}</strong>
+								Total cost per year <strong>{` $${totalCost.toLocaleString('en-US')}`}</strong>
 							</FlexBox>
-							{props.status === PayOptions.YEARLY && <STag>{`Save $${costSaved} / Year`}</STag>}
+							{props.status === PayOptions.YEARLY && <STag>{`Save $${costSaved.toLocaleString('en-US')} / Year`}</STag>}
 						</FlexBox>
 						<Button className="mt-10 mb-15" onClick={handleClick}>
 							Upgrade to For One

@@ -36,7 +36,7 @@ const LastApplicants = () => {
 	}, []);
 	return (
 		<SContainer className="mt-20">
-			<SH4>Recent applications</SH4>
+			<SH4>Recent Applications</SH4>
 			{showApplicants?.content?.length! > 0 ? (
 				<>
 					{showApplicants?.content?.slice(0, 3).map((elem, idx) => {

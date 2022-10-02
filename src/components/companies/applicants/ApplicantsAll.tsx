@@ -14,7 +14,7 @@ const SContainer = styled.div`
 `;
 const ApplicantsAll = () => {
 	const { showApplicants } = useAppSelector((state) => state.applications);
-	if (showApplicants?.content?.length === 0) return <DataEmpty title="No applicant Founds" />;
+	if (showApplicants?.content?.length === 0) return <DataEmpty title="No applicant found" />;
 	return (
 		<SContainer>
 			{showApplicants?.content?.map((elem, idx) => {

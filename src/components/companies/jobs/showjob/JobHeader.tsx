@@ -19,7 +19,7 @@ const JobHeader = () => {
 	return (
 		<FlexBox justify="space-between">
 			<Headline variant="h2" size="sm">
-				{showJob.count} Job(s) founds
+				{showJob.count} Job(s) found
 			</Headline>
 			<FlexBox gap={10}>
 				<Button

@@ -1,5 +1,5 @@
 import { FlexBox } from 'staak-ui';
-import { SpanTitle, SData } from '@/components/companies/profile/common/common.style';
+import { SpanTitle, SData, SSpan } from '@/components/companies/profile/common/common.style';
 import { useAppSelector } from '@/utils/appHooks';
 
 const TimeZone = () => {
@@ -7,9 +7,13 @@ const TimeZone = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>Time zone</SpanTitle>
+				<SpanTitle>Time Zone</SpanTitle>
 			</FlexBox>
-			<SData className="mt-10">{timezone?.name}</SData>
+			{timezone?.name && timezone?.name !== '' ? (
+				<SData className="mt-10">{timezone?.name}</SData>
+			) : (
+				<SSpan className="mt-10">Set your time zone to have talents call you at your work time</SSpan>
+			)}
 		</div>
 	);
 };

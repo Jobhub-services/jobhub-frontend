@@ -8,7 +8,7 @@ const GeneralInfo = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>General info</SpanTitle>
+				<SpanTitle>General Information</SpanTitle>
 			</FlexBox>
 			<GeneralInfoElem generalinfo={generalinfo} />
 		</div>

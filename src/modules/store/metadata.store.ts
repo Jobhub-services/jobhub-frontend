@@ -63,7 +63,11 @@ const reducerSlice = createSlice({
 			state.isLoading = loading;
 		},
 		setCountries: (state, action) => {
-			state.countries = action.payload;
+			let sortedArray = action.payload?.content;
+			sortedArray.sort((a: any, b: any) => {
+				return a?.name?.localeCompare(b?.name);
+			});
+			state.countries = { ...action.payload, content: sortedArray };
 		},
 		setSkills: (state, action) => {
 			state.skills_list = action.payload;
@@ -84,7 +88,11 @@ const reducerSlice = createSlice({
 			state.industries = action.payload;
 		},
 		setLanguages: (state, action) => {
-			state.langs = action.payload;
+			let sortedArray = action.payload?.content;
+			sortedArray.sort((a: any, b: any) => {
+				return a?.name?.localeCompare(b?.name);
+			});
+			state.langs = { ...action.payload, content: sortedArray };
 		},
 		setTimeZone: (state, action) => {
 			state.timezones = action.payload;

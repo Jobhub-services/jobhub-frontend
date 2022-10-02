@@ -29,7 +29,7 @@ const CompanyInfo = () => {
 	};
 	return (
 		<div>
-			<SH3>Company information</SH3>
+			<SH3>Company Information</SH3>
 			<InputField name="address" placeholder="Adress" required value={billingInfo?.address} onDataChange={handleChange}>
 				Address
 			</InputField>
@@ -38,7 +38,7 @@ const CompanyInfo = () => {
 					City
 				</InputField>
 				<InputField name="zipCode" placeholder="Zip Code" required value={billingInfo?.zipCode} onDataChange={handleChange}>
-					Zip code
+					Zip Code
 				</InputField>
 			</FlexBox>
 			<FlexBox gap={15} className="mt-10">

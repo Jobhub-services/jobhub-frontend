@@ -109,14 +109,14 @@ const BillingView = () => {
 		<div style={{ position: 'relative' }}>
 			<HeaderContainer justify="space-between">
 				<StyledHeadline variant="h2" size="sm">
-					Billing Informations
+					Billing Information
 				</StyledHeadline>
 			</HeaderContainer>
 			<div style={{ padding: '10px 20px' }}>
 				<CompanyInfo />
 				<BillingContact />
 				<div className="mt-20">
-					<SH3>Card information</SH3>
+					<SH3>Card Information</SH3>
 					<SCard flexDirection="column">
 						{isFetchingPaymentMethod ? (
 							<LoadingIcon color={colors.PURPLE_2} width="55px" height="55px" />
@@ -127,7 +127,7 @@ const BillingView = () => {
 								<span>
 									<CreditCardIcon width="40px" height="40px" />
 								</span>
-								<h3>No credit card provided</h3>
+								<h3>No Credit Card Provided</h3>
 								<Button onClick={() => setAddCard(true)}>Add a credit card</Button>
 							</>
 						) : (

@@ -4,7 +4,7 @@ import { Button, FlexBox } from 'staak-ui';
 
 const EnableJobModal = () => {
 	return (
-		<PopModel width="20%" closable={false} positionAbsolute>
+		<PopModel width="20%" closable={false} positionAbsolute style={{ zIndex: '9' }}>
 			<PopModel.Header>
 				<strong style={{ fontSize: '16px' }}>Enable Jobs</strong>
 			</PopModel.Header>

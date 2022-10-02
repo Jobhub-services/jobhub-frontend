@@ -11,9 +11,9 @@ const SocialProfile = () => {
 	const { social_profile } = useAppSelector((state) => state.companyProfile.profile);
 	return (
 		<div>
-			{social_profile?.website !== '' && (
-				<FlexBox gap={5}>
-					<WorldIcon width="25px" height="25px" color={colors.BLACK_7} />
+			{social_profile?.website && social_profile?.website !== '' && (
+				<FlexBox justify="start" gap={5}>
+					<WorldIcon width="25px" height="25px" color={colors.BLUE_DARK_2} />
 					<SLink href={social_profile?.website}>{social_profile?.website?.split('//')[1]}</SLink>
 				</FlexBox>
 			)}

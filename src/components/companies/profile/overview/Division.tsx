@@ -6,7 +6,7 @@ const Division = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>Company divisions</SpanTitle>
+				<SpanTitle>Company Divisions</SpanTitle>
 			</FlexBox>
 			<DivisionElem />
 		</div>

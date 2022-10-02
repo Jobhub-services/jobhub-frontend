@@ -24,7 +24,7 @@ const CompanyDivision = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>Company divisions</SpanTitle>
+				<SpanTitle>Company Divisions</SpanTitle>
 				<SButton padding={company_division?.length! > 0 ? 5 : 0} onClick={onShow}>
 					{company_division?.length! > 0 ? (
 						<EditIcon width="15px" height="15px" color={colors.PURPLE_BASE} />

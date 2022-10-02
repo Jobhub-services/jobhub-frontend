@@ -130,13 +130,19 @@ const JobCard = (props: PJobCard) => {
 						<FlexBox gap={5} align="start" justify="start" className="mt-15">
 							<div style={{ whiteSpace: 'nowrap' }}>Hires in :</div>
 							<SLoc>
-								{props.hire_remotly
-									? 'Everywhere'
-									: props.hire_location?.length! > 0
-									? props.hire_location?.map((elem, idx) => {
+								{!props.hire_remotly && (!props.hire_location || props.hire_location?.length! === 0) ? (
+									<>Not specified</>
+								) : props.hire_remotly && (!props.hire_location || props.hire_location?.length! === 0) ? (
+									<>Remote</>
+								) : (
+									`${props.hire_remotly && <>Hybrid, </>}
+									${
+										props.hire_location?.length! > 0 &&
+										props.hire_location?.map((elem, idx) => {
 											return `${elem.city ?? 'N/A'}, ${elem.country ?? 'N/A'}.  `;
-									  })
-									: 'Not specified'}
+										})
+									}`
+								)}
 							</SLoc>
 						</FlexBox>
 						<FlexBox gap={5} justify="flex-start" className="mt-15">

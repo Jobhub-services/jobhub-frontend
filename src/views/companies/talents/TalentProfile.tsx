@@ -137,7 +137,7 @@ const TalentProfile = () => {
 									<CloseIcon color={colors.BLACK_8} />
 								</IconButton>
 								<Headline variant="h2" size="sm">
-									Talent details
+									Talent Details
 								</Headline>
 							</FlexBox>
 							<Button

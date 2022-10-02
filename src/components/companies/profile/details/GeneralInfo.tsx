@@ -46,7 +46,7 @@ const GeneralInfo = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>General info</SpanTitle>
+				<SpanTitle>General Information</SpanTitle>
 				<SButton padding={empty ? 0 : 5} onClick={onShow}>
 					{!empty ? (
 						<EditIcon width="15px" height="15px" color={colors.PURPLE_BASE} />

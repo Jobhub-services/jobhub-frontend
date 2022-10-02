@@ -13,7 +13,7 @@ export const metadataDispatcher = {
 	setIsLoading(laoding: boolean) {
 		dispatchToStore(storeActions.isLoading({ laoding }));
 	},
-	getCountries(data: { code: string; label: string }) {
+	getCountries(data: any) {
 		dispatchToStore(storeActions.setCountries(data));
 	},
 	setComapnyDivision(data: any) {
