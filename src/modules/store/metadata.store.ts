@@ -55,6 +55,7 @@ const reducerSlice = createSlice({
 	initialState,
 	reducers: {
 		setAppExpanded: (state, action) => {
+			//test
 			const { expanded } = action.payload;
 			state.appExpanded = expanded;
 		},
