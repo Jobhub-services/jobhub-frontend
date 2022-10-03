@@ -12,6 +12,7 @@ const NEW_JOB_PERIOD = 3;
 const SContainer = styled.div<any>`
 	background: white;
 	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
+	border: 1px solid #0000003b;
 	border-radius: 8px;
 	${(props) =>
 		props.hover &&

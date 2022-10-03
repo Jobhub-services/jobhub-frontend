@@ -12,6 +12,7 @@ const Container = styled.div`
 	margin: auto;
 	margin: 30px 50px;
 	width: 95%;
+	max-width: 1400px;
 	@media only screen and (max-width: 1070px) {
 		grid-template-columns: repeat(1, 1fr);
 	}
