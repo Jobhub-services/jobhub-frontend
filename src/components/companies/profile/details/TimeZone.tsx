@@ -34,7 +34,7 @@ const TimeZone = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>Time zone</SpanTitle>
+				<SpanTitle>Time Zone</SpanTitle>
 				<SButton padding={notEmpty ? 5 : 0} onClick={onShow}>
 					{notEmpty ? (
 						<EditIcon width="15px" height="15px" color={colors.PURPLE_BASE} />
@@ -50,7 +50,7 @@ const TimeZone = () => {
 							<SData>{timezone?.name}</SData>
 						</>
 					) : (
-						<SSpan>The main office or centre of control of your company or organization</SSpan>
+						<SSpan>Set your time zone to have talents call you at your work time</SSpan>
 					)}
 				</FlexBox>
 			}

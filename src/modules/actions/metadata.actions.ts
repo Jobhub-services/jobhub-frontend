@@ -13,7 +13,7 @@ export const metadataDispatcher = {
 	setIsLoading(laoding: boolean) {
 		dispatchToStore(storeActions.isLoading({ laoding }));
 	},
-	getCountries(data: { code: string; label: string }) {
+	getCountries(data: any) {
 		dispatchToStore(storeActions.setCountries(data));
 	},
 	setComapnyDivision(data: any) {
@@ -36,6 +36,9 @@ export const metadataDispatcher = {
 	},
 	setTimeZone: (data: any) => {
 		dispatchToStore(storeActions.setTimeZone(data));
+	},
+	setIndustries: (data: any) => {
+		dispatchToStore(storeActions.setIndustry(data));
 	},
 };
 
@@ -133,6 +136,17 @@ export const metadataActions = {
 		} catch {
 		} finally {
 			metadataDispatcher.setIsLoading(false);
+		}
+	},
+	getIndustries: async () => {
+		try {
+			const response = await httpClient.get(`${METADATA_SERVICE}/industries`);
+			const responseData = response.data;
+			if (responseData) {
+				if (responseData) metadataDispatcher.setIndustries(responseData);
+			}
+		} catch (e: any) {
+		} finally {
 		}
 	},
 };

@@ -88,10 +88,10 @@ const TalentsFilter = () => {
 					</TagPicker>
 				</div>
 				<Skills onChange={handleComponentChanges} skills={localFilters.skills} clear={clear} />
-				<div>
-					<SH3>Year of experience</SH3>
+				<div className="mt-15">
+					<SH3>Years of experience</SH3>
 					<TagPicker
-						placeholder="Choose applicants countries"
+						placeholder="Choose years of experience"
 						name="experienceYear"
 						values={localFilters.experienceYear ?? []}
 						onChange={handleChange}

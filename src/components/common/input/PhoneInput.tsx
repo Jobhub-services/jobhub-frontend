@@ -61,7 +61,13 @@ const PhoneInput = (props: PPhoneInput) => {
 		<div className={props.className} style={{ width: '100%' }}>
 			<SLabel>Phone</SLabel>
 			<FlexBox justify="start" gap={5} width="100%">
-				<DropDown listPosition="left" onSelect={handleSelect} style={{ zIndex: '1' }}>
+				<DropDown
+					listStyle={{ overflow: 'auto', height: '250px', width: '350px' }}
+					listPosition="left"
+					onSelect={handleSelect}
+					listClasses="staak_scrollbar"
+					style={{ zIndex: '1' }}
+				>
 					<DropDown.Title>
 						<STitle gap={5} width="90px">
 							<FlexBox justify="start" gap={5}>

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IJobsState } from '@/models/store/developer/jobs.interface';
-import { TLoading } from '@/types/developer/job.type';
+import { TJobDuration, TLoading, TTJob } from '@/types/developer/job.type';
 
 const initialState: IJobsState = {
 	filterClosed: true,
@@ -30,8 +30,8 @@ const initialState: IJobsState = {
 		work_location: undefined,
 		//hire_remotly: true,
 		category: '',
-		job_type: 'Full time',
-		duration: 'Permanent',
+		job_type: TTJob.FULL_TIME,
+		duration: TJobDuration.PERMANENT,
 		hire_location: [],
 		requirements: ``,
 		education: [],

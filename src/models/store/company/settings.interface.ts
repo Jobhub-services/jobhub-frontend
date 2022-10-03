@@ -43,6 +43,8 @@ export interface ISettingsState {
 	[TBooleanAttr.IS_CREATING_CHARGE]: boolean;
 	[TBooleanAttr.IS_CANCELING_SUBSCRIPTION]: boolean;
 	[TBooleanAttr.SUBSCRIPTION_CANCELED]: boolean;
+	[TBooleanAttr.CONTACT_SENDED]: boolean;
+	[TBooleanAttr.CONTACT_FAILED]: boolean;
 
 	isUpdated?: boolean;
 	errors?: {

@@ -13,6 +13,8 @@ const initialState: ISettingsState = {
 	[TBooleanAttr.IS_CREATING_CHARGE]: false,
 	[TBooleanAttr.IS_CANCELING_SUBSCRIPTION]: false,
 	[TBooleanAttr.SUBSCRIPTION_CANCELED]: false,
+	[TBooleanAttr.CONTACT_SENDED]: false,
+	[TBooleanAttr.CONTACT_FAILED]: false,
 
 	generaleInfo: {},
 	securityInfo: {},

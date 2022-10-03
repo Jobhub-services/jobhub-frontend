@@ -1,5 +1,16 @@
 export type TLoading = 'isLoading' | 'isDetailLoading' | 'isApplicationSubmited' | 'isDataFetching' | 'isSaving';
 
+export enum TTJob {
+	FULL_TIME = 'Full time',
+	PART_TIME = 'Part time',
+	CONTRACT = 'Contract',
+	INTERNSHIP = 'Internship',
+}
+export enum TJobDuration {
+	PERMANENT = 'Permanent',
+	TEMPORARY = 'Temporary',
+}
+
 export type JobInfoData = {
 	_id: string;
 	title?: string;
@@ -8,8 +19,8 @@ export type JobInfoData = {
 	hire_remotly?: boolean;
 	hire_location?: { country?: string; city?: string }[];
 	category?: string;
-	job_type?: 'Full time' | 'Part time';
-	duration?: 'Permanent' | 'Temporary';
+	job_type?: TTJob;
+	duration?: TJobDuration;
 	createdAt?: string | null;
 	company?: {
 		_id?: string;

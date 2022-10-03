@@ -3,7 +3,7 @@ import JobCard from '@/components/developers/_common/JobCard';
 import { useAppSelector } from '@/utils/appHooks';
 import DataEmpty from '@/components/common/DataEmpty';
 import { jobActions, jobDispatcher } from '@/modules/actions/developer/jobs.actions';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { pushNotification } from '@/utils/helpers';
 
@@ -18,6 +18,7 @@ const SWrapper = styled.div<any>`
 `;
 const JobsList = () => {
 	const navigate = useNavigate();
+	const [params] = useSearchParams();
 	const { jobInfo, jobDetails, jobSaved } = useAppSelector((state) => state.developerJobs);
 	const { content } = jobInfo;
 
@@ -33,11 +34,11 @@ const JobsList = () => {
 	};
 	const onApply = (id: string) => {
 		if (jobDetails?._id !== id) jobActions.getJob(id);
-		navigate(`/jobs/detail/${id}`, { state: { activeTab: 'Application' } });
+		navigate({ pathname: `/jobs/detail/${id}`, search: params.toString() }, { state: { activeTab: 'Application' } });
 	};
 	const handleSelect = (id: string) => {
 		if (jobDetails?._id !== id) jobActions.getJob(id);
-		navigate(`/jobs/detail/${id}`, { state: { activeTab: 'Overview' } });
+		navigate({ pathname: `/jobs/detail/${id}`, search: params.toString() }, { state: { activeTab: 'Overview' } });
 	};
 	if (content?.length === 0)
 		return <DataEmpty title="No data found" description="No content match your criteria. Try searching for something else" />;

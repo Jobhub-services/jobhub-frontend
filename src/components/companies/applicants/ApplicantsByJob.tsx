@@ -14,7 +14,7 @@ const SContainer = styled.div`
 
 const ApplicantsByJob = () => {
 	const { applicantsByJobs } = useAppSelector((state) => state.applications);
-	if (applicantsByJobs?.content?.length === 0) return <DataEmpty title="No Data Founds" descritpion="There is no applicant yet to any job" />;
+	if (applicantsByJobs?.content?.length === 0) return <DataEmpty title="No data found" descritpion="There is no applicant yet to any job" />;
 	return (
 		<SContainer style={{ padding: '10px 0' }}>
 			{applicantsByJobs?.content?.map((elem, idx) => {

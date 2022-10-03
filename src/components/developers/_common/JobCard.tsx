@@ -90,7 +90,7 @@ const JobCard = (props: PJobCard) => {
 		if (props.onSave) props.onSave(props._id, props.saved!);
 	};
 
-	const handleSelect = (val: any, e: any) => {
+	const handleSelect = (val?: any, e?: any) => {
 		if (props.onShow) props.onShow(props._id);
 	};
 
@@ -108,6 +108,7 @@ const JobCard = (props: PJobCard) => {
 						img={props.company?.avatar}
 						featured={props.featured}
 						company_size={props?.company?.company_size}
+						onShowDetail={handleSelect}
 					/>
 					<DropDown listPosition="left" onSelect={handleSelect}>
 						<DropDown.Title>
@@ -129,13 +130,19 @@ const JobCard = (props: PJobCard) => {
 						<FlexBox gap={5} align="start" justify="start" className="mt-15">
 							<div style={{ whiteSpace: 'nowrap' }}>Hires in :</div>
 							<SLoc>
-								{props.hire_remotly
-									? 'Everywhere'
-									: props.hire_location?.length! > 0
-									? props.hire_location?.map((elem, idx) => {
+								{!props.hire_remotly && (!props.hire_location || props.hire_location?.length! === 0) ? (
+									<>Not specified</>
+								) : props.hire_remotly && (!props.hire_location || props.hire_location?.length! === 0) ? (
+									<>Remote</>
+								) : (
+									`${props.hire_remotly && <>Hybrid, </>}
+									${
+										props.hire_location?.length! > 0 &&
+										props.hire_location?.map((elem, idx) => {
 											return `${elem.city ?? 'N/A'}, ${elem.country ?? 'N/A'}.  `;
-									  })
-									: 'Not specified'}
+										})
+									}`
+								)}
 							</SLoc>
 						</FlexBox>
 						<FlexBox gap={5} justify="flex-start" className="mt-15">

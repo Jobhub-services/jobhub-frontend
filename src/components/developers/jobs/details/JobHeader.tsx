@@ -35,7 +35,7 @@ const JobHeader = () => {
 	const posted_at = moment(new Date(jobDetails?.createdAt!)).fromNow();
 
 	const handleClick = () => {
-		navigate(`/companies/detail/${jobDetails?.company?._id}`);
+		navigate(`/companies/detail/${jobDetails?.company?._id}`, { state: { onlyDetail: true } });
 	};
 
 	return (

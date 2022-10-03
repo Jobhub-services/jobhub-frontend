@@ -25,7 +25,7 @@ const ProfileDetails = () => {
 			<FlexBox style={{ padding: '20px 20px', borderBottom: `1px solid ${colors.BLACK_12}` }}>
 				<FlexBox justify="space-between" width="100%">
 					<ProfileAvatar />
-					<Button onClick={() => navigate('/settings/account')}>Account settings</Button>
+					<Button onClick={() => navigate('/settings/account')}>Account Settings</Button>
 				</FlexBox>
 			</FlexBox>
 			<FlexBox align="start">

@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { jobActions, jobDispatcher } from '@/modules/actions/company/job.actions';
 import JobHeader from '@/components/companies/jobs/showjob/JobHeader';
 import JobFilter from '@/components/companies/jobs/showjob/filter/JobFilter';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 import { useAppSelector } from '@/utils/appHooks';
 import { LoadingIcon } from '@/assets/icons';
@@ -25,9 +25,13 @@ const JobOverview = (props: StandardProps) => {
 	const { isLoading, showJob, isDetailLoading } = useAppSelector((state) => state.job);
 	const [isFetching, setIsFetching] = useState(false);
 	const [searchParams, setSearchParams] = useSearchParams();
+	const { state } = useLocation();
+	const onlyDetail = (state as any)?.onlyDetail ?? false;
 
 	useEffect(() => {
-		jobActions.getJobs(!isDetailLoading && showJob.size === 0);
+		if (!onlyDetail) {
+			if (!isLoading) jobActions.getJobs(!isDetailLoading && showJob.size === 0);
+		}
 		return function cleanup() {
 			jobDispatcher.setJobs({}, true);
 		};
@@ -51,19 +55,20 @@ const JobOverview = (props: StandardProps) => {
 	};
 	return (
 		<Container>
-			{isLoading ? (
-				<LoadingScreen />
-			) : (
-				<SubContainer className="staak_scrollbar" onScroll={handleScroll}>
-					<JobHeader />
-					<ShowJobs />
-					{isFetching && (
-						<div>
-							<LoadingIcon width="60px" height="60px" color={colors.PURPLE_BASE} />
-						</div>
-					)}
-				</SubContainer>
-			)}
+			{!onlyDetail &&
+				(isLoading ? (
+					<LoadingScreen />
+				) : (
+					<SubContainer className="staak_scrollbar" onScroll={handleScroll}>
+						<JobHeader />
+						<ShowJobs />
+						{isFetching && (
+							<div>
+								<LoadingIcon width="60px" height="60px" color={colors.PURPLE_BASE} />
+							</div>
+						)}
+					</SubContainer>
+				))}
 			<Outlet />
 			<JobFilter />
 		</Container>

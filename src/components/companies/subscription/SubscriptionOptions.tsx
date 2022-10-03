@@ -76,7 +76,7 @@ const SubscriptionOptions = () => {
 			settingsAction.createSubscription(tmp);
 			//console.log(tmp);
 		} else {
-			pushNotification.error('There is missing informations, please check your credit card and billing informations');
+			pushNotification.error('There is missing informations, please check your credit card and billing information');
 		}
 	};
 	return (

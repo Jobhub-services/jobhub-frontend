@@ -70,7 +70,7 @@ const Headquarters = () => {
 			}
 			{show && (
 				<div className="mt-15">
-					<InputPickerField name="country" title="Country" value={headquarter?.country?.name} onChange={handlePicker}>
+					<InputPickerField name="country" title="Country" placeholder="Your country" value={headquarter?.country?.name} onChange={handlePicker}>
 						{countries?.content?.map((elem, idx) => {
 							const str = elem.name + '(' + elem.code + ')';
 							return (
@@ -80,10 +80,10 @@ const Headquarters = () => {
 							);
 						})}
 					</InputPickerField>
-					<InputField className="mt-10" name="city" value={headquarter?.city} onDataChange={handleInput}>
+					<InputField className="mt-10" name="city" placeholder="Your city" value={headquarter?.city} onDataChange={handleInput}>
 						City
 					</InputField>
-					<InputField className="mt-10" name="street" value={headquarter?.street} onDataChange={handleInput}>
+					<InputField className="mt-10" name="street" placeholder="Your street" value={headquarter?.street} onDataChange={handleInput}>
 						Street
 					</InputField>
 					<FlexBox className="mt-15" justify="end" gap={10}>

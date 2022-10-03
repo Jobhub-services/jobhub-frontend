@@ -9,6 +9,8 @@ export enum TBooleanAttr {
 	IS_CREATING_CHARGE = 'isCreatingCharge',
 	IS_CANCELING_SUBSCRIPTION = 'isCancelingSubscription',
 	SUBSCRIPTION_CANCELED = 'subscriptionCanceled',
+	CONTACT_SENDED = 'contactSended',
+	CONTACT_FAILED = 'contactFailed',
 }
 
 export enum ChargesStatus {

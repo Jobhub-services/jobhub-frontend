@@ -1,6 +1,6 @@
 import { Button, FlexBox, IconButton, Tag, DropDown } from 'staak-ui';
 import styled from 'styled-components';
-import { LocationIcon, MoneyIcon, CalendarFillIcon } from '@/assets/icons';
+import { LocationIcon, MoneyIcon, CalendarFillIcon, DetailIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { DotIcon } from '@/assets/icons';
 import { JobCardProps } from '@/models/component';
@@ -169,7 +169,7 @@ const JobCard = (props: JobCardProps) => {
 				</SBody>
 				<SFooter justify="space-between">
 					<div>
-						<Button variant="light" size="sm" onClick={(e: any) => handleClick(e, 'open')}>
+						<Button startIcon={<DetailIcon />} variant="light" size="sm" onClick={(e: any) => handleClick(e, 'open')}>
 							Details
 						</Button>
 					</div>

@@ -43,9 +43,9 @@ const Preferences = (props: TalentAllInfo) => {
 					{props.languages?.length === 0 && 'N/A'}
 				</FlexBox>
 			</div>
-			<HrDivider top={15} side={20} />
+			<HrDivider top={15} side={0} />
 			<div>
-				<STitle>Open to the following</STitle>
+				<STitle>Open To The Following</STitle>
 				<FlexBox justify="start" gap={10}>
 					<SubTitle>Job Roles</SubTitle>
 					<FlexBox justify="start" gap={10}>
@@ -74,7 +74,7 @@ const Preferences = (props: TalentAllInfo) => {
 					</FlexBox>
 				</FlexBox>
 			</div>
-			<HrDivider top={15} side={20} />
+			<HrDivider top={15} side={0} />
 			<div>
 				<STitle>Remote Work</STitle>
 				<FlexBox justify="start" gap={10}>
@@ -82,7 +82,7 @@ const Preferences = (props: TalentAllInfo) => {
 					<SSpan>Accepts offers for remote and onsite roles</SSpan>
 				</FlexBox>
 			</div>
-			<HrDivider top={15} side={20} />
+			<HrDivider top={15} side={0} />
 			<div>
 				<STitle>Desired Location</STitle>
 				<FlexBox justify="start" gap={10}>
@@ -96,7 +96,7 @@ const Preferences = (props: TalentAllInfo) => {
 					{props.desired_location?.length === 0 && 'N/A'}
 				</FlexBox>
 			</div>
-			<HrDivider top={15} side={20} />
+			<HrDivider top={15} side={0} />
 			<div>
 				<STitle>Wants</STitle>
 				<SPre>{props.wants}</SPre>

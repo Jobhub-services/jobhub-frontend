@@ -38,7 +38,7 @@ const SocialProfile = () => {
 	return (
 		<div>
 			<FlexBox justify="space-between" gap={20}>
-				<SpanTitle>Social profiles</SpanTitle>
+				<SpanTitle>Social Profiles</SpanTitle>
 				<SButton padding={dataEmpty ? 0 : 5} onClick={onShow}>
 					{dataEmpty ? (
 						<PlusIcon color={colors.PURPLE_BASE} width="23px" height="23px" />

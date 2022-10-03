@@ -27,7 +27,9 @@ const TalentsView = () => {
 	const onlyDetail = (state as any)?.onlyDetail ?? false;
 
 	useEffect(() => {
-		if (!onlyDetail) talentsActions.getTalents();
+		if (!onlyDetail) {
+			if (!isLoading) talentsActions.getTalents();
+		}
 		return function cleanup() {
 			talentsDispatcher.setTalents({}, true);
 		};

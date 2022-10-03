@@ -9,6 +9,23 @@ import { colors } from '@/assets/theme';
 import { companiesActions } from '@/modules/actions/developer/companies.actions';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 
+const kwidth = keyframes`
+	from {
+		width: 0;
+	} 
+	to{
+		width: 83%;
+	}
+`;
+const kFullWidth = keyframes`
+	from {
+		width: 0;
+	} 
+	to{
+		width: 100%;
+	}
+`;
+
 const jobTitle = (
 	<FlexBox gap={10}>
 		<JobIcon width="17px" height="17px" color={colors.PURPLE_BASE} />
@@ -23,14 +40,6 @@ const overviewTitle = (
 	</FlexBox>
 );
 
-const width = keyframes`
-    from{
-        width:0;
-    }
-    to{
-        width:80%;
-    }
-`;
 const MainContainer = styled.div<any>`
 	cursor: pointer;
 	position: absolute;
@@ -38,9 +47,6 @@ const MainContainer = styled.div<any>`
 	top: 0;
 	width: 100%;
 	height: 100%;
-	//top: ${HEADER_HIEGHT}px;
-	//width: calc(${(props) => (props.showed ? `100% - ${EXPANDED_ASIDE_WIDTH}px` : '0')});
-	//height: calc(${(props) => (props.showed ? `100% - ${HEADER_HIEGHT}px` : '0')});
 	background-color: #2c2c2c3b;
 `;
 const DetailContainer = styled.div<any>`
@@ -49,8 +55,8 @@ const DetailContainer = styled.div<any>`
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: 80%;
-	animation: ${width} 0.15s ease-out;
+	width: ${(props) => (props.onlyDetail ? '100%' : '83%')};
+	animation: ${(props) => (props.onlyDetail ? kFullWidth : kwidth)} 0.2s ease-in-out;
 	//width: ${(props) => (props.showed ? '80%' : '0')};
 	background: white;
 `;
@@ -87,8 +93,10 @@ const SBody = styled(FlexBox)`
 const CompanyDetail = () => {
 	const { id } = useParams();
 	const loc = useLocation();
-	const { state } = loc as { state: { activeTab: string } };
+	const { state } = loc as { state: { activeTab: string; onlyDetail: boolean } };
 	const { isDetailLoading, companyDetail, isLoading } = useAppSelector((state) => state.companies);
+	const onlyDetail = (state as any)?.onlyDetail ?? false;
+
 	useEffect(() => {
 		if (companyDetail?._id !== id) companiesActions.getCompanyDetail(id!, !isLoading);
 	}, []);
@@ -99,8 +107,8 @@ const CompanyDetail = () => {
 	};
 
 	return (
-		<MainContainer ref={parentRef} showed={true} onClick={onClose}>
-			<DetailContainer showed={true}>
+		<MainContainer ref={parentRef} onClick={onClose}>
+			<DetailContainer onlyDetail={onlyDetail}>
 				{isDetailLoading ? (
 					<LoadingScreen />
 				) : (

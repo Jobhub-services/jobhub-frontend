@@ -76,16 +76,16 @@ const AccountElem = () => {
 	return (
 		<>
 			<Container>
-				<h3>General information</h3>
+				<h3>General Information</h3>
 				<div style={{ padding: '0 15px' }}>
-					<InputField name="companyName" placeholder="Company name" value={localData?.companyName} onDataChange={handleData}>
-						Company name
+					<InputField name="companyName" placeholder="Company Name" value={localData?.companyName} onDataChange={handleData}>
+						Company Name
 					</InputField>
 					<InputField name="username" placeholder="Username" className="mt-10" value={localData?.username} onDataChange={handleData}>
 						Username
 					</InputField>
-					<InputField name="email" placeholder="Business email" className="mt-10" value={localData?.email} onDataChange={handleData}>
-						Business email
+					<InputField name="email" placeholder="Business Email" className="mt-10" value={localData?.email} onDataChange={handleData}>
+						Business Email
 					</InputField>
 					<PhoneInput name="phone" placeholder="Phone" className="mt-10" onDataChange={handleDataChange} value={localData?.phone} />
 					<Button className="mt-20" onClick={handleClick}>

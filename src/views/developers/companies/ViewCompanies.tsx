@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { CompaniesList } from '@/components/developers/companies';
-import { Outlet, useSearchParams } from 'react-router-dom';
+import { Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { companiesActions, companiesDispatcher } from '@/modules/actions/developer/companies.actions';
 import { useAppSelector } from '@/utils/appHooks';
@@ -25,13 +25,17 @@ const ViewCompanies = () => {
 	const { isLoading, companies, isDetailLoading } = useAppSelector((state) => state.companies);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const [isFetching, setIsFetching] = useState(false);
+	const { state } = useLocation();
+	const onlyDetail = (state as any)?.onlyDetail ?? false;
 
 	useEffect(() => {
-		const params = {
-			page: 0,
-			limit: 20,
-		};
-		companiesActions.getCompanies(!isDetailLoading, params);
+		if (!onlyDetail) {
+			const params = {
+				page: 0,
+				limit: 20,
+			};
+			companiesActions.getCompanies(!isDetailLoading, params);
+		}
 		return function cleanup() {
 			companiesDispatcher.setCompanies({}, true);
 		};
@@ -56,19 +60,20 @@ const ViewCompanies = () => {
 
 	return (
 		<SContainer>
-			{isLoading ? (
-				<LoadingScreen />
-			) : (
-				<SubContainer className="staak_scrollbar" onScroll={handleScroll}>
-					<Header />
-					<CompaniesList />
-					{isFetching && (
-						<div>
-							<LoadingIcon width="60px" height="60px" color={colors.PURPLE_BASE} />
-						</div>
-					)}
-				</SubContainer>
-			)}
+			{!onlyDetail &&
+				(isLoading ? (
+					<LoadingScreen />
+				) : (
+					<SubContainer className="staak_scrollbar" onScroll={handleScroll}>
+						<Header />
+						<CompaniesList />
+						{isFetching && (
+							<div>
+								<LoadingIcon width="60px" height="60px" color={colors.PURPLE_BASE} />
+							</div>
+						)}
+					</SubContainer>
+				))}
 			<Outlet />
 			<CompanyFilters />
 		</SContainer>

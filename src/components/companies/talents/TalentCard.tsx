@@ -1,14 +1,12 @@
 import { FlexBox, HrDivider, Button, Tag } from 'staak-ui';
 import { LocationIcon, ProfileIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
-import { talentsActions } from '@/modules/actions/company/talents.actions';
 import StatusElem from '@/components/companies/_common/StatusElem';
 import { TitleStatus } from '@/constants/company/talent.contants';
 import { CardProps } from '@/models/component/companies/talents/talents.interface';
 import { Avatar } from '@/components/companies/_common';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppSelector } from '@/utils/appHooks';
 
 const SWarrap = styled(FlexBox)`
 	flex-wrap: wrap;
@@ -52,11 +50,10 @@ const Sp = styled.p`
 
 const TalentCard = (props: CardProps) => {
 	const navigate = useNavigate();
-	const { _id } = useAppSelector((state) => state.talent.talentDetails);
 
 	const viewProfile = () => {
 		navigate(`detail/${props._id}`);
-		if (props._id !== _id) talentsActions.getTalentDetails(props._id);
+		//if (props._id !== _id) talentsActions.getTalentDetails(props._id);
 	};
 
 	return (

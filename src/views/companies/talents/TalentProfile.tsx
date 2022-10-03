@@ -125,8 +125,8 @@ const TalentProfile = () => {
 		}
 	};
 	return (
-		<MainContainer showed={true} ref={parentRef} onClick={backUp}>
-			<DetailContainer showed={true} onlyDetail={onlyDetail}>
+		<MainContainer ref={parentRef} onClick={backUp}>
+			<DetailContainer onlyDetail={onlyDetail}>
 				{isDetailLoading ? (
 					<LoadingScreen />
 				) : (
@@ -137,7 +137,7 @@ const TalentProfile = () => {
 									<CloseIcon color={colors.BLACK_8} />
 								</IconButton>
 								<Headline variant="h2" size="sm">
-									Talent details
+									Talent Details
 								</Headline>
 							</FlexBox>
 							<Button

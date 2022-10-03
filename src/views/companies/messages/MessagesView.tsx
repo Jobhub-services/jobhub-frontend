@@ -80,8 +80,8 @@ const MessagesView = () => {
 				<FlexBox height="100%" flexDirection="column">
 					<img src={EmptyConv} alt="Empty" width={200} />
 					<FlexBox className="mt-20" flexDirection="column">
-						<h2 style={{ margin: '5px' }}>Your Conversation is Empty</h2>
-						<span>Browse and Select a Talent to Start New Conversation</span>
+						<h2 style={{ margin: '5px' }}>Your conversation is empty</h2>
+						<span>Browse and select a talent to start new conversation</span>
 						<Link to="/talents" className="mt-20">
 							<Button>Browse Talents</Button>
 						</Link>

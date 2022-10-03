@@ -15,3 +15,14 @@ export type AppDispatch = typeof store.dispatch;
 export type StatusType = 'ready' | 'open' | 'closed';
 
 export type TValueLabel = { value?: string; label?: string };
+
+export enum TJobType {
+	FULL_TIME = 'Full time',
+	PART_TIME = 'Part time',
+	CONTRACT = 'Contract',
+	INTERNSHIP = 'Internship',
+}
+export enum TJobDuration {
+	TEMPORARY = 'Temporary',
+	PERMANENT = 'Permanent',
+}

@@ -68,7 +68,7 @@ const PopModel = (props: PopModelProps) => {
 		}
 	};
 	return (
-		<Container closed={closed} onClick={handleClose} ref={ref} top={props.top} positionAbsolute={props.positionAbsolute}>
+		<Container style={{ ...props.style }} closed={closed} onClick={handleClose} ref={ref} top={props.top} positionAbsolute={props.positionAbsolute}>
 			<SPopUp width={props.width} closed={closed}>
 				<FlexBox justify="space-between" style={{ padding: '10px 15px' }}>
 					{header}

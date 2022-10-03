@@ -7,4 +7,5 @@ export const API_PATHS = {
 	TALENT_SERVICE: '/talent',
 	WEBSOCKET_SERVICE: '/websocket',
 	PAYMENT_SERVICE: '/payments',
+	NOTIFICATION_SERVICE: '/notifications',
 };

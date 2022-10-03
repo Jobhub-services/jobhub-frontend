@@ -19,7 +19,7 @@ const AccountSettings = () => {
 		<>
 			<HeaderContainer justify="space-between">
 				<StyledHeadline variant="h2" size="sm">
-					General account settings
+					General Account Settings
 				</StyledHeadline>
 			</HeaderContainer>
 			<AccountElem />

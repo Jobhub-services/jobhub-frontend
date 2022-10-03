@@ -12,7 +12,7 @@ const GeneralInfoElem = (props: TProfileInfo) => {
 	const empty =
 		(!generalinfo?.company_size || generalinfo?.company_size === '') &&
 		(!generalinfo?.founded || generalinfo.founded === '') &&
-		(!generalinfo?.industry || generalinfo.industry === '');
+		(!generalinfo?.industry?._id || generalinfo.industry._id === '');
 	return (
 		<div>
 			{!empty ? (
@@ -34,10 +34,10 @@ const GeneralInfoElem = (props: TProfileInfo) => {
 						)}
 					</>
 					<>
-						{generalinfo?.industry && generalinfo?.industry !== '' && (
+						{generalinfo?.industry?.name && generalinfo?.industry?.name !== '' && (
 							<FlexBox justify="start" className="mt-15" gap={10}>
 								<SData>Industry</SData>
-								<SValue>{generalinfo?.industry}</SValue>
+								<SValue>{generalinfo?.industry?.name}</SValue>
 							</FlexBox>
 						)}
 					</>

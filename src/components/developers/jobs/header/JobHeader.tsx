@@ -59,7 +59,7 @@ const JobHeader = () => {
 				</Button>
 
 				<InputPicker
-					placeholder="Sort application by"
+					placeholder="Sort jobs by"
 					width="300px"
 					onChange={handleChange}
 					value={SORT_MAP_APP[(searchParams.get('sort') as '-1' | '1' | '0') ?? '-1']}

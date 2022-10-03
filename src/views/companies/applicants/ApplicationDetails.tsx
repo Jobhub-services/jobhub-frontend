@@ -134,7 +134,7 @@ const ApplicationDetails = () => {
 										status={applicantDetails?.userStatus}
 										experience={applicantDetails.role?.experience}
 									/>
-									<Link to={`/talents/detail/${applicantDetails?.userId}`}>
+									<Link to={`/talents/detail/${applicantDetails?.userId}`} state={{ onlyDetail: true }}>
 										<span style={{ display: 'block', fontSize: '13px', color: `${colors.PURPLE_BASE}`, cursor: 'pointer', whiteSpace: 'nowrap' }}>
 											View Profile
 										</span>

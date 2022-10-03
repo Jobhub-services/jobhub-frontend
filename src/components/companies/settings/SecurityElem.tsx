@@ -40,7 +40,7 @@ const SecurityElem = () => {
 	return (
 		<>
 			<Container>
-				<h3>Change password</h3>
+				<h3>Change Password</h3>
 				<div style={{ padding: '0 15px' }}>
 					<InputField
 						type="password"
@@ -49,7 +49,7 @@ const SecurityElem = () => {
 						onDataChange={handleChange}
 						value={localData?.currentPassword}
 					>
-						Current password
+						Current Password
 					</InputField>
 					<InputField
 						type="password"
@@ -59,7 +59,7 @@ const SecurityElem = () => {
 						onDataChange={handleChange}
 						value={localData?.newPassword}
 					>
-						New password
+						New Password
 					</InputField>
 					<InputField
 						type="password"
@@ -69,7 +69,7 @@ const SecurityElem = () => {
 						onDataChange={handleChange}
 						value={localData?.confirmPassword}
 					>
-						Confirm password
+						Confirm Password
 					</InputField>
 					<Button className="mt-20" onClick={handleClick}>
 						Save changes

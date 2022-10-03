@@ -22,13 +22,13 @@ const BillingContact = () => {
 	};
 	return (
 		<div className="mt-20">
-			<SH3>Billing contact</SH3>
+			<SH3>Billing Contact</SH3>
 			<FlexBox gap={15}>
 				<InputField name="first_name" placeholder="First Name" required value={billingInfo?.first_name} onDataChange={handleChange}>
-					First name
+					First Name
 				</InputField>
 				<InputField name="last_name" placeholder="Last Name" required value={billingInfo?.last_name} onDataChange={handleChange}>
-					Last name
+					Last Name
 				</InputField>
 			</FlexBox>
 			<FlexBox gap={15} className="mt-10">

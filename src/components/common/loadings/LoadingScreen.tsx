@@ -1,5 +1,6 @@
 import { colors } from '@/assets/theme';
 import StaakLogo from '@/assets/theme/StaakLogo';
+import { StandardProps } from '@/models/component';
 import { FlexBox } from 'staak-ui';
 import styled from 'styled-components';
 
@@ -30,9 +31,9 @@ const AnimatedSpan = styled.span`
 	background-image: linear-gradient(90deg, ${colors.PURPLE_BASE}, ${colors.PURPLE_3}, ${colors.PURPLE_BASE}, ${colors.PURPLE_3});
 	background-size: 300% 100%;
 `;
-export const LoadingScreen = () => {
+export const LoadingScreen = (props: StandardProps) => {
 	return (
-		<ContainerStyled flexDirection="column">
+		<ContainerStyled style={{ ...props.style }} flexDirection="column">
 			<StaakLogo size={150} style={{ marginLeft: '-15px' }} />
 			<ProgressBarStyled>
 				<AnimatedSpan />
