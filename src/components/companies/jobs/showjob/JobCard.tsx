@@ -19,6 +19,7 @@ import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
 const SContainer = styled.div`
 	background: white;
 	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
+	border: 1px solid #0000003b;
 	border-radius: 8px;
 `;
 const SHeader = styled(FlexBox)`
