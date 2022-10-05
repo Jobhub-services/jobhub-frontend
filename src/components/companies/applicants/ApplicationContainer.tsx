@@ -42,6 +42,9 @@ const CardContainer = styled.div<any>`
 	grid-template-columns: repeat(2, 1fr);
 	gap: 10px;
 	padding: 10px 15px;
+	@media only screen and (min-width: 1499px) and (max-width: 1750px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
 `;
 const ApplicationContainer = (props: ApplicationContainerProps) => {
 	const { status } = useParams();

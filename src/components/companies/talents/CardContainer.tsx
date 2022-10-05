@@ -11,6 +11,12 @@ const SContainer = styled.div`
 	@media only screen and (max-width: 1640px) {
 		grid-template-columns: repeat(3, 1fr);
 	}
+	@media only screen and (max-width: 1400px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+	@media only screen and (max-width: 900px) {
+		grid-template-columns: repeat(1, 1fr);
+	}
 `;
 
 const CardContainer = () => {
