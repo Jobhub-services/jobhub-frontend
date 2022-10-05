@@ -10,10 +10,10 @@ const SH1 = styled.h1`
 	font-size: 24px;
 `;
 const TalentsHeader = () => {
-	const { filterClosed } = useAppSelector((state) => state.talent);
+	const { filterClosed, showTalents } = useAppSelector((state) => state.talent);
 	return (
 		<FlexBox justify="space-between" style={{ padding: '10px 40px' }}>
-			<SH1>Talents</SH1>
+			<SH1>{showTalents?.count ?? 0} Talents</SH1>
 			<Button
 				startIcon={<FilterIcon />}
 				onClick={() => {
