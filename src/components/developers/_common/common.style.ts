@@ -5,6 +5,7 @@ const SContainer = styled.div<any>`
 	background: white;
 	box-shadow: 0px 0px 20px -15px ${colors.BLACK_7};
 	border-radius: 8px;
+	border: 1px solid #0000003b;
 	${(props) =>
 		props.hover &&
 		css`

@@ -1,4 +1,4 @@
-import { ForOneIcon, LoadingIcon, SubscriptionIcon } from '@/assets/icons';
+import { ForOneIcon, RocketIcon, BowlingIcon, LoadingIcon, SubscriptionIcon } from '@/assets/icons';
 import { colors } from '@/assets/theme';
 import { Button, FlexBox, Headline, HrDivider } from 'staak-ui';
 import styled from 'styled-components';

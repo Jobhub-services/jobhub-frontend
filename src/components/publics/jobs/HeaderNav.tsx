@@ -49,7 +49,7 @@ const HeaderNav = () => {
 						<VDivider />
 						<div>
 							<SH2>JOBS</SH2>
-							<div style={{ color: 'white' }}>By Staak</div>
+							<div style={{ color: 'white' }}>By staak</div>
 						</div>
 					</FlexBox>
 					<FlexBox gap={15}>

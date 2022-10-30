@@ -5,11 +5,19 @@ import { useAppSelector } from '@/utils/appHooks';
 import { authActions } from '@/modules/actions/auth.actions';
 import { UserType } from '@/models/store/user.interface';
 import styled from 'styled-components';
-import { Button } from 'staak-ui';
+import { Button, CheckBox } from 'staak-ui';
 import PhoneInput from '@/components/common/input/PhoneInput';
+import { Link } from 'react-router-dom';
+import { colors } from '@/assets/theme';
+import { pushNotification } from '@/utils/helpers';
 
+const { APP_URL } = STAAK_ENV;
 const FormStyled = styled.form`
 	width: 100%;
+`;
+const SLink = styled(Link)`
+	color: ${colors.PURPLE_BASE};
+	text-decoration: underline;
 `;
 
 const CompanyForm = (props: FormProps) => {
@@ -21,9 +29,11 @@ const CompanyForm = (props: FormProps) => {
 		password: '',
 		confirmpassword: '',
 		userType: UserType.COMPANY,
+		agree: false,
 	});
 	const [companyInfo, setCompanyInfo] = useState({ companyName: '' });
 	const [confirmPasswordError, setConfirmPasswordError] = useState(false);
+
 	const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 		setState({
@@ -44,11 +54,22 @@ const CompanyForm = (props: FormProps) => {
 			[name]: value,
 		});
 	};
+	const handleBox = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const { checked } = event.target;
+		let tmp = { ...state };
+		tmp.agree = checked;
+		setState(tmp);
+	};
+
 	const onSubmit = (e: any) => {
 		e.preventDefault();
 		const userInfo = { ...state, companyInfo: companyInfo };
 		if (userInfo.password !== userInfo.confirmpassword) {
 			setConfirmPasswordError(true);
+			return;
+		}
+		if (!state.agree) {
+			pushNotification.error('Please agree check agree privacy policy and terms & conditions', { position: 'top-center' });
 			return;
 		}
 		if (confirmPasswordError) setConfirmPasswordError(false);
@@ -111,7 +132,11 @@ const CompanyForm = (props: FormProps) => {
 			>
 				Confirm Password
 			</InputField>
-			<Button type="submit" width="100%" className="mt-20">
+			<CheckBox size="md" className="mt-15" name="agree" onChange={handleBox}>
+				I agree to the <SLink to={`${APP_URL}/privacy-policy`}>privacy policy</SLink> and{' '}
+				<SLink to={`${APP_URL}/terms-conditions`}>terms and conditions</SLink>
+			</CheckBox>
+			<Button type="submit" width="100%" className="mt-10">
 				Sign Up
 			</Button>
 		</FormStyled>

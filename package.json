@@ -33,7 +33,7 @@
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"dev": "vite  --force --mode dev",
+		"dev": "vite  --force --mode dev --port 3020",
 		"solo": "vite --mode solo",
 		"solo:reload": "vite --force --mode solo",
 		"build:prod": "tsc --noEmit && vite build",

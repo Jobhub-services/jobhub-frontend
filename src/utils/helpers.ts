@@ -40,7 +40,7 @@ export function dateWithMonthName(value: string | Date): string | null {
 }
 
 export namespace pushNotification {
-	export const success = (content: any, id?: string) => {
+	export const success = (content: any, myOptions?: any) => {
 		let options: any = {
 			position: 'top-right',
 			autoClose: 7000,
@@ -51,16 +51,11 @@ export namespace pushNotification {
 			draggable: true,
 			pauseOnHover: true,
 			theme: 'colored',
+			...myOptions,
 		};
-		if (id) {
-			options = {
-				toastId: id,
-				...options,
-			};
-		}
 		toast.success(content, options);
 	};
-	export const error = (content: any) => {
+	export const error = (content: any, myOptions?: any) => {
 		toast.error(content, {
 			position: 'top-right',
 			autoClose: 7000,
@@ -71,6 +66,7 @@ export namespace pushNotification {
 			draggable: true,
 			pauseOnHover: true,
 			theme: 'colored',
+			...myOptions,
 		});
 	};
 }

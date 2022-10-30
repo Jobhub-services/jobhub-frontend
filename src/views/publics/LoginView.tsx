@@ -29,13 +29,13 @@ class LoginView extends Component<LoginProps, LoginState> {
 		return (
 			<>
 				<LoginFlexBox>
-					<TitleAuth>Sign in to Staak</TitleAuth>
+					<TitleAuth>Sign in to staak</TitleAuth>
 					<LoginForm />
 				</LoginFlexBox>
 				<FlexLink justify="end" width="100%">
 					<SLink to="/forgot-password">Forgot your password?</SLink>
 				</FlexLink>
-				<AuthFooter title="Don't have a Staak account?" link="Sign up Now" to="/register/company" />
+				<AuthFooter title="Don't have a staak account?" link="Sign up Now" to="/register/company" />
 			</>
 		);
 	}
