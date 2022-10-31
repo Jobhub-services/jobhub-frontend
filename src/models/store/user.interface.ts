@@ -25,4 +25,5 @@ export interface IUser extends IDeveloperInfo, ICompanyInfo {
 export interface IUserState {
 	userInfo: IUser;
 	userInfoLoaded: boolean;
+	isLoadingUserInfo: boolean;
 }

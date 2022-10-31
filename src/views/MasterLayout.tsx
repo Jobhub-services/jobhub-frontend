@@ -7,6 +7,7 @@ import { userActions } from '@/modules/actions/user.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import PrivateRoutes from '@/routes/PrivateRoutes';
 import { metadataDispatcher } from '@/modules/actions/metadata.actions';
+import AppLoadingScreen from '@/views/AppLoadingScreen';
 
 const StyledPublicView = styled.div`
 	position: fixed;
@@ -41,6 +42,7 @@ const MainContainer = styled.div`
 const MasterLayout: FC = () => {
 	const { appExpanded } = useAppSelector((state) => state.metadata);
 	const { accessToken } = useAppSelector(({ auth }) => auth);
+	const isLoadingUserInfo = useAppSelector(({ user }) => user.isLoadingUserInfo);
 
 	useEffect(() => {
 		window.addEventListener('resize', onResize);
@@ -48,14 +50,18 @@ const MasterLayout: FC = () => {
 			window.removeEventListener('resize', onResize);
 		};
 	}, []);
+
 	useEffect(() => {
 		if (accessToken) userActions.getUserInfo();
 	}, [accessToken]);
+
 	const onResize = (event: UIEvent) => {
 		if (window.screen.width <= 1270) metadataDispatcher.setAppExpanded(false);
 		else metadataDispatcher.setAppExpanded(true);
 	};
-	return (
+	return isLoadingUserInfo ? (
+		<AppLoadingScreen></AppLoadingScreen>
+	) : (
 		<StyledPublicView>
 			<HeaderBar />
 			<StyledFlexBox align="flex-start" className="staak_scrollbar">

@@ -24,7 +24,7 @@ const SubContainer = styled.div`
 const JobOverview = (props: StandardProps) => {
 	const { isLoading, showJob, isDetailLoading } = useAppSelector((state) => state.job);
 	const [isFetching, setIsFetching] = useState(false);
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const { state } = useLocation();
 	const onlyDetail = (state as any)?.onlyDetail ?? false;
 

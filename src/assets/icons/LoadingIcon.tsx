@@ -2,14 +2,7 @@ import { IconProps } from '@/models/component';
 
 const LoadingIcon = ({ width, height, color }: IconProps) => {
 	return (
-		<svg
-			xmlns="http://www.w3.org/2000/svg"
-			style={{ margin: 'auto', display: 'block', shapeRendering: 'auto' }}
-			width={width}
-			height={height}
-			viewBox="0 0 100 100"
-			preserveAspectRatio="xMidYMid"
-		>
+		<svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 			<circle cx="50" cy="50" fill="none" stroke={color} strokeWidth="7" r="25" strokeDasharray="117.80972450961724 41.269908169872416">
 				<animateTransform
 					attributeName="transform"

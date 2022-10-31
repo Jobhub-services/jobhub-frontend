@@ -4,6 +4,7 @@ import { IUserState } from '@/models/store/user.interface';
 const initialState: IUserState = {
 	userInfo: {},
 	userInfoLoaded: false,
+	isLoadingUserInfo: true,
 };
 const reducerSlice = createSlice({
 	name: 'user',
@@ -13,6 +14,9 @@ const reducerSlice = createSlice({
 			const { user } = action.payload;
 			state.userInfo = user;
 			state.userInfoLoaded = true;
+		},
+		setIsLoadingUserInfo: (state, { payload: { isLoading } }) => {
+			state.isLoadingUserInfo = isLoading;
 		},
 	},
 });

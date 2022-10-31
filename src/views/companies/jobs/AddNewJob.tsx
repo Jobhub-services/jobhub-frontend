@@ -52,16 +52,12 @@ const SContainer = styled.div`
 //IAddNewJobState
 const AddNewJob = () => {
 	const { userInfo } = useAppSelector((state) => state.user);
-	const { isLoading, jobCreated, createJob, jobUpdated } = useAppSelector((state) => state.job);
+	const { isLoading, jobCreated, jobUpdated } = useAppSelector((state) => state.job);
 	const navigate = useNavigate();
 	const [currentStep, setCurrentStep] = useState(0);
 	const [validSteps, setvalidSteps] = useState([false, false, false, false]);
-	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(false);
 
-	useEffect(() => {
-		setLoading(isLoading!);
-	}, [isLoading]);
 	useEffect(() => {
 		if (jobCreated) {
 			setCurrentStep(0);
