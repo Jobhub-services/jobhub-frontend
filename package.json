@@ -29,10 +29,11 @@
 		"rsocket-websocket-client": "0.0.27",
 		"staak-ui": "^2.0.8",
 		"styled-components": "5.3.5",
+		"use-places-autocomplete": "^4.0.0",
 		"web-vitals": "^2.1.4"
 	},
 	"scripts": {
-		"dev": "vite  --force --mode dev",
+		"dev": "vite  --force --mode dev --port 3020",
 		"solo": "vite --mode solo",
 		"solo:reload": "vite --force --mode solo",
 		"build:prod": "tsc --noEmit && vite build",

@@ -39,7 +39,6 @@ const MainContainer = styled.div`
 	/*padding: 10px 15px;*/
 `;
 const MasterLayout: FC = () => {
-	const { userInfoLoaded } = useAppSelector((state) => state.user);
 	const { appExpanded } = useAppSelector((state) => state.metadata);
 	const { accessToken } = useAppSelector(({ auth }) => auth);
 

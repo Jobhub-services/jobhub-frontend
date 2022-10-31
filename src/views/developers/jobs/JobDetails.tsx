@@ -1,12 +1,11 @@
 import { colors } from '@/assets/theme';
 import { LoadingScreen } from '@/components/common/loadings/LoadingScreen';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { CloseIcon, FlexBox, Headline, HrDivider, IconButton, TabPane } from 'staak-ui';
 import JobApplication from '@/components/developers/jobs/details/application/JobApplication';
 import styled, { keyframes } from 'styled-components';
 import { useAppSelector } from '@/utils/appHooks';
-import { useEffect, useRef } from 'react';
-import { jobActions } from '@/modules/actions/developer/jobs.actions';
+import { useRef } from 'react';
 import ErrorHandler from '@/components/developers/jobs/details/application/ErrorHandler';
 import JobMetaInfo from '@/components/developers/jobs/details/JobMetaInfo';
 import JobGeneralInfo from '@/components/developers/jobs/details/JobGeneralInfo';
@@ -67,7 +66,6 @@ const RightContainer = styled.div`
 	height: 100%;
 `;
 const JobDetails = () => {
-	const { id } = useParams();
 	const { jobDetails, errors, succesApplication, isDetailLoading } = useAppSelector((state) => state.developerJobs);
 	const loc = useLocation();
 	const { state } = loc as { state: { activeTab: string } };
@@ -81,11 +79,11 @@ const JobDetails = () => {
 	const backUp = (e: any) => {
 		if (e.target === parentRef.current) navigate(-1);
 	};
-	useEffect(() => {
+	/*useEffect(() => {
 		if (id && jobDetails?._id !== id) {
 			jobActions.getJob(id);
 		}
-	}, []);
+	}, []);*/
 	return (
 		<>
 			<MainContainer ref={parentRef} showed={true} onClick={backUp}>

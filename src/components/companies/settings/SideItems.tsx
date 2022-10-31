@@ -48,11 +48,15 @@ const SideItems = () => {
 			</HeaderContainer>
 			<FlexBox flexDirection="column" align="start" className="mt-20" style={{ padding: '0 10px 10px 10px' }}>
 				<SElem justify="start" gap={10} onClick={(e: any) => handleClick('account')} active={pathname === `/settings/account`}>
-					<GeneralSettingsIcon width="30px" height="30px" />
+					<FlexBox>
+						<GeneralSettingsIcon width="30px" height="30px" />
+					</FlexBox>
 					<span>General</span>
 				</SElem>
 				<SElem justify="start" gap={10} onClick={(e: any) => handleClick('security')} active={pathname === `/settings/security`} className="mt-15">
-					<ProtectIcon width="30px" height="30px" />
+					<FlexBox>
+						<ProtectIcon width="30px" height="30px" />
+					</FlexBox>
 					<span>Security</span>
 				</SElem>
 				<SElem
@@ -62,11 +66,15 @@ const SideItems = () => {
 					active={pathname === `/settings/subscription`}
 					className="mt-15"
 				>
-					<PaymentIcon width="30px" height="30px" />
+					<FlexBox>
+						<PaymentIcon width="30px" height="30px" />
+					</FlexBox>
 					<span>Subscription</span>
 				</SElem>
 				<SElem justify="start" gap={10} onClick={(e: any) => handleClick('billing')} active={pathname === `/settings/billing`} className="mt-15">
-					<BillingIcon width="30px" height="30px" />
+					<FlexBox>
+						<BillingIcon width="30px" height="30px" />
+					</FlexBox>
 					<span>Billing</span>
 				</SElem>
 			</FlexBox>

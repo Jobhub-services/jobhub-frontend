@@ -15,6 +15,9 @@ const SWrapper = styled.div`
 	gap: 20px;
 	@media only screen and (max-width: 1600px) {
 		grid-template-columns: repeat(2, 1fr);
+	}
+	@media only screen and (max-width: 1100px) {
+		grid-template-columns: repeat(1, 1fr);
 	} ;
 `;
 

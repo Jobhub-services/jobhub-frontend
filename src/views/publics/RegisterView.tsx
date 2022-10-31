@@ -30,7 +30,7 @@ const RegisterView = (props: RegisterProps) => {
 					</SignUpFlexBox>
 				</TabPane.Pane>
 			</TabPane>
-			<AuthFooter title="Already have a Staak account?" link="Sign in Now" to="/login" />
+			<AuthFooter title="Already have a staak account?" link="Sign in Now" to="/login" />
 		</>
 	);
 };

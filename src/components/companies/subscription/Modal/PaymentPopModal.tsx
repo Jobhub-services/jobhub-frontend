@@ -128,7 +128,7 @@ const PaymentPopModal = ({ open, onClose, orderTitle, description, amount, onPla
 								<FlexBox justify="space-between">
 									<SSubType>{orderTitle}</SSubType>
 									<span>
-										<strong>${amount}</strong>
+										<strong>${amount.toLocaleString('en-US')}</strong>
 									</span>
 								</FlexBox>
 								<div className="mt-10">{description}</div>
@@ -137,7 +137,7 @@ const PaymentPopModal = ({ open, onClose, orderTitle, description, amount, onPla
 							<FlexBox justify="space-between">
 								<div>Total in USD</div>
 								<SUSD>
-									<strong>${amount}</strong>
+									<strong>${amount.toLocaleString('en-US')}</strong>
 								</SUSD>
 							</FlexBox>
 						</SOrder>

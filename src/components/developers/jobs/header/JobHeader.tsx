@@ -4,8 +4,9 @@ import { FilterIcon } from '@/assets/icons';
 import { jobActions } from '@/modules/actions/developer/jobs.actions';
 import { useAppSelector } from '@/utils/appHooks';
 import { useSearchParams } from 'react-router-dom';
+import { SORT_VALUES } from '@/constants/developer/jobs.constants';
 
-const SORT_MAP_APP = { '-1': 'Most recent', '1': 'Highest salary', '0': 'Lowest salary' };
+const SORT_MAP_APP: any = { [SORT_VALUES.MOST_RECENT]: 'Most recent', [SORT_VALUES.HIGHEST_SALARY]: 'Highest salary', '0': 'Lowest salary' };
 // os mean Only Saved
 const JobHeader = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
@@ -62,9 +63,10 @@ const JobHeader = () => {
 					placeholder="Sort jobs by"
 					width="300px"
 					onChange={handleChange}
-					value={SORT_MAP_APP[(searchParams.get('sort') as '-1' | '1' | '0') ?? '-1']}
+					value={SORT_MAP_APP[searchParams.get('sort') ?? SORT_VALUES.MOST_RECENT]}
 				>
-					<InputPicker.Option value="-1">Most recent</InputPicker.Option>
+					<InputPicker.Option value={SORT_VALUES.MOST_RECENT}>Most recent</InputPicker.Option>
+					<InputPicker.Option value={SORT_VALUES.HIGHEST_SALARY}>Highest salary</InputPicker.Option>
 					{/*<InputPicker.Option value="1">Highest salary</InputPicker.Option>
 					<InputPicker.Option value="0">Lowest salary</InputPicker.Option>*/}
 				</InputPicker>

@@ -56,8 +56,8 @@ const ContactList = () => {
 								key={idx}
 								_id={elem._id}
 								active={chatId === elem._id}
-								message={elem.message.content}
-								lastDate={elem.message.createdAt}
+								message={elem.message?.content}
+								lastDate={elem.message?.createdAt}
 								img={elem.userInfo?.avatar}
 								companyName={elem.userInfo?.companyName}
 								sender={elem.message?.sender === userInfo._id}
