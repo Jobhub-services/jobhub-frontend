@@ -1,5 +1,7 @@
 import { store } from '@/config/store';
 
+export type StoreState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 export declare namespace TypeAttributes {
 	type Align = 'center' | 'flex-start' | 'flex-end';
 	type Justify = 'center' | 'space-between' | 'space-around' | 'flex-end' | 'flex-start';
@@ -10,8 +12,6 @@ export declare namespace TypeAttributes {
 }
 
 export type FilterType = 'applications' | 'job' | 'talent' | 'developerJobs' | 'companies';
-export type StoreState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
 export type StatusType = 'ready' | 'open' | 'closed';
 
 export type TValueLabel = { value?: string; label?: string };
