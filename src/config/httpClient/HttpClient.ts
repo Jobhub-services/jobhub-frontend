@@ -8,9 +8,9 @@ export class HttpClient {
 	constructor() {
 		const config = {
 			baseURL: STAAK_ENV.API_URL,
+			withCredentials: true,
 		};
 
-		//axios.defaults.withCredentials = true;
 		this._client = axios.create(config);
 		this._initAuthInterceptor();
 		this._initErrorInterceptor();
@@ -61,22 +61,17 @@ export class HttpClient {
 		this._initAuthInterceptor();
 	}
 
-	/**
-	 * Injects JWT token from session storage as bearer token in auth header.
-	 */
 	private _initAuthInterceptor() {
-		const authInterceptor = (config: any) => {
-			const {
-				auth: { accessToken },
-			} = store.getState();
+		this._client.interceptors.request.use((config: any) => {
+			const { auth: { accessToken } } = store.getState();
 			if (accessToken) {
 				config.headers = {
+					...config.headers,
 					Authorization: 'Bearer ' + accessToken,
 				};
 			}
 			return config;
-		};
-		this._client.interceptors.request.use(authInterceptor);
+		});
 	}
 
 	/**
@@ -109,7 +104,10 @@ export class HttpClient {
 			if (response) {
 				if (response.status === 401) {
 					authDispatchers.setAuthToken(null);
-					window.location.reload();
+					window.location.replace('/login');
+				} else if (response.status === 500) {
+					const message = response.data?.message || 'Something went wrong. Please try again.';
+					authDispatchers.setApiError(response.status, message);
 				}
 			}
 			return Promise.reject(error);

@@ -8,6 +8,7 @@ const initialState: IAuthState = {
 	accessToken: null,
 	isLoading: false,
 	authErrors: {},
+	apiError: null,
 };
 const reducerSlice = createSlice({
 	name: 'auth',
@@ -16,6 +17,7 @@ const reducerSlice = createSlice({
 		login: (state, action) => {
 			const { token } = action.payload;
 			state.accessToken = token;
+			state.apiError = null;
 			httpClient.setAuthToken();
 		},
 		setIsLoading: (state, action) => {
@@ -26,7 +28,14 @@ const reducerSlice = createSlice({
 			const { errors } = action.payload;
 			state.authErrors = errors;
 		},
+		setApiError: (state, action) => {
+			state.apiError = action.payload;
+		},
+		clearApiError: (state) => {
+			state.apiError = null;
+		},
 	},
 });
 export const reducer = persistReducer({ storage, key: 'staak-auth', whitelist: ['accessToken'] }, reducerSlice.reducer);
 export const storeActions = reducerSlice.actions;
+export const { setApiError, clearApiError } = reducerSlice.actions;

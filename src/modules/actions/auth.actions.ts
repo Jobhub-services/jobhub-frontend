@@ -1,6 +1,6 @@
 import { httpClient } from '@/config/httpClient/HttpClient';
 import dispatchToStore from '@/utils/store';
-import { storeActions } from '@/modules/store/auth.store';
+import { storeActions, setApiError, clearApiError } from '@/modules/store/auth.store';
 import { AxiosResponse } from 'axios';
 import { transformErrors } from '@/utils/validations';
 import { IUser } from '@/models/store/user.interface';
@@ -17,6 +17,12 @@ export const authDispatchers = {
 	},
 	setAuthToken(token: string | null) {
 		dispatchToStore(storeActions.login({ token }));
+	},
+	setApiError(status: number, message: string) {
+		dispatchToStore(setApiError({ status, message }));
+	},
+	clearApiError() {
+		dispatchToStore(clearApiError());
 	},
 };
 
@@ -60,6 +66,9 @@ export const authActions = {
 		}
 	},
 	async logout() {
+		try {
+			await httpClient.post(`${USERS_SERVICE}/auth/logout`);
+		} catch {}
 		authDispatchers.setAuthToken(null);
 	},
 	async forgetPassword(email: string) {
