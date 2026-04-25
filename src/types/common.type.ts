@@ -1,0 +1,28 @@
+import { store } from '@/config/store';
+
+export type StoreState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export declare namespace TypeAttributes {
+	type Align = 'center' | 'flex-start' | 'flex-end';
+	type Justify = 'center' | 'space-between' | 'space-around' | 'flex-end' | 'flex-start';
+	type Color = 'red' | 'purple' | 'blue' | 'black' | 'white' | 'gray';
+	type Size = 'xs' | 'sm' | 'md' | 'lg' | 'xlg';
+	type TextAlign = 'center' | 'end' | 'start' | 'justify' | 'left' | 'right';
+	type Direction = 'column' | 'column-reverse' | 'row' | 'row-reverse';
+}
+
+export type FilterType = 'applications' | 'job' | 'talent' | 'developerJobs' | 'companies';
+export type StatusType = 'ready' | 'open' | 'closed';
+
+export type TValueLabel = { value?: string; label?: string };
+
+export enum TJobType {
+	FULL_TIME = 'Full time',
+	PART_TIME = 'Part time',
+	CONTRACT = 'Contract',
+	INTERNSHIP = 'Internship',
+}
+export enum TJobDuration {
+	TEMPORARY = 'Temporary',
+	PERMANENT = 'Permanent',
+}

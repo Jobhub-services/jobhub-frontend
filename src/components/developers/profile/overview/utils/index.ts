@@ -1,0 +1,12 @@
+import Skills from './Skills';
+import Languages from './Languages';
+import WorkExperience from './WorkExperience';
+import Education from './Education';
+import Certification from './Certification';
+import Summary from './Summary';
+import SocialProfile from './SocialProfile';
+import DesiredLocation from './DesiredLocation';
+import DesiredRoles from './DesiredRoles';
+import Salary from './Salary';
+import JobType from './JobType';
+export { Skills, Languages, WorkExperience, Education, Certification, Summary, SocialProfile, DesiredLocation, DesiredRoles, Salary, JobType };

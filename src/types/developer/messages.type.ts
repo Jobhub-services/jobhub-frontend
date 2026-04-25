@@ -1,0 +1,10 @@
+export enum TBooleanAttr {
+	IS_LOADING = 'isLoading',
+	IS_CONVERSATION_FETCHED = 'conversationFetched',
+	IS_MESSAGES_LOADING = 'isMessagesLoading',
+	IS_MESSAGES_FETCHED = 'isMessagesFetched',
+	IS_MESSAGE_SENDING = 'isMessageSending',
+	IS_CONVERSATION_DELETING = 'isConversationDeleting',
+	IS_CONVERSATION_DELETED = 'conversationDeleted',
+	IS_DELETE_POP_MODAL_OPENED = 'isDeletePopModalOpened',
+}

@@ -1,0 +1,76 @@
+{
+	"name": "staak-frontend",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@reduxjs/toolkit": "^1.7.2",
+		"@testing-library/jest-dom": "^5.16.2",
+		"@testing-library/react": "^12.1.2",
+		"@testing-library/user-event": "^13.5.0",
+		"@tinymce/tinymce-react": "^4.2.0",
+		"@types/jest": "^27.4.0",
+		"@types/rsocket-core": "0.0.7",
+		"@types/rsocket-types": "0.0.3",
+		"axios": "0.25.0",
+		"buffer": "^6.0.3",
+		"express": "^4.17.3",
+		"html-react-parser": "^2.0.0",
+		"moment": "^2.29.3",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"react-redux": "^7.2.6",
+		"react-router-dom": "^6.2.2",
+		"react-toastify": "^9.0.7",
+		"redux-persist": "^6.0.0",
+		"redux-saga": "^1.1.3",
+		"rsocket-core": "0.0.27",
+		"rsocket-flowable": "0.0.27",
+		"rsocket-types": "0.0.27",
+		"rsocket-websocket-client": "0.0.27",
+		"staak-ui": "^2.0.8",
+		"styled-components": "5.3.5",
+		"use-places-autocomplete": "^4.0.0",
+		"web-vitals": "^2.1.4"
+	},
+	"scripts": {
+		"dev": "vite  --force --mode dev --port 3020",
+		"solo": "vite --mode solo",
+		"solo:reload": "vite --force --mode solo",
+		"build:prod": "tsc --noEmit && vite build",
+		"build:dev": "tsc --noEmit && vite build --mode dev",
+		"preview": "vite preview --port 3006",
+		"serve": "vite preview",
+		"heroku:serve": "node server.js",
+		"format": "prettier --write ."
+	},
+	"eslintConfig": {
+		"extends": [
+			"react-app",
+			"react-app/jest"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"devDependencies": {
+		"@types/react": "^17.0.33",
+		"@types/react-dom": "^17.0.10",
+		"@types/rsocket-websocket-client": "0.0.4",
+		"@types/styled-components": "5.1.24",
+		"@vitejs/plugin-react": "^1.0.7",
+		"prettier": "^2.6.1",
+		"rollup-plugin-node-polyfills": "^0.2.1",
+		"sass": "^1.49.9",
+		"typescript": "^4.5.4",
+		"vite": "2.8.0"
+	}
+}

@@ -1,0 +1,45 @@
+import { IconProps } from '@/models/component';
+
+const SettingsColorIcon = ({ width, height }: IconProps) => {
+	return (
+		<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172" width={width} height={height}>
+			<defs>
+				<linearGradient x1="114.70967" y1="114.70967" x2="56.90692" y2="56.90692" gradientUnits="userSpaceOnUse" id="color-11">
+					<stop offset="0" stopColor="#ffffff"></stop>
+					<stop offset="0.242" stopColor="#f2f2f2"></stop>
+					<stop offset="1" stopColor="#cccccc"></stop>
+				</linearGradient>
+				<linearGradient x1="62.52917" y1="62.52917" x2="103.70167" y2="103.70167" gradientUnits="userSpaceOnUse" id="color-22">
+					<stop offset="0" stopColor="#0d61a9"></stop>
+					<stop offset="0.363" stopColor="#0e5fa4"></stop>
+					<stop offset="0.78" stopColor="#135796"></stop>
+					<stop offset="1" stopColor="#16528c"></stop>
+				</linearGradient>
+				<linearGradient x1="19.08483" y1="19.14933" x2="136.4605" y2="136.52142" gradientUnits="userSpaceOnUse" id="color-33">
+					<stop offset="0" stopColor="#3498db"></stop>
+					<stop offset="0.331" stopColor="#3498db"></stop>
+					<stop offset="0.669" stopColor="#3498db"></stop>
+					<stop offset="1" stopColor="#3498db"></stop>
+				</linearGradient>
+			</defs>
+			<g fill="none">
+				<path d="M0,172v-172h172v172z" fill="none"></path>
+				<g>
+					<circle cx="24" cy="24" transform="scale(3.58333,3.58333)" r="11.5" fill="url(#color-11)"></circle>
+					<circle cx="24" cy="24" transform="scale(3.58333,3.58333)" r="7" fill="url(#color-22)"></circle>
+					<path
+						d="M155.54175,68.95408c-8.56058,-0.10392 -16.84883,-4.56517 -21.43908,-12.51658c-4.41825,-7.654 -4.32867,-16.65892 -0.5805,-23.98325c-7.61458,-6.76175 -16.63383,-11.96475 -26.62417,-15.007c-4.49708,6.76175 -12.17258,11.21942 -20.898,11.21942c-8.72542,0 -16.40092,-4.45767 -20.89442,-11.21942c-9.99033,3.04225 -19.00958,8.24525 -26.62417,15.007c3.74817,7.32433 3.83775,16.32925 -0.5805,23.98325c-4.59025,7.95142 -12.8785,12.41267 -21.43908,12.51658c-1.34017,5.47175 -2.1285,11.16208 -2.1285,17.04592c0,4.601 0.47658,9.08375 1.30433,13.44467c8.84725,-0.18275 17.52608,4.32867 22.26325,12.5345c4.902,8.4925 4.25342,18.64767 -0.78833,26.31958c7.4605,6.97675 16.38658,12.384 26.30167,15.67708c4.04917,-8.4065 12.62767,-14.22583 22.58575,-14.22583c9.95808,0 18.53658,5.81933 22.58575,14.22942c9.91508,-3.29308 18.84117,-8.70033 26.30167,-15.67708c-5.04175,-7.67192 -5.69033,-17.82708 -0.78833,-26.31958c4.73717,-8.20583 13.41242,-12.71725 22.26325,-12.5345c0.82775,-4.3645 1.30433,-8.84725 1.30433,-13.44825c0,-5.88383 -0.78833,-11.57417 -2.12492,-17.04592zM86,123.625c-20.77975,0 -37.625,-16.84525 -37.625,-37.625c0,-20.77975 16.84525,-37.625 37.625,-37.625c20.77975,0 37.625,16.84525 37.625,37.625c0,20.77975 -16.84525,37.625 -37.625,37.625z"
+						fill="url(#color-33)"
+					></path>
+				</g>
+			</g>
+		</svg>
+	);
+};
+
+SettingsColorIcon.defaultProps = {
+	width: '25px',
+	height: '25px',
+};
+
+export default SettingsColorIcon;
